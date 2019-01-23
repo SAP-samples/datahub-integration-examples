@@ -5,7 +5,7 @@ It is based on Python 2.7 and was tested with Data Hub version 2.4.
 
 ![alt text](./graph.png "Graph")
 
-**Content**
+**Content**  
 **1. Dockerfile 'Python2_pyArrow' (dockerfiles.examples.Python2_pyArrow)**
   - Extends the SAP-delivered Dockerfile com.sap.python27
   - imports Python libraries pyarrow and pandas
