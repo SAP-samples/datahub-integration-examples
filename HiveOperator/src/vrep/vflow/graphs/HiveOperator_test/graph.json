@@ -1,0 +1,81 @@
+{
+    "properties": {},
+    "description": "",
+    "processes": {
+        "hiveoperator1": {
+            "component": "examples.HiveOperator",
+            "metadata": {
+                "label": "hiveOperator",
+                "x": -51,
+                "y": 55,
+                "height": 80,
+                "width": 120,
+                "extensible": true,
+                "config": {
+                    "hive_hostname": "10.47.104.186",
+                    "port": 10000,
+                    "$type": "http://sap.com/vflow/HiveOperator.configSchema.json"
+                }
+            }
+        },
+        "terminal1": {
+            "component": "com.sap.util.terminal",
+            "metadata": {
+                "label": "Terminal",
+                "x": 265,
+                "y": 90,
+                "height": 80,
+                "width": 120,
+                "ui": "dynpath",
+                "subengines": [
+                    "main"
+                ],
+                "config": {}
+            }
+        }
+    },
+    "groups": [
+        {
+            "name": "group3",
+            "nodes": [
+                "hiveoperator1"
+            ],
+            "metadata": {
+                "description": "Group"
+            },
+            "tags": {
+                "pyhive": "pip2"
+            }
+        }
+    ],
+    "connections": [
+        {
+            "metadata": {
+                "points": "73,95 166.5,95 166.5,130 260,130"
+            },
+            "src": {
+                "port": "output",
+                "process": "hiveoperator1"
+            },
+            "tgt": {
+                "port": "in1",
+                "process": "terminal1"
+            }
+        },
+        {
+            "metadata": {
+                "points": "389,130 439,130 439,112.5 -106,112.5 -106,95 -56,95"
+            },
+            "src": {
+                "port": "out1",
+                "process": "terminal1"
+            },
+            "tgt": {
+                "port": "inSql",
+                "process": "hiveoperator1"
+            }
+        }
+    ],
+    "inports": {},
+    "outports": {}
+}

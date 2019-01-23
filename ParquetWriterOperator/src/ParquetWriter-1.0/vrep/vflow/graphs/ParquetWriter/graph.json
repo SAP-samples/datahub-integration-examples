@@ -1,0 +1,273 @@
+{
+    "properties": {},
+    "description": "ParquetWriter",
+    "processes": {
+        "tomessageconverter1": {
+            "component": "com.sap.util.toMessageConverter",
+            "metadata": {
+                "label": "ToMessage Converter",
+                "x": 573.9999942779541,
+                "y": 266.99999952316284,
+                "height": 50,
+                "width": 50,
+                "config": {}
+            }
+        },
+        "saphanaclient1": {
+            "component": "com.sap.hana.client2",
+            "metadata": {
+                "label": "SAP HANA Client",
+                "x": 660.9999933242798,
+                "y": 251.99999952316284,
+                "height": 80,
+                "width": 120,
+                "config": {
+                    "connection": {
+                        "connectionProperties": {
+                            "host": "host",
+                            "password": "",
+                            "port": 9000,
+                            "user": ""
+                        },
+                        "configurationType": "Configuration Manager",
+                        "connectionID": "HANA"
+                    },
+                    "terminateOnError": false
+                }
+            }
+        },
+        "12multiplexer1": {
+            "component": "com.sap.system.multiplexer.1-2",
+            "metadata": {
+                "label": "1:2 Multiplexer",
+                "x": 810.9999923706055,
+                "y": 252.49999952316284,
+                "height": 80,
+                "width": 120,
+                "extensible": true,
+                "config": {}
+            }
+        },
+        "12multiplexer2": {
+            "component": "com.sap.system.multiplexer.1-2",
+            "metadata": {
+                "label": "1:2 Multiplexer",
+                "x": 1156.9999990463257,
+                "y": 316.9999997615814,
+                "height": 80,
+                "width": 120,
+                "extensible": true,
+                "config": {}
+            }
+        },
+        "tostringconverter2": {
+            "component": "com.sap.util.toStringConverter",
+            "metadata": {
+                "label": "ToString Converter",
+                "x": 1531.9999961853027,
+                "y": 188.99999952316284,
+                "height": 50,
+                "width": 50,
+                "config": {}
+            }
+        },
+        "writefile1": {
+            "component": "com.sap.storage.write",
+            "metadata": {
+                "label": "Write File",
+                "x": 1332.9999980926514,
+                "y": 316.99999952316284,
+                "height": 80,
+                "width": 120,
+                "config": {
+                    "path": "./output.parquet",
+                    "mode": "overwrite"
+                }
+            }
+        },
+        "31multiplexer1": {
+            "component": "com.sap.system.multiplexer.3-1",
+            "metadata": {
+                "label": "3:1 Multiplexer",
+                "x": 1365.999997138977,
+                "y": 189.49999952316284,
+                "height": 80,
+                "width": 120,
+                "extensible": true,
+                "config": {}
+            }
+        },
+        "terminal1": {
+            "component": "com.sap.util.terminal",
+            "metadata": {
+                "label": "Terminal",
+                "x": 419.9999952316284,
+                "y": 251.99999952316284,
+                "height": 80,
+                "width": 120,
+                "ui": "dynpath",
+                "config": {}
+            }
+        },
+        "parquetwriter1": {
+            "component": "examples.ParquetWriter",
+            "metadata": {
+                "label": "ParquetWriter",
+                "x": 987.9999914169312,
+                "y": 316.9999997615814,
+                "height": 80,
+                "width": 120,
+                "extensible": true,
+                "config": {}
+            }
+        }
+    },
+    "groups": [],
+    "connections": [
+        {
+            "metadata": {
+                "points": "543.9999952316284,291.99999952316284 556.5,292 556.5,283 568.9999942779541,282.99999952316284"
+            },
+            "src": {
+                "port": "out1",
+                "process": "terminal1"
+            },
+            "tgt": {
+                "port": "inbody",
+                "process": "tomessageconverter1"
+            }
+        },
+        {
+            "metadata": {
+                "points": "627.9999942779541,291.99999952316284 642,292 642,283 655.9999933242798,282.99999952316284"
+            },
+            "src": {
+                "port": "out",
+                "process": "tomessageconverter1"
+            },
+            "tgt": {
+                "port": "sql",
+                "process": "saphanaclient1"
+            }
+        },
+        {
+            "metadata": {
+                "points": "784.9999933242798,291.99999952316284 795.5,292 795.5,292.5 805.9999923706055,292.49999952316284"
+            },
+            "src": {
+                "port": "result",
+                "process": "saphanaclient1"
+            },
+            "tgt": {
+                "port": "in1",
+                "process": "12multiplexer1"
+            }
+        },
+        {
+            "metadata": {
+                "points": "1585.9999961853027,213.99999952316284 1636,214 1636,178 365,178 365,292 414.9999952316284,291.99999952316284"
+            },
+            "src": {
+                "port": "outstring",
+                "process": "tostringconverter2"
+            },
+            "tgt": {
+                "port": "in1",
+                "process": "terminal1"
+            }
+        },
+        {
+            "metadata": {
+                "points": "1280.9999990463257,365.9999997615814 1304.5,366 1304.5,357 1327.9999980926514,356.99999952316284"
+            },
+            "src": {
+                "port": "out2",
+                "process": "12multiplexer2"
+            },
+            "tgt": {
+                "port": "inFile",
+                "process": "writefile1"
+            }
+        },
+        {
+            "metadata": {
+                "points": "1489.999997138977,229.49999952316284 1508.5,229.5 1508.5,223 1526.9999961853027,222.99999952316284"
+            },
+            "src": {
+                "port": "out1",
+                "process": "31multiplexer1"
+            },
+            "tgt": {
+                "port": "inmessage",
+                "process": "tostringconverter2"
+            }
+        },
+        {
+            "metadata": {
+                "points": "1456.9999980926514,356.99999952316284 1507,357 1507,302.25 1344,302.25 1344,247.5 1360.999997138977,247.49999952316284"
+            },
+            "src": {
+                "port": "outFilename",
+                "process": "writefile1"
+            },
+            "tgt": {
+                "port": "in3",
+                "process": "31multiplexer1"
+            }
+        },
+        {
+            "metadata": {
+                "points": "1280.9999990463257,347.9999997615814 1321,348 1321,229.5 1360.999997138977,229.49999952316284"
+            },
+            "src": {
+                "port": "out1",
+                "process": "12multiplexer2"
+            },
+            "tgt": {
+                "port": "in2",
+                "process": "31multiplexer1"
+            }
+        },
+        {
+            "metadata": {
+                "points": "934.9999923706055,283.49999952316284 1148,283.5 1148,211.5 1360.999997138977,211.49999952316284"
+            },
+            "src": {
+                "port": "out1",
+                "process": "12multiplexer1"
+            },
+            "tgt": {
+                "port": "in1",
+                "process": "31multiplexer1"
+            }
+        },
+        {
+            "metadata": {
+                "points": "934.9999923706055,301.49999952316284 959,301.5 959,357 982.9999914169312,356.9999997615814"
+            },
+            "src": {
+                "port": "out2",
+                "process": "12multiplexer1"
+            },
+            "tgt": {
+                "port": "input",
+                "process": "parquetwriter1"
+            }
+        },
+        {
+            "metadata": {
+                "points": "1111.9999914169312,356.9999997615814 1151.9999990463257,356.9999997615814"
+            },
+            "src": {
+                "port": "output",
+                "process": "parquetwriter1"
+            },
+            "tgt": {
+                "port": "in1",
+                "process": "12multiplexer2"
+            }
+        }
+    ],
+    "inports": {},
+    "outports": {}
+}
