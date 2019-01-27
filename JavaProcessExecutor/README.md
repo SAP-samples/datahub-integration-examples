@@ -6,7 +6,6 @@ The Process Executor Operator starts the Java Application as a process and provi
 The functionality was tested with Data Hub version 2.4.
 
 ![Graph](./graph.png "Graph")
-![Operator](./operator.png "Operator")
 
 ## Build
 
