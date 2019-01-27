@@ -1,7 +1,7 @@
 # Java Process Executor #
 This example shows how to run a Java Application and how to pass custom configuration paramaters using a `Process Executor Operator`.
 
-The `Process Executor Operator` starts the Java Application as a process and provides given contiguous streams to it. The operator finishes when the forked Java process terminates.
+The Process Executor Operator starts the Java Application as a process and provides given contiguous streams to it. The operator finishes when the forked Java process terminates.
 
 The functionality was tested with Data Hub version 2.4.
 
