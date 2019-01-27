@@ -1,5 +1,7 @@
 # Java Process Executor #
-This example shows how to run a Java Application using a Process Executor Operator.
+This example shows how to run a Java Application and how to pass custom configuration paramaters using a `Process Executor Operator`.
+
+The `Process Executor Operator` starts the Java Application as a process and provides given contiguous streams to it. The operator finishes when the forked Java process terminates.
 
 The functionality was tested with Data Hub version 2.4.
 
@@ -20,18 +22,21 @@ $ tar -cvz --exclude='./JavaApplication' -f solution/JavaProcessExecutor.tgz -C 
 ```
 
 ## Content  
-**1. Dockerfile [src/vrep/vflow/dockerfiles/examples/JavaProcessExecutor/Dockerfile](src/vrep/vflow/dockerfiles/examples/JavaProcessExecutor/Dockerfile)**
+**1. Dockerfile** [src/vrep/vflow/dockerfiles/examples/JavaProcessExecutor/Dockerfile](src/vrep/vflow/dockerfiles/examples/JavaProcessExecutor/Dockerfile)
   - Specifies the Docker Image that is used by the ProcessExecutor
   - The used Base Image provides the Java Runtime Environment required by the ProcessExecutor
   - provides the image tag `java` with version `11`
 
-**2. Custom Operator  [src/vrep/vflow/operators/examples/JavaProcessExecutor/](src/vrep/vflow/operators/examples/JavaProcessExecutor/)**
+**2. Java Application**  [src/JavaApplication/src/main/java/com/sap/javaapplication](src/JavaApplication/src/main/java/com/sap/javaapplication)
+  - Example Java Application that shows how to read from stdin and how to write to stdout/stderr
+  
+**2. Custom Operator**  [src/vrep/vflow/operators/examples/JavaProcessExecutor/](src/vrep/vflow/operators/examples/JavaProcessExecutor/)
   - Derived from 'ProcessExecutor'
   - Uses the image tag `java` with version `11`
   - Has one parameter `mode`
   - Runs the command `java -jar /vrep/vflow/operators/examples/JavaProcessExecutor/JavaApplication.jar ${mode}` 
  
-**3. Sample graph [src/vrep/vflow/graphs/examples/JavaProcessExecutor/](src/vrep/vflow/graphs/examples/JavaProcessExecutor/)**
+**3. Sample Graph** [src/vrep/vflow/graphs/examples/JavaProcessExecutor/](src/vrep/vflow/graphs/examples/JavaProcessExecutor/)
   - Demonstrates how to use the custom Process Executor to run a Java Application
 
 ## How to run
