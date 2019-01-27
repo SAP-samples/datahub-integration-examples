@@ -1,0 +1,199 @@
+{
+    "properties": {},
+    "description": "",
+    "processes": {
+        "datagenerator1": {
+            "component": "com.sap.util.dataGenerator",
+            "metadata": {
+                "label": "Data Generator",
+                "x": 12,
+                "y": 72,
+                "height": 80,
+                "width": 120,
+                "extensible": true,
+                "config": {
+                    "script": "getRandomInt = function(min, max) {\n    return Math.floor(Math.random() * (max - min + 1)) + min;\n};\n\ngenerateData = function()\n{\n    var payload = 'sometext';\n    \n    return payload;\n};\n\n$.addTimer(\"500ms\",doTick);\n\nfunction doTick(ctx) {\n    $.output(generateData());\n}\n"
+                }
+            }
+        },
+        "wiretap1": {
+            "component": "com.sap.util.wiretap",
+            "metadata": {
+                "label": "Wiretap",
+                "x": 181,
+                "y": 72,
+                "height": 80,
+                "width": 120,
+                "ui": "dynpath",
+                "config": {}
+            }
+        },
+        "stringtostreamconverter1": {
+            "component": "com.sap.util.stringToStreamConverter",
+            "metadata": {
+                "label": "StringToStream Converter",
+                "x": 350,
+                "y": 87,
+                "height": 50,
+                "width": 50,
+                "config": {}
+            }
+        },
+        "wiretap2": {
+            "component": "com.sap.util.wiretap",
+            "metadata": {
+                "label": "Wiretap",
+                "x": 748.9999980926514,
+                "y": 12,
+                "height": 80,
+                "width": 120,
+                "ui": "dynpath",
+                "config": {}
+            }
+        },
+        "streamtostringconverter1": {
+            "component": "com.sap.util.streamToStringConverter",
+            "metadata": {
+                "label": "StreamToString Converter",
+                "x": 633.9999990463257,
+                "y": 42,
+                "height": 50,
+                "width": 50,
+                "config": {}
+            }
+        },
+        "streamtostringconverter2": {
+            "component": "com.sap.util.streamToStringConverter",
+            "metadata": {
+                "label": "StreamToString Converter",
+                "x": 633.9999990463257,
+                "y": 132,
+                "height": 50,
+                "width": 50,
+                "config": {}
+            }
+        },
+        "wiretap3": {
+            "component": "com.sap.util.wiretap",
+            "metadata": {
+                "label": "Wiretap",
+                "x": 748.9999980926514,
+                "y": 132,
+                "height": 80,
+                "width": 120,
+                "ui": "dynpath",
+                "config": {}
+            }
+        },
+        "javaprocessexecutor1": {
+            "component": "examples.JavaProcessExecutor",
+            "metadata": {
+                "label": "JavaProcessExecutor",
+                "x": 449,
+                "y": 72,
+                "height": 80,
+                "width": 120,
+                "extensible": true,
+                "config": {
+                    "cmdLine": "java -jar /vrep/vflow/operators/examples/JavaProcessExecutor/JavaApplication.jar ${mode}"
+                }
+            }
+        }
+    },
+    "groups": [],
+    "connections": [
+        {
+            "metadata": {
+                "points": "136,112 176,112"
+            },
+            "src": {
+                "port": "output",
+                "process": "datagenerator1"
+            },
+            "tgt": {
+                "port": "in",
+                "process": "wiretap1"
+            }
+        },
+        {
+            "metadata": {
+                "points": "305,112 345,112"
+            },
+            "src": {
+                "port": "out",
+                "process": "wiretap1"
+            },
+            "tgt": {
+                "port": "in",
+                "process": "stringtostreamconverter1"
+            }
+        },
+        {
+            "metadata": {
+                "points": "687.9999990463257,67 715.9999985694885,67 715.9999985694885,52 743.9999980926514,52"
+            },
+            "src": {
+                "port": "out",
+                "process": "streamtostringconverter1"
+            },
+            "tgt": {
+                "port": "in",
+                "process": "wiretap2"
+            }
+        },
+        {
+            "metadata": {
+                "points": "687.9999990463257,157 715.9999985694885,157 715.9999985694885,172 743.9999980926514,172"
+            },
+            "src": {
+                "port": "out",
+                "process": "streamtostringconverter2"
+            },
+            "tgt": {
+                "port": "in",
+                "process": "wiretap3"
+            }
+        },
+        {
+            "metadata": {
+                "points": "404,112 444,112"
+            },
+            "src": {
+                "port": "out",
+                "process": "stringtostreamconverter1"
+            },
+            "tgt": {
+                "port": "stdin",
+                "process": "javaprocessexecutor1"
+            }
+        },
+        {
+            "metadata": {
+                "points": "573,103 600.9999995231628,103 600.9999995231628,67 628.9999990463257,67"
+            },
+            "src": {
+                "port": "stdout",
+                "process": "javaprocessexecutor1"
+            },
+            "tgt": {
+                "port": "in",
+                "process": "streamtostringconverter1"
+            }
+        },
+        {
+            "metadata": {
+                "points": "573,121 600.9999995231628,121 600.9999995231628,157 628.9999990463257,157"
+            },
+            "src": {
+                "port": "stderr",
+                "process": "javaprocessexecutor1"
+            },
+            "tgt": {
+                "port": "in",
+                "process": "streamtostringconverter2"
+            }
+        }
+    ],
+    "inports": {},
+    "outports": {}
+}

@@ -1,0 +1,1 @@
+{"description":"JavaProcessExecutor","component":"com.sap.system.processExecutor","icon":"cogs","config":{"$type":"http://sap.com/vflow/examples.JavaProcessExecutor.configSchema.json","cmdLine":"java -jar /vrep/vflow/operators/examples/JavaProcessExecutor/JavaApplication.jar ${mode}","mode":"upper","script":""},"tags":{"java":"11"}}

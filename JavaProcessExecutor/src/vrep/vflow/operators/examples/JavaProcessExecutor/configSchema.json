@@ -1,0 +1,36 @@
+{
+    "$schema": "http://json-schema.org/draft-06/schema#",
+    "$id": "http://sap.com/vflow/examples.JavaProcessExecutor.configSchema.json",
+    "type": "object",
+    "properties": {
+        "TraceStderr": {
+            "type": "boolean"
+        },
+        "cmdLine": {
+            "type": "string"
+        },
+        "codelanguage": {
+            "type": "string",
+            "sap_vflow_constraints": {
+                "ui_visibility": false
+            }
+        },
+        "mode": {
+            "title": "Mode",
+            "type": "string",
+            "enum": [
+                "Length",
+                "Upper"
+            ]
+        },
+        "script": {
+            "type": "string",
+            "sap_vflow_constraints": {
+                "ui_visibility": false
+            }
+        }
+    },
+    "required": [
+        "cmdLine"
+    ]
+}
