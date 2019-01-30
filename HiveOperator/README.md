@@ -4,7 +4,9 @@ This operator provides functionality to query a Hive Metastore server using a Hi
 
 The operator runs on a custom Docker images that extends the SAP-deliver docker image `com.sap.python2.7` and uses the Kerberos client binary `krb5-user` as well as `libsasl2` for Ubuntu. The PyHive python module is developed and maintained by Dropbox: https://github.com/dropbox/PyHive
 
-![alt text](./graph.jpg "Graph") [(Source code)](https://github.com/SAP/datahub-integration-examples/blob/master/HiveOperator/src/vrep/vflow/graphs/HiveOperator_test/graph.json)
+![alt text](./graph.jpg "Graph")
+
+[(Graph source code)](https://github.com/SAP/datahub-integration-examples/blob/master/HiveOperator/src/vrep/vflow/graphs/HiveOperator_test/graph.json)
 
 ![alt text](./Hive_Sql.jpg "Hive SQL example")
 
