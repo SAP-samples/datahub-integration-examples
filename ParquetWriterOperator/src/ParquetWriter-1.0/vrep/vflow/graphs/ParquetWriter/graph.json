@@ -2,6 +2,18 @@
     "properties": {},
     "description": "ParquetWriter",
     "processes": {
+        "terminal1": {
+            "component": "com.sap.util.terminal",
+            "metadata": {
+                "label": "Terminal",
+                "x": 419.9999952316284,
+                "y": 251.99999952316284,
+                "height": 80,
+                "width": 120,
+                "ui": "dynpath",
+                "config": {}
+            }
+        },
         "tomessageconverter1": {
             "component": "com.sap.util.toMessageConverter",
             "metadata": {
@@ -97,24 +109,12 @@
                 "config": {}
             }
         },
-        "terminal1": {
-            "component": "com.sap.util.terminal",
-            "metadata": {
-                "label": "Terminal",
-                "x": 419.9999952316284,
-                "y": 251.99999952316284,
-                "height": 80,
-                "width": 120,
-                "ui": "dynpath",
-                "config": {}
-            }
-        },
         "parquetwriter1": {
             "component": "examples.ParquetWriter",
             "metadata": {
                 "label": "ParquetWriter",
-                "x": 987.9999914169312,
-                "y": 316.9999997615814,
+                "x": 1007,
+                "y": 317,
                 "height": 80,
                 "width": 120,
                 "extensible": true,
@@ -122,7 +122,17 @@
             }
         }
     },
-    "groups": [],
+    "groups": [
+        {
+            "name": "group1",
+            "nodes": [
+                "terminal1"
+            ],
+            "metadata": {
+                "description": "Group"
+            }
+        }
+    ],
     "connections": [
         {
             "metadata": {
@@ -243,7 +253,7 @@
         },
         {
             "metadata": {
-                "points": "934.9999923706055,301.49999952316284 959,301.5 959,357 982.9999914169312,356.9999997615814"
+                "points": "934.9999923706055,301.49999952316284 968.5,301.5 968.5,357 1002,357"
             },
             "src": {
                 "port": "out2",
@@ -256,7 +266,7 @@
         },
         {
             "metadata": {
-                "points": "1111.9999914169312,356.9999997615814 1151.9999990463257,356.9999997615814"
+                "points": "1131,357 1151.9999990463257,356.9999997615814"
             },
             "src": {
                 "port": "output",
