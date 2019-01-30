@@ -1,10 +1,11 @@
 HiveOperator [(Source code)](https://github.com/SAP/datahub-integration-examples/blob/master/HiveOperator/src/vrep/vflow/subengines/com/sap/python27/operators/examples/HiveOperator/script.py)
 ------------
-This operator querying a Hive Metastore server and using a HiveQL string and returns a response in the format of a delimited string.
+This operator provides functionality to query a Hive Metastore server using a HiveQL string and returns a response in the format of a delimited string.
 
 The operator runs on a custom Docker images that extends the SAP-deliver docker image `com.sap.python2.7` and uses the Kerberos client binary `krb5-user` as well as `libsasl2` for Ubuntu. The PyHive python module is developed and maintained by Dropbox: https://github.com/dropbox/PyHive
 
-![alt text](./graph.jpg "Graph")
+![alt text](./graph.jpg "Graph") [(Source code)](https://github.com/SAP/datahub-integration-examples/blob/master/HiveOperator/src/vrep/vflow/graphs/HiveOperator_test/graph.json)
+
 ![alt text](./Hive_Sql.jpg "Hive SQL example")
 
 **Operator configuration parameters**
