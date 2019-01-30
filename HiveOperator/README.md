@@ -1,4 +1,4 @@
-HiveOperator
+HiveOperator [(Source code)](https://github.com/SAP/datahub-integration-examples/blob/master/HiveOperator/src/vrep/vflow/subengines/com/sap/python27/operators/examples/HiveOperator/script.py)
 ------------
 This operator querying a Hive Metastore server and using a HiveQL string and returns a response in the format of a delimited string.
 
