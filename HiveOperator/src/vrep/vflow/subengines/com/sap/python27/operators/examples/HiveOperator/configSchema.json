@@ -1,0 +1,94 @@
+{
+    "$schema": "http://json-schema.org/draft-06/schema#",
+    "$id": "http://sap.com/vflow/HiveOperator.configSchema.json",
+    "type": "object",
+    "properties": {
+        "codelanguage": {
+            "type": "string",
+            "sap_vflow_constraints": {
+                "ui_visibility": false
+            }
+        },
+        "script": {
+            "type": "string",
+            "sap_vflow_constraints": {
+                "ui_visibility": false
+            }
+        },
+        "delimiter": {
+            "title": "Delimiter",
+            "description": "Delimit Hive results using a special character",
+            "type": "string"
+        },
+        "hive_hostname": {
+            "title": "Hive Hostname",
+            "type": "string"
+        },
+        "http_mode": {
+            "title": "HTTP-mode enabled",
+            "type": "boolean"
+        },
+        "port": {
+            "title": "Hive Port",
+            "type": "number"
+        },
+        "username": {
+            "title": "Username",
+            "type": "string"
+        },
+        "password": {
+            "title": "Password",
+            "type": "string"
+        },
+        "database": {
+            "title": "Hive Database",
+            "type": "string"
+        },
+        "kerberos_enabled": {
+            "title": "Kerberos enabled",
+            "type": "boolean"
+        },
+        "kerberos_principal": {
+            "title": "Kerberos Principal",
+            "type": "string",
+            "sap_vflow_constraints": {
+                "ui_visibility": [
+                    {
+                        "name": "kerberos_enabled",
+                        "value": true
+                    }
+                ]
+            }
+        },
+        "kerberos_realm": {
+            "type": "string",
+            "sap_vflow_constraints": {
+                "ui_visibility": [
+                    {
+                        "name": "kerberos_enabled",
+                        "value": true
+                    }
+                ]
+            }
+        },
+        "kerberos_keytab_filename": {
+            "type": "string",
+            "sap_vflow_constraints": {
+                "ui_visibility": [
+                    {
+                        "name": "kerberos_enabled",
+                        "value": true
+                    }
+                ]
+            }
+        }
+    },
+    "required": [
+        "delimiter",
+        "hive_hostname",
+        "http_mode",
+        "port",
+        "database",
+        "kerberos_enabled"
+    ]
+}

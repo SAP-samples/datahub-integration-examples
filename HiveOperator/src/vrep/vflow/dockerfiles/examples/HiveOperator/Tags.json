@@ -1,3 +1,4 @@
 {
-    "pyhive": "pip2"
+    "pyhive": "pip2",
+    "python27": ""
 }
