@@ -13,9 +13,9 @@ In order to be able to deploy and run the examples, the following requirements n
 
 ## Examples
 
-1. [HANA_exposed_via_OpenAPIServer](/HANA_exposed_via_OpenAPIServer): Shows how to expose an SAP HANA database through an OpenAPI server operator
+1. [HANA_exposed_via_OpenAPIServer](/HANA_exposed_via_OpenAPIServer): Expose an SAP HANA database through an OpenAPI server operator
 2. [HiveOperator](/HiveOperator): Provides functionality to query a Hive Metastore server using a HiveQL string 
-3. [JavaProcessExecutor](/JavaProcessExecutor): Shows how to run a Java Application and how to pass custom configuration paramaters using a Process Executor Operator
+3. [JavaProcessExecutor](/JavaProcessExecutor): Run a Java Application and pass custom configuration paramaters using a Process Executor Operator
 4. [ParquetWriterOperator](/ParquetWriterOperator): This custom operator creates a file in Parquet format from an input message
 
 ## How to get support
