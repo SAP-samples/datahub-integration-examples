@@ -25,7 +25,7 @@ The operator runs on a custom Docker images that extends the SAP-deliver docker 
 	password: 		  Password for plain authentication
 
 **Kerberos configuration**
-(Optional) Upload .keytab and krb5.conf file via the HiveOperator designer. These will be copied into the docker container at runtime.
+(Optional) Upload .keytab and krb5.conf file via the HiveOperator designer. These will be copied into the docker container at runtime. Remember to specify the kerberos realm and principal name in the operator's configuration section when designing your graph.
 
 ![alt text](./upload.gif "Upload")
 
