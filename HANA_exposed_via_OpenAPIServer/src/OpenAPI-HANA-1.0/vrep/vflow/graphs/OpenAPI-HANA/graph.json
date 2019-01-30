@@ -1,0 +1,165 @@
+{
+    "properties": {},
+    "description": "OpenAPI-HANA",
+    "processes": {
+        "javascriptoperator21": {
+            "component": "com.sap.system.jsmengine",
+            "metadata": {
+                "label": "Request",
+                "x": 181,
+                "y": 26.49999976158142,
+                "height": 80,
+                "width": 120,
+                "extensible": true,
+                "config": {
+                    "script": "$.setPortCallback(\"input\",onInput);\n\n//Checks the data if in bytes\n//Incase of bytes we need to convert to string\nfunction isByteArray(data) {\n    return (typeof data === 'object' && Array.isArray(data) \n        && data.length > 0 && typeof data[0] === 'number')\n}\n\nfunction onInput(ctx,s) {\n    var msg = {};\n    var inbody = s.Body;\n    var inattributes = s.Attributes;\n    \n    // convert the body into string if it is bytes\n    if (isByteArray(inbody)) {\n        inbody = String.fromCharCode.apply(null, inbody);\n    }\n\n    // just send a copy of the request to the output for someone else (e.g., if port output is connected)\n    msg.Attributes = {};\n    for (var key in inattributes) {\n        msg.Attributes[key] = inattributes[key];\n    }\n    msg.Body = inbody;\n    \n\n    // pass a copy to the output if connected\n    if ($.output != null) {\n        $.output(s);\n    }\n    \n    //Construct message SQL (Just the holder)\n    var msgSQL = {};\n    msgSQL.Body = {};\n    \n    // send the response\n    var reqmethod = inattributes[\"openapi.method\"];\n    var reqpath = inattributes[\"openapi.request_uri\"];\n    var opid = inattributes[\"openapi.operation_id\"];\n    var tabName = inattributes[\"openapi.path_params.hanaTable\"];\n    \n    //Construct response holder\n    var resp = {};\n    resp.Attributes = {};\n    \n    // workaround for the current limitaiton in openapi.server not deriving the content-type automatically\n    resp.Attributes[\"openapi.header.content-type\"] = \"application/json\";\n    \n    switch (opid) {\n        case \"getDummy\":\n            var str = \"select * from dummy;\";\n            msgSQL.Body = str;\n            $.outsql(msgSQL);\n            break;\n        case \"getHanaTable\":\n            var str = \"select * from \" + tabName + \";\";\n            msgSQL.Body = str;\n            $.outsql(msgSQL);\n            break;\n        default:\n            $.sendResponse(s, null, Error(\"Unexpected operation ID \" + opid))\n            break;\n    }\n}\n"
+                },
+                "additionaloutports": [
+                    {
+                        "name": "outsql",
+                        "type": "message"
+                    }
+                ]
+            }
+        },
+        "openapiservlow1": {
+            "component": "com.sap.openapi.server",
+            "metadata": {
+                "label": "OpenAPI Servlow",
+                "x": 12,
+                "y": 26.49999976158142,
+                "height": 80,
+                "width": 120,
+                "config": {
+                    "basePath": "/samples/hanaServer",
+                    "swaggerSpec": "{\n   \"swagger\":\"2.0\",\n   \"info\":{\n      \"description\":\"This is a server to get Hana data.\",\n      \"version\":\"1.0.0\",\n      \"title\":\"Swagger HanaServer\",\n      \"termsOfService\":\"https:www.sap.com\",\n      \"contact\":{\n         \"email\":\"datahub@sap.com\"\n      },\n      \"license\":{\n         \"name\":\"Apache 2.0\",\n         \"url\":\"http://www.apache.org/licenses/LICENSE-2.0.html\"\n      }\n   },\n   \"host\":\"localhost:8090\",\n   \"basePath\":\"/v2\",\n   \"tags\":[\n      {\n         \"name\":\"Hana\",\n         \"description\":\"Get Hana data\",\n         \"externalDocs\":{\n            \"description\":\"Find out more\",\n            \"url\":\"http://swagger.io\"\n         }\n      }\n   ],\n   \"schemes\":[\n      \"https\",\n      \"http\"\n   ],\n   \"paths\":{\n      \"/hana\":{\n         \"get\":{\n            \"tags\":[\n               \"getDummy\"\n            ],\n            \"summary\":\"Gets data from table\",\n            \"description\":\"Provide table name to give data from hana tables\",\n            \"operationId\":\"getDummy\",\n            \"produces\":[\n               \"application/json\"\n            ],\n            \"parameters\":[\n               {\n                  \"name\":\"table\",\n                  \"in\":\"query\",\n                  \"description\":\"Status values that need to be considered for filter\",\n                  \"required\":true,\n                  \"type\":\"string\"\n               }\n            ],\n            \"responses\":{\n               \"200\":{\n                  \"description\":\"successful operation\",\n                  \"schema\":{\n                     \"type\":\"array\",\n                     \"items\":{\n                        \"$ref\":\"#/definitions/Pet\"\n                     }\n                  }\n               },\n               \"400\":{\n                  \"description\":\"Invalid status value\"\n               }\n            },\n            \"security\":[\n               {\n                  \"petstore_auth\":[\n                     \"write:pets\",\n                     \"read:pets\"\n                  ]\n               }\n            ]\n         }\n      },\n      \"/hana/{hanaTable}\":{\n         \"get\":{\n            \"tags\":[\n               \"HanaTable\"\n            ],\n            \"summary\":\"Get Hana data\",\n            \"description\":\"Returns rows from Hana table\",\n            \"operationId\":\"getHanaTable\",\n            \"produces\":[\n               \"application/xml\",\n               \"application/json\"\n            ],\n            \"parameters\":[\n               {\n                  \"name\":\"hanaTable\",\n                  \"in\":\"path\",\n                  \"description\":\"output from Hana table\",\n                  \"required\":true,\n                  \"type\":\"string\"\n               }\n            ],\n            \"responses\":{\n               \"200\":{\n                  \"description\":\"successful operation\",\n                  \"schema\":{\n                     \"$ref\":\"#/definitions/Pet\"\n                  }\n               },\n               \"400\":{\n                  \"description\":\"Invalid ID supplied\"\n               },\n               \"404\":{\n                  \"description\":\"Pet not found\"\n               }\n            },\n            \"security\":[\n               {\n                  \"api_key\":[\n\n                  ]\n               }\n            ]\n         }\n      }\n   },\n   \"securityDefinitions\":{\n      \"petstore_auth\":{\n         \"type\":\"oauth2\",\n         \"authorizationUrl\":\"http://petstore.swagger.io/oauth/dialog\",\n         \"flow\":\"implicit\",\n         \"scopes\":{\n            \"write:pets\":\"modify pets in your account\",\n            \"read:pets\":\"read your pets\"\n         }\n      },\n      \"api_key\":{\n         \"type\":\"apiKey\",\n         \"name\":\"api_key\",\n         \"in\":\"header\"\n      }\n   },\n   \"definitions\":{\n      \"Order\":{\n         \"type\":\"object\",\n         \"properties\":{\n            \"id\":{\n               \"type\":\"integer\",\n               \"format\":\"int64\"\n            },\n            \"petId\":{\n               \"type\":\"integer\",\n               \"format\":\"int64\"\n            },\n            \"quantity\":{\n               \"type\":\"integer\",\n               \"format\":\"int32\"\n            },\n            \"shipDate\":{\n               \"type\":\"string\",\n               \"format\":\"date-time\"\n            },\n            \"status\":{\n               \"type\":\"string\",\n               \"description\":\"Order Status\",\n               \"enum\":[\n                  \"placed\",\n                  \"approved\",\n                  \"delivered\"\n               ]\n            },\n            \"complete\":{\n               \"type\":\"boolean\",\n               \"default\":false\n            }\n         },\n         \"xml\":{\n            \"name\":\"Order\"\n         }\n      },\n      \"Category\":{\n         \"type\":\"object\",\n         \"properties\":{\n            \"id\":{\n               \"type\":\"integer\",\n               \"format\":\"int64\"\n            },\n            \"name\":{\n               \"type\":\"string\"\n            }\n         },\n         \"xml\":{\n            \"name\":\"Category\"\n         }\n      },\n      \"User\":{\n         \"type\":\"object\",\n         \"properties\":{\n            \"id\":{\n               \"type\":\"integer\",\n               \"format\":\"int64\"\n            },\n            \"username\":{\n               \"type\":\"string\"\n            },\n            \"firstName\":{\n               \"type\":\"string\"\n            },\n            \"lastName\":{\n               \"type\":\"string\"\n            },\n            \"email\":{\n               \"type\":\"string\"\n            },\n            \"password\":{\n               \"type\":\"string\"\n            },\n            \"phone\":{\n               \"type\":\"string\"\n            },\n            \"userStatus\":{\n               \"type\":\"integer\",\n               \"format\":\"int32\",\n               \"description\":\"User Status\"\n            }\n         },\n         \"xml\":{\n            \"name\":\"User\"\n         }\n      },\n      \"Tag\":{\n         \"type\":\"object\",\n         \"properties\":{\n            \"id\":{\n               \"type\":\"integer\",\n               \"format\":\"int64\"\n            },\n            \"name\":{\n               \"type\":\"string\"\n            }\n         },\n         \"xml\":{\n            \"name\":\"Tag\"\n         }\n      },\n      \"Pet\":{\n         \"type\":\"object\",\n         \"required\":[\n            \"name\",\n            \"photoUrls\"\n         ],\n         \"properties\":{\n            \"id\":{\n               \"type\":\"integer\",\n               \"format\":\"int64\"\n            },\n            \"category\":{\n               \"$ref\":\"#/definitions/Category\"\n            },\n            \"name\":{\n               \"type\":\"string\",\n               \"example\":\"doggie\"\n            },\n            \"photoUrls\":{\n               \"type\":\"array\",\n               \"xml\":{\n                  \"name\":\"photoUrl\",\n                  \"wrapped\":true\n               },\n               \"items\":{\n                  \"type\":\"string\"\n               }\n            },\n            \"tags\":{\n               \"type\":\"array\",\n               \"xml\":{\n                  \"name\":\"tag\",\n                  \"wrapped\":true\n               },\n               \"items\":{\n                  \"$ref\":\"#/definitions/Tag\"\n               }\n            },\n            \"status\":{\n               \"type\":\"string\",\n               \"description\":\"pet status in the store\",\n               \"enum\":[\n                  \"available\",\n                  \"pending\",\n                  \"sold\"\n               ]\n            }\n         },\n         \"xml\":{\n            \"name\":\"Pet\"\n         }\n      },\n      \"ApiResponse\":{\n         \"type\":\"object\",\n         \"properties\":{\n            \"code\":{\n               \"type\":\"integer\",\n               \"format\":\"int32\"\n            },\n            \"type\":{\n               \"type\":\"string\"\n            },\n            \"message\":{\n               \"type\":\"string\"\n            }\n         }\n      }\n   },\n   \"externalDocs\":{\n      \"description\":\"Find out more about Swagger\",\n      \"url\":\"http://swagger.io\"\n   }\n}",
+                    "websocket": true
+                }
+            }
+        },
+        "wiretap3": {
+            "component": "com.sap.util.wiretap",
+            "metadata": {
+                "label": "Wiretap",
+                "x": 735.9999980926514,
+                "y": 26.49999976158142,
+                "height": 80,
+                "width": 120,
+                "ui": "dynpath",
+                "config": {}
+            }
+        },
+        "javascriptoperator23": {
+            "component": "com.sap.system.jsmengine",
+            "metadata": {
+                "label": "Response",
+                "x": 566.9999980926514,
+                "y": 26.49999976158142,
+                "height": 80,
+                "width": 120,
+                "extensible": true,
+                "config": {
+                    "script": "$.setPortCallback(\"input\",onInput);\n\n$.setPortCallback(\"inResp\",inResp);\nvar orig_resp;\n\nfunction isByteArray(data) {\n    switch (Object.prototype.toString.call(data)) {\n        case \"[object Int8Array]\":\n        case \"[object Uint8Array]\":\n            return true;\n        case \"[object Array]\":\n        case \"[object GoArray]\":\n            return data.length > 0 && typeof data[0] === 'number';\n    }\n    return false;\n}\n\n\nfunction inResp(ctx,s1) {\n    orig_resp = s1;\n}\n\nfunction onInput(ctx,s) {\n    var msg = {};\n\n    var inbody = s.Body;\n    var inattributes = s.Attributes;\n    \n    // convert the body into string if it is bytes\n    if (isByteArray(inbody)) {\n        inbody = String.fromCharCode.apply(null, inbody);\n    }\n    \n    var data = inbody;\n    \n    //Construct response of the output from HANA client\n    var resp = {};\n    resp.Attributes = {};\n    \n    // workaround for the current limitaiton in openapi.server not deriving the content-type automatically\n    resp.Attributes[\"openapi.header.content-type\"] = \"application/json\";\n    resp.Body = {\"output\": data};\n    //resp.Body = {\"output\": \"helloWorld\"};\n    $.sendResponse(orig_resp, resp, null);\n    $.output(resp);\n}\n"
+                },
+                "additionalinports": [
+                    {
+                        "name": "inResp",
+                        "type": "message"
+                    }
+                ]
+            }
+        },
+        "saphanaclient2": {
+            "component": "com.sap.hana.client2",
+            "metadata": {
+                "label": "SAP HANA Client",
+                "x": 381.9999990463257,
+                "y": 12,
+                "height": 80,
+                "width": 120,
+                "config": {
+                    "connection": {
+                        "connectionProperties": {
+                            "host": "host",
+                            "password": "",
+                            "port": 9000,
+                            "user": ""
+                        },
+                        "configurationType": "Configuration Manager",
+                        "connectionID": "HANA"
+                    }
+                }
+            }
+        }
+    },
+    "groups": [],
+    "connections": [
+        {
+            "metadata": {
+                "points": "690.9999980926514,66.49999976158142 730.9999980926514,66.49999976158142"
+            },
+            "src": {
+                "port": "output",
+                "process": "javascriptoperator23"
+            },
+            "tgt": {
+                "port": "in",
+                "process": "wiretap3"
+            }
+        },
+        {
+            "metadata": {
+                "points": "136,66.49999976158142 176,66.49999976158142"
+            },
+            "src": {
+                "port": "out",
+                "process": "openapiservlow1"
+            },
+            "tgt": {
+                "port": "input",
+                "process": "javascriptoperator21"
+            }
+        },
+        {
+            "metadata": {
+                "points": "305,57.49999976158142 348.99999952316284,57.49999976158142 348.99999952316284,119.99999952316284 533.9999985694885,119.99999952316284 533.9999985694885,75.49999976158142 561.9999980926514,75.49999976158142"
+            },
+            "src": {
+                "port": "output",
+                "process": "javascriptoperator21"
+            },
+            "tgt": {
+                "port": "inResp",
+                "process": "javascriptoperator23"
+            }
+        },
+        {
+            "metadata": {
+                "points": "305,75.49999976158142 332.99999952316284,75.49999976158142 332.99999952316284,43 376.9999990463257,43"
+            },
+            "src": {
+                "port": "outsql",
+                "process": "javascriptoperator21"
+            },
+            "tgt": {
+                "port": "sql",
+                "process": "saphanaclient2"
+            }
+        },
+        {
+            "metadata": {
+                "points": "505.9999990463257,52 533.9999985694885,52 533.9999985694885,57.49999976158142 561.9999980926514,57.49999976158142"
+            },
+            "src": {
+                "port": "result",
+                "process": "saphanaclient2"
+            },
+            "tgt": {
+                "port": "input",
+                "process": "javascriptoperator23"
+            }
+        }
+    ],
+    "inports": {},
+    "outports": {}
+}
