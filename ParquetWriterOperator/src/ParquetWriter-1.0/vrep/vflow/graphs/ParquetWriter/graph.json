@@ -2,18 +2,6 @@
     "properties": {},
     "description": "ParquetWriter",
     "processes": {
-        "terminal1": {
-            "component": "com.sap.util.terminal",
-            "metadata": {
-                "label": "Terminal",
-                "x": 419.9999952316284,
-                "y": 251.99999952316284,
-                "height": 80,
-                "width": 120,
-                "ui": "dynpath",
-                "config": {}
-            }
-        },
         "tomessageconverter1": {
             "component": "com.sap.util.toMessageConverter",
             "metadata": {
@@ -39,10 +27,11 @@
                             "host": "host",
                             "password": "",
                             "port": 9000,
-                            "user": ""
+                            "user": "",
+                            "useTLS": false
                         },
                         "configurationType": "Configuration Manager",
-                        "connectionID": "HANA"
+                        "connectionID": "HANA_INTERNAL"
                     },
                     "terminateOnError": false
                 }
@@ -109,11 +98,23 @@
                 "config": {}
             }
         },
+        "terminal1": {
+            "component": "com.sap.util.terminal",
+            "metadata": {
+                "label": "Terminal",
+                "x": 419.9999952316284,
+                "y": 251.99999952316284,
+                "height": 80,
+                "width": 120,
+                "ui": "dynpath",
+                "config": {}
+            }
+        },
         "parquetwriter1": {
             "component": "examples.ParquetWriter",
             "metadata": {
                 "label": "ParquetWriter",
-                "x": 1007,
+                "x": 1006,
                 "y": 317,
                 "height": 80,
                 "width": 120,
@@ -122,17 +123,7 @@
             }
         }
     },
-    "groups": [
-        {
-            "name": "group1",
-            "nodes": [
-                "terminal1"
-            ],
-            "metadata": {
-                "description": "Group"
-            }
-        }
-    ],
+    "groups": [],
     "connections": [
         {
             "metadata": {
@@ -253,7 +244,7 @@
         },
         {
             "metadata": {
-                "points": "934.9999923706055,301.49999952316284 968.5,301.5 968.5,357 1002,357"
+                "points": "934.9999923706055,301.49999952316284 968,301.5 968,357 1001,357"
             },
             "src": {
                 "port": "out2",
@@ -266,7 +257,7 @@
         },
         {
             "metadata": {
-                "points": "1131,357 1151.9999990463257,356.9999997615814"
+                "points": "1130,357 1151.9999990463257,356.9999997615814"
             },
             "src": {
                 "port": "output",

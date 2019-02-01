@@ -6,8 +6,6 @@ import pyarrow.parquet as pq
 def on_input(data):
     
     #create pandas data frame from Data section (=query result from HANA Client)
-    #change data to data.body in vflow    
-    #body = data
     body = data.body
     df = pd.read_json(json.dumps(body))
     
@@ -18,8 +16,6 @@ def on_input(data):
     buf = output.getvalue()
 
     # send output to next operator
-    #api.send("output", str(buf.to_pybytes()))
     api.send("output", api.Message(str(buf.to_pybytes()), None))
-
 
 api.set_port_callback("input", on_input)
