@@ -9,7 +9,7 @@ In order to be able to deploy and run the examples, the following requirements n
 
 ## Run examples
 
-....
+The source codes required for building and running the examples are contained in the `src/` folder within each example. Moreover, a solution archive is available within the `solution/` folder of each example. A [solution](https://blogs.sap.com/2018/12/05/building-sap-data-hub-solutions-aka-vsolutions/) is a self-contained archive that includes all artefacts that are required to build and run an example. The solutions can be imported via `SAP Data Hub System Management` -> `Files` -> `Import Solution`. Please refer to the README.md of the respective examples how to run the example after the solution has been imported.
 
 ## Examples
 
