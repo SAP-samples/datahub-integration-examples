@@ -5,7 +5,11 @@ This repository contains example operators, pipelines and dockerfiles for [SAP D
 
 In order to be able to deploy and run the examples, the following requirements need to be fulfilled:
 
-- SAP Data Hub On-Premise or Cloud edition
+- SAP Data Hub 2.3 or later installed on a supported [platform](https://support.sap.com/content/dam/launchpad/en_us/pam/pam-essentials/SAP_Data_Hub_2_PAM.pdf)
+
+or
+
+- SAP Data Hub, [trial edition 2.3](https://blogs.sap.com/2018/04/26/sap-data-hub-trial-edition/)
 
 ## Run examples
 
