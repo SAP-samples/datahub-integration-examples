@@ -1,4 +1,4 @@
-# datahub-integration-examples
+# SAP Data Hub Integration Examples
 
 ## Description
 
@@ -22,6 +22,8 @@ The source codes required for building and running the examples are contained in
 4. [ParquetWriterOperator](/ParquetWriterOperator): This custom operator creates a file in Parquet format from an input message
 
 ## Known Issues
+
+- In cases where errors appear after importing the solutions archive of an example, please try to re-create your Modeler Instance.
 
 ## How to get support
 
