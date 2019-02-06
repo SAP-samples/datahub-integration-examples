@@ -19,7 +19,7 @@ In order to be able to deploy and run the examples, the following requirements n
 
 To download the examples just download the complete repository as ZIP file from [here](https://github.com/SAP/datahub-integration-examples/archive/master.zip).
 
-After downloading the repository, extract it and navigate into the desired example folder (for example `HiveOperator/`). Each example comes with a solution archive within the folder `solution/`. A [solution](https://blogs.sap.com/2018/12/05/building-sap-data-hub-solutions-aka-vsolutions/) is a self-contained archive that includes all artefacts that are required to run the example. The solution archives can be imported into SAP Data Hub via `SAP Data Hub System Management` -> `Files` -> `Import Solution`.
+After downloading, extract the ZIP file and navigate into the desired example folder (for example `HiveOperator/`). Each example comes with a solution archive within the folder `solution/`. A [solution](https://blogs.sap.com/2018/12/05/building-sap-data-hub-solutions-aka-vsolutions/) is a self-contained archive that includes all artefacts that are required to run the example. The solution archives can be imported into SAP Data Hub via `SAP Data Hub System Management` -> `Files` -> `Import Solution`.
 
 For details on how to configure and run the examples after the solution has been imported, please refer to the `README.md` in the corresponding example directory.
 
