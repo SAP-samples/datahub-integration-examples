@@ -9,6 +9,8 @@ The functionality was tested with Data Hub version 2.4.
 
 ## Build
 
+The [solution/JavaProcessExecutor.tgz](solution/JavaProcessExecutor.tgz) already includes all required artifacts to run this example. However, when you want to build the solution from your local computer, you can use the following commands:
+
 ### Build example JavaApplication using Maven (https://maven.apache.org/)
 
 ```
