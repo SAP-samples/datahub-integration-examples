@@ -7,6 +7,13 @@ The functionality was tested with Data Hub version 2.4.
 
 ![Graph](./graph.png "Graph")
 
+## Requirements
+
+Before you start using the example, please make sure that:
+
+- You are familiar with the basic concepts of SAP Data Hub Modeling such Pipelines (Graphs), Operators and Dockerfiles.  For more information, you may refer to the Modeling Guide for SAP Data Hub that is available on the SAP Help Portal (https://help.sap.com/viewer/p/SAP_DATA_HUB).
+- You are familiar with the basic concepts of Docker (https://docs.docker.com/get-started/) and Kubernetes (https://kubernetes.io/docs/concepts/overview/what-is-kubernetes/).
+
 ## Build
 
 The [solution/JavaProcessExecutor.tgz](solution/JavaProcessExecutor.tgz) already includes all required artifacts to run this example. However, when you want to build the solution from your local computer, you can use the following commands:
