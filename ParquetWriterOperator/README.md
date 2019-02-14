@@ -5,6 +5,13 @@ It is based on Python 2.7 and was tested with Data Hub version 2.4.
 
 ![alt text](./graph.png "Graph")
 
+## Requirements
+
+Before you start using the example, please make sure that:
+
+- You are familiar with the basic concepts of SAP Data Hub Modeling such Pipelines (Graphs), Operators and Dockerfiles.  For more information, you may refer to the Modeling Guide for SAP Data Hub that is available on the SAP Help Portal (https://help.sap.com/viewer/p/SAP_DATA_HUB).
+- You are familiar with the basic concepts of Docker (https://docs.docker.com/get-started/) and Kubernetes (https://kubernetes.io/docs/concepts/overview/what-is-kubernetes/).
+
 ## Content
 **1. Dockerfile 'Python2_pyArrow' ([Source code](src/ParquetWriter-1.0/vrep/vflow/dockerfiles/examples/Python2_pyArrow/Dockerfile))**
   - Extends the SAP-delivered Dockerfile com.sap.python27
@@ -22,8 +29,8 @@ It is based on Python 2.7 and was tested with Data Hub version 2.4.
   
 ## How to run
   - Import [solution/ParquetWriter-1.0.tgz](solution/ParquetWriter-1.0.tgz) via `SAP Data Hub System Management` -> `Files` -> `Import Solution`
-  - Define a HANA connection in the Connection Management
-  - Configure the 'SAP HANA Client' operator in the sample graph `ParquetWriter` to use that HANA connection
+  - Define a HANA connection in the SAP Data Hub Connection Management
+  - Open graph `ParquetWriter` and configure the `SAP HANA Client` operator to use the previously created HANA connection
   - Start the graph and open the 'Terminal' via right-click 'Open UI'
   - In the 'Terminal' prompt run a SQL against a HANA table
     - For testing use a SQL that returns a small amount of data:  
