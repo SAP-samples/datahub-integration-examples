@@ -6,6 +6,17 @@ The graph was tested with Data Hub version 2.4.
 
 ![alt text](./open_api_graph.png "Graph")
 
+## Requirements
+
+Before you start using the example, please make sure that:
+
+- You are familiar with the basic concepts of SAP Data Hub Modeling such Pipelines (Graphs), Operators and Dockerfiles.  For more information, you may refer to the Modeling Guide for SAP Data Hub that is available on the SAP Help Portal (https://help.sap.com/viewer/p/SAP_DATA_HUB).
+- You are familiar with the basic concepts of Docker (https://docs.docker.com/get-started/) and Kubernetes (https://kubernetes.io/docs/concepts/overview/what-is-kubernetes/).
+
+## Content
+**Sample graph**
+  - Demonstrates a workflow where a HANA table is exposed via OpenAPI Server operator. In this case, user can query table via GET request.
+
 **How to run**
 
 1. Import the sample graph
