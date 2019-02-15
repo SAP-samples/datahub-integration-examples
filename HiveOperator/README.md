@@ -10,6 +10,34 @@ The operator runs on a custom Docker images that extends the SAP-deliver docker 
 
 ![alt text](./Hive_Sql.jpg "Hive SQL example")
 
+## Requirements
+Before you start using the example, please make sure that:
+
+- Hive Metastore server, such as one hosted on Ambari Hortonworks or Cloudera.
+- You are familiar with the basic concepts of SAP Data Hub Modeling such Pipelines (Graphs), Operators and Dockerfiles.  For more information, you may refer to the Modeling Guide for SAP Data Hub that is available on the SAP Help Portal (https://help.sap.com/viewer/p/SAP_DATA_HUB).
+- You are familiar with the basic concepts of Docker (https://docs.docker.com/get-started/) and Kubernetes (https://kubernetes.io/docs/concepts/overview/what-is-kubernetes/).
+
+
+## Content
+**1. Dockerfile**
+  - Extends the SAP-delivered Dockerfile com.sap.python27
+  - Imports the python library `pyhive`
+  - Install Kerberos client libraries
+
+**2. Custom operator 'HiveOperator'**
+  - Derived from Pythin20Operator
+  - Uses image tags `python27:""` and `pyhive:pip2`
+  - **input port `inSql` of type string:** expects a single HiveQL-compliant string without a semicolon
+  - **output port `output` of type string:** outputs the response from the Hive Metastore server, columns are delimited by a comma (default) but can be overriden using the `delimiter` configuration parameter (See description below)
+
+**3. Sample graph HiveOperator_test**
+  - Provides an interactive terminal to query a Hive Metastore server and display the results. Note, the HiveOperator can only process one HiveQL statement at a time.
+
+
+## How to run
+  - Import [solution/HiveOperator-1.0.tgz](solution/HiveOperator-1.0.tgz) via `SAP Data Hub System Management` -> `Files` -> `Import Solution`
+  - Run the `Graph` -> `examples.HiveOperator_test`
+  
 **Operator configuration parameters**
 
 	database:                 Specify which database in Hive metastore to connect to
@@ -30,5 +58,6 @@ The operator runs on a custom Docker images that extends the SAP-deliver docker 
 ![alt text](./upload.gif "Upload")
 
 **Troubleshooting**
+
 For detailed errors messages check the failing vflow pod's log.
 Note: Bad HiveQL syntax will cause the graph to terminate. HiveQL statements must not include a semicolon.
