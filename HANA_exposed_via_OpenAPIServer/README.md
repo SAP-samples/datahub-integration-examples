@@ -17,7 +17,7 @@ Before you start using the example, please make sure that:
 **Sample graph**
   - Demonstrates a workflow where a HANA table is exposed via OpenAPI Server operator. In this case, user can query table via GET request.
 
-**How to run**
+## How to run
 
 1. Import the sample graph
 2. Define a HANA connection in the Connection Management
