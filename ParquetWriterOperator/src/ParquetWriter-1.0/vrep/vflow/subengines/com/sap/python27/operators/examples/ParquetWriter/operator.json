@@ -1,1 +1,0 @@
-{"description":"ParquetWriter","component":"com.sap.system.python2Operator","inports":[{"name":"input","type":"message"}],"outports":[{"name":"output","type":"message"}],"icon":"puzzle-piece","config":{"script":"file://parquet_pyarrow_upload.py","scriptReference":"parquet_pyarrow_upload.py"},"tags":{"pyarrow":"","python27":""}}
