@@ -2,12 +2,27 @@
     "properties": {},
     "description": "",
     "processes": {
+        "terminal1": {
+            "component": "com.sap.util.terminal",
+            "metadata": {
+                "label": "Terminal",
+                "x": 297.99999809265137,
+                "y": 59.99999952316284,
+                "height": 80,
+                "width": 120,
+                "ui": "dynpath",
+                "subengines": [
+                    "main"
+                ],
+                "config": {}
+            }
+        },
         "hiveoperator1": {
             "component": "examples.HiveOperator",
             "metadata": {
                 "label": "hiveOperator",
-                "x": -51,
-                "y": 55,
+                "x": 92.99999904632568,
+                "y": 67.99999952316284,
                 "height": 80,
                 "width": 120,
                 "extensible": true,
@@ -17,41 +32,13 @@
                     "$type": "http://sap.com/vflow/HiveOperator.configSchema.json"
                 }
             }
-        },
-        "terminal1": {
-            "component": "com.sap.util.terminal",
-            "metadata": {
-                "label": "Terminal",
-                "x": 265,
-                "y": 90,
-                "height": 80,
-                "width": 120,
-                "ui": "dynpath",
-                "subengines": [
-                    "main"
-                ],
-                "config": {}
-            }
         }
     },
-    "groups": [
-        {
-            "name": "group3",
-            "nodes": [
-                "hiveoperator1"
-            ],
-            "metadata": {
-                "description": "Group"
-            },
-            "tags": {
-                "pyhive": "pip2"
-            }
-        }
-    ],
+    "groups": [],
     "connections": [
         {
             "metadata": {
-                "points": "73,95 166.5,95 166.5,130 260,130"
+                "points": "216.99999904632568,107.99999952316284 264.9999985694885,107.99999952316284 264.9999985694885,99.99999952316284 292.99999809265137,99.99999952316284"
             },
             "src": {
                 "port": "output",
@@ -64,7 +51,7 @@
         },
         {
             "metadata": {
-                "points": "389,130 439,130 439,112.5 -106,112.5 -106,95 -56,95"
+                "points": "421.99999809265137,99.99999952316284 449.9999976158142,99.99999952316284 449.9999976158142,32 264.9999985694885,32 264.9999985694885,12 12,12 12,107.99999952316284 87.99999904632568,107.99999952316284"
             },
             "src": {
                 "port": "out1",
