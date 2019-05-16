@@ -1,7 +1,7 @@
 # ParquetWriter operator #
 This custom operator creates a file in Parquet format from an input message. For more information on the Parquet format see https://parquet.apache.org/
 
-It is based on Python 2.7 and was tested with Data Hub version 2.4.
+It is based on Python 2.7 and was tested with Data Hub version 2.5.
 
 ![alt text](./graph.png "Graph")
 
@@ -28,7 +28,7 @@ Before you start using the example, please make sure that:
   - Demonstrates a workflow where a HANA table is read and written into a parquet file using the custom ParquetWriter  operator
   
 ## How to run
-  - Import [solution/ParquetWriter-1.0.tgz](solution/ParquetWriter-1.0.tgz) via `SAP Data Hub System Management` -> `Files` -> `Import Solution`
+  - Import [solution/ParquetWriter-1.1.0.zip](solution/ParquetWriter-1.1.0.zip) via `SAP Data Hub System Management` -> `Files` -> `Import Solution`
   - Define a HANA connection in the SAP Data Hub Connection Management
   - Open graph `ParquetWriter` and configure the `SAP HANA Client` operator to use the previously created HANA connection
   - Start the graph and open the 'Terminal' via right-click 'Open UI'
