@@ -24,14 +24,15 @@
                 "config": {
                     "connection": {
                         "connectionProperties": {
+                            "additionalHosts": [],
                             "host": "host",
                             "password": "",
                             "port": 9000,
-                            "user": "",
-                            "useTLS": false
+                            "useTLS": false,
+                            "user": ""
                         },
                         "configurationType": "Configuration Manager",
-                        "connectionID": "HANA_INTERNAL"
+                        "connectionID": "HANA_CONNECTION"
                     },
                     "terminateOnError": false
                 }
@@ -82,7 +83,18 @@
                 "width": 120,
                 "config": {
                     "path": "./output.parquet",
-                    "mode": "overwrite"
+                    "mode": "overwrite",
+                    "service": "file",
+                    "gcsConnection": {
+                        "connectionProperties": {
+                            "keyFile": "",
+                            "projectId": "project-id",
+                            "rootPath": ""
+                        },
+                        "configurationType": "Configuration Manager",
+                        "connectionID": "GCS_CONNECTION"
+                    },
+                    "gcsBucket": ""
                 }
             }
         },
