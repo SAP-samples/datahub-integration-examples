@@ -32,6 +32,7 @@ For details on how to configure and run the examples after the solution has been
 | [HiveOperator](/HiveOperator)                                     | Provides functionality to query a Hive Metastore server using a HiveQL string |
 | [JavaProcessExecutor](/JavaProcessExecutor)                       | Run a Java Application using a Process Executor Operator |
 | [ParquetWriterOperator](/ParquetWriterOperator)                   | This custom operator creates a file in Parquet format from an input message |
+| [DI_pandas Operators](/DI_Pandas) | Couple of pandas DataFrame based operators for big data processing | 
 
 ## Known Issues
 
