@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg" xmlns:bx="https://boxy-svg.com">
+  <g transform="matrix(1.498332, -0.005655, 0.006585, 1.744868, -103.568176, -162.705078)" style="">
+    <g>
+      <rect x="116.214" y="189.379" width="99.948" height="97.673" style="fill: rgb(216, 216, 216); stroke: rgb(5, 5, 5);"/>
+      <g transform="matrix(1, 0, 0, 1, 121.882401, 44.398006)">
+        <rect width="90.314" height="3.457" style="fill: rgb(5, 5, 5);" y="158.405"/>
+        <rect y="192.461" width="90.314" height="3.457" style="fill: rgb(5, 5, 5);"/>
+        <rect y="169.757" width="90.314" height="3.457" style="fill: rgb(5, 5, 5);"/>
+        <rect y="181.109" width="90.314" height="3.457" style="fill: rgb(5, 5, 5);"/>
+        <rect y="215.165" width="90.314" height="3.457" style="fill: rgb(5, 5, 5);"/>
+        <rect y="203.813" width="90.314" height="3.457" style="fill: rgb(5, 5, 5);"/>
+        <rect y="226.516" width="90.314" height="3.457" style="fill: rgb(5, 5, 5);"/>
+      </g>
+    </g>
+    <path d="M 239.896 183.851 H 314.246 L 314.246 175.688 L 327.766 186.317 L 314.246 196.945 L 314.246 188.782 H 239.896 V 183.851 Z" style="fill: rgb(216, 216, 216);" transform="matrix(0.934715, -0.355399, 0.355399, 0.934715, -58.26601, 101.666656)" bx:shape="arrow 239.896 175.688 87.87 21.257 4.931 13.52 0 1@8c005d22"/>
+    <g transform="matrix(0.273151, 0, 0, 0.230948, 295.181122, 101.403946)" style="">
+      <rect x="116.214" y="189.379" width="99.948" height="97.673" style="fill: rgb(216, 216, 216); stroke: rgb(5, 5, 5);"/>
+      <g transform="matrix(1, 0, 0, 1, 121.882401, 44.398006)">
+        <rect width="90.314" height="3.457" style="fill: rgb(5, 5, 5);" y="158.405"/>
+        <rect y="192.461" width="90.314" height="3.457" style="fill: rgb(5, 5, 5);"/>
+        <rect y="169.757" width="90.314" height="3.457" style="fill: rgb(5, 5, 5);"/>
+        <rect y="181.109" width="90.314" height="3.457" style="fill: rgb(5, 5, 5);"/>
+        <rect y="215.165" width="90.314" height="3.457" style="fill: rgb(5, 5, 5);"/>
+        <rect y="203.813" width="90.314" height="3.457" style="fill: rgb(5, 5, 5);"/>
+        <rect y="226.516" width="90.314" height="3.457" style="fill: rgb(5, 5, 5);"/>
+      </g>
+    </g>
+    <g transform="matrix(0.273151, 0, 0, 0.230948, 295.181122, 149.274979)" style="">
+      <rect x="116.214" y="189.379" width="99.948" height="97.673" style="fill: rgb(216, 216, 216); stroke: rgb(5, 5, 5);"/>
+      <g transform="matrix(1, 0, 0, 1, 121.882401, 44.398006)">
+        <rect width="90.314" height="3.457" style="fill: rgb(5, 5, 5);" y="158.405"/>
+        <rect y="192.461" width="90.314" height="3.457" style="fill: rgb(5, 5, 5);"/>
+        <rect y="169.757" width="90.314" height="3.457" style="fill: rgb(5, 5, 5);"/>
+        <rect y="181.109" width="90.314" height="3.457" style="fill: rgb(5, 5, 5);"/>
+        <rect y="215.165" width="90.314" height="3.457" style="fill: rgb(5, 5, 5);"/>
+        <rect y="203.813" width="90.314" height="3.457" style="fill: rgb(5, 5, 5);"/>
+        <rect y="226.516" width="90.314" height="3.457" style="fill: rgb(5, 5, 5);"/>
+      </g>
+    </g>
+    <g transform="matrix(0.273151, 0, 0, 0.230948, 295.181122, 197.146027)" style="">
+      <rect x="116.214" y="189.379" width="99.948" height="97.673" style="fill: rgb(216, 216, 216); stroke: rgb(5, 5, 5);"/>
+      <g transform="matrix(1, 0, 0, 1, 121.882401, 44.398006)">
+        <rect width="90.314" height="3.457" style="fill: rgb(5, 5, 5);" y="158.405"/>
+        <rect y="192.461" width="90.314" height="3.457" style="fill: rgb(5, 5, 5);"/>
+        <rect y="169.757" width="90.314" height="3.457" style="fill: rgb(5, 5, 5);"/>
+        <rect y="181.109" width="90.314" height="3.457" style="fill: rgb(5, 5, 5);"/>
+        <rect y="215.165" width="90.314" height="3.457" style="fill: rgb(5, 5, 5);"/>
+        <rect y="203.813" width="90.314" height="3.457" style="fill: rgb(5, 5, 5);"/>
+        <rect y="226.516" width="90.314" height="3.457" style="fill: rgb(5, 5, 5);"/>
+      </g>
+    </g>
+    <g transform="matrix(0.273151, 0, 0, 0.230948, 295.181122, 245.017059)" style="">
+      <rect x="116.214" y="189.379" width="99.948" height="97.673" style="fill: rgb(216, 216, 216); stroke: rgb(5, 5, 5);"/>
+      <g transform="matrix(1, 0, 0, 1, 121.882401, 44.398006)">
+        <rect width="90.314" height="3.457" style="fill: rgb(5, 5, 5);" y="158.405"/>
+        <rect y="192.461" width="90.314" height="3.457" style="fill: rgb(5, 5, 5);"/>
+        <rect y="169.757" width="90.314" height="3.457" style="fill: rgb(5, 5, 5);"/>
+        <rect y="181.109" width="90.314" height="3.457" style="fill: rgb(5, 5, 5);"/>
+        <rect y="215.165" width="90.314" height="3.457" style="fill: rgb(5, 5, 5);"/>
+        <rect y="203.813" width="90.314" height="3.457" style="fill: rgb(5, 5, 5);"/>
+        <rect y="226.516" width="90.314" height="3.457" style="fill: rgb(5, 5, 5);"/>
+      </g>
+    </g>
+    <path d="M 239.896 183.851 H 314.246 L 314.246 175.688 L 327.766 186.317 L 314.246 196.945 L 314.246 188.782 H 239.896 V 183.851 Z" style="fill: rgb(216, 216, 216);" transform="matrix(0.989799, -0.142474, 0.142474, 0.989799, -31.255928, 68.078979)" bx:shape="arrow 239.896 175.688 87.87 21.257 4.931 13.52 0 1@8c005d22"/>
+    <path d="M 239.896 183.851 H 314.246 L 314.246 175.688 L 327.766 186.316 L 314.246 196.945 L 314.246 188.782 H 239.896 V 183.851 Z" style="fill: rgb(216, 216, 216);" transform="matrix(0.999698, 0.024576, -0.024576, 0.999698, -6.318339, 60.368813)" bx:shape="arrow 239.896 175.688 87.87 21.257 4.931 13.52 0 1@db844ca7"/>
+    <path d="M 239.896 183.851 H 314.246 L 314.246 175.688 L 327.766 186.317 L 314.246 196.945 L 314.246 188.782 H 239.896 V 183.851 Z" style="fill: rgb(216, 216, 216);" transform="matrix(0.987055, 0.160382, -0.160382, 0.987055, 20.600275, 60.644089)" bx:shape="arrow 239.896 175.688 87.87 21.257 4.931 13.52 0 1@8c005d22"/>
+  </g>
+</svg>

@@ -1,0 +1,791 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="675ed38c-d365-4fa4-ba4d-96f2a4cff63f" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../CreatePOSV4-0.0.4.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DI_Pandas-0.0.6.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DI_pandas-0.0.7.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../README.md" beforeDir="false" afterPath="$PROJECT_DIR$/../README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../di_pandas-0.0.3.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../di_pandas-0.0.3/content/files/vflow/subengines/com/sap/python36/operators/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../di_pandas-0.0.3/content/files/vflow/subengines/com/sap/python36/operators/com/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../di_pandas-0.0.3/content/files/vflow/subengines/com/sap/python36/operators/com/sap/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../di_pandas-0.0.3/content/files/vflow/subengines/com/sap/python36/operators/com/sap/retail/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../di_pandas-0.0.3/content/files/vflow/subengines/com/sap/python36/operators/com/sap/retail/findCluster/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../di_pandas-0.0.3/content/files/vflow/subengines/com/sap/python36/operators/com/sap/retail/findCluster/operator.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../di_pandas-0.0.3/content/files/vflow/subengines/com/sap/python36/operators/com/sap/retail/findCluster/operator.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../di_pandas-0.0.3/content/files/vflow/subengines/com/sap/python36/operators/com/sap/retail/map2ColumnNames/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../di_pandas-0.0.3/content/files/vflow/subengines/com/sap/python36/operators/com/sap/retail/map2ColumnNames/operator.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../di_pandas-0.0.3/content/files/vflow/subengines/com/sap/python36/operators/com/sap/retail/map2ColumnNames/operator.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../di_pandas-0.0.3/content/files/vflow/subengines/com/sap/python36/operators/com/sap/retail/preparePOS_ML/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../di_pandas-0.0.3/content/files/vflow/subengines/com/sap/python36/operators/com/sap/retail/preparePOS_ML/json_pandas_util.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../di_pandas-0.0.3/content/files/vflow/subengines/com/sap/python36/operators/com/sap/retail/preparePOS_ML/operator.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../di_pandas-0.0.3/content/files/vflow/subengines/com/sap/python36/operators/com/sap/retail/preparePOS_ML/operator.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../di_pandas-0.0.3/content/files/vflow/subengines/com/sap/python36/operators/com/sap/retail/readPOS/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../di_pandas-0.0.3/content/files/vflow/subengines/com/sap/python36/operators/com/sap/retail/readPOS/operator.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../di_pandas-0.0.3/content/files/vflow/subengines/com/sap/python36/operators/com/sap/retail/readPOS/operator.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../di_pandas-0.0.3/content/files/vflow/subengines/com/sap/python36/operators/com/sap/retail/selectCategories/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../di_pandas-0.0.3/content/files/vflow/subengines/com/sap/python36/operators/com/sap/retail/selectCategories/operator.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../di_pandas-0.0.3/content/files/vflow/subengines/com/sap/python36/operators/com/sap/retail/selectCategories/operator.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../di_pandas-0.0.3/content/files/vflow/subengines/com/sap/python36/operators/merge_DataFrames/DI Pandas.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../di_pandas-0.0.3/content/files/vflow/subengines/com/sap/python36/operators/merge_DataFrames/configSchema.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../di_pandas-0.0.3/content/files/vflow/subengines/com/sap/python36/operators/merge_DataFrames/joinDataFrames.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../di_pandas-0.0.3/content/files/vflow/subengines/com/sap/python36/operators/merge_DataFrames/join_DataFrames.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../di_pandas-0.0.3/content/files/vflow/subengines/com/sap/python36/operators/merge_DataFrames/operator.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../di_pandas-0.0.3/content/files/vflow/subengines/com/sap/python36/operators/selectDataFrame/DI Pandas.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../di_pandas-0.0.3/content/files/vflow/subengines/com/sap/python36/operators/selectDataFrame/configSchema.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../di_pandas-0.0.3/content/files/vflow/subengines/com/sap/python36/operators/selectDataFrame/operator.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../di_pandas-0.0.3/content/files/vflow/subengines/com/sap/python36/operators/selectDataFrame/selectDataFrame.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../di_pandas-0.0.3/content/files/vflow/subengines/com/sap/python36/operators/toCSVDataFrame/DI Pandas.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../di_pandas-0.0.3/content/files/vflow/subengines/com/sap/python36/operators/toCSVDataFrame/configSchema.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../di_pandas-0.0.3/content/files/vflow/subengines/com/sap/python36/operators/toCSVDataFrame/operator.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../di_pandas-0.0.3/content/files/vflow/subengines/com/sap/python36/operators/toCSVDataFrame/script.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../di_pandas-0.0.3/content/files/vflow/subengines/com/sap/python36/operators/toCSVDataFrame/toCSVDataFrame.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../di_pandas-0.0.3/content/files/vflow/subengines/com/sap/python36/operators/toDataframe/DI Pandas.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../di_pandas-0.0.3/content/files/vflow/subengines/com/sap/python36/operators/toDataframe/configSchema.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../di_pandas-0.0.3/content/files/vflow/subengines/com/sap/python36/operators/toDataframe/fromCSVDataFrame.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../di_pandas-0.0.3/content/files/vflow/subengines/com/sap/python36/operators/toDataframe/operator.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../di_pandas-0.0.3/content/files/vflow/subengines/com/sap/python36/operators/toHanaDataFrame/DI Pandas.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../di_pandas-0.0.3/content/files/vflow/subengines/com/sap/python36/operators/toHanaDataFrame/configSchema.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../di_pandas-0.0.3/content/files/vflow/subengines/com/sap/python36/operators/toHanaDataFrame/operator.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../di_pandas-0.0.3/content/files/vflow/subengines/com/sap/python36/operators/toHanaDataFrame/toHanaDataFrame.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../di_pandas-0.0.3/manifest.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../di_pandas-0.0.4.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../di_pandas-0.0.5.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../howto_use_template.md" beforeDir="false" afterPath="$PROJECT_DIR$/../howto_use_template.md" afterDir="false" />
+    </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CoverageDataManager">
+    <SUITE FILE_PATH="coverage/local$dropColumnsDataFrame.coverage" NAME="dropColumnsDataFrame Coverage Results" MODIFIED="1564244483711" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/src$batchProducer.coverage" NAME="batchProducer Coverage Results" MODIFIED="1565079665159" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/local$pipeline.coverage" NAME="pipeline Coverage Results" MODIFIED="1564306089911" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/local$joinDataFrames.coverage" NAME="joinDataFrames Coverage Results" MODIFIED="1564072413561" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/local$sampleDataFrame.coverage" NAME="sampleDataFrame Coverage Results" MODIFIED="1564285843017" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/src$sampleDataFrame.coverage" NAME="sampleDataFrame Coverage Results" MODIFIED="1564391164416" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/local$templateDataFrames.coverage" NAME="templateDataFrames Coverage Results" MODIFIED="1564150834572" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/src$batchesConsumer.coverage" NAME="batchesConsumer Coverage Results" MODIFIED="1565080657275" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/src$transposeColumnDataFrame.coverage" NAME="transposeColumnDataFrame Coverage Results" MODIFIED="1564400026832" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/local$fromCSVDataFrame.coverage" NAME="fromCSVDataFrame Coverage Results" MODIFIED="1564072166640" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/local$toCSVDataFrame.coverage" NAME="toCSVDataFrame Coverage Results" MODIFIED="1564072304849" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/local$selectDataFrame.coverage" NAME="selectDataFrame Coverage Results" MODIFIED="1564072373242" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+  </component>
+  <component name="FUSProjectUsageTrigger">
+    <session id="-1289171052">
+      <usages-collector id="statistics.lifecycle.project">
+        <counts>
+          <entry key="project.closed" value="5" />
+          <entry key="project.open.time.0" value="1" />
+          <entry key="project.open.time.10" value="1" />
+          <entry key="project.open.time.11" value="1" />
+          <entry key="project.open.time.12" value="1" />
+          <entry key="project.open.time.7" value="1" />
+          <entry key="project.open.time.8" value="1" />
+          <entry key="project.opened" value="6" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.open">
+        <counts>
+          <entry key="py" value="29" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.open">
+        <counts>
+          <entry key="Python" value="29" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.edit">
+        <counts>
+          <entry key="Python Console" value="37" />
+          <entry key="dummy" value="11" />
+          <entry key="py" value="13478" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.edit">
+        <counts>
+          <entry key="PLAIN_TEXT" value="11" />
+          <entry key="Python" value="13515" />
+        </counts>
+      </usages-collector>
+    </session>
+    <session id="-96763135">
+      <usages-collector id="statistics.lifecycle.project">
+        <counts>
+          <entry key="project.closed" value="1" />
+          <entry key="project.open.time.1" value="1" />
+          <entry key="project.open.time.12" value="1" />
+          <entry key="project.open.time.2" value="1" />
+          <entry key="project.opened" value="3" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.open">
+        <counts>
+          <entry key="py" value="5" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.open">
+        <counts>
+          <entry key="Python" value="5" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.edit">
+        <counts>
+          <entry key="Python Console" value="7" />
+          <entry key="dummy" value="2" />
+          <entry key="py" value="3730" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.edit">
+        <counts>
+          <entry key="PLAIN_TEXT" value="2" />
+          <entry key="Python" value="3734" />
+          <entry key="SQL" value="3" />
+        </counts>
+      </usages-collector>
+    </session>
+  </component>
+  <component name="FavoritesManager">
+    <favorites_list name="local" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/toCSVDataFrame.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1541">
+              <caret line="93" column="13" lean-forward="true" selection-start-line="93" selection-start-column="13" selection-end-line="93" selection-end-column="13" />
+              <folding>
+                <element signature="e#0#19#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/selectDataFrame.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-76">
+              <caret line="26" column="51" lean-forward="true" selection-start-line="26" selection-start-column="8" selection-end-line="26" selection-end-column="51" />
+              <folding>
+                <element signature="e#0#19#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/dropColumnsDataFrame.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="514">
+              <caret line="161" column="1" selection-start-line="161" selection-start-column="1" selection-end-line="161" selection-end-column="1" />
+              <folding>
+                <element signature="e#0#19#0" expanded="true" />
+                <marker date="1564295246287" expanded="true" signature="3894:3934" ph="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/fromCSVDataFrame.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="610">
+              <caret line="153" column="28" lean-forward="true" selection-start-line="141" selection-start-column="16" selection-end-line="153" selection-end-column="28" />
+              <folding>
+                <element signature="e#0#19#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templateDataFrames.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="748">
+              <caret line="45" lean-forward="true" selection-start-line="45" selection-end-line="45" />
+              <folding>
+                <element signature="e#0#19#0" expanded="true" />
+                <marker date="1564305142600" expanded="true" signature="233:239" ph="..." />
+                <marker date="1564305142600" expanded="true" signature="2383:2472" ph="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/transposeColumnDataFrame.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="104">
+              <caret line="39" lean-forward="true" selection-start-line="39" selection-end-line="39" />
+              <folding>
+                <element signature="e#0#19#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/batchesProducer.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="449">
+              <caret line="31" column="5" selection-start-line="31" selection-start-column="5" selection-end-line="31" selection-end-column="5" />
+              <folding>
+                <element signature="e#1#11#0" expanded="true" />
+                <marker date="1565081039089" expanded="true" signature="2533:2579" ph="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/batchesConsumer.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="88">
+              <caret line="16" column="81" selection-start-line="16" selection-start-column="81" selection-end-line="16" selection-end-column="81" />
+              <folding>
+                <element signature="e#1#11#0" expanded="true" />
+                <marker date="1565081039083" expanded="true" signature="1088:1115" ph="..." />
+                <marker date="1565081039083" expanded="true" signature="1128:1165" ph="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file:///usr/local/lib/python3.7/site-packages/pandas/core/generic.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="86819">
+              <caret line="5179" selection-start-line="5179" selection-end-line="5179" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file:///usr/local/lib/python3.7/site-packages/pandas/io/parsers.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="20247">
+              <caret line="1254" selection-start-line="1254" selection-end-line="1254" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>print</find>
+      <find>selection_str</find>
+    </findStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/tprogress.py" />
+        <option value="$PROJECT_DIR$/pipeline.py" />
+        <option value="$PROJECT_DIR$/selectDataFrame.py" />
+        <option value="$PROJECT_DIR$/toCSVDataFrame.py" />
+        <option value="$PROJECT_DIR$/dropColumnsDataFrame.py" />
+        <option value="$PROJECT_DIR$/templateDataFrames.py" />
+        <option value="$PROJECT_DIR$/joinDataFrames.py" />
+        <option value="$PROJECT_DIR$/sampleDataFrame.py" />
+        <option value="$PROJECT_DIR$/transposeColumnDataFrame.py" />
+        <option value="$PROJECT_DIR$/fromCSVDataFrame.py" />
+        <option value="$PROJECT_DIR$/batchProducer.py" />
+        <option value="$PROJECT_DIR$/batchesProducer.py" />
+        <option value="$PROJECT_DIR$/batchesConsumer.py" />
+      </list>
+    </option>
+  </component>
+  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsGulpfileManager">
+    <detection-done>true</detection-done>
+    <sorting>DEFINITION_ORDER</sorting>
+  </component>
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="width" value="1440" />
+    <option name="height" value="900" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="src" type="b2602c69:ProjectViewProjectNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="Scope" />
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
+    <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager" selected="Python.batchesConsumer">
+    <configuration name="batchProducer" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="local" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/batchesProducer.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="batchesConsumer" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="local" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/batchesConsumer.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="pipeline" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="local" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/pipeline.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="sampleDataFrame" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="local" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/sampleDataFrame.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="transposeColumnDataFrame" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="local" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/transposeColumnDataFrame.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Python.sampleDataFrame" />
+      <item itemvalue="Python.pipeline" />
+      <item itemvalue="Python.transposeColumnDataFrame" />
+      <item itemvalue="Python.batchProducer" />
+      <item itemvalue="Python.batchesConsumer" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.batchesConsumer" />
+        <item itemvalue="Python.batchProducer" />
+        <item itemvalue="Python.transposeColumnDataFrame" />
+        <item itemvalue="Python.sampleDataFrame" />
+        <item itemvalue="Python.pipeline" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="675ed38c-d365-4fa4-ba4d-96f2a4cff63f" name="Default Changelist" comment="" />
+      <created>1563526564130</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1563526564130</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="TodoView" selected-index="3">
+    <todo-panel id="selected-file">
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="0" y="23" width="1440" height="819" extended-state="6" />
+    <layout>
+      <window_info id="Favorites" order="0" sideWeight="0.5021097" side_tool="true" weight="0.34549356" />
+      <window_info content_ui="combo" id="Project" order="1" sideWeight="0.4978903" visible="true" weight="0.27968526" />
+      <window_info id="Structure" order="2" sideWeight="0.5021097" side_tool="true" weight="0.34549356" />
+      <window_info anchor="bottom" id="Database Changes" order="0" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Terminal" order="1" weight="0.32961586" />
+      <window_info anchor="bottom" id="Event Log" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Version Control" order="3" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Python Console" order="4" weight="0.35687733" />
+      <window_info anchor="bottom" id="Docker" order="5" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Message" order="6" />
+      <window_info anchor="bottom" id="Find" order="7" weight="0.3286119" />
+      <window_info active="true" anchor="bottom" id="Run" order="8" visible="true" weight="0.35795453" />
+      <window_info anchor="bottom" id="Debug" order="9" weight="0.55116516" />
+      <window_info anchor="bottom" id="Cvs" order="10" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="11" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="12" weight="0.3283767" />
+      <window_info anchor="right" id="Database" order="0" />
+      <window_info anchor="right" id="Commander" order="1" weight="0.4" />
+      <window_info anchor="right" id="SciView" order="2" weight="0.036741216" />
+      <window_info anchor="right" id="Ant Build" order="3" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="4" weight="0.25" />
+    </layout>
+    <layout-to-restore>
+      <window_info id="Favorites" order="0" sideWeight="0.5021097" side_tool="true" weight="0.34549356" />
+      <window_info active="true" content_ui="combo" id="Project" order="1" sideWeight="0.4978903" visible="true" weight="0.20820022" />
+      <window_info id="Structure" order="2" sideWeight="0.5021097" side_tool="true" weight="0.34549356" />
+      <window_info anchor="bottom" id="Database Changes" order="0" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Terminal" order="1" weight="0.32961586" />
+      <window_info anchor="bottom" id="Event Log" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Version Control" order="3" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Python Console" order="4" weight="0.35687733" />
+      <window_info anchor="bottom" id="Docker" order="5" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Message" order="6" />
+      <window_info anchor="bottom" id="Find" order="7" weight="0.3286119" />
+      <window_info anchor="bottom" id="Run" order="8" visible="true" weight="0.3941236" />
+      <window_info anchor="bottom" id="Debug" order="9" weight="0.3457249" />
+      <window_info anchor="bottom" id="Cvs" order="10" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="11" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="12" weight="0.3283767" />
+      <window_info anchor="right" id="Database" order="0" />
+      <window_info anchor="right" id="Commander" order="1" weight="0.4" />
+      <window_info anchor="right" id="SciView" order="2" visible="true" weight="0.036741216" />
+      <window_info anchor="right" id="Ant Build" order="3" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="4" weight="0.25" />
+    </layout-to-restore>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/dropColumnsDataFrame.py</url>
+          <line>27</line>
+          <option name="timeStamp" value="33" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/dropColumnsDataFrame.py</url>
+          <line>23</line>
+          <option name="timeStamp" value="34" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/joinDataFrames.py</url>
+          <line>156</line>
+          <option name="timeStamp" value="41" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/transposeColumnDataFrame.py</url>
+          <line>16</line>
+          <option name="timeStamp" value="42" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/batchesConsumer.py</url>
+          <line>61</line>
+          <option name="timeStamp" value="46" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/batchesProducer.py</url>
+          <line>26</line>
+          <option name="timeStamp" value="48" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$APPLICATION_HOME_DIR$/helpers/pydev/_pydev_imps/_pydev_execfile.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="17" selection-start-line="17" selection-end-line="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///usr/local/lib/python3.7/site-packages/pandas/core/frame.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="188">
+          <caret line="4390" selection-start-line="4390" selection-end-line="4390" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/json_pandas_util.py" />
+    <entry file="file://$PROJECT_DIR$/tprogress.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="697">
+          <caret line="42" column="61" selection-start-line="42" selection-start-column="61" selection-end-line="42" selection-end-column="61" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///usr/local/Cellar/python/3.7.3/Frameworks/Python.framework/Versions/3.7/lib/python3.7/json/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="183">
+          <caret line="340" selection-start-line="340" selection-end-line="340" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///usr/local/lib/python3.7/site-packages/pandas/core/indexes/base.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="5332" selection-start-line="5332" selection-end-line="5332" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///usr/local/lib/python3.7/site-packages/pandas/core/groupby/grouper.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="435">
+          <caret line="620" selection-start-line="620" selection-end-line="620" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///usr/local/lib/python3.7/site-packages/pandas/core/reshape/merge.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="162">
+          <caret line="81" selection-start-line="81" selection-end-line="81" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/joinDataFrames.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2686">
+          <caret line="159" selection-start-line="159" selection-end-line="159" />
+          <folding>
+            <element signature="e#0#19#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pipeline.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="544">
+          <caret line="38" selection-start-line="38" selection-end-line="38" />
+          <folding>
+            <element signature="e#0#34#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sampleDataFrame.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="799">
+          <caret line="48" column="31" lean-forward="true" selection-start-line="48" selection-start-column="31" selection-end-line="48" selection-end-column="31" />
+          <folding>
+            <element signature="e#0#19#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templateDataFrames.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="748">
+          <caret line="45" lean-forward="true" selection-start-line="45" selection-end-line="45" />
+          <folding>
+            <element signature="e#0#19#0" expanded="true" />
+            <marker date="1564305142600" expanded="true" signature="233:239" ph="..." />
+            <marker date="1564305142600" expanded="true" signature="2383:2472" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///usr/local/lib/python3.7/site-packages/pandas/core/generic.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="86819">
+          <caret line="5179" selection-start-line="5179" selection-end-line="5179" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///usr/local/lib/python3.7/site-packages/pandas/io/parsers.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="20247">
+          <caret line="1254" selection-start-line="1254" selection-end-line="1254" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/transposeColumnDataFrame.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="104">
+          <caret line="39" lean-forward="true" selection-start-line="39" selection-end-line="39" />
+          <folding>
+            <element signature="e#0#19#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/toCSVDataFrame.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1541">
+          <caret line="93" column="13" lean-forward="true" selection-start-line="93" selection-start-column="13" selection-end-line="93" selection-end-column="13" />
+          <folding>
+            <element signature="e#0#19#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fromCSVDataFrame.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="610">
+          <caret line="153" column="28" lean-forward="true" selection-start-line="141" selection-start-column="16" selection-end-line="153" selection-end-column="28" />
+          <folding>
+            <element signature="e#0#19#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/selectDataFrame.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-76">
+          <caret line="26" column="51" lean-forward="true" selection-start-line="26" selection-start-column="8" selection-end-line="26" selection-end-column="51" />
+          <folding>
+            <element signature="e#0#19#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dropColumnsDataFrame.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="514">
+          <caret line="161" column="1" selection-start-line="161" selection-start-column="1" selection-end-line="161" selection-end-column="1" />
+          <folding>
+            <element signature="e#0#19#0" expanded="true" />
+            <marker date="1564295246287" expanded="true" signature="3894:3934" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/batchesProducer.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="449">
+          <caret line="31" column="5" selection-start-line="31" selection-start-column="5" selection-end-line="31" selection-end-column="5" />
+          <folding>
+            <element signature="e#1#11#0" expanded="true" />
+            <marker date="1565081039089" expanded="true" signature="2533:2579" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/batchesConsumer.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="88">
+          <caret line="16" column="81" selection-start-line="16" selection-start-column="81" selection-end-line="16" selection-end-column="81" />
+          <folding>
+            <element signature="e#1#11#0" expanded="true" />
+            <marker date="1565081039083" expanded="true" signature="1088:1115" ph="..." />
+            <marker date="1565081039083" expanded="true" signature="1128:1165" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>
