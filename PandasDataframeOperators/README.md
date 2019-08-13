@@ -1,11 +1,11 @@
-# Data Intelligence Pandas (DI_pandas)
-Are a set of operators that can be implemented on SAP Data Intelligence. These operators 
+# Pandas DataFrame Operators
+Are a set of operators that can be implemented on SAP Data Hub/SAP Data Intelligence. These operators 
 help to create Pandas DataFrames from CSV-strings or byte-encoded data. 
 
 Example graph with creating DataFrames, sampling, joining, selecting and creating CSV:
 ![Example pipeline: Create POS](images/CreatePOS_pipeline.png)
 
-The list of operators are constantly growing and will never be complete. In any case it should provide you the idea how to develop quickly similar pandas operators that suits your requirements. At the end of the README.md you find a documention with common feautes and some practices of how it was developed. 
+The list of operators are constantly growing and will never be complete. In any case it should provide you the idea how to develop quickly similar pandas operators that suits your requirements. At the end of the README.md you find a documention with common features and some practices of how it was developed. 
 
 More on the pandas project and the benefits it provides to high-performance data structures and analysis you find at https://pandas.pydata.org.
 
@@ -24,14 +24,17 @@ In the *solution*-folder you find the ready-to-import operators that will be sto
 
 ## Examples
 In the github folder *example-graphs* you find an example how to use the operators.
-|
+
 ## Known Issues
 
-Currently there are no known issues with the operators but nonetheless although all operators come with test cases and the code has limited complexities there might be erros that are not discovered yet. Notes of failing cases are well-appreciated. 
+Currently there are no known issues with the operators but nonetheless although all operators come with test cases and the code has limited complexities there might be errors that are not discovered yet. Notes of failing cases are well-appreciated. 
 
 ## How to get support
 
 If you need help or in case you found a bug please open a [Github Issue](https://github.com/SAP/datahub-integration-examples/issues).
+
+## How to run
+  - Import [solution/PandasDataFrameOperators-0.0.7.zip](solution/PandasDataFrameOperators-0.0.7.zip) via `SAP Data Hub System Management` -> `Files` -> `Import Solution`
 
 ## License
 
@@ -50,7 +53,7 @@ Four basic operators are provided and a template for creating custom panda opera
 * ... 
 
 ### Local Development Support
-Because it is time consuming for developing directly in Data Intelligence due to the queueing process and the limited support of debugging, it is more effective to start the development locally and do the appropriate tests before deploying the scripts in DI. For doing this for all scripts supporting features are provided. There is also a hint for a simulation of a pipeline. An example is given in the **pipeline.py** script. 
+To work with the IDE of your choice and to run unit tests, you may start the development locally and do the appropriate tests before deploying the scripts in a SAP Data Hub / SAP Data Intelligence cluster. For doing this for all scripts supporting features are provided. There is also a hint for a simulation of a pipeline. An example is given in the **pipeline.py** script. 
 
 
 ### Basic Architecture
