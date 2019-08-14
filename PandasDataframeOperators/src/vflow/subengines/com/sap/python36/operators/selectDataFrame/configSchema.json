@@ -1,0 +1,22 @@
+{
+    "$schema": "http://json-schema.org/draft-06/schema#",
+    "$id": "http://sap.com/vflow/selectDataFrame.configSchema.json",
+    "type": "object",
+    "properties": {
+        "codelanguage": {
+            "type": "string"
+        },
+        "script": {
+            "type": "string"
+        },
+        "selection_num": {
+            "title": "Selection in columns of numeric type",
+            "description": "Selection in columns of numeric type",
+            "type": "string"
+        },
+        "selection_list": {
+            "description": "Selection from list  in column of string type",
+            "type": "string"
+        }
+    }
+}

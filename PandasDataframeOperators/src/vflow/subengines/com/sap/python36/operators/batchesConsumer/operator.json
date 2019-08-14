@@ -1,0 +1,1 @@
+{"description":"Batches Consumer","component":"com.sap.system.python3Operator","inports":[{"name":"inCSVMsg","type":"message"}],"outports":[{"name":"Info","type":"string"},{"name":"outCSVMsg","type":"message"}],"icon":"puzzle-piece","iconsrc":"batchConsumer.svg","config":{"$type":"http://sap.com/vflow/batchesConsumer.configSchema.json","script":"file://batchesConsumer.py"}}

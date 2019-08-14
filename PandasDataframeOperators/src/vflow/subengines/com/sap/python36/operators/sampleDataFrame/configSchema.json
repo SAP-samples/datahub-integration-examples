@@ -1,0 +1,28 @@
+{
+    "$schema": "http://json-schema.org/draft-06/schema#",
+    "$id": "http://sap.com/vflow/sampleDataFrame.configSchema.json",
+    "type": "object",
+    "properties": {
+        "codelanguage": {
+            "type": "string"
+        },
+        "script": {
+            "type": "string"
+        },
+        "sample_size": {
+            "title": "Sample size",
+            "description": "Sample size",
+            "type": "integer"
+        },
+        "random_state": {
+            "title": "Random state",
+            "description": "Random state",
+            "type": "integer"
+        },
+        "invariant_column": {
+            "title": "Invariant column",
+            "description": "Column where all the same value records should be kept as a whole in a sample",
+            "type": "string"
+        }
+    }
+}

@@ -17,9 +17,10 @@ In order to be able to deploy and run the examples, the following requirements n
 - A docker-image with pandas package is available 
 
 ## Download and Installation
-In the *solution*-folder you find the ready-to-import operators that will be stored under the path: 
+In the *solution*-folder you find the ready-to-import operators that will be stored under the path */files/vflow/subengines/com/sap/python36/operators* and the dockerfile to install the pandas library:
 
-- /files/vflow/subengines/com/sap/python36/operators
+* pandasDockerfile-0.0.x.zip
+* PandasDataFrameOperators-x.x.x.zip
 
 
 ## Examples

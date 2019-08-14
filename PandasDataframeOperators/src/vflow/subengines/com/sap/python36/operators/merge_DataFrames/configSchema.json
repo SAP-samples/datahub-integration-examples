@@ -1,0 +1,49 @@
+{
+    "$schema": "http://json-schema.org/draft-06/schema#",
+    "$id": "http://sap.com/vflow/merge_DataFrames.configSchema.json",
+    "type": "object",
+    "properties": {
+        "codelanguage": {
+            "type": "string"
+        },
+        "script": {
+            "type": "string"
+        },
+        "how": {
+            "title": "How to join",
+            "description": "How to join 2 DataFrames",
+            "type": "string",
+            "enum": [
+                "inner",
+                "outer",
+                "left",
+                "right"
+            ]
+        },
+        "on_index": {
+            "title": "On index",
+            "description": "Join on indices of both DataFrames",
+            "type": "boolean"
+        },
+        "left_on": {
+            "title": "Left df column to join",
+            "description": "Left DataFrame column to join",
+            "type": "string"
+        },
+        "right_on": {
+            "title": "Right df column to join",
+            "description": "Right DataFrame column to join",
+            "type": "string"
+        },
+        "drop_columns": {
+            "title": "Drop columns",
+            "description": "List of columns to drop after join",
+            "type": "string"
+        },
+        "new_indices": {
+            "title": "New index or index list",
+            "description": "New index/list after merge",
+            "type": "string"
+        }
+    }
+}

@@ -1,0 +1,53 @@
+{
+    "$schema": "http://json-schema.org/draft-06/schema#",
+    "$id": "http://sap.com/vflow/toDataframe.configSchema.json",
+    "type": "object",
+    "properties": {
+        "codelanguage": {
+            "type": "string"
+        },
+        "script": {
+            "type": "string"
+        },
+        "index_cols": {
+            "title": "Index Columns",
+            "description": "Index columns of dataframe",
+            "type": "string"
+        },
+        "separator": {
+            "title": "Separator of CSV",
+            "description": "Separator of CSV",
+            "type": "string"
+        },
+        "error_bad_lines": {
+            "title": "Error on bad lines",
+            "description": "Error on bad lines",
+            "type": "boolean"
+        },
+        "use_columns": {
+            "title": "Use columns from CSV",
+            "description": "Use columns from CSV (list)",
+            "type": "string"
+        },
+        "limit_rows": {
+            "title": "Limit number of rows",
+            "description": "Limit number of rows for testing purpose",
+            "type": "number"
+        },
+        "downcast_int": {
+            "title": "Downcast integers",
+            "description": "Downcast integers from int64 to int with smallest memory footprint",
+            "type": "boolean"
+        },
+        "downcast_float": {
+            "title": "Downcast float datatypes",
+            "description": "Downcast float64 to float32 datatypes",
+            "type": "boolean"
+        },
+        "df_name": {
+            "title": "DataFrame name",
+            "description": "DataFrame name for debugging reasons",
+            "type": "string"
+        }
+    }
+}

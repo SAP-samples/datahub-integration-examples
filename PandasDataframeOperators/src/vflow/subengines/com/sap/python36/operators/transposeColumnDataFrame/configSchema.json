@@ -1,0 +1,43 @@
+{
+    "$schema": "http://json-schema.org/draft-06/schema#",
+    "$id": "http://sap.com/vflow/transposeColumnDataFrame.configSchema.json",
+    "type": "object",
+    "properties": {
+        "codelanguage": {
+            "type": "string"
+        },
+        "script": {
+            "type": "string"
+        },
+        "transpose_column": {
+            "title": "Column to transpose",
+            "description": "Column to transpose",
+            "type": "string"
+        },
+        "selected_values": {
+            "title": "Selected Values",
+            "description": "Selected Value to  transpose",
+            "type": "string"
+        },
+        "groupby_column": {
+            "title": "Groupby column",
+            "description": "Groupby column",
+            "type": "string"
+        },
+        "aggr_trans": {
+            "title": "Aggregation method for transpose columns",
+            "description": "Aggregation method for transpose columns",
+            "type": "string"
+        },
+        "aggr_default": {
+            "title": "Aggregation method of non-transposed columns",
+            "description": "Aggregation method of non-transposed columns",
+            "type": "string"
+        },
+        "reset_index": {
+            "title": "Reset Index",
+            "description": "Reset Index",
+            "type": "boolean"
+        }
+    }
+}

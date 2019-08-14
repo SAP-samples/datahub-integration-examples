@@ -1,0 +1,18 @@
+{
+    "$schema": "http://json-schema.org/draft-06/schema#",
+    "$id": "http://sap.com/vflow/dropColumnsDataFrame.configSchema.json",
+    "type": "object",
+    "properties": {
+        "codelanguage": {
+            "type": "string"
+        },
+        "script": {
+            "type": "string"
+        },
+        "drop_columns": {
+            "title": "Columns to drop",
+            "description": "Columns to drop",
+            "type": "string"
+        }
+    }
+}

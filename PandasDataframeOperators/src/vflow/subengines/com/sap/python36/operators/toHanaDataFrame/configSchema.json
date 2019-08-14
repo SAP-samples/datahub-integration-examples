@@ -1,0 +1,38 @@
+{
+    "$schema": "http://json-schema.org/draft-06/schema#",
+    "$id": "http://sap.com/vflow/toHanaDataFrame.configSchema.json",
+    "type": "object",
+    "properties": {
+        "codelanguage": {
+            "type": "string"
+        },
+        "script": {
+            "type": "string"
+        },
+        "write_index": {
+            "title": "Write index",
+            "description": "Write Index",
+            "type": "boolean"
+        },
+        "table_name": {
+            "title": "Table name",
+            "description": "Table name",
+            "type": "string"
+        },
+        "schema": {
+            "title": "Schema",
+            "description": "Schema",
+            "type": "string"
+        },
+        "datatime2date": {
+            "title": "Datetime to date conversion",
+            "description": "Datetime to date conversion",
+            "type": "boolean"
+        },
+        "map_types": {
+            "title": "Map types",
+            "description": "Map types schema",
+            "type": "string"
+        }
+    }
+}

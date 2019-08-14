@@ -1,0 +1,23 @@
+{
+    "$schema": "http://json-schema.org/draft-06/schema#",
+    "$id": "http://sap.com/vflow/toCSVDataFrame.configSchema.json",
+    "type": "object",
+    "properties": {
+        "codelanguage": {
+            "type": "string"
+        },
+        "script": {
+            "type": "string"
+        },
+        "write_index": {
+            "title": "Write Index",
+            "description": "Write index or ignore it",
+            "type": "boolean"
+        },
+        "separator": {
+            "title": "Separator",
+            "description": "Separator",
+            "type": "string"
+        }
+    }
+}
