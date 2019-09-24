@@ -1,0 +1,6 @@
+VIEW
+TABLE: "DH_INPUT"."com_sap_appint_mc_interactions"
+TABLE: "DH_INPUT"."com_sap_appint_mc_interactionContactOriginData"
+TABLE: "DH_INPUT"."com_sap_appint_s4_businessPartners"
+TABLE: "DH_INPUT"."com_sap_appint_c4c_corporateAccounts"
+VIEW: "DH_INPUT"."com_sap_appint_businesPartnerMapping"
