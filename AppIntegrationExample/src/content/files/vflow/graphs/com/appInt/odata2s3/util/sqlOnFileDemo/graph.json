@@ -1,0 +1,249 @@
+{
+	"properties": {},
+	"description": "SQL-on-File Demo",
+	"processes": {
+		"sapvoraclient1": {
+			"component": "com.sap.vora.client2",
+			"metadata": {
+				"label": "Execute SQL in Vora",
+				"x": 1141.9999933242798,
+				"y": 40.99999952316284,
+				"height": 80,
+				"width": 120,
+				"config": {
+					"connection": {
+						"configurationType": "Configuration Manager",
+						"connectionID": "APPINT_DH_VORA"
+					}
+				}
+			}
+		},
+		"writefile1": {
+			"component": "com.sap.storage.write",
+			"metadata": {
+				"label": "Write File to S3",
+				"x": 1730.999997138977,
+				"y": 40.99999952316284,
+				"height": 80,
+				"width": 120,
+				"config": {
+					"service": "S3",
+					"awsConnection": {
+						"configurationType": "Configuration Manager",
+						"connectionID": "APPINT_S3"
+					},
+					"path": "/sdl/data_zone/appInt/mc_interactionsWithContactData.csv",
+					"mode": "overwrite"
+				}
+			}
+		},
+		"terminal1": {
+			"component": "com.sap.util.terminal",
+			"metadata": {
+				"label": "Terminal",
+				"x": 672.9999952316284,
+				"y": 40.99999952316284,
+				"height": 80,
+				"width": 120,
+				"ui": "dynpath",
+				"config": {}
+			}
+		},
+		"tostringconverter2": {
+			"component": "com.sap.util.toStringConverter",
+			"metadata": {
+				"label": "ToString Converter",
+				"x": 1902.9999961853027,
+				"y": 55.99999952316284,
+				"height": 50,
+				"width": 50,
+				"config": {}
+			}
+		},
+		"constantgenerator1": {
+			"component": "com.sap.util.constantGenerator",
+			"metadata": {
+				"label": "Constant Generator",
+				"x": 841.9999952316284,
+				"y": 40.99999952316284,
+				"height": 80,
+				"width": 120,
+				"extensible": true,
+				"config": {
+					"content": "select T1.\"InteractionTimeStampUTC\", T1.\"InteractionAmount\", T1.\"InteractionCurrency\", T2.\"InteractionContactID\", T2.\"FullName\", T2.\"CityName\", T2.\"StreetName\" from \"com_appInt_mc_Interactions_ORC\" as T1 inner join \"com_appInt_mc_Contacts_ORC\" as T2 on T2.\"InteractionContactUUID\" = T1.\"InteractionContactUUID\""
+				}
+			}
+		},
+		"tomessageconverter1": {
+			"component": "com.sap.util.toMessageConverter",
+			"metadata": {
+				"label": "ToMessage Converter",
+				"x": 1026.999994277954,
+				"y": 55.99999952316284,
+				"height": 50,
+				"width": 50,
+				"config": {}
+			}
+		},
+		"formatconverter1": {
+			"component": "com.sap.util.formatConverter",
+			"metadata": {
+				"label": "Format Converter",
+				"x": 1454.9999990463257,
+				"y": 41.49999952316284,
+				"height": 80,
+				"width": 120,
+				"config": {
+					"csvComma": ";",
+					"csvHeaderIncluded": true,
+					"targetFormat": "CSV",
+					"fields": "InteractionTimeStampUTC,InteractionAmount,InteractionCurrency,InteractionContactID,FullName,CityName,StreetName"
+				}
+			}
+		},
+		"toblobconverter1": {
+			"component": "com.sap.util.toBlobConverter",
+			"metadata": {
+				"label": "ToBlob Converter",
+				"x": 1326.9999923706055,
+				"y": 55.49999952316284,
+				"height": 50,
+				"width": 50,
+				"config": {}
+			}
+		},
+		"tomessageconverter2": {
+			"component": "com.sap.util.toMessageConverter",
+			"metadata": {
+				"label": "ToMessage Converter",
+				"x": 1627.9999980926514,
+				"y": 55.99999952316284,
+				"height": 50,
+				"width": 50,
+				"config": {}
+			}
+		}
+	},
+	"groups": [],
+	"connections": [
+		{
+			"metadata": {
+				"points": "1854.999997138977,80.99999952316284 1876.5,81 1876.5,90 1897.9999961853027,89.99999952316284"
+			},
+			"src": {
+				"port": "outFilename",
+				"process": "writefile1"
+			},
+			"tgt": {
+				"port": "inmessage",
+				"process": "tostringconverter2"
+			}
+		},
+		{
+			"metadata": {
+				"points": "1956.9999961853027,80.99999952316284 2007,81 2007,26 618,26 618,81 667.9999952316284,80.99999952316284"
+			},
+			"src": {
+				"port": "outstring",
+				"process": "tostringconverter2"
+			},
+			"tgt": {
+				"port": "in1",
+				"process": "terminal1"
+			}
+		},
+		{
+			"metadata": {
+				"points": "796.9999952316284,80.99999952316284 836.9999952316284,80.99999952316284"
+			},
+			"src": {
+				"port": "out1",
+				"process": "terminal1"
+			},
+			"tgt": {
+				"port": "in",
+				"process": "constantgenerator1"
+			}
+		},
+		{
+			"metadata": {
+				"points": "965.9999952316284,80.99999952316284 993.9999947547913,80.99999952316284 993.9999947547913,89.99999952316284 1021.9999942779541,89.99999952316284"
+			},
+			"src": {
+				"port": "out",
+				"process": "constantgenerator1"
+			},
+			"tgt": {
+				"port": "instring",
+				"process": "tomessageconverter1"
+			}
+		},
+		{
+			"metadata": {
+				"points": "1080.999994277954,80.99999952316284 1136.9999933242798,80.99999952316284"
+			},
+			"src": {
+				"port": "out",
+				"process": "tomessageconverter1"
+			},
+			"tgt": {
+				"port": "sql",
+				"process": "sapvoraclient1"
+			}
+		},
+		{
+			"metadata": {
+				"points": "1380.9999923706055,80.49999952316284 1415.5,80.5 1415.5,81.5 1449.9999990463257,81.49999952316284"
+			},
+			"src": {
+				"port": "outbytearray",
+				"process": "toblobconverter1"
+			},
+			"tgt": {
+				"port": "input",
+				"process": "formatconverter1"
+			}
+		},
+		{
+			"metadata": {
+				"points": "1578.9999990463257,81.49999952316284 1601,81.5 1601,72 1622.9999980926514,71.99999952316284"
+			},
+			"src": {
+				"port": "output",
+				"process": "formatconverter1"
+			},
+			"tgt": {
+				"port": "inbody",
+				"process": "tomessageconverter2"
+			}
+		},
+		{
+			"metadata": {
+				"points": "1265.9999933242798,80.99999952316284 1294,81 1294,80.5 1321.9999923706055,80.49999952316284"
+			},
+			"src": {
+				"port": "result",
+				"process": "sapvoraclient1"
+			},
+			"tgt": {
+				"port": "ininterface",
+				"process": "toblobconverter1"
+			}
+		},
+		{
+			"metadata": {
+				"points": "1681.9999980926514,80.99999952316284 1725.999997138977,80.99999952316284"
+			},
+			"src": {
+				"port": "out",
+				"process": "tomessageconverter2"
+			},
+			"tgt": {
+				"port": "inFile",
+				"process": "writefile1"
+			}
+		}
+	],
+	"inports": {},
+	"outports": {}
+}

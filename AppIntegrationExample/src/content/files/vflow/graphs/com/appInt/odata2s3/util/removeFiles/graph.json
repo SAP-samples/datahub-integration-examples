@@ -1,0 +1,114 @@
+{
+	"description": "Remove file from S3",
+	"processes": {
+		"removefile1": {
+			"component": "com.sap.storage.remove2",
+			"metadata": {
+				"label": "Remove File",
+				"x": 487.99999618530273,
+				"y": 40.49999952316284,
+				"height": 80,
+				"width": 120,
+				"config": {
+					"service": "S3",
+					"awsConnection": {
+						"configurationType": "Configuration Manager",
+						"connectionID": "APPINT_S3"
+					}
+				}
+			}
+		},
+		"terminal1": {
+			"component": "com.sap.util.terminal",
+			"metadata": {
+				"label": "Terminal",
+				"x": 187.99999809265137,
+				"y": 40.99999952316284,
+				"height": 80,
+				"width": 120,
+				"ui": "dynpath",
+				"config": {}
+			}
+		},
+		"tostringconverter1": {
+			"component": "com.sap.util.toStringConverter",
+			"metadata": {
+				"label": "ToString Converter",
+				"x": 72.99999904632568,
+				"y": 55.49999952316284,
+				"height": 50,
+				"width": 50,
+				"config": {}
+			}
+		},
+		"tomessageconverter1": {
+			"component": "com.sap.util.toMessageConverter",
+			"metadata": {
+				"label": "ToMessage Converter",
+				"x": 372.99999713897705,
+				"y": 55.99999952316284,
+				"height": 50,
+				"width": 50,
+				"config": {}
+			}
+		}
+	},
+	"groups": [],
+	"connections": [
+		{
+			"metadata": {
+				"points": "611.9999961853027,80.49999952316284 639.9999957084656,80.49999952316284 639.9999957084656,12.5 454.9999966621399,12.5 454.9999966621399,27 339.9999976158142,27 339.9999976158142,12 154.99999856948853,12 154.99999856948853,27.5 12,27.5 12,89.49999952316284 67.99999904632568,89.49999952316284"
+			},
+			"src": {
+				"port": "out",
+				"process": "removefile1"
+			},
+			"tgt": {
+				"port": "inmessage",
+				"process": "tostringconverter1"
+			}
+		},
+		{
+			"metadata": {
+				"points": "126.99999904632568,80.49999952316284 154.99999856948853,80.49999952316284 154.99999856948853,80.99999952316284 182.99999809265137,80.99999952316284"
+			},
+			"src": {
+				"port": "outstring",
+				"process": "tostringconverter1"
+			},
+			"tgt": {
+				"port": "in1",
+				"process": "terminal1"
+			}
+		},
+		{
+			"metadata": {
+				"points": "426.99999713897705,80.99999952316284 454.9999966621399,80.99999952316284 454.9999966621399,80.49999952316284 482.99999618530273,80.49999952316284"
+			},
+			"src": {
+				"port": "out",
+				"process": "tomessageconverter1"
+			},
+			"tgt": {
+				"port": "in",
+				"process": "removefile1"
+			}
+		},
+		{
+			"metadata": {
+				"points": "311.99999809265137,80.99999952316284 340,81 340,72 367.99999713897705,71.99999952316284"
+			},
+			"src": {
+				"port": "out1",
+				"process": "terminal1"
+			},
+			"tgt": {
+				"port": "inbody",
+				"process": "tomessageconverter1"
+			}
+		}
+	],
+	"inports": {},
+	"outports": {},
+	"properties": {}
+}

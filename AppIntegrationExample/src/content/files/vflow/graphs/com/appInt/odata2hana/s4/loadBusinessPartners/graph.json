@@ -1,0 +1,91 @@
+{
+	"properties": {},
+	"description": "S4 BuPa to HANA",
+	"processes": {
+		"odataqueryconsumer1": {
+			"component": "com.sap.dh.sdi.odata.query.consumer",
+			"metadata": {
+				"label": "Get Business Partners via OData",
+				"x": 17,
+				"y": 12,
+				"height": 80,
+				"width": 120,
+				"extensible": false,
+				"config": {
+					"odataConnection": {
+						"configurationType": "Configuration Manager",
+						"connectionID": "APPINT_S4_BUPA"
+					},
+					"fetchSize": 5000,
+					"batchQueryMode": "true",
+					"entity": "/",
+					"query": "",
+					"native_sql_statement": "A_BusinessPartner?$select=BusinessPartner,Customer,Supplier,AcademicTitle,AuthorizationGroup,BusinessPartnerCategory,BusinessPartnerFullName,BusinessPartnerGrouping,BusinessPartnerName,BusinessPartnerUUID,CorrespondenceLanguage,CreatedByUser,CreationDate,CreationTime,FirstName,FormOfAddress,Industry,InternationalLocationNumber1,InternationalLocationNumber2,IsFemale,IsMale,IsNaturalPerson,IsSexUnknown,Language,LastChangeDate,LastChangeTime,LastChangedByUser,LastName,LegalForm,OrganizationBPName1,OrganizationBPName2,OrganizationBPName3,OrganizationBPName4,OrganizationFoundationDate,OrganizationLiquidationDate,SearchTerm1,AdditionalLastName,BirthDate,BusinessPartnerIsBlocked,BusinessPartnerType,ETag,GroupBusinessPartnerName1,GroupBusinessPartnerName2,IndependentAddressID,InternationalLocationNumber3,MiddleName,NameCountry,NameFormat,PersonFullName,PersonNumber,IsMarkedForArchiving,BusinessPartnerIDByExtSystem,TradingPartner"
+				}
+			}
+		},
+		"flowagenttableproducer1": {
+			"component": "com.sap.dh.ds.database.producer",
+			"metadata": {
+				"label": "Write Data to HANA Table",
+				"x": 201.99999904632568,
+				"y": 12,
+				"height": 80,
+				"width": 120,
+				"extensible": false,
+				"config": {
+					"service": "HANA",
+					"hanaConnection": {
+						"configurationType": "Configuration Manager",
+						"connectionID": "APPINT_HANA"
+					},
+					"hanaAdaptedDataset": "DH_INPUT.com_sap_appint_s4_businessPartners",
+					"mode": "truncate",
+					"batchSize": 5000
+				}
+			}
+		},
+		"graphterminator1": {
+			"component": "com.sap.util.graphTerminator",
+			"metadata": {
+				"label": "Graph Terminator",
+				"x": 370.9999990463257,
+				"y": 12,
+				"height": 80,
+				"width": 120,
+				"config": {}
+			}
+		}
+	},
+	"groups": [],
+	"connections": [
+		{
+			"metadata": {
+				"points": "141,43 168.99999952316284,43 168.99999952316284,52 196.99999904632568,52"
+			},
+			"src": {
+				"port": "outConfig",
+				"process": "odataqueryconsumer1"
+			},
+			"tgt": {
+				"port": "inConfig",
+				"process": "flowagenttableproducer1"
+			}
+		},
+		{
+			"metadata": {
+				"points": "325.9999990463257,52 365.9999990463257,52"
+			},
+			"src": {
+				"port": "outMessage",
+				"process": "flowagenttableproducer1"
+			},
+			"tgt": {
+				"port": "stop",
+				"process": "graphterminator1"
+			}
+		}
+	],
+	"inports": {},
+	"outports": {}
+}
