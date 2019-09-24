@@ -53,6 +53,10 @@ APPINT_DH_VORA | SAP Data Hub built-in VORA Database | VORA | n/a
 APPINT_HANA | SAP HANA Database | HANA_DB | n/a
 APPINT_S3 | Amazon S3 File Storage | S3 | n/a
 
+For the SAP S/4 HANA connections to work you need to enable the following communication scenarios as described [here](https://help.sap.com/viewer/e0cd7c1ecf3d4f2f9feb46ec1c5b68fb/1908.500/en-US/2e84a10c430645a88bdbfaaa23ac9ff7.html).
+- SAP_COM_0008 (API_BUSINESS_PARTNER)
+- SAP_COM_0157 (API_CUSTOMER_RETURN_SRV)
+
 Again, you may want to use only parts of the scenario. In this case, of course, you only need to import the connections that are relevant for your requirements.
 
 ### Connecting SAP Analytics Cloud to SAP HANA
