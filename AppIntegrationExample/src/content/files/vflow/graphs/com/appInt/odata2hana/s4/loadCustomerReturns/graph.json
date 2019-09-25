@@ -1,0 +1,91 @@
+{
+	"properties": {},
+	"description": "S4 CustRet. to HANA",
+	"processes": {
+		"odataqueryconsumer1": {
+			"component": "com.sap.dh.sdi.odata.query.consumer",
+			"metadata": {
+				"label": "Get Customer Returns via OData",
+				"x": 17,
+				"y": 12,
+				"height": 80,
+				"width": 120,
+				"extensible": false,
+				"config": {
+					"odataConnection": {
+						"configurationType": "Configuration Manager",
+						"connectionID": "APPINT_S4_CUSTRET"
+					},
+					"fetchSize": 5000,
+					"batchQueryMode": "true",
+					"entity": "/",
+					"query": "",
+					"native_sql_statement": "A_CustomerReturn?$select=CustomerReturn,CustomerReturnType,SalesOrganization,DistributionChannel,OrganizationDivision,SalesGroup,SalesOffice,SalesDistrict,SoldToParty,CreationDate,CreatedByUser,LastChangeDate,LastChangeDateTime,PurchaseOrderByCustomer,CustomerPurchaseOrderType,CustomerPurchaseOrderDate,CustomerReturnDate,TotalNetAmount,TransactionCurrency,SDDocumentReason,PricingDate,RequestedDeliveryDate,HeaderBillingBlockReason,DeliveryBlockReason,IncotermsClassification,IncotermsTransferLocation,IncotermsLocation1,IncotermsLocation2,IncotermsVersion,CustomerPaymentTerms,PaymentMethod,RetsMgmtProcess,ReferenceSDDocument,ReferenceSDDocumentCategory,RetsMgmtLogProcgStatus,RetsMgmtCompnProcgStatus,RetsMgmtProcessingStatus,OverallSDProcessStatus,TotalCreditCheckStatus,OverallSDDocumentRejectionSts"
+				}
+			}
+		},
+		"flowagenttableproducer1": {
+			"component": "com.sap.dh.ds.database.producer",
+			"metadata": {
+				"label": "Write Data to HANA Table",
+				"x": 201.99999904632568,
+				"y": 12,
+				"height": 80,
+				"width": 120,
+				"extensible": false,
+				"config": {
+					"service": "HANA",
+					"hanaConnection": {
+						"configurationType": "Configuration Manager",
+						"connectionID": "APPINT_HANA"
+					},
+					"hanaAdaptedDataset": "DH_INPUT.com_sap_appint_s4_customerReturns",
+					"mode": "truncate",
+					"batchSize": 5000
+				}
+			}
+		},
+		"graphterminator1": {
+			"component": "com.sap.util.graphTerminator",
+			"metadata": {
+				"label": "Graph Terminator",
+				"x": 370.9999990463257,
+				"y": 12,
+				"height": 80,
+				"width": 120,
+				"config": {}
+			}
+		}
+	},
+	"groups": [],
+	"connections": [
+		{
+			"metadata": {
+				"points": "141,43 168.99999952316284,43 168.99999952316284,52 196.99999904632568,52"
+			},
+			"src": {
+				"port": "outConfig",
+				"process": "odataqueryconsumer1"
+			},
+			"tgt": {
+				"port": "inConfig",
+				"process": "flowagenttableproducer1"
+			}
+		},
+		{
+			"metadata": {
+				"points": "325.9999990463257,52 365.9999990463257,52"
+			},
+			"src": {
+				"port": "outMessage",
+				"process": "flowagenttableproducer1"
+			},
+			"tgt": {
+				"port": "stop",
+				"process": "graphterminator1"
+			}
+		}
+	],
+	"inports": {},
+	"outports": {}
+}

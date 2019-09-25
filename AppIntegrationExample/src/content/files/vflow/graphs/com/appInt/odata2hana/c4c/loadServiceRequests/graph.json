@@ -1,0 +1,89 @@
+{
+	"properties": {},
+	"description": "C4C SrvRq. to HANA",
+	"processes": {
+		"odataqueryconsumer1": {
+			"component": "com.sap.dh.sdi.odata.query.consumer",
+			"metadata": {
+				"label": "Get Requests via OData",
+				"x": 17,
+				"y": 12,
+				"height": 80,
+				"width": 120,
+				"extensible": false,
+				"config": {
+					"odataConnection": {
+						"configurationType": "Configuration Manager",
+						"connectionID": "APPINT_C4C"
+					},
+					"fetchSize": 5000,
+					"batchQueryMode": "true",
+					"native_sql_statement": "ServiceRequestCollection?$select=ObjectID,ID,UUID,Name,ProductRecipientPartyID,ProductRecipientPartyUUID,ProductRecipientPartyName,IncidentServiceIssueCategoryID,EscalationStatusCode,EscalationStatusCodeText,ServicePriorityCode,ServicePriorityCodeText,RequestedFulfillmentPeriodStartDateTime,RequestedFulfillmentPeriodEndDateTime,RequestedTotalProcessingDuration,RequestedTotalRequestorDuration,RequestInitialReceiptdatetimecontent,RequestCloseddatetimeContent,SalesOrganisationID,SalesUnitPartyID,BuyerPartyID,WarrantyGoodwillCode,EscalationTimePointDateTime,ResolutionDueDateTime,SalesTerritoryID,SalesUnitPartyName,BuyerPartyName,BuyerPartyUUID,WarrantyID,ServiceIssueCategoryID,ServiceRequestClassificationCode,ServiceRequestClassificationCodeText,CreationDateTime"
+				}
+			}
+		},
+		"flowagenttableproducer1": {
+			"component": "com.sap.dh.ds.database.producer",
+			"metadata": {
+				"label": "Write Data to HANA Table",
+				"x": 201.99999904632568,
+				"y": 12,
+				"height": 80,
+				"width": 120,
+				"extensible": false,
+				"config": {
+					"service": "HANA",
+					"hanaConnection": {
+						"configurationType": "Configuration Manager",
+						"connectionID": "APPINT_HANA"
+					},
+					"hanaAdaptedDataset": "DH_INPUT.com_sap_appint_c4c_serviceRequests",
+					"mode": "truncate",
+					"batchSize": 5000
+				}
+			}
+		},
+		"graphterminator1": {
+			"component": "com.sap.util.graphTerminator",
+			"metadata": {
+				"label": "Graph Terminator",
+				"x": 370.9999990463257,
+				"y": 12,
+				"height": 80,
+				"width": 120,
+				"config": {}
+			}
+		}
+	},
+	"groups": [],
+	"connections": [
+		{
+			"metadata": {
+				"points": "141,43 168.99999952316284,43 168.99999952316284,52 196.99999904632568,52"
+			},
+			"src": {
+				"port": "outConfig",
+				"process": "odataqueryconsumer1"
+			},
+			"tgt": {
+				"port": "inConfig",
+				"process": "flowagenttableproducer1"
+			}
+		},
+		{
+			"metadata": {
+				"points": "325.9999990463257,52 365.9999990463257,52"
+			},
+			"src": {
+				"port": "outMessage",
+				"process": "flowagenttableproducer1"
+			},
+			"tgt": {
+				"port": "stop",
+				"process": "graphterminator1"
+			}
+		}
+	],
+	"inports": {},
+	"outports": {}
+}

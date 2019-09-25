@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" schemaVersion="2.3" id="COM_SAP_APPINT_ALL_DATES_SERIES" applyPrivilegeType="ANALYTIC_PRIVILEGE" checkAnalyticPrivileges="true" defaultClient="$$client$$" defaultLanguage="$$language$$" hierarchiesSQLEnabled="false" translationRelevant="true" visibility="reportingEnabled" calculationScenarioType="TREE_BASED" dataCategory="CUBE" enforceSqlExecution="false" executionSemantic="UNDEFINED" outputViewType="Projection">
+  <origin/>
+  <descriptions defaultDescription="COM_SAP_APPINT_ALL_DATES_SERIES"/>
+  <metadata activatedAt="2019-09-17 14:52:06.0" changedAt="2019-09-17 16:52:02.898"/>
+  <localVariables/>
+  <variableMappings/>
+  <informationModelLayout relativeWidthScenario="26"/>
+  <dataSources>
+    <DataSource id="com_sap_appint_allDatesSeries" type="DATA_BASE_VIEW">
+      <viewAttributes allViewAttributes="true"/>
+      <columnObject schemaName="DH_INPUT" columnObjectName="com_sap_appint_allDatesSeries"/>
+    </DataSource>
+  </dataSources>
+  <calculationViews/>
+  <logicalModel id="com_sap_appint_allDatesSeries">
+    <descriptions defaultDescription="COM_SAP_APPINT_ALL_DATES_SERIES"/>
+    <attributes>
+      <attribute id="BusinessPartnerUID" order="1" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="BusinessPartnerUID"/>
+        <keyMapping schemaName="DH_INPUT" columnObjectName="com_sap_appint_allDatesSeries" columnName="BusinessPartnerUID"/>
+      </attribute>
+      <attribute id="mcInteractionContactOrigin" order="2" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="mcInteractionContactOrigin"/>
+        <keyMapping schemaName="DH_INPUT" columnObjectName="com_sap_appint_allDatesSeries" columnName="mcInteractionContactOrigin"/>
+      </attribute>
+      <attribute id="mcInteractionContactID" order="3" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="mcInteractionContactID"/>
+        <keyMapping schemaName="DH_INPUT" columnObjectName="com_sap_appint_allDatesSeries" columnName="mcInteractionContactID"/>
+      </attribute>
+      <attribute id="mcInteractionContactUUID" order="4" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="mcInteractionContactUUID"/>
+        <keyMapping schemaName="DH_INPUT" columnObjectName="com_sap_appint_allDatesSeries" columnName="mcInteractionContactUUID"/>
+      </attribute>
+      <attribute id="c4cAccountId" order="5" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="c4cAccountId"/>
+        <keyMapping schemaName="DH_INPUT" columnObjectName="com_sap_appint_allDatesSeries" columnName="c4cAccountId"/>
+      </attribute>
+      <attribute id="s4BusinessPartner" order="6" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="s4BusinessPartner"/>
+        <keyMapping schemaName="DH_INPUT" columnObjectName="com_sap_appint_allDatesSeries" columnName="s4BusinessPartner"/>
+      </attribute>
+      <attribute id="isContact" order="8" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="isContact"/>
+        <keyMapping schemaName="DH_INPUT" columnObjectName="com_sap_appint_allDatesSeries" columnName="isContact"/>
+      </attribute>
+      <attribute id="isCorporateAccount" order="9" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="isCorporateAccount"/>
+        <keyMapping schemaName="DH_INPUT" columnObjectName="com_sap_appint_allDatesSeries" columnName="isCorporateAccount"/>
+      </attribute>
+      <attribute id="isBusinessPartner" order="10" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="isBusinessPartner"/>
+        <keyMapping schemaName="DH_INPUT" columnObjectName="com_sap_appint_allDatesSeries" columnName="isBusinessPartner"/>
+      </attribute>
+      <attribute id="Name" order="11" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Name"/>
+        <keyMapping schemaName="DH_INPUT" columnObjectName="com_sap_appint_allDatesSeries" columnName="Name"/>
+      </attribute>
+      <attribute id="Country" order="12" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Country"/>
+        <keyMapping schemaName="DH_INPUT" columnObjectName="com_sap_appint_allDatesSeries" columnName="Country"/>
+      </attribute>
+      <attribute id="City" order="13" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="City"/>
+        <keyMapping schemaName="DH_INPUT" columnObjectName="com_sap_appint_allDatesSeries" columnName="City"/>
+      </attribute>
+      <attribute id="Date" order="14" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Date"/>
+        <keyMapping schemaName="DH_INPUT" columnObjectName="com_sap_appint_allDatesSeries" columnName="Date"/>
+      </attribute>
+      <attribute id="Currency" order="15" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Currency"/>
+        <keyMapping schemaName="DH_INPUT" columnObjectName="com_sap_appint_allDatesSeries" columnName="Currency"/>
+      </attribute>
+    </attributes>
+    <calculatedAttributes/>
+    <privateDataFoundation>
+      <tableProxies/>
+      <joins/>
+      <layout>
+        <shapes/>
+      </layout>
+    </privateDataFoundation>
+    <baseMeasures>
+      <measure id="Matches" order="7" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="Matches"/>
+        <measureMapping schemaName="DH_INPUT" columnObjectName="com_sap_appint_allDatesSeries" columnName="Matches"/>
+      </measure>
+      <measure id="c4cOrders" order="16" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="c4cOrders"/>
+        <measureMapping schemaName="DH_INPUT" columnObjectName="com_sap_appint_allDatesSeries" columnName="c4cOrders"/>
+      </measure>
+      <measure id="c4cOrdersTotal" order="17" semanticType="amount" aggregationType="sum" measureType="amount">
+        <descriptions defaultDescription="c4cOrdersTotal"/>
+        <unitCurrencyAttribute attributeName="Currency"/>
+        <measureMapping schemaName="DH_INPUT" columnObjectName="com_sap_appint_allDatesSeries" columnName="c4cOrdersTotal"/>
+      </measure>
+      <measure id="c4cServiceRequest" order="18" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="c4cServiceRequest"/>
+        <measureMapping schemaName="DH_INPUT" columnObjectName="com_sap_appint_allDatesSeries" columnName="c4cServiceRequest"/>
+      </measure>
+      <measure id="mcComplaints" order="19" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="mcComplaints"/>
+        <measureMapping schemaName="DH_INPUT" columnObjectName="com_sap_appint_allDatesSeries" columnName="mcComplaints"/>
+      </measure>
+      <measure id="mcComplaintsTotal" order="20" semanticType="amount" aggregationType="sum" measureType="amount">
+        <descriptions defaultDescription="mcComplaintsTotal"/>
+        <unitCurrencyAttribute attributeName="Currency"/>
+        <measureMapping schemaName="DH_INPUT" columnObjectName="com_sap_appint_allDatesSeries" columnName="mcComplaintsTotal"/>
+      </measure>
+      <measure id="mcOpportunities" order="21" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="mcOpportunities"/>
+        <measureMapping schemaName="DH_INPUT" columnObjectName="com_sap_appint_allDatesSeries" columnName="mcOpportunities"/>
+      </measure>
+      <measure id="mcOpportunitiesTotal" order="22" semanticType="amount" aggregationType="sum" measureType="amount">
+        <descriptions defaultDescription="mcOpportunitiesTotal"/>
+        <unitCurrencyAttribute attributeName="Currency"/>
+        <measureMapping schemaName="DH_INPUT" columnObjectName="com_sap_appint_allDatesSeries" columnName="mcOpportunitiesTotal"/>
+      </measure>
+      <measure id="s4CustomerReturns" order="23" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="s4CustomerReturns"/>
+        <measureMapping schemaName="DH_INPUT" columnObjectName="com_sap_appint_allDatesSeries" columnName="s4CustomerReturns"/>
+      </measure>
+      <measure id="s4CustomerReturnsTotal" order="24" semanticType="amount" aggregationType="sum" measureType="amount">
+        <descriptions defaultDescription="s4CustomerReturnsTotal"/>
+        <unitCurrencyAttribute attributeName="Currency"/>
+        <measureMapping schemaName="DH_INPUT" columnObjectName="com_sap_appint_allDatesSeries" columnName="s4CustomerReturnsTotal"/>
+      </measure>
+    </baseMeasures>
+    <calculatedMeasures/>
+    <restrictedMeasures/>
+    <localDimensions/>
+  </logicalModel>
+  <layout>
+    <shapes>
+      <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+        <upperLeftCorner x="40" y="85"/>
+        <rectangleSize height="0" width="0"/>
+      </shape>
+    </shapes>
+  </layout>
+</Calculation:scenario>

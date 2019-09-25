@@ -1,0 +1,7 @@
+{
+  "name": "sap_dh_appint_example",
+  "version": "1.0.0",
+  "format": "2",
+  "description": "SAP Data Hub Application Integration Example",
+  "dependencies": []
+}

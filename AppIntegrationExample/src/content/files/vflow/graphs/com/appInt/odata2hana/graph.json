@@ -1,0 +1,570 @@
+{
+	"description": "OData to HANA",
+	"processes": {
+		"pipeline1": {
+			"component": "com.sap.dh.vflowpipeline",
+			"metadata": {
+				"label": "C4C Accounts to HANA",
+				"x": 397.9999990463257,
+				"y": 12,
+				"height": 80,
+				"width": 120,
+				"extensible": false,
+				"config": {
+					"graphName": "com.appInt.odata2hana.c4c.loadCorporateAccounts"
+				}
+			}
+		},
+		"workflowtrigger1": {
+			"component": "com.sap.dh.trigger",
+			"metadata": {
+				"label": "Workflow Trigger",
+				"x": 12,
+				"y": 372,
+				"height": 80,
+				"width": 120,
+				"extensible": true,
+				"config": {}
+			}
+		},
+		"pipeline2": {
+			"component": "com.sap.dh.vflowpipeline",
+			"metadata": {
+				"label": "C4C CustOrders to HANA",
+				"x": 397.9999990463257,
+				"y": 132,
+				"height": 80,
+				"width": 120,
+				"extensible": false,
+				"config": {
+					"graphName": "com.appInt.odata2hana.c4c.loadCustomerOrders"
+				}
+			}
+		},
+		"pipeline3": {
+			"component": "com.sap.dh.vflowpipeline",
+			"metadata": {
+				"label": "C4C ServReq. to HANA",
+				"x": 397.9999990463257,
+				"y": 252,
+				"height": 80,
+				"width": 120,
+				"extensible": false,
+				"config": {
+					"graphName": "com.appInt.odata2hana.c4c.loadServiceRequests"
+				}
+			}
+		},
+		"pipeline4": {
+			"component": "com.sap.dh.vflowpipeline",
+			"metadata": {
+				"label": "MC Contacts to HANA",
+				"x": 397.9999990463257,
+				"y": 372,
+				"height": 80,
+				"width": 120,
+				"extensible": false,
+				"config": {
+					"graphName": "com.appInt.odata2hana.mc.loadContactOriginData"
+				}
+			}
+		},
+		"pipeline5": {
+			"component": "com.sap.dh.vflowpipeline",
+			"metadata": {
+				"label": "MC Interact. to HANA",
+				"x": 397.9999990463257,
+				"y": 492,
+				"height": 80,
+				"width": 120,
+				"extensible": false,
+				"config": {
+					"graphName": "com.appInt.odata2hana.mc.loadInteractions"
+				}
+			}
+		},
+		"pipeline6": {
+			"component": "com.sap.dh.vflowpipeline",
+			"metadata": {
+				"label": "S4 BuPa to HANA",
+				"x": 397.9999990463257,
+				"y": 612,
+				"height": 80,
+				"width": 120,
+				"extensible": false,
+				"config": {
+					"graphName": "com.appInt.odata2hana.s4.loadBusinessPartners"
+				}
+			}
+		},
+		"pipeline7": {
+			"component": "com.sap.dh.vflowpipeline",
+			"metadata": {
+				"label": "S4 CustReturns to HANA",
+				"x": 397.9999990463257,
+				"y": 732,
+				"height": 80,
+				"width": 120,
+				"extensible": false,
+				"config": {
+					"graphName": "com.appInt.odata2hana.s4.loadCustomerReturns"
+				}
+			}
+		},
+		"terminal1": {
+			"component": "com.sap.util.terminal",
+			"metadata": {
+				"label": "Terminal",
+				"x": 879.999997138977,
+				"y": 432,
+				"height": 80,
+				"width": 120,
+				"ui": "dynpath",
+				"config": {}
+			}
+		},
+		"workflowterminator1": {
+			"component": "com.sap.dh.terminator",
+			"metadata": {
+				"label": "Workflow Terminator",
+				"x": 1064.9999961853027,
+				"y": 372,
+				"height": 80,
+				"width": 120,
+				"config": {}
+			}
+		},
+		"workflowsplit1": {
+			"component": "com.sap.dh.split",
+			"metadata": {
+				"label": "Workflow Split",
+				"x": 181,
+				"y": 344,
+				"height": 136,
+				"width": 120,
+				"extensible": true,
+				"config": {},
+				"additionaloutports": [
+					{
+						"name": "out3",
+						"type": "any.*"
+					},
+					{
+						"name": "out4",
+						"type": "any.*"
+					},
+					{
+						"name": "out5",
+						"type": "any.*"
+					},
+					{
+						"name": "out6",
+						"type": "any.*"
+					},
+					{
+						"name": "out7",
+						"type": "any.*"
+					}
+				]
+			}
+		},
+		"workflowmergeand1": {
+			"component": "com.sap.dh.logical.AND",
+			"metadata": {
+				"label": "Workflow Merge (and)",
+				"x": 694.9999980926514,
+				"y": 256,
+				"height": 136,
+				"width": 120,
+				"extensible": true,
+				"config": {},
+				"additionalinports": [
+					{
+						"name": "input3",
+						"type": "string"
+					},
+					{
+						"name": "input4",
+						"type": "string"
+					},
+					{
+						"name": "input5",
+						"type": "string"
+					},
+					{
+						"name": "input6",
+						"type": "string"
+					},
+					{
+						"name": "input7",
+						"type": "string"
+					}
+				]
+			}
+		},
+		"workflowterminator2": {
+			"component": "com.sap.dh.terminator",
+			"metadata": {
+				"label": "Workflow Terminator",
+				"x": 879.999997138977,
+				"y": 312,
+				"height": 80,
+				"width": 120,
+				"config": {}
+			}
+		},
+		"51multiplexer1": {
+			"component": "com.sap.system.multiplexer.5-1",
+			"metadata": {
+				"label": "7:1 Multiplexer",
+				"x": 694.9999980926514,
+				"y": 432,
+				"height": 136,
+				"width": 120,
+				"extensible": true,
+				"config": {},
+				"additionalinports": [
+					{
+						"name": "in6",
+						"type": "any.*"
+					},
+					{
+						"name": "in7",
+						"type": "any.*"
+					}
+				]
+			}
+		}
+	},
+	"groups": [],
+	"connections": [
+		{
+			"metadata": {
+				"points": "1003.999997138977,472 1031.99999666214,472 1031.99999666214,412 1059.9999961853027,412"
+			},
+			"src": {
+				"port": "out1",
+				"process": "terminal1"
+			},
+			"tgt": {
+				"port": "stop",
+				"process": "workflowterminator1"
+			}
+		},
+		{
+			"metadata": {
+				"points": "136,412 176,412"
+			},
+			"src": {
+				"port": "output",
+				"process": "workflowtrigger1"
+			},
+			"tgt": {
+				"port": "in",
+				"process": "workflowsplit1"
+			}
+		},
+		{
+			"metadata": {
+				"points": "305,358 332.99999952316284,358 332.99999952316284,52 392.9999990463257,52"
+			},
+			"src": {
+				"port": "out1",
+				"process": "workflowsplit1"
+			},
+			"tgt": {
+				"port": "input",
+				"process": "pipeline1"
+			}
+		},
+		{
+			"metadata": {
+				"points": "305,376 348.99999952316284,376 348.99999952316284,172 392.9999990463257,172"
+			},
+			"src": {
+				"port": "out2",
+				"process": "workflowsplit1"
+			},
+			"tgt": {
+				"port": "input",
+				"process": "pipeline2"
+			}
+		},
+		{
+			"metadata": {
+				"points": "305,394 364.99999952316284,394 364.99999952316284,292 392.9999990463257,292"
+			},
+			"src": {
+				"port": "out3",
+				"process": "workflowsplit1"
+			},
+			"tgt": {
+				"port": "input",
+				"process": "pipeline3"
+			}
+		},
+		{
+			"metadata": {
+				"points": "305,412 392.9999990463257,412"
+			},
+			"src": {
+				"port": "out4",
+				"process": "workflowsplit1"
+			},
+			"tgt": {
+				"port": "input",
+				"process": "pipeline4"
+			}
+		},
+		{
+			"metadata": {
+				"points": "305,430 364.99999952316284,430 364.99999952316284,532 392.9999990463257,532"
+			},
+			"src": {
+				"port": "out5",
+				"process": "workflowsplit1"
+			},
+			"tgt": {
+				"port": "input",
+				"process": "pipeline5"
+			}
+		},
+		{
+			"metadata": {
+				"points": "305,448 348.99999952316284,448 348.99999952316284,652 392.9999990463257,652"
+			},
+			"src": {
+				"port": "out6",
+				"process": "workflowsplit1"
+			},
+			"tgt": {
+				"port": "input",
+				"process": "pipeline6"
+			}
+		},
+		{
+			"metadata": {
+				"points": "305,466 332.99999952316284,466 332.99999952316284,772 392.9999990463257,772"
+			},
+			"src": {
+				"port": "out7",
+				"process": "workflowsplit1"
+			},
+			"tgt": {
+				"port": "input",
+				"process": "pipeline7"
+			}
+		},
+		{
+			"metadata": {
+				"points": "521.9999990463257,43 661.9999985694885,43 661.9999985694885,270 689.9999980926514,270"
+			},
+			"src": {
+				"port": "output",
+				"process": "pipeline1"
+			},
+			"tgt": {
+				"port": "input",
+				"process": "workflowmergeand1"
+			}
+		},
+		{
+			"metadata": {
+				"points": "521.9999990463257,163 629.9999985694885,163 629.9999985694885,288 689.9999980926514,288"
+			},
+			"src": {
+				"port": "output",
+				"process": "pipeline2"
+			},
+			"tgt": {
+				"port": "input2",
+				"process": "workflowmergeand1"
+			}
+		},
+		{
+			"metadata": {
+				"points": "521.9999990463257,283 597.9999985694885,283 597.9999985694885,306 689.9999980926514,306"
+			},
+			"src": {
+				"port": "output",
+				"process": "pipeline3"
+			},
+			"tgt": {
+				"port": "input3",
+				"process": "workflowmergeand1"
+			}
+		},
+		{
+			"metadata": {
+				"points": "521.9999990463257,403 549.9999985694885,403 549.9999985694885,324 689.9999980926514,324"
+			},
+			"src": {
+				"port": "output",
+				"process": "pipeline4"
+			},
+			"tgt": {
+				"port": "input4",
+				"process": "workflowmergeand1"
+			}
+		},
+		{
+			"metadata": {
+				"points": "521.9999990463257,523 565.9999985694885,523 565.9999985694885,342 689.9999980926514,342"
+			},
+			"src": {
+				"port": "output",
+				"process": "pipeline5"
+			},
+			"tgt": {
+				"port": "input5",
+				"process": "workflowmergeand1"
+			}
+		},
+		{
+			"metadata": {
+				"points": "521.9999990463257,643 597.9999985694885,643 597.9999985694885,360 689.9999980926514,360"
+			},
+			"src": {
+				"port": "output",
+				"process": "pipeline6"
+			},
+			"tgt": {
+				"port": "input6",
+				"process": "workflowmergeand1"
+			}
+		},
+		{
+			"metadata": {
+				"points": "521.9999990463257,763 629.9999985694885,763 629.9999985694885,378 689.9999980926514,378"
+			},
+			"src": {
+				"port": "output",
+				"process": "pipeline7"
+			},
+			"tgt": {
+				"port": "input7",
+				"process": "workflowmergeand1"
+			}
+		},
+		{
+			"metadata": {
+				"points": "818.9999980926514,324 846.9999976158142,324 846.9999976158142,352 874.999997138977,352"
+			},
+			"src": {
+				"port": "output",
+				"process": "workflowmergeand1"
+			},
+			"tgt": {
+				"port": "stop",
+				"process": "workflowterminator2"
+			}
+		},
+		{
+			"metadata": {
+				"points": "521.9999990463257,61 645.9999985694885,61 645.9999985694885,446 689.9999980926514,446"
+			},
+			"src": {
+				"port": "error",
+				"process": "pipeline1"
+			},
+			"tgt": {
+				"port": "in1",
+				"process": "51multiplexer1"
+			}
+		},
+		{
+			"metadata": {
+				"points": "521.9999990463257,181 613.9999985694885,181 613.9999985694885,464 689.9999980926514,464"
+			},
+			"src": {
+				"port": "error",
+				"process": "pipeline2"
+			},
+			"tgt": {
+				"port": "in2",
+				"process": "51multiplexer1"
+			}
+		},
+		{
+			"metadata": {
+				"points": "521.9999990463257,301 581.9999985694885,301 581.9999985694885,482 689.9999980926514,482"
+			},
+			"src": {
+				"port": "error",
+				"process": "pipeline3"
+			},
+			"tgt": {
+				"port": "in3",
+				"process": "51multiplexer1"
+			}
+		},
+		{
+			"metadata": {
+				"points": "521.9999990463257,421 549.9999985694885,421 549.9999985694885,500 689.9999980926514,500"
+			},
+			"src": {
+				"port": "error",
+				"process": "pipeline4"
+			},
+			"tgt": {
+				"port": "in4",
+				"process": "51multiplexer1"
+			}
+		},
+		{
+			"metadata": {
+				"points": "521.9999990463257,541 613.9999985694885,541 613.9999985694885,518 689.9999980926514,518"
+			},
+			"src": {
+				"port": "error",
+				"process": "pipeline5"
+			},
+			"tgt": {
+				"port": "in5",
+				"process": "51multiplexer1"
+			}
+		},
+		{
+			"metadata": {
+				"points": "521.9999990463257,661 645.9999985694885,661 645.9999985694885,536 689.9999980926514,536"
+			},
+			"src": {
+				"port": "error",
+				"process": "pipeline6"
+			},
+			"tgt": {
+				"port": "in6",
+				"process": "51multiplexer1"
+			}
+		},
+		{
+			"metadata": {
+				"points": "521.9999990463257,781 661.9999985694885,781 661.9999985694885,554 689.9999980926514,554"
+			},
+			"src": {
+				"port": "error",
+				"process": "pipeline7"
+			},
+			"tgt": {
+				"port": "in7",
+				"process": "51multiplexer1"
+			}
+		},
+		{
+			"metadata": {
+				"points": "818.9999980926514,500 846.9999976158142,500 846.9999976158142,472 874.999997138977,472"
+			},
+			"src": {
+				"port": "out1",
+				"process": "51multiplexer1"
+			},
+			"tgt": {
+				"port": "in1",
+				"process": "terminal1"
+			}
+		}
+	],
+	"inports": {},
+	"outports": {},
+	"properties": {}
+}

@@ -1,0 +1,89 @@
+{
+	"properties": {},
+	"description": "MC Interact. to S3",
+	"processes": {
+		"odataqueryconsumer1": {
+			"component": "com.sap.dh.sdi.odata.query.consumer",
+			"metadata": {
+				"label": "Get Interactions via OData",
+				"x": 17,
+				"y": 12,
+				"height": 80,
+				"width": 120,
+				"extensible": false,
+				"config": {
+					"odataConnection": {
+						"configurationType": "Configuration Manager",
+						"connectionID": "APPINT_MC_INTERACT"
+					},
+					"fetchSize": 5000,
+					"batchQueryMode": "true",
+					"native_sql_statement": "Interactions?$select=InteractionUUID,InteractionContactOrigin,InteractionContactId,CommunicationMedium,InteractionType,InteractionTimeStampUTC,InteractionSourceObjectType,InteractionSourceObject,MarketingArea,CampaignID,MarketingLocationOrigin,MarketingLocation,DigitalAccountType,DigitalAccount,MKT_AgreementOrigin,MKT_AgreementExternalID,CampaignContent,InteractionWeightingFactor,InteractionSentimentValue,InteractionStatus,InteractionReason,InteractionLanguage,InteractionIsAnonymous,InteractionAmount,InteractionCurrency,InteractionLatitude,InteractionLongitude,SpatialReferenceSystem,DeviceType,InteractionDeviceName,PrecedingInteractionUUID,SourceSystemType,SourceSystem,InteractionSourceObjectAddlID,InteractionSourceObjectStatus,InteractionSourceDataURL,InteractionSourceTimeStampUTC,CampaignContentLinkURL,CampaignContentLinkName,ReferralSource,ReferralSourceCategory,InteractionContactUUID,InteractionLastChangedDateTime,InteractionLastChangedByUser,InteractionContentSubject,InteractionContent&$orderby=InteractionTimeStampUTC&$filter=InteractionType eq 'COMPLAINTS' or InteractionType eq 'EMAIL_COMPLAINT' or InteractionType eq 'OPPORTUNITY' or InteractionType eq 'C4C_OPPORTUNITY' or InteractionType eq 'CRM_OPPORTUNITY'"
+				}
+			}
+		},
+		"flowagentfileproducer1": {
+			"component": "com.sap.dh.ds.storage.producer",
+			"metadata": {
+				"label": "Write Data to S3 ORC File",
+				"x": 201.99999904632568,
+				"y": 12,
+				"height": 80,
+				"width": 120,
+				"extensible": false,
+				"config": {
+					"service": "s3",
+					"s3Connection": {
+						"configurationType": "Configuration Manager",
+						"connectionID": "APPINT_S3"
+					},
+					"s3TargetObjectName": "/sdl/landing_zone/appInt/mc/Interactions.orc",
+					"batchSize": 5000,
+					"format": "ORC"
+				}
+			}
+		},
+		"graphterminator1": {
+			"component": "com.sap.util.graphTerminator",
+			"metadata": {
+				"label": "Graph Terminator",
+				"x": 370.9999990463257,
+				"y": 12,
+				"height": 80,
+				"width": 120,
+				"config": {}
+			}
+		}
+	},
+	"groups": [],
+	"connections": [
+		{
+			"metadata": {
+				"points": "141,43 168.99999952316284,43 168.99999952316284,52 196.99999904632568,52"
+			},
+			"src": {
+				"port": "outConfig",
+				"process": "odataqueryconsumer1"
+			},
+			"tgt": {
+				"port": "inConfig",
+				"process": "flowagentfileproducer1"
+			}
+		},
+		{
+			"metadata": {
+				"points": "325.9999990463257,52 365.9999990463257,52"
+			},
+			"src": {
+				"port": "outMessage",
+				"process": "flowagentfileproducer1"
+			},
+			"tgt": {
+				"port": "stop",
+				"process": "graphterminator1"
+			}
+		}
+	],
+	"inports": {},
+	"outports": {}
+}

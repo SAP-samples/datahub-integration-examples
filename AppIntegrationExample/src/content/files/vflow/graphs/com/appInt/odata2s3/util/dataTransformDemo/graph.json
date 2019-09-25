@@ -1,0 +1,1806 @@
+{
+	"properties": {},
+	"description": "Data Transf. Demo",
+	"processes": {
+		"datatransform1": {
+			"component": "com.sap.dh.datatransform",
+			"metadata": {
+				"label": "Data Transform",
+				"x": 181,
+				"y": 72,
+				"height": 80,
+				"width": 120,
+				"extensible": true,
+				"config": {
+					"definition": {
+						"nodeType": "ContainerNode",
+						"inputs": [
+							{
+								"id": "d144823b-32a1-462f-afc3-fa3522d925ef",
+								"nodeType": "DataNode",
+								"name": "Interactions",
+								"dataset": {
+									"database": "",
+									"description": "",
+									"remoteObjectReference": {
+										"connection": {
+											"id": "APPINT_S3",
+											"type": "S3"
+										},
+										"name": "Interactions.orc",
+										"remoteObjectType": "FILE.ORC",
+										"qualifiedName": "/sdl/landing_zone/appInt/mc/Interactions.orc",
+										"nativeQualifiedName": "/sdl/landing_zone/appInt/mc/Interactions.orc",
+										"owner": "flowagent",
+										"size": 8436544,
+										"version": {
+											"dataLastModified": 1569237316000,
+											"metadataLastModified": 1569237316000,
+											"metadataVersionNumber": 1569237316000
+										}
+									},
+									"schema": {
+										"genericType": "TABLE",
+										"tableBasedRepresentation": {
+											"attributes": []
+										}
+									}
+								},
+								"attributes": [
+									{
+										"id": "481bbb60-a052-4ca4-b2e9-de090ea9aa88",
+										"name": "InteractionUUID",
+										"datatype": "STRING",
+										"nullable": false
+									},
+									{
+										"id": "91727a40-74c0-4c52-a2aa-d1eafb13e06a",
+										"name": "InteractionContactOrigin",
+										"datatype": "STRING",
+										"nullable": false
+									},
+									{
+										"id": "b2c1b561-e8ad-4059-bbc9-0fc081e89ab1",
+										"name": "InteractionContactId",
+										"datatype": "STRING",
+										"nullable": false
+									},
+									{
+										"id": "c42b27be-3056-4444-bb11-db7856132d0d",
+										"name": "CommunicationMedium",
+										"datatype": "STRING",
+										"nullable": false
+									},
+									{
+										"id": "ada2a62f-2ae8-49b5-94b8-43b50807a994",
+										"name": "InteractionType",
+										"datatype": "STRING",
+										"nullable": false
+									},
+									{
+										"id": "7a925624-4f47-4011-920e-ad2485ff930b",
+										"name": "InteractionTimeStampUTC",
+										"datatype": "DATETIME",
+										"nullable": false
+									},
+									{
+										"id": "5eb3f286-2fd1-48a1-89bd-932f17b62f27",
+										"name": "InteractionSourceObjectType",
+										"datatype": "STRING",
+										"nullable": false
+									},
+									{
+										"id": "3bdfc7a1-0481-4aef-a952-fef9c28f2475",
+										"name": "InteractionSourceObject",
+										"datatype": "STRING",
+										"nullable": false
+									},
+									{
+										"id": "afc29b5e-8cac-4932-bf38-e36a5a52cd67",
+										"name": "MarketingArea",
+										"datatype": "STRING",
+										"nullable": false
+									},
+									{
+										"id": "a4a30c6d-e2ec-48d2-8921-0a3fca0ab69b",
+										"name": "CampaignID",
+										"datatype": "STRING",
+										"nullable": false
+									},
+									{
+										"id": "a6d14951-9e0f-4cf9-9829-27a3bf6da96b",
+										"name": "MarketingLocationOrigin",
+										"datatype": "STRING",
+										"nullable": false
+									},
+									{
+										"id": "03abf565-1f26-4303-bf58-0f7849e2c6b9",
+										"name": "MarketingLocation",
+										"datatype": "STRING",
+										"nullable": false
+									},
+									{
+										"id": "cbb0b1cb-81f0-47f3-b722-08dda6031943",
+										"name": "DigitalAccountType",
+										"datatype": "STRING",
+										"nullable": false
+									},
+									{
+										"id": "8f52ecad-2da5-4465-b747-4fd3185e65c9",
+										"name": "DigitalAccount",
+										"datatype": "STRING",
+										"nullable": false
+									},
+									{
+										"id": "e1973e57-a407-4617-9c7b-600677bc57ca",
+										"name": "MKT_AgreementOrigin",
+										"datatype": "STRING",
+										"nullable": false
+									},
+									{
+										"id": "79144506-c4f2-4b28-b9b6-7b767334b6a3",
+										"name": "MKT_AgreementExternalID",
+										"datatype": "STRING",
+										"nullable": false
+									},
+									{
+										"id": "293a9975-3884-40f9-826f-51082ebb7364",
+										"name": "CampaignContent",
+										"datatype": "INTEGER",
+										"nullable": false
+									},
+									{
+										"id": "2eb8b0dd-3939-4bfc-9b86-651dbfa6bf47",
+										"name": "InteractionWeightingFactor",
+										"datatype": "INTEGER",
+										"nullable": false
+									},
+									{
+										"id": "1f983185-f504-4acd-8001-feaa82a3d2b6",
+										"name": "InteractionSentimentValue",
+										"datatype": "INTEGER",
+										"nullable": false
+									},
+									{
+										"id": "001c4ef5-690c-4543-959d-ce0593924368",
+										"name": "InteractionStatus",
+										"datatype": "STRING",
+										"nullable": false
+									},
+									{
+										"id": "1767c3ff-aeed-4d9e-87af-ade34e875a88",
+										"name": "InteractionReason",
+										"datatype": "STRING",
+										"nullable": false
+									},
+									{
+										"id": "6907267f-c9f0-4b74-81e3-902b36825d77",
+										"name": "InteractionLanguage",
+										"datatype": "STRING",
+										"nullable": false
+									},
+									{
+										"id": "18a49db8-fc0c-467c-ac36-dea74c6ec7a7",
+										"name": "InteractionIsAnonymous",
+										"datatype": "STRING",
+										"nullable": false
+									},
+									{
+										"id": "ecbf90ac-282b-458b-b3c1-593eb200270a",
+										"name": "InteractionAmount",
+										"datatype": "DECIMAL",
+										"nullable": false,
+										"precision": 31,
+										"scale": 14
+									},
+									{
+										"id": "188886fa-1b38-4240-9324-90d320966256",
+										"name": "InteractionCurrency",
+										"datatype": "STRING",
+										"nullable": false
+									},
+									{
+										"id": "75b0addd-15d5-4c7e-9d24-8f9fa3505d88",
+										"name": "InteractionLatitude",
+										"datatype": "DECIMAL",
+										"nullable": false,
+										"precision": 21,
+										"scale": 10
+									},
+									{
+										"id": "3718dce6-e5c6-44cb-9f28-feab15135d1b",
+										"name": "InteractionLongitude",
+										"datatype": "DECIMAL",
+										"nullable": false,
+										"precision": 21,
+										"scale": 10
+									},
+									{
+										"id": "4c04954a-8397-4bc8-8a24-f3868c467385",
+										"name": "SpatialReferenceSystem",
+										"datatype": "STRING",
+										"nullable": false
+									},
+									{
+										"id": "824336ba-611e-4792-b2db-a690cb4d34b2",
+										"name": "DeviceType",
+										"datatype": "STRING",
+										"nullable": false
+									},
+									{
+										"id": "9512ebb4-6ae8-4b41-b75c-3ad0791d30f9",
+										"name": "InteractionDeviceName",
+										"datatype": "STRING",
+										"nullable": false
+									},
+									{
+										"id": "b3644656-0462-4e25-8af4-21320a69a01b",
+										"name": "PrecedingInteractionUUID",
+										"datatype": "STRING",
+										"nullable": false
+									},
+									{
+										"id": "1c9efec1-8e3d-46c7-8eac-f02aa5860135",
+										"name": "SourceSystemType",
+										"datatype": "STRING",
+										"nullable": false
+									},
+									{
+										"id": "a0a3a0b0-f4ec-45ad-908f-0ee16298e56d",
+										"name": "SourceSystem",
+										"datatype": "STRING",
+										"nullable": false
+									},
+									{
+										"id": "b2738b75-5532-44d0-871f-4a3e59482821",
+										"name": "InteractionSourceObjectAddlID",
+										"datatype": "STRING",
+										"nullable": false
+									},
+									{
+										"id": "f4ace362-555e-4f0f-b5af-283678960773",
+										"name": "InteractionSourceObjectStatus",
+										"datatype": "STRING",
+										"nullable": false
+									},
+									{
+										"id": "9b8c3316-0622-4c30-8cde-03e35fe4db8e",
+										"name": "InteractionSourceDataURL",
+										"datatype": "STRING",
+										"nullable": false
+									},
+									{
+										"id": "a1a87a11-7210-4cfe-8b00-5156d86e67f7",
+										"name": "InteractionSourceTimeStampUTC",
+										"datatype": "DATETIME",
+										"nullable": false
+									},
+									{
+										"id": "4c5f7144-aa9d-43fd-a68e-989821385c4e",
+										"name": "CampaignContentLinkURL",
+										"datatype": "STRING",
+										"nullable": false
+									},
+									{
+										"id": "edc043fd-73b0-4f32-9cdf-d6328f4f8bff",
+										"name": "CampaignContentLinkName",
+										"datatype": "STRING",
+										"nullable": false
+									},
+									{
+										"id": "a4e3298e-2afe-4055-a9e7-080375e7c409",
+										"name": "ReferralSource",
+										"datatype": "STRING",
+										"nullable": false
+									},
+									{
+										"id": "7dd3bf11-a0e6-4870-a09e-1fec6432994f",
+										"name": "ReferralSourceCategory",
+										"datatype": "STRING",
+										"nullable": false
+									},
+									{
+										"id": "0aaaccec-8a3e-4e69-a727-8e193061319f",
+										"name": "InteractionContactUUID",
+										"datatype": "STRING",
+										"nullable": false
+									},
+									{
+										"id": "4789c80b-647e-4528-a9ff-69d2e12a7ab5",
+										"name": "InteractionLastChangedDateTime",
+										"datatype": "DATETIME",
+										"nullable": false
+									},
+									{
+										"id": "701a2cba-f78d-4a3e-9a36-f643601ca1ac",
+										"name": "InteractionLastChangedByUser",
+										"datatype": "STRING",
+										"nullable": false
+									},
+									{
+										"id": "ca66c943-ec96-44b6-9016-df461af9a687",
+										"name": "InteractionContentSubject",
+										"datatype": "STRING",
+										"nullable": false
+									},
+									{
+										"id": "c5dfd69c-01a9-471c-9ef1-e88b86b0225a",
+										"name": "InteractionContent",
+										"datatype": "STRING",
+										"nullable": false
+									}
+								],
+								"UILayout": {
+									"x": 12,
+									"y": 12,
+									"height": 80,
+									"width": 120
+								}
+							},
+							{
+								"id": "a62375c4-f20f-411e-b73b-001e947840fa",
+								"nodeType": "DataNode",
+								"name": "Contacts",
+								"dataset": {
+									"database": "",
+									"description": "",
+									"remoteObjectReference": {
+										"connection": {
+											"id": "APPINT_S3",
+											"type": "S3"
+										},
+										"name": "Contacts.orc",
+										"remoteObjectType": "FILE.ORC",
+										"qualifiedName": "/sdl/landing_zone/appInt/mc/Contacts.orc",
+										"nativeQualifiedName": "/sdl/landing_zone/appInt/mc/Contacts.orc",
+										"owner": "flowagent",
+										"size": 3010446,
+										"version": {
+											"dataLastModified": 1569237310000,
+											"metadataLastModified": 1569237310000,
+											"metadataVersionNumber": 1569237310000
+										}
+									},
+									"schema": {
+										"genericType": "TABLE",
+										"tableBasedRepresentation": {
+											"attributes": []
+										}
+									}
+								},
+								"attributes": [
+									{
+										"id": "efb25912-759a-45de-934c-6b1dcaf62c36",
+										"name": "InteractionContactOrigin",
+										"datatype": "STRING",
+										"nullable": false
+									},
+									{
+										"id": "e5ed7750-3842-45db-b3a9-2e9efdbbfde4",
+										"name": "InteractionContactID",
+										"datatype": "STRING",
+										"nullable": false
+									},
+									{
+										"id": "6ebeb07d-e9b4-48f4-b70c-24a1581eabfc",
+										"name": "IsEndOfPurposeBlocked",
+										"datatype": "STRING",
+										"nullable": false
+									},
+									{
+										"id": "79b05afb-5e6d-4cd0-b237-961804e71100",
+										"name": "TrackingID",
+										"datatype": "STRING",
+										"nullable": false
+									},
+									{
+										"id": "d2ff4d1f-bfc1-4368-9677-17cd6205b36b",
+										"name": "OriginDataLastChgUTCDateTime",
+										"datatype": "DATETIME",
+										"nullable": false
+									},
+									{
+										"id": "5424a00e-55fd-44a7-87b2-648693fe517d",
+										"name": "LastChangeDateTime",
+										"datatype": "DATETIME",
+										"nullable": false
+									},
+									{
+										"id": "7f2a1a9d-ddfb-4df2-bebe-29bac9242361",
+										"name": "LastChangedByUser",
+										"datatype": "STRING",
+										"nullable": false
+									},
+									{
+										"id": "62e23669-341a-42c4-b417-dff1f45aae0d",
+										"name": "WebSiteURL",
+										"datatype": "STRING",
+										"nullable": false
+									},
+									{
+										"id": "02253854-bd9e-4233-a70e-16d393785245",
+										"name": "CreationDateTime",
+										"datatype": "DATETIME",
+										"nullable": false
+									},
+									{
+										"id": "c66ec131-1dc0-4916-9bab-925260744426",
+										"name": "InteractionContactImageURL",
+										"datatype": "STRING",
+										"nullable": false
+									},
+									{
+										"id": "f4bced5c-2ca0-4b50-82cd-0fc6286507ff",
+										"name": "CreatedByUser",
+										"datatype": "STRING",
+										"nullable": false
+									},
+									{
+										"id": "33c7d665-dc2a-44ce-833c-856fa0340d0c",
+										"name": "InteractionContactType",
+										"datatype": "STRING",
+										"nullable": false
+									},
+									{
+										"id": "92fa42fd-4006-4ad5-aebb-48d983fc4774",
+										"name": "InteractionContactUUID",
+										"datatype": "STRING",
+										"nullable": false
+									},
+									{
+										"id": "a66e4dd0-4563-425e-a079-cc169bd64339",
+										"name": "Latitude",
+										"datatype": "DECIMAL",
+										"nullable": false,
+										"precision": 20,
+										"scale": 10
+									},
+									{
+										"id": "0e0927a0-de6a-4a00-9296-97d37321c9e1",
+										"name": "Longitude",
+										"datatype": "DECIMAL",
+										"nullable": false,
+										"precision": 20,
+										"scale": 10
+									},
+									{
+										"id": "ee9196a8-624d-43d4-b5cc-482ae0f3977c",
+										"name": "FullName",
+										"datatype": "STRING",
+										"nullable": false
+									},
+									{
+										"id": "c4437017-79c0-4a9f-b6d5-519bdf609834",
+										"name": "SpatialReferenceSystem",
+										"datatype": "STRING",
+										"nullable": false
+									},
+									{
+										"id": "65ec130f-063b-441e-8685-c1885fa48603",
+										"name": "CityName",
+										"datatype": "STRING",
+										"nullable": false
+									},
+									{
+										"id": "cd3d33ba-acf0-4def-b1cc-0fae9c76d0d3",
+										"name": "StreetName",
+										"datatype": "STRING",
+										"nullable": false
+									},
+									{
+										"id": "559db560-24c7-4d94-9837-ef8516aee053",
+										"name": "AddressHouseNumber",
+										"datatype": "STRING",
+										"nullable": false
+									},
+									{
+										"id": "12b90836-c49c-4737-9d6a-50b612c6f4b1",
+										"name": "Language",
+										"datatype": "STRING",
+										"nullable": false
+									},
+									{
+										"id": "37222d91-5815-44cd-8cfc-da2d055f70dd",
+										"name": "LanguageName",
+										"datatype": "STRING",
+										"nullable": false
+									},
+									{
+										"id": "1e251d8c-ca1e-43e1-8b8d-951af77702e0",
+										"name": "EmailAddress",
+										"datatype": "STRING",
+										"nullable": false
+									},
+									{
+										"id": "3ef3063b-edd1-448e-b9ab-7f82b92c881f",
+										"name": "PhoneNumber",
+										"datatype": "STRING",
+										"nullable": false
+									},
+									{
+										"id": "14bd5639-b766-47c1-8b2e-890363f95147",
+										"name": "MobileNumber",
+										"datatype": "STRING",
+										"nullable": false
+									},
+									{
+										"id": "2ca0bc22-1b04-4214-836c-2804e520bff1",
+										"name": "FaxNumber",
+										"datatype": "STRING",
+										"nullable": false
+									},
+									{
+										"id": "3f594865-73e1-4ddd-9c28-08f03a83da62",
+										"name": "HasMktgPermissionForDirectMail",
+										"datatype": "STRING",
+										"nullable": false
+									},
+									{
+										"id": "8fddfc1a-d2e5-46e8-b07a-876f184f2801",
+										"name": "Country",
+										"datatype": "STRING",
+										"nullable": false
+									},
+									{
+										"id": "ae246b0d-b8d4-4fd2-9093-fba2c4bea688",
+										"name": "CountryName",
+										"datatype": "STRING",
+										"nullable": false
+									},
+									{
+										"id": "9f47f732-6b63-416b-aad5-096238a7abdf",
+										"name": "AddressRegion",
+										"datatype": "STRING",
+										"nullable": false
+									},
+									{
+										"id": "72e7d770-2104-49e3-8c27-949a7233be30",
+										"name": "RegionName",
+										"datatype": "STRING",
+										"nullable": false
+									},
+									{
+										"id": "36407913-0c06-4b59-81b8-9041f5d79db8",
+										"name": "ContactPostalCode",
+										"datatype": "STRING",
+										"nullable": false
+									},
+									{
+										"id": "ece092b3-d060-4ec0-8d14-9ac77e8da085",
+										"name": "Industry",
+										"datatype": "STRING",
+										"nullable": false
+									},
+									{
+										"id": "a6658ab8-d279-4708-b35a-a1747411cb36",
+										"name": "IndustryName",
+										"datatype": "STRING",
+										"nullable": false
+									},
+									{
+										"id": "f557d5cf-cfa4-45f2-9d3f-01140b38824b",
+										"name": "IsObsolete",
+										"datatype": "STRING",
+										"nullable": false
+									}
+								],
+								"UILayout": {
+									"x": 12,
+									"y": 132,
+									"height": 80,
+									"width": 120
+								}
+							}
+						],
+						"outputs": [
+							{
+								"id": "5ee91b80-2361-43f4-a0fe-272660804710",
+								"nodeType": "DataNode",
+								"name": "ComplaintsWithContacts",
+								"dataset": {
+									"database": "",
+									"description": "",
+									"remoteObjectReference": {
+										"connection": {
+											"id": "APPINT_S3",
+											"type": "S3"
+										},
+										"name": "C4_MC_complaintsWithContactData.csv",
+										"remoteObjectType": "FILE.ORC",
+										"qualifiedName": "/sdl/data_zone/appInt/transformedInteractionsWithContactData.orc",
+										"nativeQualifiedName": "/sdl/data_zone/csappint/C4_MC_complaintsWithContactData.csv",
+										"owner": "flowagent",
+										"size": 2630409,
+										"version": {
+											"dataLastModified": 1562921704000,
+											"metadataLastModified": 1562921704000,
+											"metadataVersionNumber": 1562921704000
+										}
+									},
+									"schema": {
+										"genericType": "TABLE",
+										"tableBasedRepresentation": {
+											"attributes": []
+										}
+									}
+								},
+								"attributes": [
+									{
+										"id": "9bed698e-4355-4e8c-af3c-675f845b01f5",
+										"name": "InteractionTimeStampUTC",
+										"datatype": "DATETIME",
+										"nullable": false
+									},
+									{
+										"id": "baa8c314-f852-45b4-a620-81e07a74192a",
+										"name": "InteractionAmount",
+										"datatype": "DECIMAL",
+										"nullable": false,
+										"precision": 31,
+										"scale": 14
+									},
+									{
+										"id": "9fbdafcd-18fd-4dce-8513-8e5b9a5a9a67",
+										"name": "InteractionCurrency",
+										"datatype": "STRING",
+										"nullable": false
+									},
+									{
+										"id": "ca1ea74c-32fe-4188-a8d3-9e9a7929ddeb",
+										"name": "InteractionContactID",
+										"datatype": "STRING",
+										"nullable": false
+									},
+									{
+										"id": "d5c424fe-9d3d-4bc4-b429-2eff5bbcda37",
+										"name": "FullName",
+										"datatype": "STRING",
+										"nullable": false
+									},
+									{
+										"id": "023f3d8e-9535-439c-b3e7-0d3b7b045ad5",
+										"name": "CityName",
+										"datatype": "STRING",
+										"nullable": false
+									},
+									{
+										"id": "2b08acdc-7bd4-4d48-b3db-9cdbad255411",
+										"name": "StreetName",
+										"datatype": "STRING",
+										"nullable": false
+									}
+								],
+								"mode": "OVERWRITE",
+								"UILayout": {
+									"x": 367.9999990463257,
+									"y": 72,
+									"height": 80,
+									"width": 120
+								}
+							}
+						],
+						"nodes": [
+							{
+								"id": "89326ad5-5b2a-4444-bc0b-18d0f1d0f5d0",
+								"type": "JoinNode",
+								"nodeType": "JoinNode",
+								"name": "Join",
+								"inputs": [
+									{
+										"id": "f30a5654-9859-4e79-815c-7eae869cbbe2",
+										"name": "Join1_Input1",
+										"attributes": [
+											{
+												"id": "988db445-a81c-45ca-a9d5-5fca6a85978f",
+												"name": "InteractionUUID",
+												"datatype": "STRING",
+												"nullable": false
+											},
+											{
+												"id": "23bc2224-7186-4ce4-8c7a-ea575f3cea9e",
+												"name": "InteractionContactOrigin",
+												"datatype": "STRING",
+												"nullable": false
+											},
+											{
+												"id": "2be3fd3e-0806-4c6c-9560-d0001e9c83ad",
+												"name": "InteractionContactId",
+												"datatype": "STRING",
+												"nullable": false
+											},
+											{
+												"id": "9daaba23-17cf-447b-ab3e-a6280615dc18",
+												"name": "CommunicationMedium",
+												"datatype": "STRING",
+												"nullable": false
+											},
+											{
+												"id": "845f66fe-c3c7-44ad-aa0e-da0d524cb66a",
+												"name": "InteractionType",
+												"datatype": "STRING",
+												"nullable": false
+											},
+											{
+												"id": "23c33da4-e311-42f0-9f6b-4e601627f09c",
+												"name": "InteractionTimeStampUTC",
+												"datatype": "DATETIME",
+												"nullable": false
+											},
+											{
+												"id": "d3eb143f-9f66-426c-9a3e-89d5dacc6ea5",
+												"name": "InteractionSourceObjectType",
+												"datatype": "STRING",
+												"nullable": false
+											},
+											{
+												"id": "becdb12f-fcfb-44fb-ad41-03923ebe7b27",
+												"name": "InteractionSourceObject",
+												"datatype": "STRING",
+												"nullable": false
+											},
+											{
+												"id": "07b9867f-4ac0-4fbd-83af-63bf689a265d",
+												"name": "MarketingArea",
+												"datatype": "STRING",
+												"nullable": false
+											},
+											{
+												"id": "49978af2-2ec1-4135-9746-61709e9628b7",
+												"name": "CampaignID",
+												"datatype": "STRING",
+												"nullable": false
+											},
+											{
+												"id": "d5acc9d1-ccb2-4efe-b60c-629f5ec943be",
+												"name": "MarketingLocationOrigin",
+												"datatype": "STRING",
+												"nullable": false
+											},
+											{
+												"id": "b57d8129-564b-4869-8ab0-0d50abba447d",
+												"name": "MarketingLocation",
+												"datatype": "STRING",
+												"nullable": false
+											},
+											{
+												"id": "3bfd3562-ed44-4611-b757-7d0cb3b25010",
+												"name": "DigitalAccountType",
+												"datatype": "STRING",
+												"nullable": false
+											},
+											{
+												"id": "68b4291c-3de0-402b-aeae-e7451f7d2410",
+												"name": "DigitalAccount",
+												"datatype": "STRING",
+												"nullable": false
+											},
+											{
+												"id": "cd661b7c-22e0-47ec-bcea-a992dc8e8ee4",
+												"name": "MKT_AgreementOrigin",
+												"datatype": "STRING",
+												"nullable": false
+											},
+											{
+												"id": "84506b5e-8e18-4151-833d-5e55ac7a2921",
+												"name": "MKT_AgreementExternalID",
+												"datatype": "STRING",
+												"nullable": false
+											},
+											{
+												"id": "8bdb14af-bd29-415f-ada8-2a2cd526739c",
+												"name": "CampaignContent",
+												"datatype": "INTEGER",
+												"nullable": false
+											},
+											{
+												"id": "e9fc2633-2b1e-406d-b8a3-7c0b23f8724f",
+												"name": "InteractionWeightingFactor",
+												"datatype": "INTEGER",
+												"nullable": false
+											},
+											{
+												"id": "241735f3-0688-4608-9b8f-7589b7e881e6",
+												"name": "InteractionSentimentValue",
+												"datatype": "INTEGER",
+												"nullable": false
+											},
+											{
+												"id": "db78e97d-b6d9-4816-b9b7-3f720054367f",
+												"name": "InteractionStatus",
+												"datatype": "STRING",
+												"nullable": false
+											},
+											{
+												"id": "bb68ffd4-d934-400d-90e7-15573fa491e6",
+												"name": "InteractionReason",
+												"datatype": "STRING",
+												"nullable": false
+											},
+											{
+												"id": "2ea74fd1-6ca4-4805-988a-b2dfacde1baf",
+												"name": "InteractionLanguage",
+												"datatype": "STRING",
+												"nullable": false
+											},
+											{
+												"id": "1b0c8b4b-9d9d-488d-908f-6ac54a4ad516",
+												"name": "InteractionIsAnonymous",
+												"datatype": "STRING",
+												"nullable": false
+											},
+											{
+												"id": "43f0a48d-1289-4fd8-a159-a34171b553a6",
+												"name": "InteractionAmount",
+												"datatype": "DECIMAL",
+												"nullable": false,
+												"precision": 31,
+												"scale": 14
+											},
+											{
+												"id": "3e71020e-f187-496c-b829-4c4fa1f93089",
+												"name": "InteractionCurrency",
+												"datatype": "STRING",
+												"nullable": false
+											},
+											{
+												"id": "ec141ec1-f95f-4764-9e1a-0f75589622b1",
+												"name": "InteractionLatitude",
+												"datatype": "DECIMAL",
+												"nullable": false,
+												"precision": 21,
+												"scale": 10
+											},
+											{
+												"id": "af02695e-92c1-4dab-a215-43d6085ce4f6",
+												"name": "InteractionLongitude",
+												"datatype": "DECIMAL",
+												"nullable": false,
+												"precision": 21,
+												"scale": 10
+											},
+											{
+												"id": "0e0bc45c-bcca-4fb9-b7d8-62747e4c1dae",
+												"name": "SpatialReferenceSystem",
+												"datatype": "STRING",
+												"nullable": false
+											},
+											{
+												"id": "2c951aa0-3965-49e8-9c55-46bd9ff83b47",
+												"name": "DeviceType",
+												"datatype": "STRING",
+												"nullable": false
+											},
+											{
+												"id": "644e3c1e-f168-4aa0-a56f-2ce6dce1cca8",
+												"name": "InteractionDeviceName",
+												"datatype": "STRING",
+												"nullable": false
+											},
+											{
+												"id": "b2f78b7f-319d-486a-9d1e-73f0e8f7220b",
+												"name": "PrecedingInteractionUUID",
+												"datatype": "STRING",
+												"nullable": false
+											},
+											{
+												"id": "f38c1acb-6df3-43cd-a81e-ce82f85d1dad",
+												"name": "SourceSystemType",
+												"datatype": "STRING",
+												"nullable": false
+											},
+											{
+												"id": "c58fd196-da42-4883-ab29-00d26e933a2f",
+												"name": "SourceSystem",
+												"datatype": "STRING",
+												"nullable": false
+											},
+											{
+												"id": "f859eae4-6167-4599-a6a5-d20583df334c",
+												"name": "InteractionSourceObjectAddlID",
+												"datatype": "STRING",
+												"nullable": false
+											},
+											{
+												"id": "590bd9a0-6a5a-44fe-8edd-3a518a48853c",
+												"name": "InteractionSourceObjectStatus",
+												"datatype": "STRING",
+												"nullable": false
+											},
+											{
+												"id": "f9805897-ed56-47dc-a57b-90654964bddc",
+												"name": "InteractionSourceDataURL",
+												"datatype": "STRING",
+												"nullable": false
+											},
+											{
+												"id": "41755270-c42e-4dba-b216-4baaca845416",
+												"name": "InteractionSourceTimeStampUTC",
+												"datatype": "DATETIME",
+												"nullable": false
+											},
+											{
+												"id": "38de9ff4-9438-4c4e-9ccf-d8e0277eb173",
+												"name": "CampaignContentLinkURL",
+												"datatype": "STRING",
+												"nullable": false
+											},
+											{
+												"id": "055a126f-d181-43ea-b5be-8238f4124787",
+												"name": "CampaignContentLinkName",
+												"datatype": "STRING",
+												"nullable": false
+											},
+											{
+												"id": "cbbec1e2-ef35-4dc5-afbc-88063c7da369",
+												"name": "ReferralSource",
+												"datatype": "STRING",
+												"nullable": false
+											},
+											{
+												"id": "d007e9d1-b34e-4919-9dad-ab27601a1db5",
+												"name": "ReferralSourceCategory",
+												"datatype": "STRING",
+												"nullable": false
+											},
+											{
+												"id": "a3fd151e-f775-4780-9ee7-7fd4a32453c2",
+												"name": "InteractionContactUUID",
+												"datatype": "STRING",
+												"nullable": false
+											},
+											{
+												"id": "886bcba8-bc5c-44cf-a725-29762e772bb9",
+												"name": "InteractionLastChangedDateTime",
+												"datatype": "DATETIME",
+												"nullable": false
+											},
+											{
+												"id": "2f496ba2-9dbe-4e0c-be31-12f16b3412eb",
+												"name": "InteractionLastChangedByUser",
+												"datatype": "STRING",
+												"nullable": false
+											},
+											{
+												"id": "ee241616-9dd2-4b78-ae10-6683a7153448",
+												"name": "InteractionContentSubject",
+												"datatype": "STRING",
+												"nullable": false
+											},
+											{
+												"id": "71c4f08a-ad87-45ec-af70-818c97a1e563",
+												"name": "InteractionContent",
+												"datatype": "STRING",
+												"nullable": false
+											}
+										],
+										"UILayout": {
+											"x": 12,
+											"y": 12
+										}
+									},
+									{
+										"id": "c24da343-5518-48ea-a918-56b86e2c3143",
+										"name": "Join1_Input2",
+										"attributes": [
+											{
+												"id": "a1fccf9e-d55a-49e6-9790-80ef284e5add",
+												"name": "InteractionContactOrigin",
+												"datatype": "STRING",
+												"nullable": false
+											},
+											{
+												"id": "6ef2d01a-b88e-4999-a61a-010865f59c44",
+												"name": "InteractionContactID",
+												"datatype": "STRING",
+												"nullable": false
+											},
+											{
+												"id": "65cc49d7-4b7f-4051-b15c-6ceab114b74e",
+												"name": "IsEndOfPurposeBlocked",
+												"datatype": "STRING",
+												"nullable": false
+											},
+											{
+												"id": "28e9fa4c-0cad-4249-81a1-cba77a60a7d8",
+												"name": "TrackingID",
+												"datatype": "STRING",
+												"nullable": false
+											},
+											{
+												"id": "2bfb9672-2040-4ad5-b4bf-2d2e6c1c0d76",
+												"name": "OriginDataLastChgUTCDateTime",
+												"datatype": "DATETIME",
+												"nullable": false
+											},
+											{
+												"id": "d425b8ee-7068-4674-9126-858492389a8b",
+												"name": "LastChangeDateTime",
+												"datatype": "DATETIME",
+												"nullable": false
+											},
+											{
+												"id": "a3aa2aff-bba1-4007-8671-0959bb52ade1",
+												"name": "LastChangedByUser",
+												"datatype": "STRING",
+												"nullable": false
+											},
+											{
+												"id": "339f3345-b149-4c07-8d33-b4bd28a4a753",
+												"name": "WebSiteURL",
+												"datatype": "STRING",
+												"nullable": false
+											},
+											{
+												"id": "ddb712fa-cfec-4587-abb4-b2254f829422",
+												"name": "CreationDateTime",
+												"datatype": "DATETIME",
+												"nullable": false
+											},
+											{
+												"id": "2b874b20-1796-47a8-9f2b-9d00cbf5d0ea",
+												"name": "InteractionContactImageURL",
+												"datatype": "STRING",
+												"nullable": false
+											},
+											{
+												"id": "31d774b8-2dd0-4283-a110-aa4a7068c52a",
+												"name": "CreatedByUser",
+												"datatype": "STRING",
+												"nullable": false
+											},
+											{
+												"id": "fba7f975-9753-4330-8d51-a548d243a58a",
+												"name": "InteractionContactType",
+												"datatype": "STRING",
+												"nullable": false
+											},
+											{
+												"id": "3abfdbf0-dd6a-453d-92b3-28ca88df1a29",
+												"name": "InteractionContactUUID",
+												"datatype": "STRING",
+												"nullable": false
+											},
+											{
+												"id": "0de269f9-6576-496c-a559-e58f02f00b6e",
+												"name": "Latitude",
+												"datatype": "DECIMAL",
+												"nullable": false,
+												"precision": 20,
+												"scale": 10
+											},
+											{
+												"id": "6b87ceb1-b7b6-4ba8-a7df-b8ac18a94085",
+												"name": "Longitude",
+												"datatype": "DECIMAL",
+												"nullable": false,
+												"precision": 20,
+												"scale": 10
+											},
+											{
+												"id": "090e95a7-7bae-4f0d-8813-5d78ebaa073b",
+												"name": "FullName",
+												"datatype": "STRING",
+												"nullable": false
+											},
+											{
+												"id": "672e98d2-a660-4a70-a69c-3d8c6f3e1df6",
+												"name": "SpatialReferenceSystem",
+												"datatype": "STRING",
+												"nullable": false
+											},
+											{
+												"id": "4f6a0c28-afd7-4fa1-9f23-c530d39b3b01",
+												"name": "CityName",
+												"datatype": "STRING",
+												"nullable": false
+											},
+											{
+												"id": "a840a540-cec6-48bb-a0c8-17ce95dcf497",
+												"name": "StreetName",
+												"datatype": "STRING",
+												"nullable": false
+											},
+											{
+												"id": "202d99d9-fb6f-41f7-86d8-60e6e17bcbd3",
+												"name": "AddressHouseNumber",
+												"datatype": "STRING",
+												"nullable": false
+											},
+											{
+												"id": "20f196eb-0991-4cff-a92d-6737a17fff80",
+												"name": "Language",
+												"datatype": "STRING",
+												"nullable": false
+											},
+											{
+												"id": "5a8549d9-cc40-46db-9082-ac8c815960e8",
+												"name": "LanguageName",
+												"datatype": "STRING",
+												"nullable": false
+											},
+											{
+												"id": "28eb7409-12c3-4122-83ba-21669b492b75",
+												"name": "EmailAddress",
+												"datatype": "STRING",
+												"nullable": false
+											},
+											{
+												"id": "b0d5c1dd-acf9-47e2-ace0-e944663aa7dc",
+												"name": "PhoneNumber",
+												"datatype": "STRING",
+												"nullable": false
+											},
+											{
+												"id": "c996ddeb-62fc-4196-a869-be4ac6cebc77",
+												"name": "MobileNumber",
+												"datatype": "STRING",
+												"nullable": false
+											},
+											{
+												"id": "0278858b-1093-4754-827d-e0a31462ff60",
+												"name": "FaxNumber",
+												"datatype": "STRING",
+												"nullable": false
+											},
+											{
+												"id": "79f491b9-5d59-4cd1-97d7-90ecae8849f1",
+												"name": "HasMktgPermissionForDirectMail",
+												"datatype": "STRING",
+												"nullable": false
+											},
+											{
+												"id": "e75e130f-3a70-4f77-aa23-77cdc1817ddc",
+												"name": "Country",
+												"datatype": "STRING",
+												"nullable": false
+											},
+											{
+												"id": "2eb1cf1f-ef41-4229-9661-18d56dd72e1f",
+												"name": "CountryName",
+												"datatype": "STRING",
+												"nullable": false
+											},
+											{
+												"id": "06340122-3c90-480d-a536-0ae488981fee",
+												"name": "AddressRegion",
+												"datatype": "STRING",
+												"nullable": false
+											},
+											{
+												"id": "eeaf4cba-18ad-4d29-85d8-f5d796ce7b9b",
+												"name": "RegionName",
+												"datatype": "STRING",
+												"nullable": false
+											},
+											{
+												"id": "78da22ef-db33-40b4-8677-ad31eab6bd92",
+												"name": "ContactPostalCode",
+												"datatype": "STRING",
+												"nullable": false
+											},
+											{
+												"id": "594e01bf-28b4-424c-84e1-cd81dd7ddab8",
+												"name": "Industry",
+												"datatype": "STRING",
+												"nullable": false
+											},
+											{
+												"id": "381b6457-f34e-4259-ac57-1440445343c8",
+												"name": "IndustryName",
+												"datatype": "STRING",
+												"nullable": false
+											},
+											{
+												"id": "5d0a67f2-da47-41a5-8e2f-4e1da16dcd18",
+												"name": "IsObsolete",
+												"datatype": "STRING",
+												"nullable": false
+											}
+										],
+										"UILayout": {
+											"x": 332.19287109375,
+											"y": 12
+										}
+									}
+								],
+								"outputs": [
+									{
+										"id": "c5517360-d437-4920-8289-b6f780c663ec",
+										"name": "Join1_Output1",
+										"attributes": [
+											{
+												"id": "674bf745-5b65-4836-bf59-cdb646e848d9",
+												"name": "InteractionTimeStampUTC",
+												"datatype": "DATETIME",
+												"nullable": false
+											},
+											{
+												"id": "2f7e36ad-0305-4b18-afba-d1d2086b24d6",
+												"name": "InteractionAmount",
+												"datatype": "DECIMAL",
+												"nullable": false,
+												"precision": 31,
+												"scale": 14
+											},
+											{
+												"id": "8c629aac-38fd-420e-8e46-a8b0fe48a630",
+												"name": "InteractionCurrency",
+												"datatype": "STRING",
+												"nullable": false
+											},
+											{
+												"id": "f1186fe9-01e4-4c77-89dd-7359aa95f098",
+												"name": "InteractionContactID",
+												"datatype": "STRING",
+												"nullable": false
+											},
+											{
+												"id": "8e3044d4-5679-4bd5-8006-e6a64315c5b9",
+												"name": "FullName",
+												"datatype": "STRING",
+												"nullable": false
+											},
+											{
+												"id": "2e02ab4d-a10a-4148-938a-bd0321ebcf4c",
+												"name": "CityName",
+												"datatype": "STRING",
+												"nullable": false
+											},
+											{
+												"id": "9bbbf28a-4d99-45a7-bdf5-3ab5f1d92218",
+												"name": "StreetName",
+												"datatype": "STRING",
+												"nullable": false
+											}
+										]
+									}
+								],
+								"UILayout": {
+									"x": 197.99999904632568,
+									"y": 72,
+									"height": 80,
+									"width": 120
+								},
+								"joinDefinitions": [
+									{
+										"left": "f30a5654-9859-4e79-815c-7eae869cbbe2",
+										"right": "c24da343-5518-48ea-a918-56b86e2c3143",
+										"type": "INNER",
+										"condition": "\"Join1_Input1\".\"InteractionContactUUID\" = \"Join1_Input2\".\"InteractionContactUUID\""
+									}
+								],
+								"tableMappings": [
+									{
+										"source": "f30a5654-9859-4e79-815c-7eae869cbbe2",
+										"target": "c5517360-d437-4920-8289-b6f780c663ec",
+										"attributeMappings": [
+											{
+												"source": "23c33da4-e311-42f0-9f6b-4e601627f09c",
+												"target": "674bf745-5b65-4836-bf59-cdb646e848d9"
+											},
+											{
+												"source": "43f0a48d-1289-4fd8-a159-a34171b553a6",
+												"target": "2f7e36ad-0305-4b18-afba-d1d2086b24d6"
+											},
+											{
+												"source": "3e71020e-f187-496c-b829-4c4fa1f93089",
+												"target": "8c629aac-38fd-420e-8e46-a8b0fe48a630"
+											}
+										]
+									},
+									{
+										"source": "c24da343-5518-48ea-a918-56b86e2c3143",
+										"target": "c5517360-d437-4920-8289-b6f780c663ec",
+										"attributeMappings": [
+											{
+												"source": "6ef2d01a-b88e-4999-a61a-010865f59c44",
+												"target": "f1186fe9-01e4-4c77-89dd-7359aa95f098"
+											},
+											{
+												"source": "090e95a7-7bae-4f0d-8813-5d78ebaa073b",
+												"target": "8e3044d4-5679-4bd5-8006-e6a64315c5b9"
+											},
+											{
+												"source": "4f6a0c28-afd7-4fa1-9f23-c530d39b3b01",
+												"target": "2e02ab4d-a10a-4148-938a-bd0321ebcf4c"
+											},
+											{
+												"source": "a840a540-cec6-48bb-a0c8-17ce95dcf497",
+												"target": "9bbbf28a-4d99-45a7-bdf5-3ab5f1d92218"
+											}
+										]
+									}
+								]
+							}
+						],
+						"tableMappings": [
+							{
+								"source": "d144823b-32a1-462f-afc3-fa3522d925ef",
+								"target": "f30a5654-9859-4e79-815c-7eae869cbbe2",
+								"attributeMappings": [
+									{
+										"source": "481bbb60-a052-4ca4-b2e9-de090ea9aa88",
+										"target": "988db445-a81c-45ca-a9d5-5fca6a85978f"
+									},
+									{
+										"source": "91727a40-74c0-4c52-a2aa-d1eafb13e06a",
+										"target": "23bc2224-7186-4ce4-8c7a-ea575f3cea9e"
+									},
+									{
+										"source": "b2c1b561-e8ad-4059-bbc9-0fc081e89ab1",
+										"target": "2be3fd3e-0806-4c6c-9560-d0001e9c83ad"
+									},
+									{
+										"source": "c42b27be-3056-4444-bb11-db7856132d0d",
+										"target": "9daaba23-17cf-447b-ab3e-a6280615dc18"
+									},
+									{
+										"source": "ada2a62f-2ae8-49b5-94b8-43b50807a994",
+										"target": "845f66fe-c3c7-44ad-aa0e-da0d524cb66a"
+									},
+									{
+										"source": "7a925624-4f47-4011-920e-ad2485ff930b",
+										"target": "23c33da4-e311-42f0-9f6b-4e601627f09c"
+									},
+									{
+										"source": "5eb3f286-2fd1-48a1-89bd-932f17b62f27",
+										"target": "d3eb143f-9f66-426c-9a3e-89d5dacc6ea5"
+									},
+									{
+										"source": "3bdfc7a1-0481-4aef-a952-fef9c28f2475",
+										"target": "becdb12f-fcfb-44fb-ad41-03923ebe7b27"
+									},
+									{
+										"source": "afc29b5e-8cac-4932-bf38-e36a5a52cd67",
+										"target": "07b9867f-4ac0-4fbd-83af-63bf689a265d"
+									},
+									{
+										"source": "a4a30c6d-e2ec-48d2-8921-0a3fca0ab69b",
+										"target": "49978af2-2ec1-4135-9746-61709e9628b7"
+									},
+									{
+										"source": "a6d14951-9e0f-4cf9-9829-27a3bf6da96b",
+										"target": "d5acc9d1-ccb2-4efe-b60c-629f5ec943be"
+									},
+									{
+										"source": "03abf565-1f26-4303-bf58-0f7849e2c6b9",
+										"target": "b57d8129-564b-4869-8ab0-0d50abba447d"
+									},
+									{
+										"source": "cbb0b1cb-81f0-47f3-b722-08dda6031943",
+										"target": "3bfd3562-ed44-4611-b757-7d0cb3b25010"
+									},
+									{
+										"source": "8f52ecad-2da5-4465-b747-4fd3185e65c9",
+										"target": "68b4291c-3de0-402b-aeae-e7451f7d2410"
+									},
+									{
+										"source": "e1973e57-a407-4617-9c7b-600677bc57ca",
+										"target": "cd661b7c-22e0-47ec-bcea-a992dc8e8ee4"
+									},
+									{
+										"source": "79144506-c4f2-4b28-b9b6-7b767334b6a3",
+										"target": "84506b5e-8e18-4151-833d-5e55ac7a2921"
+									},
+									{
+										"source": "293a9975-3884-40f9-826f-51082ebb7364",
+										"target": "8bdb14af-bd29-415f-ada8-2a2cd526739c"
+									},
+									{
+										"source": "2eb8b0dd-3939-4bfc-9b86-651dbfa6bf47",
+										"target": "e9fc2633-2b1e-406d-b8a3-7c0b23f8724f"
+									},
+									{
+										"source": "1f983185-f504-4acd-8001-feaa82a3d2b6",
+										"target": "241735f3-0688-4608-9b8f-7589b7e881e6"
+									},
+									{
+										"source": "001c4ef5-690c-4543-959d-ce0593924368",
+										"target": "db78e97d-b6d9-4816-b9b7-3f720054367f"
+									},
+									{
+										"source": "1767c3ff-aeed-4d9e-87af-ade34e875a88",
+										"target": "bb68ffd4-d934-400d-90e7-15573fa491e6"
+									},
+									{
+										"source": "6907267f-c9f0-4b74-81e3-902b36825d77",
+										"target": "2ea74fd1-6ca4-4805-988a-b2dfacde1baf"
+									},
+									{
+										"source": "18a49db8-fc0c-467c-ac36-dea74c6ec7a7",
+										"target": "1b0c8b4b-9d9d-488d-908f-6ac54a4ad516"
+									},
+									{
+										"source": "ecbf90ac-282b-458b-b3c1-593eb200270a",
+										"target": "43f0a48d-1289-4fd8-a159-a34171b553a6"
+									},
+									{
+										"source": "188886fa-1b38-4240-9324-90d320966256",
+										"target": "3e71020e-f187-496c-b829-4c4fa1f93089"
+									},
+									{
+										"source": "75b0addd-15d5-4c7e-9d24-8f9fa3505d88",
+										"target": "ec141ec1-f95f-4764-9e1a-0f75589622b1"
+									},
+									{
+										"source": "3718dce6-e5c6-44cb-9f28-feab15135d1b",
+										"target": "af02695e-92c1-4dab-a215-43d6085ce4f6"
+									},
+									{
+										"source": "4c04954a-8397-4bc8-8a24-f3868c467385",
+										"target": "0e0bc45c-bcca-4fb9-b7d8-62747e4c1dae"
+									},
+									{
+										"source": "824336ba-611e-4792-b2db-a690cb4d34b2",
+										"target": "2c951aa0-3965-49e8-9c55-46bd9ff83b47"
+									},
+									{
+										"source": "9512ebb4-6ae8-4b41-b75c-3ad0791d30f9",
+										"target": "644e3c1e-f168-4aa0-a56f-2ce6dce1cca8"
+									},
+									{
+										"source": "b3644656-0462-4e25-8af4-21320a69a01b",
+										"target": "b2f78b7f-319d-486a-9d1e-73f0e8f7220b"
+									},
+									{
+										"source": "1c9efec1-8e3d-46c7-8eac-f02aa5860135",
+										"target": "f38c1acb-6df3-43cd-a81e-ce82f85d1dad"
+									},
+									{
+										"source": "a0a3a0b0-f4ec-45ad-908f-0ee16298e56d",
+										"target": "c58fd196-da42-4883-ab29-00d26e933a2f"
+									},
+									{
+										"source": "b2738b75-5532-44d0-871f-4a3e59482821",
+										"target": "f859eae4-6167-4599-a6a5-d20583df334c"
+									},
+									{
+										"source": "f4ace362-555e-4f0f-b5af-283678960773",
+										"target": "590bd9a0-6a5a-44fe-8edd-3a518a48853c"
+									},
+									{
+										"source": "9b8c3316-0622-4c30-8cde-03e35fe4db8e",
+										"target": "f9805897-ed56-47dc-a57b-90654964bddc"
+									},
+									{
+										"source": "a1a87a11-7210-4cfe-8b00-5156d86e67f7",
+										"target": "41755270-c42e-4dba-b216-4baaca845416"
+									},
+									{
+										"source": "4c5f7144-aa9d-43fd-a68e-989821385c4e",
+										"target": "38de9ff4-9438-4c4e-9ccf-d8e0277eb173"
+									},
+									{
+										"source": "edc043fd-73b0-4f32-9cdf-d6328f4f8bff",
+										"target": "055a126f-d181-43ea-b5be-8238f4124787"
+									},
+									{
+										"source": "a4e3298e-2afe-4055-a9e7-080375e7c409",
+										"target": "cbbec1e2-ef35-4dc5-afbc-88063c7da369"
+									},
+									{
+										"source": "7dd3bf11-a0e6-4870-a09e-1fec6432994f",
+										"target": "d007e9d1-b34e-4919-9dad-ab27601a1db5"
+									},
+									{
+										"source": "0aaaccec-8a3e-4e69-a727-8e193061319f",
+										"target": "a3fd151e-f775-4780-9ee7-7fd4a32453c2"
+									},
+									{
+										"source": "4789c80b-647e-4528-a9ff-69d2e12a7ab5",
+										"target": "886bcba8-bc5c-44cf-a725-29762e772bb9"
+									},
+									{
+										"source": "701a2cba-f78d-4a3e-9a36-f643601ca1ac",
+										"target": "2f496ba2-9dbe-4e0c-be31-12f16b3412eb"
+									},
+									{
+										"source": "ca66c943-ec96-44b6-9016-df461af9a687",
+										"target": "ee241616-9dd2-4b78-ae10-6683a7153448"
+									},
+									{
+										"source": "c5dfd69c-01a9-471c-9ef1-e88b86b0225a",
+										"target": "71c4f08a-ad87-45ec-af70-818c97a1e563"
+									}
+								],
+								"UILayout": {
+									"points": "132,52 165,52 165,103 197.99999904632568,103"
+								}
+							},
+							{
+								"source": "a62375c4-f20f-411e-b73b-001e947840fa",
+								"target": "c24da343-5518-48ea-a918-56b86e2c3143",
+								"attributeMappings": [
+									{
+										"source": "efb25912-759a-45de-934c-6b1dcaf62c36",
+										"target": "a1fccf9e-d55a-49e6-9790-80ef284e5add"
+									},
+									{
+										"source": "e5ed7750-3842-45db-b3a9-2e9efdbbfde4",
+										"target": "6ef2d01a-b88e-4999-a61a-010865f59c44"
+									},
+									{
+										"source": "6ebeb07d-e9b4-48f4-b70c-24a1581eabfc",
+										"target": "65cc49d7-4b7f-4051-b15c-6ceab114b74e"
+									},
+									{
+										"source": "79b05afb-5e6d-4cd0-b237-961804e71100",
+										"target": "28e9fa4c-0cad-4249-81a1-cba77a60a7d8"
+									},
+									{
+										"source": "d2ff4d1f-bfc1-4368-9677-17cd6205b36b",
+										"target": "2bfb9672-2040-4ad5-b4bf-2d2e6c1c0d76"
+									},
+									{
+										"source": "5424a00e-55fd-44a7-87b2-648693fe517d",
+										"target": "d425b8ee-7068-4674-9126-858492389a8b"
+									},
+									{
+										"source": "7f2a1a9d-ddfb-4df2-bebe-29bac9242361",
+										"target": "a3aa2aff-bba1-4007-8671-0959bb52ade1"
+									},
+									{
+										"source": "62e23669-341a-42c4-b417-dff1f45aae0d",
+										"target": "339f3345-b149-4c07-8d33-b4bd28a4a753"
+									},
+									{
+										"source": "02253854-bd9e-4233-a70e-16d393785245",
+										"target": "ddb712fa-cfec-4587-abb4-b2254f829422"
+									},
+									{
+										"source": "c66ec131-1dc0-4916-9bab-925260744426",
+										"target": "2b874b20-1796-47a8-9f2b-9d00cbf5d0ea"
+									},
+									{
+										"source": "f4bced5c-2ca0-4b50-82cd-0fc6286507ff",
+										"target": "31d774b8-2dd0-4283-a110-aa4a7068c52a"
+									},
+									{
+										"source": "33c7d665-dc2a-44ce-833c-856fa0340d0c",
+										"target": "fba7f975-9753-4330-8d51-a548d243a58a"
+									},
+									{
+										"source": "92fa42fd-4006-4ad5-aebb-48d983fc4774",
+										"target": "3abfdbf0-dd6a-453d-92b3-28ca88df1a29"
+									},
+									{
+										"source": "a66e4dd0-4563-425e-a079-cc169bd64339",
+										"target": "0de269f9-6576-496c-a559-e58f02f00b6e"
+									},
+									{
+										"source": "0e0927a0-de6a-4a00-9296-97d37321c9e1",
+										"target": "6b87ceb1-b7b6-4ba8-a7df-b8ac18a94085"
+									},
+									{
+										"source": "ee9196a8-624d-43d4-b5cc-482ae0f3977c",
+										"target": "090e95a7-7bae-4f0d-8813-5d78ebaa073b"
+									},
+									{
+										"source": "c4437017-79c0-4a9f-b6d5-519bdf609834",
+										"target": "672e98d2-a660-4a70-a69c-3d8c6f3e1df6"
+									},
+									{
+										"source": "65ec130f-063b-441e-8685-c1885fa48603",
+										"target": "4f6a0c28-afd7-4fa1-9f23-c530d39b3b01"
+									},
+									{
+										"source": "cd3d33ba-acf0-4def-b1cc-0fae9c76d0d3",
+										"target": "a840a540-cec6-48bb-a0c8-17ce95dcf497"
+									},
+									{
+										"source": "559db560-24c7-4d94-9837-ef8516aee053",
+										"target": "202d99d9-fb6f-41f7-86d8-60e6e17bcbd3"
+									},
+									{
+										"source": "12b90836-c49c-4737-9d6a-50b612c6f4b1",
+										"target": "20f196eb-0991-4cff-a92d-6737a17fff80"
+									},
+									{
+										"source": "37222d91-5815-44cd-8cfc-da2d055f70dd",
+										"target": "5a8549d9-cc40-46db-9082-ac8c815960e8"
+									},
+									{
+										"source": "1e251d8c-ca1e-43e1-8b8d-951af77702e0",
+										"target": "28eb7409-12c3-4122-83ba-21669b492b75"
+									},
+									{
+										"source": "3ef3063b-edd1-448e-b9ab-7f82b92c881f",
+										"target": "b0d5c1dd-acf9-47e2-ace0-e944663aa7dc"
+									},
+									{
+										"source": "14bd5639-b766-47c1-8b2e-890363f95147",
+										"target": "c996ddeb-62fc-4196-a869-be4ac6cebc77"
+									},
+									{
+										"source": "2ca0bc22-1b04-4214-836c-2804e520bff1",
+										"target": "0278858b-1093-4754-827d-e0a31462ff60"
+									},
+									{
+										"source": "3f594865-73e1-4ddd-9c28-08f03a83da62",
+										"target": "79f491b9-5d59-4cd1-97d7-90ecae8849f1"
+									},
+									{
+										"source": "8fddfc1a-d2e5-46e8-b07a-876f184f2801",
+										"target": "e75e130f-3a70-4f77-aa23-77cdc1817ddc"
+									},
+									{
+										"source": "ae246b0d-b8d4-4fd2-9093-fba2c4bea688",
+										"target": "2eb1cf1f-ef41-4229-9661-18d56dd72e1f"
+									},
+									{
+										"source": "9f47f732-6b63-416b-aad5-096238a7abdf",
+										"target": "06340122-3c90-480d-a536-0ae488981fee"
+									},
+									{
+										"source": "72e7d770-2104-49e3-8c27-949a7233be30",
+										"target": "eeaf4cba-18ad-4d29-85d8-f5d796ce7b9b"
+									},
+									{
+										"source": "36407913-0c06-4b59-81b8-9041f5d79db8",
+										"target": "78da22ef-db33-40b4-8677-ad31eab6bd92"
+									},
+									{
+										"source": "ece092b3-d060-4ec0-8d14-9ac77e8da085",
+										"target": "594e01bf-28b4-424c-84e1-cd81dd7ddab8"
+									},
+									{
+										"source": "a6658ab8-d279-4708-b35a-a1747411cb36",
+										"target": "381b6457-f34e-4259-ac57-1440445343c8"
+									},
+									{
+										"source": "f557d5cf-cfa4-45f2-9d3f-01140b38824b",
+										"target": "5d0a67f2-da47-41a5-8e2f-4e1da16dcd18"
+									}
+								],
+								"UILayout": {
+									"points": "132,172 165,172 165,121 197.99999904632568,121"
+								}
+							},
+							{
+								"source": "c5517360-d437-4920-8289-b6f780c663ec",
+								"target": "5ee91b80-2361-43f4-a0fe-272660804710",
+								"attributeMappings": [
+									{
+										"source": "674bf745-5b65-4836-bf59-cdb646e848d9",
+										"target": "9bed698e-4355-4e8c-af3c-675f845b01f5"
+									},
+									{
+										"source": "2f7e36ad-0305-4b18-afba-d1d2086b24d6",
+										"target": "baa8c314-f852-45b4-a620-81e07a74192a"
+									},
+									{
+										"source": "8c629aac-38fd-420e-8e46-a8b0fe48a630",
+										"target": "9fbdafcd-18fd-4dce-8513-8e5b9a5a9a67"
+									},
+									{
+										"source": "f1186fe9-01e4-4c77-89dd-7359aa95f098",
+										"target": "ca1ea74c-32fe-4188-a8d3-9e9a7929ddeb"
+									},
+									{
+										"source": "8e3044d4-5679-4bd5-8006-e6a64315c5b9",
+										"target": "d5c424fe-9d3d-4bc4-b429-2eff5bbcda37"
+									},
+									{
+										"source": "2e02ab4d-a10a-4148-938a-bd0321ebcf4c",
+										"target": "023f3d8e-9535-439c-b3e7-0d3b7b045ad5"
+									},
+									{
+										"source": "9bbbf28a-4d99-45a7-bdf5-3ab5f1d92218",
+										"target": "2b08acdc-7bd4-4d48-b3db-9cdbad255411"
+									}
+								],
+								"UILayout": {
+									"points": "317.9999990463257,112 367.9999990463257,112"
+								}
+							}
+						],
+						"invalidMappings": []
+					}
+				}
+			}
+		},
+		"workflowtrigger1": {
+			"component": "com.sap.dh.trigger",
+			"metadata": {
+				"label": "Workflow Trigger",
+				"x": 12,
+				"y": 72,
+				"height": 80,
+				"width": 120,
+				"extensible": true,
+				"config": {}
+			}
+		},
+		"workflowterminator1": {
+			"component": "com.sap.dh.terminator",
+			"metadata": {
+				"label": "Workflow Terminator",
+				"x": 365.9999990463257,
+				"y": 12,
+				"height": 80,
+				"width": 120,
+				"config": {}
+			}
+		},
+		"terminal1": {
+			"component": "com.sap.util.terminal",
+			"metadata": {
+				"label": "Terminal",
+				"x": 365.9999990463257,
+				"y": 132,
+				"height": 80,
+				"width": 120,
+				"ui": "dynpath",
+				"config": {}
+			}
+		},
+		"workflowterminator2": {
+			"component": "com.sap.dh.terminator",
+			"metadata": {
+				"label": "Workflow Terminator",
+				"x": 550.9999980926514,
+				"y": 72,
+				"height": 80,
+				"width": 120,
+				"config": {}
+			}
+		}
+	},
+	"groups": [],
+	"connections": [
+		{
+			"metadata": {
+				"points": "136,112 176,112"
+			},
+			"src": {
+				"port": "output",
+				"process": "workflowtrigger1"
+			},
+			"tgt": {
+				"port": "input",
+				"process": "datatransform1"
+			}
+		},
+		{
+			"metadata": {
+				"points": "305,103 332.99999952316284,103 332.99999952316284,52 360.9999990463257,52"
+			},
+			"src": {
+				"port": "output",
+				"process": "datatransform1"
+			},
+			"tgt": {
+				"port": "stop",
+				"process": "workflowterminator1"
+			}
+		},
+		{
+			"metadata": {
+				"points": "305,121 332.99999952316284,121 332.99999952316284,172 360.9999990463257,172"
+			},
+			"src": {
+				"port": "error",
+				"process": "datatransform1"
+			},
+			"tgt": {
+				"port": "in1",
+				"process": "terminal1"
+			}
+		},
+		{
+			"metadata": {
+				"points": "489.9999990463257,172 517.9999985694885,172 517.9999985694885,112 545.9999980926514,112"
+			},
+			"src": {
+				"port": "out1",
+				"process": "terminal1"
+			},
+			"tgt": {
+				"port": "stop",
+				"process": "workflowterminator2"
+			}
+		}
+	],
+	"inports": {},
+	"outports": {}
+}

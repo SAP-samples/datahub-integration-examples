@@ -1,0 +1,36 @@
+{
+    "OperatorCategories": [
+        {
+            "name": "SAP Application Integration Example",
+            "entities": []
+        }
+    ],
+    "GraphCategories": [
+        {
+            "name": "SAP Application Integration Example",
+            "entities": [
+                "com.appInt.odata2hana",
+                "com.appInt.odata2hana.c4c.loadCorporateAccounts",
+                "com.appInt.odata2hana.c4c.loadCustomerOrders",
+                "com.appInt.odata2hana.c4c.loadServiceRequests",
+                "com.appInt.odata2hana.mc.loadContactOriginData",
+                "com.appInt.odata2hana.mc.loadInteractions",
+                "com.appInt.odata2hana.s4.loadBusinessPartners",
+                "com.appInt.odata2hana.s4.loadCustomerReturns",
+                "com.appInt.odata2s3",
+                "com.appInt.odata2s3.c4c.loadCorporateAccounts",
+                "com.appInt.odata2s3.c4c.loadCustomerOrders",
+                "com.appInt.odata2s3.c4c.loadServiceRequests",
+                "com.appInt.odata2s3.mc.loadContactOriginData",
+                "com.appInt.odata2s3.mc.loadInteractions",
+                "com.appInt.odata2s3.s4.loadBusinessPartners",
+                "com.appInt.odata2s3.s4.loadCustomerReturns",
+                "com.appInt.odata2s3.util.createTablesInVora",
+                "com.appInt.odata2s3.util.removeFiles",
+                "com.appInt.odata2s3.util.sqlOnFileDemo",
+                "com.appInt.odata2s3.util.dataTransformDemo"
+            ]
+        }
+    ],
+    "Extensions": null
+}

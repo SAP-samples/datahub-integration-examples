@@ -1,0 +1,92 @@
+{
+	"properties": {},
+	"description": "C4C CustOr to S3",
+	"processes": {
+		"odataqueryconsumer1": {
+			"component": "com.sap.dh.sdi.odata.query.consumer",
+			"metadata": {
+				"label": "Get CustomerOrders via OData",
+				"x": 17,
+				"y": 12,
+				"height": 80,
+				"width": 120,
+				"extensible": false,
+				"config": {
+					"odataConnection": {
+						"configurationType": "Configuration Manager",
+						"connectionID": "APPINT_C4C"
+					},
+					"fetchSize": 5000,
+					"batchQueryMode": "true",
+					"native_sql_statement": "CustomerOrderCollection?$select=ObjectID,ID,Name,ClassificationCode,ClassificationCodeText,BuyerID,BuyerPartyID,BuyerPartyName,ProductRecipientPartyID,ProductRecipientPartyName,ItemListCancellationStatusCode,ItemListCancellationStatusCodeText,ApprovalStatusCode,SalesOrganisationID,SalesUnitPartyID,NetAmount,NetAmountCurrencyCode,SetAsCompleted,LastChangeDate,DateTime"
+				}
+			}
+		},
+		"flowagentfileproducer1": {
+			"component": "com.sap.dh.ds.storage.producer",
+			"metadata": {
+				"label": "Write Data to S3 CSV File",
+				"x": 201.99999904632568,
+				"y": 12,
+				"height": 80,
+				"width": 120,
+				"extensible": false,
+				"config": {
+					"batchSize": 5000,
+					"additionalProperties_csv": {
+						"columnDelimiter": ";",
+						"csvHeaderIncluded": true
+					},
+					"service": "s3",
+					"s3Connection": {
+						"configurationType": "Configuration Manager",
+						"connectionID": "APPINT_S3"
+					},
+					"s3TargetObjectName": "/sdl/landing_zone/appInt/c4c/CustomerOrders.csv"
+				}
+			}
+		},
+		"graphterminator1": {
+			"component": "com.sap.util.graphTerminator",
+			"metadata": {
+				"label": "Graph Terminator",
+				"x": 370.9999990463257,
+				"y": 12,
+				"height": 80,
+				"width": 120,
+				"config": {}
+			}
+		}
+	},
+	"groups": [],
+	"connections": [
+		{
+			"metadata": {
+				"points": "141,43 168.99999952316284,43 168.99999952316284,52 196.99999904632568,52"
+			},
+			"src": {
+				"port": "outConfig",
+				"process": "odataqueryconsumer1"
+			},
+			"tgt": {
+				"port": "inConfig",
+				"process": "flowagentfileproducer1"
+			}
+		},
+		{
+			"metadata": {
+				"points": "325.9999990463257,52 365.9999990463257,52"
+			},
+			"src": {
+				"port": "outMessage",
+				"process": "flowagentfileproducer1"
+			},
+			"tgt": {
+				"port": "stop",
+				"process": "graphterminator1"
+			}
+		}
+	],
+	"inports": {},
+	"outports": {}
+}

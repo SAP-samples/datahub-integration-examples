@@ -1,0 +1,13 @@
+VIEW
+TABLE: "DH_INPUT"."com_sap_appint_c4c_customerOrders"
+TABLE: "DH_INPUT"."com_sap_appint_mc_interactions"
+TABLE: "DH_INPUT"."com_sap_appint_s4_customerReturns"
+VIEW: "DH_INPUT"."com_sap_appint_c4c_customerOrdersTotal"
+VIEW: "DH_INPUT"."com_sap_appint_mc_complaintInteractionsTotal"
+VIEW: "DH_INPUT"."com_sap_appint_datesAndCurrencies"
+TABLE: "DH_INPUT"."com_sap_appint_c4c_corporateAccounts"
+TABLE: "DH_INPUT"."com_sap_appint_mc_interactionContactOriginData"
+TABLE: "DH_INPUT"."com_sap_appint_s4_businessPartners"
+VIEW: "DH_INPUT"."com_sap_appint_businesPartnerMapping"
+VIEW: "DH_INPUT"."com_sap_appint_mc_opportunityInteractionsTotal"
+VIEW: "DH_INPUT"."com_sap_appint_s4_customerReturnsTotal"

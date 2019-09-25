@@ -1,0 +1,89 @@
+{
+	"properties": {},
+	"description": "MC Contcts to HANA",
+	"processes": {
+		"odataqueryconsumer1": {
+			"component": "com.sap.dh.sdi.odata.query.consumer",
+			"metadata": {
+				"label": "Get Contacts via OData",
+				"x": 17,
+				"y": 12,
+				"height": 80,
+				"width": 120,
+				"extensible": false,
+				"config": {
+					"odataConnection": {
+						"configurationType": "Configuration Manager",
+						"connectionID": "APPINT_MC_CONTACTS"
+					},
+					"fetchSize": 5000,
+					"batchQueryMode": "true",
+					"native_sql_statement": "InteractionContactOriginData?$filter=InteractionContactOrigin eq 'SAP_C4C_BUPA' or InteractionContactOrigin eq 'SAP_ERP_CUSTOMER' or InteractionContactOrigin eq 'SAP_FILE_IMPORT' or InteractionContactOrigin eq 'SAP_HYBRIS_CONSUMER'&$select=InteractionContactOrigin,InteractionContactID,IsEndOfPurposeBlocked,TrackingID,OriginDataLastChgUTCDateTime,LastChangeDateTime,LastChangedByUser,WebSiteURL,CreationDateTime,InteractionContactImageURL,CreatedByUser,InteractionContactType,InteractionContactUUID,Latitude,Longitude,FullName,SpatialReferenceSystem,CityName,StreetName,AddressHouseNumber,Language,LanguageName,EmailAddress,PhoneNumber,MobileNumber,FaxNumber,HasMktgPermissionForDirectMail,Country,CountryName,AddressRegion,RegionName,ContactPostalCode,Industry,IndustryName,IsObsolete"
+				}
+			}
+		},
+		"flowagenttableproducer1": {
+			"component": "com.sap.dh.ds.database.producer",
+			"metadata": {
+				"label": "Write Data to HANA Table",
+				"x": 201.99999904632568,
+				"y": 12,
+				"height": 80,
+				"width": 120,
+				"extensible": false,
+				"config": {
+					"service": "HANA",
+					"hanaConnection": {
+						"configurationType": "Configuration Manager",
+						"connectionID": "APPINT_HANA"
+					},
+					"hanaAdaptedDataset": "DH_INPUT.com_sap_appint_mc_interactionContactOriginData",
+					"mode": "truncate",
+					"batchSize": 5000
+				}
+			}
+		},
+		"graphterminator1": {
+			"component": "com.sap.util.graphTerminator",
+			"metadata": {
+				"label": "Graph Terminator",
+				"x": 370.9999990463257,
+				"y": 12,
+				"height": 80,
+				"width": 120,
+				"config": {}
+			}
+		}
+	},
+	"groups": [],
+	"connections": [
+		{
+			"metadata": {
+				"points": "141,43 168.99999952316284,43 168.99999952316284,52 196.99999904632568,52"
+			},
+			"src": {
+				"port": "outConfig",
+				"process": "odataqueryconsumer1"
+			},
+			"tgt": {
+				"port": "inConfig",
+				"process": "flowagenttableproducer1"
+			}
+		},
+		{
+			"metadata": {
+				"points": "325.9999990463257,52 365.9999990463257,52"
+			},
+			"src": {
+				"port": "outMessage",
+				"process": "flowagenttableproducer1"
+			},
+			"tgt": {
+				"port": "stop",
+				"process": "graphterminator1"
+			}
+		}
+	],
+	"inports": {},
+	"outports": {}
+}

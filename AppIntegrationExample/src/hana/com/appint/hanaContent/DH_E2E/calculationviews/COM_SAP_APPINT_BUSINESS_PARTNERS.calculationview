@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" schemaVersion="2.3" id="COM_SAP_APPINT_BUSINESS_PARTNERS" applyPrivilegeType="ANALYTIC_PRIVILEGE" checkAnalyticPrivileges="true" defaultClient="$$client$$" defaultLanguage="$$language$$" hierarchiesSQLEnabled="false" translationRelevant="true" visibility="reportingEnabled" calculationScenarioType="TREE_BASED" dataCategory="CUBE" enforceSqlExecution="false" executionSemantic="UNDEFINED" outputViewType="Projection">
+  <origin/>
+  <descriptions defaultDescription="COM_SAP_APPINT_BUSINESS_PARTNERS"/>
+  <metadata activatedAt="2019-09-13 09:59:05.0" changedAt="2019-09-13 11:59:02.944"/>
+  <localVariables/>
+  <variableMappings/>
+  <informationModelLayout relativeWidthScenario="27"/>
+  <dataSources>
+    <DataSource id="com_sap_appint_businesPartnerMapping" type="DATA_BASE_VIEW">
+      <viewAttributes allViewAttributes="true"/>
+      <columnObject schemaName="DH_INPUT" columnObjectName="com_sap_appint_businesPartnerMapping"/>
+    </DataSource>
+  </dataSources>
+  <calculationViews/>
+  <logicalModel id="com_sap_appint_businesPartnerMapping">
+    <descriptions defaultDescription="COM_SAP_APPINT_BUSINESS_PARTNERS"/>
+    <attributes>
+      <attribute id="UID" key="true" order="1" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="UID"/>
+        <keyMapping schemaName="DH_INPUT" columnObjectName="com_sap_appint_businesPartnerMapping" columnName="UID"/>
+      </attribute>
+      <attribute id="mcInteractionContactOrigin" order="2" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="mcInteractionContactOrigin"/>
+        <keyMapping schemaName="DH_INPUT" columnObjectName="com_sap_appint_businesPartnerMapping" columnName="mcInteractionContactOrigin"/>
+      </attribute>
+      <attribute id="mcInteractionContactID" order="3" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="mcInteractionContactID"/>
+        <keyMapping schemaName="DH_INPUT" columnObjectName="com_sap_appint_businesPartnerMapping" columnName="mcInteractionContactID"/>
+      </attribute>
+      <attribute id="mcInteractionContactUUID" order="4" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="mcInteractionContactUUID"/>
+        <keyMapping schemaName="DH_INPUT" columnObjectName="com_sap_appint_businesPartnerMapping" columnName="mcInteractionContactUUID"/>
+      </attribute>
+      <attribute id="c4cAccountId" order="5" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="c4cAccountId"/>
+        <keyMapping schemaName="DH_INPUT" columnObjectName="com_sap_appint_businesPartnerMapping" columnName="c4cAccountId"/>
+      </attribute>
+      <attribute id="s4BusinessPartner" order="6" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="s4BusinessPartner"/>
+        <keyMapping schemaName="DH_INPUT" columnObjectName="com_sap_appint_businesPartnerMapping" columnName="s4BusinessPartner"/>
+      </attribute>
+      <attribute id="isContact" order="7" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="isContact"/>
+        <keyMapping schemaName="DH_INPUT" columnObjectName="com_sap_appint_businesPartnerMapping" columnName="isContact"/>
+      </attribute>
+      <attribute id="isCorporateAccount" order="8" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="isCorporateAccount"/>
+        <keyMapping schemaName="DH_INPUT" columnObjectName="com_sap_appint_businesPartnerMapping" columnName="isCorporateAccount"/>
+      </attribute>
+      <attribute id="isBusinessPartner" key="true" order="9" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="isBusinessPartner"/>
+        <keyMapping schemaName="DH_INPUT" columnObjectName="com_sap_appint_businesPartnerMapping" columnName="isBusinessPartner"/>
+      </attribute>
+      <attribute id="Name" key="true" order="10" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Name"/>
+        <keyMapping schemaName="DH_INPUT" columnObjectName="com_sap_appint_businesPartnerMapping" columnName="Name"/>
+      </attribute>
+      <attribute id="Country" key="true" order="11" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Country"/>
+        <keyMapping schemaName="DH_INPUT" columnObjectName="com_sap_appint_businesPartnerMapping" columnName="Country"/>
+      </attribute>
+      <attribute id="City" key="true" order="12" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="City"/>
+        <keyMapping schemaName="DH_INPUT" columnObjectName="com_sap_appint_businesPartnerMapping" columnName="City"/>
+      </attribute>
+    </attributes>
+    <calculatedAttributes/>
+    <privateDataFoundation>
+      <tableProxies/>
+      <joins/>
+      <layout>
+        <shapes/>
+      </layout>
+    </privateDataFoundation>
+    <baseMeasures>
+      <measure id="Matches" order="13" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="Matches"/>
+        <measureMapping schemaName="DH_INPUT" columnObjectName="com_sap_appint_businesPartnerMapping" columnName="Matches"/>
+      </measure>
+    </baseMeasures>
+    <calculatedMeasures/>
+    <restrictedMeasures/>
+    <localDimensions/>
+  </logicalModel>
+  <layout>
+    <shapes>
+      <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+        <upperLeftCorner x="40" y="85"/>
+        <rectangleSize height="0" width="0"/>
+      </shape>
+    </shapes>
+  </layout>
+</Calculation:scenario>

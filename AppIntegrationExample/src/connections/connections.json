@@ -1,0 +1,237 @@
+[
+	{
+		"contentData": {
+			"url": "/sap/c4c/odata/v1/c4codataapi/",
+			"version": "V2",
+			"authenticationType": "Basic",
+			"requireCsrfHeader": "false",
+			"httpHeaders": []
+		},
+		"description": "APPINT SAP Cloud for Customer Generic API",
+		"id": "APPINT_C4C",
+		"licenseRelevant": true,
+		"readOnly": false,
+		"type": "ODATA",
+		"tags": [],
+		"tagsFromType": [],
+		"capabilities": [
+			"DATASET",
+			"BROWSING",
+			"EXTRACT_DATASET",
+			"FLOWAGENT"
+		],
+		"status": {
+			"connectionId": "APPINT_C4C",
+			"status": "UNKNOWN",
+			"message": ""
+		}
+	},
+	{
+		"contentData": {
+			"url": "/sap/opu/odata/sap/API_MKT_INTERACTION_CONTACT_SRV/",
+			"version": "V2",
+			"authenticationType": "Basic",
+			"requireCsrfHeader": "false",
+			"httpHeaders": []
+		},
+		"description": "APPINT SAP Marketing Cloud Interaction Contacts",
+		"id": "APPINT_MC_CONTACTS",
+		"licenseRelevant": true,
+		"readOnly": false,
+		"type": "ODATA",
+		"tags": [],
+		"tagsFromType": [],
+		"capabilities": [
+			"DATASET",
+			"BROWSING",
+			"EXTRACT_DATASET",
+			"FLOWAGENT"
+		],
+		"status": {
+			"connectionId": "APPINT_MC_CONTACTS",
+			"status": "UNKNOWN",
+			"message": ""
+		}
+	},
+	{
+		"contentData": {
+			"url": "/sap/opu/odata/sap/API_MKT_INTERACTION_SRV/",
+			"version": "V2",
+			"authenticationType": "Basic",
+			"requireCsrfHeader": "false",
+			"httpHeaders": []
+		},
+		"description": "APPINT SAP Marketing Cloud Interactions",
+		"id": "APPINT_MC_INTERACT",
+		"licenseRelevant": true,
+		"readOnly": false,
+		"type": "ODATA",
+		"tags": [],
+		"tagsFromType": [],
+		"capabilities": [
+			"DATASET",
+			"BROWSING",
+			"EXTRACT_DATASET",
+			"FLOWAGENT"
+		],
+		"status": {
+			"connectionId": "APPINT_MC_INTERACT",
+			"status": "UNKNOWN",
+			"message": ""
+		}
+	},
+	{
+		"contentData": {
+			"port": 30015,
+			"additionalHosts": [],
+			"useTLS": false
+		},
+		"description": "APPINT SAP HANA Database",
+		"id": "APPINT_HANA",
+		"licenseRelevant": true,
+		"readOnly": false,
+		"type": "HANA_DB",
+		"tags": [],
+		"tagsFromType": [
+			"db"
+		],
+		"capabilities": [
+			"RULES",
+			"DATASET",
+			"PROFILING",
+			"BROWSING",
+			"FLOWAGENT",
+			"EXTRACT_LINEAGE",
+			"EXTRACT_DATASET",
+			"DATA_TRANSFER_SOURCE",
+			"DATAPREP_SOURCE",
+			"DATAPREP_TARGET"
+		],
+		"status": {
+			"connectionId": "APPINT_HANA",
+			"status": "UNKNOWN",
+			"message": ""
+		}
+	},
+	{
+		"contentData": {
+			"url": "/sap/opu/odata/sap/API_BUSINESS_PARTNER/",
+			"version": "V2",
+			"authenticationType": "Basic",
+			"requireCsrfHeader": "false",
+			"httpHeaders": []
+		},
+		"description": "APPINT SAP S/4 HANA Business Partners",
+		"id": "APPINT_S4_BUPA",
+		"licenseRelevant": true,
+		"readOnly": false,
+		"type": "ODATA",
+		"tags": [],
+		"tagsFromType": [],
+		"capabilities": [
+			"DATASET",
+			"BROWSING",
+			"EXTRACT_DATASET",
+			"FLOWAGENT"
+		],
+		"status": {
+			"connectionId": "APPINT_S4_BUPA",
+			"status": "UNKNOWN",
+			"message": ""
+		}
+	},
+	{
+		"contentData": {
+			"url": "/sap/opu/odata/sap/API_CUSTOMER_RETURN_SRV/",
+			"version": "V2",
+			"authenticationType": "Basic",
+			"requireCsrfHeader": "false",
+			"httpHeaders": []
+		},
+		"description": "APPINT SAP S/4 HANA Customer Returns",
+		"id": "APPINT_S4_CUSTRET",
+		"licenseRelevant": true,
+		"readOnly": false,
+		"type": "ODATA",
+		"tags": [],
+		"tagsFromType": [],
+		"capabilities": [
+			"DATASET",
+			"BROWSING",
+			"EXTRACT_DATASET",
+			"FLOWAGENT"
+		],
+		"status": {
+			"connectionId": "APPINT_S4_CUSTRET",
+			"status": "UNKNOWN",
+			"message": ""
+		}
+	
+	},
+	{
+		"contentData": {
+			"host": "vora-tx-coordinator-ext",
+			"port": 10004,
+			"useTLS": true
+		},
+		"description": "APPINT SAP Data Hub built-in VORA Database",
+		"id": "APPINT_DH_VORA",
+		"licenseRelevant": true,
+		"readOnly": false,
+		"type": "VORA",
+		"tags": [],
+		"tagsFromType": [
+			"db"
+		],
+		"capabilities": [
+			"RULES",
+			"DATASET",
+			"PROFILING",
+			"BROWSING",
+			"DATA_TRANSFORM",
+			"FLOWAGENT",
+			"EXTRACT_LINEAGE",
+			"EXTRACT_DATASET",
+			"DATA_TRANSFER_TARGET",
+			"DATAPREP_SOURCE",
+			"DATAPREP_TARGET"
+		],
+		"status": {
+			"connectionId": "APPINT_DH_VORA",
+			"status": "UNKNOWN",
+			"message": ""
+		}
+	},
+	{
+		"contentData": {
+			"protocol": "HTTPS"
+		},
+		"description": "APPINT Amazon S3 File Storage",
+		"id": "APPINT_S3",
+		"licenseRelevant": true,
+		"readOnly": false,
+		"type": "S3",
+		"tags": [],
+		"tagsFromType": [
+			"storage"
+		],
+		"capabilities": [
+			"RULES",
+			"DATASET",
+			"PROFILING",
+			"BROWSING",
+			"DATA_TRANSFORM",
+			"FLOWAGENT",
+			"PARTITION_FILES",
+			"EXTRACT_DATASET",
+			"DATA_TRANSFER_TARGET",
+			"DATAPREP_SOURCE",
+			"DATAPREP_TARGET"
+		],
+		"status": {
+			"connectionId": "APPINT_S3",
+			"status": "UNKNOWN",
+			"message": ""
+		}
+	}
+]

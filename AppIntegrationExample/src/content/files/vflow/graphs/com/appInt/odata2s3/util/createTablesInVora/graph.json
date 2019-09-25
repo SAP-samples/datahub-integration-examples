@@ -1,0 +1,194 @@
+{
+	"properties": {},
+	"description": "Create Vora Tables",
+	"processes": {
+		"sapvoraclient1": {
+			"component": "com.sap.vora.client2",
+			"metadata": {
+				"label": "Execute SQL in Vora",
+				"x": 386.99999809265137,
+				"y": 12,
+				"height": 80,
+				"width": 120,
+				"config": {
+					"connection": {
+						"configurationType": "Configuration Manager",
+						"connectionID": "APPINT_DH_VORA"
+					},
+					"terminateOnError": false
+				}
+			}
+		},
+		"terminal1": {
+			"component": "com.sap.util.terminal",
+			"metadata": {
+				"label": "Terminal",
+				"x": 855.9999961853027,
+				"y": 26.49999976158142,
+				"height": 80,
+				"width": 120,
+				"ui": "dynpath",
+				"config": {
+					"maxSize": 5000
+				}
+			}
+		},
+		"tostringconverter2": {
+			"component": "com.sap.util.toStringConverter",
+			"metadata": {
+				"label": "ToString Converter",
+				"x": 756.9999961853027,
+				"y": 41.49999976158142,
+				"height": 50,
+				"width": 50,
+				"config": {}
+			}
+		},
+		"12multiplexer1": {
+			"component": "com.sap.system.multiplexer.1-2",
+			"metadata": {
+				"label": "1:2 Multiplexer",
+				"x": 201.99999904632568,
+				"y": 26.49999976158142,
+				"height": 80,
+				"width": 120,
+				"extensible": true,
+				"config": {}
+			}
+		},
+		"21multiplexer1": {
+			"component": "com.sap.system.multiplexer.2-1",
+			"metadata": {
+				"label": "2:1 Multiplexer",
+				"x": 571.999997138977,
+				"y": 26.49999976158142,
+				"height": 80,
+				"width": 120,
+				"extensible": true,
+				"config": {}
+			}
+		},
+		"readfile1": {
+			"component": "com.sap.storage.read",
+			"metadata": {
+				"label": "Read SQL File",
+				"x": 17,
+				"y": 26.49999976158142,
+				"height": 80,
+				"width": 120,
+				"config": {
+					"path": "/vrep/vora/createTables.sql",
+					"onlyReadOnChange": true,
+					"pollPeriodInMs": "5000"
+				}
+			}
+		},
+		"graphterminator1": {
+			"component": "com.sap.util.graphTerminator",
+			"metadata": {
+				"label": "Graph Terminator",
+				"x": 1024.9999961853027,
+				"y": 26.49999976158142,
+				"height": 80,
+				"width": 120,
+				"config": {}
+			}
+		}
+	},
+	"groups": [],
+	"connections": [
+		{
+			"metadata": {
+				"points": "325.9999990463257,57.49999976158142 353.9999985694885,57.49999976158142 353.9999985694885,52 381.99999809265137,52"
+			},
+			"src": {
+				"port": "out1",
+				"process": "12multiplexer1"
+			},
+			"tgt": {
+				"port": "sql",
+				"process": "sapvoraclient1"
+			}
+		},
+		{
+			"metadata": {
+				"points": "695.999997138977,66.49999976158142 723.9999966621399,66.49999976158142 723.9999966621399,75.49999976158142 751.9999961853027,75.49999976158142"
+			},
+			"src": {
+				"port": "out1",
+				"process": "21multiplexer1"
+			},
+			"tgt": {
+				"port": "inmessage",
+				"process": "tostringconverter2"
+			}
+		},
+		{
+			"metadata": {
+				"points": "810.9999961853027,66.49999976158142 850.9999961853027,66.49999976158142"
+			},
+			"src": {
+				"port": "outstring",
+				"process": "tostringconverter2"
+			},
+			"tgt": {
+				"port": "in1",
+				"process": "terminal1"
+			}
+		},
+		{
+			"metadata": {
+				"points": "510.99999809265137,52 538.9999976158142,52 538.9999976158142,57.49999976158142 566.999997138977,57.49999976158142"
+			},
+			"src": {
+				"port": "result",
+				"process": "sapvoraclient1"
+			},
+			"tgt": {
+				"port": "in1",
+				"process": "21multiplexer1"
+			}
+		},
+		{
+			"metadata": {
+				"points": "325.9999990463257,75.49999976158142 353.9999985694885,75.49999976158142 353.9999985694885,119.99999952316284 538.9999976158142,119.99999952316284 538.9999976158142,75.49999976158142 566.999997138977,75.49999976158142"
+			},
+			"src": {
+				"port": "out2",
+				"process": "12multiplexer1"
+			},
+			"tgt": {
+				"port": "in2",
+				"process": "21multiplexer1"
+			}
+		},
+		{
+			"metadata": {
+				"points": "141,75.49999976158142 168.99999952316284,75.49999976158142 168.99999952316284,66.49999976158142 196.99999904632568,66.49999976158142"
+			},
+			"src": {
+				"port": "outFile",
+				"process": "readfile1"
+			},
+			"tgt": {
+				"port": "in1",
+				"process": "12multiplexer1"
+			}
+		},
+		{
+			"metadata": {
+				"points": "979.9999961853027,66.49999976158142 1019.9999961853027,66.49999976158142"
+			},
+			"src": {
+				"port": "out1",
+				"process": "terminal1"
+			},
+			"tgt": {
+				"port": "stop",
+				"process": "graphterminator1"
+			}
+		}
+	],
+	"inports": {},
+	"outports": {}
+}
