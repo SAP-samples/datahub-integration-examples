@@ -31,11 +31,11 @@ Alternatively, you can also execute the individual extraction graphs depending o
 ### SAP Marketing Cloud `Contact Orgin Data` to SAP HANA
 
 Short name: `MC Contcts To HANA`  
-ID: [`com.appInt.odata2Hana.mc.loadContactOriginData`](../src/content/files/vflow/graphs/com/appInt/odata2Hana/mc/loadContactOriginData/graph.json)    
+ID: [`com.appInt.odata2hana.mc.loadContactOriginData`](../src/content/files/vflow/graphs/com/appInt/odata2hana/mc/loadContactOriginData/graph.json)    
   
 This graph extracts SAP Marketing Cloud interaction contact origin data and stores them directly to SAP HANA.
 
-![](images/odata2Hana.mc.loadInteractionContactOriginData.png)
+![](images/odata2hana.mc.loadInteractionContactOriginData.png)
 
 Read the graph documentation [here](../src/content/files/vflow/graphs/com/appInt/odata2hana/mc/loadContactOriginData/README.md).
 
@@ -44,11 +44,11 @@ Read the graph documentation [here](../src/content/files/vflow/graphs/com/appInt
 ### SAP Marketing Cloud `Interactions` to SAP HANA
 
 Short name: `MC Interact. to HANA`  
-ID: [`com.appInt.odata2Hana.mc.loadInteractions`](../src/content/files/vflow/graphs/com/appInt/odata2Hana/mc/loadInteractions/graph.json)    
+ID: [`com.appInt.odata2hana.mc.loadInteractions`](../src/content/files/vflow/graphs/com/appInt/odata2hana/mc/loadInteractions/graph.json)    
   
 This graph extracts SAP Marketing Cloud interactions and stores them directly to SAP HANA.
 
-![](images/odata2Hana.mc.loadInteractions.png)
+![](images/odata2hana.mc.loadInteractions.png)
 
 Read the graph documentation [here](../src/content/files/vflow/graphs/com/appInt/odata2hana/mc/loadInteractions/README.md).
 
@@ -57,11 +57,11 @@ Read the graph documentation [here](../src/content/files/vflow/graphs/com/appInt
 ### SAP Cloud for Customer `Corporate Accounts` to SAP HANA
 
 Short name: `C4C Accts. to HANA`  
-ID: [`com.appInt.odata2Hana.c4c.loadCorporateAccounts`](../src/content/files/vflow/graphs/com/appInt/odata2Hana/c4c/loadCorporateAccounts/graph.json)    
+ID: [`com.appInt.odata2hana.c4c.loadCorporateAccounts`](../src/content/files/vflow/graphs/com/appInt/odata2hana/c4c/loadCorporateAccounts/graph.json)    
     
 This graph extracts corporate accounts from SAP Cloud for Customer and stores them directly to SAP HANA.
 
-![](images/odata2Hana.c4c.loadCorporateAccounts.png)
+![](images/odata2hana.c4c.loadCorporateAccounts.png)
 
 Read the graph documentation [here](../src/content/files/vflow/graphs/com/appInt/odata2hana/c4c/loadCorporateAccounts/README.md).
 
@@ -70,11 +70,11 @@ Read the graph documentation [here](../src/content/files/vflow/graphs/com/appInt
 ### SAP Cloud for Customer `Customer Orders` to SAP HANA
   
 Short name: `C4C CustOr to HANA`  
-ID: [`com.appInt.odata2Hana.c4c.loadCustomerOrders`](../src/content/files/vflow/graphs/com/appInt/odata2Hana/c4c/loadCustomerOrders/graph.json)   
+ID: [`com.appInt.odata2hana.c4c.loadCustomerOrders`](../src/content/files/vflow/graphs/com/appInt/odata2hana/c4c/loadCustomerOrders/graph.json)   
     
 This graph extracts customer orders from SAP Cloud for Customer and stores them directly to SAP HANA.
 
-![](images/odata2Hana.c4c.loadCustomerOrders.png)
+![](images/odata2hana.c4c.loadCustomerOrders.png)
 
 Read the graph documentation [here](../src/content/files/vflow/graphs/com/appInt/odata2hana/c4c/loadCustomerOrders/README.md).
 
@@ -83,11 +83,11 @@ Read the graph documentation [here](../src/content/files/vflow/graphs/com/appInt
 ### SAP Cloud for Customer `Service Requests` to SAP HANA
 
 Short name: `C4C SrvRq. to HANA`  
-ID: [`com.appInt.odata2Hana.c4c.loadServiceRequests`](../src/content/files/vflow/graphs/com/appInt/odata2Hana/c4c/loadServiceRequests/graph.json)   
+ID: [`com.appInt.odata2hana.c4c.loadServiceRequests`](../src/content/files/vflow/graphs/com/appInt/odata2hana/c4c/loadServiceRequests/graph.json)   
   
 This graph extracts service requests from SAP Cloud for Customer and stores them directly to SAP HANA.
 
-![](images/odata2Hana.c4c.loadServiceRequests.png)
+![](images/odata2hana.c4c.loadServiceRequests.png)
 
 Read the graph documentation [here](../src/content/files/vflow/graphs/com/appInt/odata2hana/c4c/loadServiceRequests/README.md).
 
@@ -96,11 +96,11 @@ Read the graph documentation [here](../src/content/files/vflow/graphs/com/appInt
 ### SAP S/4 HANA `Business Partners` to SAP HANA
 
 Short name: `S4 BuPa to HANA`  
-ID: [`com.appInt.odata2Hana.s4.loadBusinessPartners`](../src/content/files/vflow/graphs/com/appInt/odata2Hana/s4/loadBusinessPartners/graph.json)   
+ID: [`com.appInt.odata2hana.s4.loadBusinessPartners`](../src/content/files/vflow/graphs/com/appInt/odata2hana/s4/loadBusinessPartners/graph.json)   
   
 This graph extracts business partners from SAP S/4 HANA and stores them directly to SAP HANA.
 
-![](images/odata2Hana.s4.loadBusinessPartners.png)
+![](images/odata2hana.s4.loadBusinessPartners.png)
 
 Read the graph documentation [here](../src/content/files/vflow/graphs/com/appInt/odata2hana/s4/loadBusinessPartners/README.md).
 
@@ -109,11 +109,11 @@ Read the graph documentation [here](../src/content/files/vflow/graphs/com/appInt
 ### SAP S/4 HANA `Customer Returns` to SAP HANA
 
 Short name: `S4 CustRet. to HANA`  
-ID: [`com.appInt.odata2Hana.s4.loadCustomerReturns`](../src/content/files/vflow/graphs/com/appInt/odata2Hana/s4/loadCustomerReturns/graph.json)   
+ID: [`com.appInt.odata2hana.s4.loadCustomerReturns`](../src/content/files/vflow/graphs/com/appInt/odata2hana/s4/loadCustomerReturns/graph.json)   
   
 This graph extracts customer returns from SAP S/4 HANA and stores them directly to SAP HANA.
 
-![](images/odata2Hana.s4.loadCustomerReturns.png)
+![](images/odata2hana.s4.loadCustomerReturns.png)
 
 Read the graph documentation [here](../src/content/files/vflow/graphs/com/appInt/odata2hana/s4/loadCustomerReturns/README.md).
 
