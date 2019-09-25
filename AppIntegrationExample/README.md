@@ -2,14 +2,13 @@
 This scenario exemplifies the use of SAP Data Hub / SAP Data Intelligence to extract, store, transform, and analyse data from several SAP applications in order to create a 360° customer view. For this 360° customer view the scenario provides selected data from SAP Cloud for Customer (customer orders), SAP Marketing Cloud (opportunities and complaints), and SAP S/4 HANA (customer returns) that are usefull to monitor the customer's overall satisfaction and to react on early signs of a loss risk. When using the transformation part in a SAP HANA system the scenario creates under certain conditions a unified customer ID to build a single view of the customer. The scenario can be run as is but of course you can also use it as a template and adapt it to your own requirements.
 
 ## Requirements
-Before you start using the example, please make sure that:
-
-- You are familiar with the basic concepts of SAP Data Hub Modeling such Pipelines (Graphs), Operators and Dockerfiles.  For more information, you may refer to the Modeling Guide for SAP Data Hub that is available on the SAP Help Portal (https://help.sap.com/viewer/p/SAP_DATA_HUB).
-- You are familiar with the basic concepts of SAP Analytics Cloud (https://help.sap.com/viewer/p/SAP_ANALYTICS_CLOUD).
-- You are familiar with using SAP Business APIs, in particular OData APIs (https://api.sap.com/).
+Before you start using the example, please make yourself familier with
+- the basic concepts of SAP Data Hub Modeling such Pipelines (Graphs), Operators and Dockerfiles.  For more information, you may refer to the Modeling Guide for SAP Data Hub that is available on the SAP Help Portal (https://help.sap.com/viewer/p/SAP_DATA_HUB),
+- the basic concepts of SAP Analytics Cloud (https://help.sap.com/viewer/p/SAP_ANALYTICS_CLOUD),
+- using SAP Business APIs, in particular OData APIs (https://api.sap.com/).
 
 ## Overview
-The following picture provides a technical overview of the scenario:<br>
+The following picture provides a technical overview of the scenario:<br><br>
 ![](doc/images/E2E_Scenario_Overview2.png)
 
 ### Extract
