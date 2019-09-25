@@ -167,7 +167,7 @@ Read the graph documentation [here](../src/content/files/vflow/graphs/com/appInt
 ### SAP Marketing Cloud `Interactions` to Amazon S3
 
 Short name: `MC Interact. to S3`  
-ID: [`com.appInt.odata2s3.mc.loadInteraactionsORC`](../src/content/files/vflow/graphs/com/appInt/odata2s3/mc/loadInteraactionsORC/graph.json)   
+ID: [`com.appInt.odata2s3.mc.loadInteractionsORC`](../src/content/files/vflow/graphs/com/appInt/odata2s3/mc/loadInteractionsORC/graph.json)   
   
 This graph extracts SAP Marketing Cloud interaction data and stores them in ORC format into Amazon S3.
 
@@ -180,7 +180,7 @@ Read the graph documentation [here](../src/content/files/vflow/graphs/com/appInt
 ### SAP Cloud for Customer `Corporate Accounts` to Amazon S3
 
 Short name: `C4C Accts. to S3`  
-ID: [`com.appInt.odata2s3.c4c.loadCorporateAccountsCSV`](../src/content/files/vflow/graphs/com/appInt/odata2s3/c4c/loadCorporateAccountsCSV/graph.json)   
+ID: [`com.appInt.odata2s3.c4c.loadCorporateAccountsCSV`](../src/content/files/vflow/graphs/com/appInt/odata2s3/c4c/loadCorporateAccounts/graph.json)   
   
 This graph extracts SAP Cloud for Customer account data and stores them in CSV format into Amazon S3.
 
@@ -193,7 +193,7 @@ Read the graph documentation [here](../src/content/files/vflow/graphs/com/appInt
 ### SAP Cloud for Customer `CustomerOrders` to Amazon S3
 
 Short name: `C4C CustOr to S3`  
-ID: [`com.appInt.odata2s3.c4c.loadCustomerOrdersCSV`](../src/content/files/vflow/graphs/com/appInt/odata2s3/c4c/loadCustomerOrdersCSV/graph.json)    
+ID: [`com.appInt.odata2s3.c4c.loadCustomerOrdersCSV`](../src/content/files/vflow/graphs/com/appInt/odata2s3/c4c/loadCustomerOrders/graph.json)    
   
 This graph extracts SAP Cloud for Customer customer order data and stores them in CSV format into Amazon S3.
 
@@ -206,7 +206,7 @@ Read the graph documentation [here](../src/content/files/vflow/graphs/com/appInt
 ### SAP Cloud for Customer `ServiceRequests` to Amazon S3
 
 Short name: `C4C SrvRq. to S3`  
-ID: [`com.appInt.odata2s3.c4c.loadServiceRequestsParquet`](../src/content/files/vflow/graphs/com/appInt/odata2s3/c4c/loadServiceRequestsParquet/graph.json)   
+ID: [`com.appInt.odata2s3.c4c.loadServiceRequestsParquet`](../src/content/files/vflow/graphs/com/appInt/odata2s3/c4c/loadServiceRequests/graph.json)   
   
 This graph extracts SAP Cloud for Customer service request data and stores them in Parquet format into Amazon S3.
 
@@ -219,7 +219,7 @@ Read the graph documentation [here](../src/content/files/vflow/graphs/com/appInt
 ### SAP S/4 HANA `BusinessPartners` to Amazon S3
 
 Short name: `S4 BuPa to S3`  
-ID: [`com.appInt.odata2s3.s4.loadBusinessPartnersParquet`](../src/content/files/vflow/graphs/com/appInt/odata2s3/s4/loadBusinessPartnersParquet/graph.json)   
+ID: [`com.appInt.odata2s3.s4.loadBusinessPartnersParquet`](../src/content/files/vflow/graphs/com/appInt/odata2s3/s4/loadBusinessPartners/graph.json)   
   
 This graph extracts S/4 business partner data and stores then in Parquet format into Amazon S3.
 
@@ -232,7 +232,7 @@ Read the graph documentation [here](../src/content/files/vflow/graphs/com/appInt
 ### SAP S/4 HANA `CustomerReturns` to Amazon S3
 
 Short name: `S4 CustRet. to S3`  
-ID: [`com.appInt.odata2s3.s4.loadCustomerReturnsCSV`](../src/content/files/vflow/graphs/com/appInt/odata2s3/s4/loadCustomerReturnsCSV/graph.json)   
+ID: [`com.appInt.odata2s3.s4.loadCustomerReturnsCSV`](../src/content/files/vflow/graphs/com/appInt/odata2s3/s4/loadCustomerReturns/graph.json)   
   
 This graph extracts S/4 customer returns data and stores then in CSV format into Amazon S3.
 
