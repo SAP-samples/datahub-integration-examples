@@ -1,10 +1,10 @@
 # Analysing data in SAP Analytics Cloud
 
-## How to import content from a .tgz file in order to recreate the pre-built stories
+## How to import content in order to recreate the pre-built stories
 
-First of all, download the .tgz package from GitHub to your computer.
+First of all, download the [SAP Analytics Cloud content archive](../sac) file to your computer.
 
-Open SAC and choose the Deployment window from the drop-down menu on the top-left corner. Click on Import.
+Open SAP Analytics Cloud and choose the Deployment window from the drop-down menu on the top-left corner. Click on Import.
 ![](images/GH_pic20.png)
 
 1.	In the Import window, choose Upload.

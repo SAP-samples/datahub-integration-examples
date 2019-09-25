@@ -1,5 +1,5 @@
 ## Views in HANA for extracting the extracted data
-The application integration scenario example contains some views that build a holistic perspective on the data that were extracted by the pipelines and that can be used to visualize the extracted data for instance in a SAC cockpit.
+The application integration scenario example contains some views that build a holistic perspective on the data that were extracted by the pipelines and that can be used to visualize the extracted data for instance in a SAP Analytics Cloud cockpit.
 
 These views are:
 
@@ -126,9 +126,9 @@ Finally the following views should be present in your HANA system when you have 
 ![](images/createHanaViews.ViewsOverview.png)
 
 
-## How to publish the views to SAC
+## How to publish the views to SAP Analytics Cloud
 
-For the consumption of the above views by SAC your HANA system must provide calculation views for those views. Such calculations views for the above described views are part of the current solution.
+For the consumption of the above views by SAP Analytics Cloud your HANA system must provide calculation views for those views. Such calculations views for the above described views are part of the current solution.
 
 The instructions below refer to SAP HANA Studio (Version: 2.2.12.) in the SAP HANA modeler perspective.
 
@@ -182,6 +182,6 @@ Then push `Activate`.
 
 ![](images/createCalcViews.ActivateSelect.png)
 
-Now the calculation views are active and ready for consumption by SAC.
+Now the calculation views are active and ready for consumption by SAP Analytics Cloud.
 
 

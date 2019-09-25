@@ -39,7 +39,7 @@ Equip your user with the privileges that are required for creating a calculation
 
 ### Import views and calculation views
 
-The application integration example scenario comes with several HANA data base and calculation views that transform the previously imported data into time series. These time series provide the counts and total amounts of the business transactions from the various source systems in one consistent picture per business partner. For the consumptions of these time series by SAC the following four calculation views are provided that can be used to present the time series in SAC:
+The application integration example scenario comes with several HANA data base and calculation views that transform the previously imported data into time series. These time series provide the counts and total amounts of the business transactions from the various source systems in one consistent picture per business partner. For the consumptions of these time series by SAP Analytics Cloud the following four calculation views are provided that can be used to present the time series in SAP Analytics Cloud:
 
 ![](images/createCalcViews.OverviewSmall.png)
 
@@ -53,7 +53,7 @@ As an alternative to loading the data into the SAP HANA in-memory database you m
 ### Create Vora Tables from SQL File
 
 Short name: `Create Vora Tables`  
-ID: [`com.appInt.odata2s3.util.createTablesinVora`](../src/content/files/vflow/graphs/com/appInt/odata2s3/util/createTablesinVora/graph.json) 
+ID: [`com.appInt.odata2s3.util.createTablesInVora`](../src/content/files/vflow/graphs/com/appInt/odata2s3/util/createTablesInVora/graph.json) 
 
 This is a helper graph which creates the required structures in Vora to use SQL-on-file. It only needs to be executed once.
 
