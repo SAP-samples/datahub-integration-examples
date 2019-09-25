@@ -28,6 +28,7 @@ For details on how to configure and run the examples after the solution has been
 
 | Name                                                              | Description                                                |
 |-------------------------------------------------------------------|------------------------------------------------------------|
+| [Application Integration Example Scenario](/AppIntegrationExample)| Exemplifies how to extract, store, transform, and analyse data from several SAP applications for 360° customer view. |
 | [HANA_exposed_via_OpenAPIServer](/HANA_exposed_via_OpenAPIServer) | Expose an SAP HANA database through an OpenAPI server operator |
 | [HiveOperator](/HiveOperator)                                     | Provides functionality to query a Hive Metastore server using a HiveQL string |
 | [JavaProcessExecutor](/JavaProcessExecutor)                       | Run a Java Application using a Process Executor Operator |
