@@ -160,7 +160,7 @@ This graph extracts SAP Marketing Cloud contact data and stores them in ORC form
 
 ![](images/odata2s3.mc.loadContactsORC.png)
 
-Read the graph documentation [here](../src/content/files/vflow/graphs/com/appInt/odata2s3/mc/loadContacts/README.md).
+Read the graph documentation [here](../src/content/files/vflow/graphs/com/appInt/odata2s3/mc/loadContactOriginData/README.md).
 
 -> [back to top](#extracting-data-from-source-systems)
 
@@ -186,7 +186,7 @@ This graph extracts SAP Cloud for Customer account data and stores them in CSV f
 
 ![](images/odata2s3.c4c.loadAccountsCSV.png)
 
-Read the graph documentation [here](../src/content/files/vflow/graphs/com/appInt/odata2s3/c4c/loadAccounts/README.md).
+Read the graph documentation [here](../src/content/files/vflow/graphs/com/appInt/odata2s3/c4c/loadCorporateAccounts/README.md).
 
 -> [back to top](#extracting-data-from-source-systems)
 
