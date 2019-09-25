@@ -53,51 +53,51 @@ As an alternative to loading the data into the SAP HANA in-memory database you m
 ### Create Vora Tables from SQL File
 
 Short name: `Create Vora Tables`  
-ID: [`com.appInt.odata2s3.util.createTablesinVora`](/src/content/files/vflow/graphs/com/appInt/odata2s3/util/createTablesinVora/graph.json) 
+ID: [`com.appInt.odata2s3.util.createTablesinVora`](../src/content/files/vflow/graphs/com/appInt/odata2s3/util/createTablesinVora/graph.json) 
 
 This is a helper graph which creates the required structures in Vora to use SQL-on-file. It only needs to be executed once.
 
 ![](images/GH_pic16.png)
 
-Read the graph documentation [here](/src/content/files/vflow/graphs/com/appInt/odata2s3/util/createTablesInVora/README.md).
+Read the graph documentation [here](../src/content/files/vflow/graphs/com/appInt/odata2s3/util/createTablesInVora/README.md).
 
 -> [back to top](#transforming-data)
 
 ### Remove file from S3
 
 Short name: `Remove file from S3`  
-ID: [`com.appInt.odata2s3.util.removeFiles`](/src/content/files/vflow/graphs/com/appInt/odata2s3/util/removeFiles/graph.json) 
+ID: [`com.appInt.odata2s3.util.removeFiles`](../src/content/files/vflow/graphs/com/appInt/odata2s3/util/removeFiles/graph.json) 
 
 This is a helper graph that allows you to delete files and directories from Amazon S3.
 
 ![](images/GH_pic17.png)
 
-Read the graph documentation [here](/src/content/files/vflow/graphs/com/appInt/odata2s3/util/removeFiles/README.md).
+Read the graph documentation [here](../src/content/files/vflow/graphs/com/appInt/odata2s3/util/removeFiles/README.md).
 
 -> [back to top](#transforming-data)
 
 ### SQL-on-File Demo
 
 Short name: `SQL-on-File Demo`  
-ID: [`com.appInt.odata2s3.util.sqlOnFileDemo`](/src/content/files/vflow/graphs/com/appInt/odata2s3/util/sqlOnFileDemo/graph.json) 
+ID: [`com.appInt.odata2s3.util.sqlOnFileDemo`](../src/content/files/vflow/graphs/com/appInt/odata2s3/util/sqlOnFileDemo/graph.json) 
 
 This graph shows how to access the data stored in Amazon S3 via SQl-on-files. As an example a simple join of two data sets is performed.
 
 ![](images/GH_pic18.png)
 
-Read the graph documentation [here](/src/content/files/vflow/graphs/com/appInt/odata2s3/util/sqlOnFileDemo/README.md).
+Read the graph documentation [here](../src/content/files/vflow/graphs/com/appInt/odata2s3/util/sqlOnFileDemo/README.md).
 
 -> [back to top](#transforming-data)
 
 ### Data Transform Workflow Demo
 
 Short name: `Data Transf. Demo`  
-ID: [`com.appInt.odata2s3.util.dataTransformDemo`](/src/content/files/vflow/graphs/com/appInt/odata2s3/util/dataTransformDemo/graph.json) 
+ID: [`com.appInt.odata2s3.util.dataTransformDemo`](../src/content/files/vflow/graphs/com/appInt/odata2s3/util/dataTransformDemo/graph.json) 
 
 This graph shows how to access the data stored in Amazon S3 using the `Data Transform` operator. As an example a simple join of two data sets is performed.
 
 ![](images/GH_pic19.png)
 
-Read the graph documentation [here](/src/content/files/vflow/graphs/com/appInt/odata2s3/util/dataTransformDemo/README.md).
+Read the graph documentation [here](../src/content/files/vflow/graphs/com/appInt/odata2s3/util/dataTransformDemo/README.md).
 
 -> [back to top](#transforming-data)

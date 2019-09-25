@@ -26,21 +26,21 @@ Implement the scenario by
 
 ### Importing the solution
 
-Once you have downloaded or cloned the [data-integration-examples](https://github.com/SAP/datahub-integration-examples) repository import the Application Integration Example solution into SAP Data Hub as described [here](https://github.com/SAP/datahub-integration-examples#download-and-installation). Alternatively you can download the solution archive [here](/solution).
+Once you have downloaded or cloned the [data-integration-examples](https://github.com/SAP/datahub-integration-examples) repository import the Application Integration Example solution into SAP Data Hub as described [here](https://github.com/SAP/datahub-integration-examples#download-and-installation). Alternatively you can download the solution archive [here](../solution).
 
 #### Content
 
-1. Graphs for extracting data from SAP Cloud for Customer into SAP HANA:<br> [/src/content/files/vflow/graphs/com/appInt/odata2hana/c4c](/src/content/files/vflow/graphs/com/appInt/odata2hana/c4c)
-2. Graphs for extracting data from SAP Marketing Cloud into SAP HANA:<br> [/src/content/files/vflow/graphs/com/appInt/odata2hana/mc](/src/content/files/vflow/graphs/com/appInt/odata2hana/mc)
-3. Graphs for extracting data from SAP S/4 HANA into SAP HANA:<br> [/src/content/files/vflow/graphs/com/appInt/odata2hana/s4](/src/content/files/vflow/graphs/com/appInt/odata2hana/s4)
-4. Graphs for extracting data from SAP Cloud for Customer into Amazon S3:<br> [/src/content/files/vflow/graphs/com/appInt/odata2s3/c4c](/src/content/files/vflow/graphs/com/appInt/odata2s3/c4c)
-5. Graphs for extracting data from SAP Marketing Cloud into Amazon S3:<br> [/src/content/files/vflow/graphs/com/appInt/odata2s3/mc](/src/content/files/vflow/graphs/com/appInt/odata2s3/mc)
-6. Graphs for extracting data from SAP S/4 HANA into Amazon S3:<br> [/src/content/files/vflow/graphs/com/appInt/odata2s3/s4](/src/content/files/vflow/graphs/com/appInt/odata2s3/s4)
-7. Graphs for working with file data in Amazon S3:<br> [/src/content/files/vflow/graphs/com/appInt/odata2s3/util](/src/content/files/vflow/graphs/com/appInt/odata2s3/util)
+1. Graphs for extracting data from SAP Cloud for Customer into SAP HANA:<br> [/src/content/files/vflow/graphs/com/appInt/odata2hana/c4c](../src/content/files/vflow/graphs/com/appInt/odata2hana/c4c)
+2. Graphs for extracting data from SAP Marketing Cloud into SAP HANA:<br> [/src/content/files/vflow/graphs/com/appInt/odata2hana/mc](../src/content/files/vflow/graphs/com/appInt/odata2hana/mc)
+3. Graphs for extracting data from SAP S/4 HANA into SAP HANA:<br> [/src/content/files/vflow/graphs/com/appInt/odata2hana/s4](../src/content/files/vflow/graphs/com/appInt/odata2hana/s4)
+4. Graphs for extracting data from SAP Cloud for Customer into Amazon S3:<br> [/src/content/files/vflow/graphs/com/appInt/odata2s3/c4c](../src/content/files/vflow/graphs/com/appInt/odata2s3/c4c)
+5. Graphs for extracting data from SAP Marketing Cloud into Amazon S3:<br> [/src/content/files/vflow/graphs/com/appInt/odata2s3/mc](../src/content/files/vflow/graphs/com/appInt/odata2s3/mc)
+6. Graphs for extracting data from SAP S/4 HANA into Amazon S3:<br> [/src/content/files/vflow/graphs/com/appInt/odata2s3/s4](../src/content/files/vflow/graphs/com/appInt/odata2s3/s4)
+7. Graphs for working with file data in Amazon S3:<br> [/src/content/files/vflow/graphs/com/appInt/odata2s3/util](../src/content/files/vflow/graphs/com/appInt/odata2s3/util)
 
 ### Setting up connections
 
-Download [this file](/src/connections/connections.json) and import the connections in SAP Data Hub `Connection Management`. During import you will need to provide the appropriate connection credentials and to prefix the OData endpoints with the appropriate host URLs in your system landscape. This will create the following connections:
+Download [this file](../src/connections/connections.json) and import the connections in SAP Data Hub `Connection Management`. During import you will need to provide the appropriate connection credentials and to prefix the OData endpoints with the appropriate host URLs in your system landscape. This will create the following connections:
 
 Connection Id | Description | Type | OData endpoint
 --------------|-------------|------|---------------
