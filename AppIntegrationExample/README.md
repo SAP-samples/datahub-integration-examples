@@ -3,12 +3,13 @@ This scenario exemplifies the use of SAP Data Hub / SAP Data Intelligence to ext
 
 ## Requirements
 Before you start using the example, please make yourself familiar with
-- the basic concepts of SAP Data Hub Modeling such Pipelines (Graphs), Operators and Dockerfiles.  For more information, you may refer to the Modeling Guide for SAP Data Hub that is available on the SAP Help Portal (https://help.sap.com/viewer/p/SAP_DATA_HUB),
+- the basic concepts of SAP Data Hub Modeling such Pipelines (Graphs), Operators and Dockerfiles. For more information, you may refer to the Modeling Guide for SAP Data Hub that is available on the SAP Help Portal (https://help.sap.com/viewer/p/SAP_DATA_HUB),
 - the basic concepts of SAP Analytics Cloud (https://help.sap.com/viewer/p/SAP_ANALYTICS_CLOUD),
 - using SAP Business APIs, in particular OData APIs (https://api.sap.com/).
 
-Required Data Intelligence version:
-- 2.7
+Required software versions:
+- SAP Data Hub 2.7
+- SAP Data Intelligence 1909
 
 ## Overview
 The following picture provides a technical overview of the scenario:<br><br>
