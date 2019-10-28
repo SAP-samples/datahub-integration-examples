@@ -7,6 +7,9 @@ Before you start using the example, please make yourself familiar with
 - the basic concepts of SAP Analytics Cloud (https://help.sap.com/viewer/p/SAP_ANALYTICS_CLOUD),
 - using SAP Business APIs, in particular OData APIs (https://api.sap.com/).
 
+Required Data Intelligence version:
+- 2.7
+
 ## Overview
 The following picture provides a technical overview of the scenario:<br><br>
 ![](doc/images/E2E_Scenario_Overview2.png)
