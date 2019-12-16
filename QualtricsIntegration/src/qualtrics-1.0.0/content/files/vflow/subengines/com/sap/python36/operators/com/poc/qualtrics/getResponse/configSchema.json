@@ -1,0 +1,49 @@
+{
+    "$schema": "http://json-schema.org/draft-06/schema#",
+    "$id": "http://sap.com/vflow/com.poc.qualtrics.getResponse.configSchema.json",
+    "type": "object",
+    "properties": {
+        "apiToken": {
+            "key": "apiToken",
+            "name": "apiToken",
+            "type": "string",
+            "title": "API Token",
+            "isRequired": true,
+            "isVisible": true,
+            "format": "password"
+        },
+        "dataCenter": {
+            "key": "datacenterID",
+            "name": "datacenterID",
+            "type": "string",
+            "title": "Data Center",
+            "isRequired": true,
+            "isVisible": true
+        },
+        "surveyID": {
+            "key": "surveyID",
+            "name": "surveyID",
+            "type": "string",
+            "title": "Survey ID",
+            "isRequired": true,
+            "isVisible": true
+        },
+        "codelanguage": {
+            "key": "codelanguage",
+            "name": "codelanguage",
+            "type": "string",
+            "isVisible": true
+        },
+        "script": {
+            "key": "script",
+            "name": "script",
+            "type": "string",
+            "isVisible": true
+        }
+    },
+    "required": [
+        "apiToken",
+        "dataCenter",
+        "surveyID"
+    ]
+}
