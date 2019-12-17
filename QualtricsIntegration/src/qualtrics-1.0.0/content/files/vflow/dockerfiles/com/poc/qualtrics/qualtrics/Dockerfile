@@ -1,2 +1,4 @@
-FROM §/com.sap.datahub.linuxx86_64/opensuse-leap:15.0-sap24
-RUN pip3 install requests pytz python-dateutil
+FROM $com.sap.sles.base
+WORKDIR /home/vflow
+ENV HOME=/home/vflow
+RUN pip3.6 install --no-cache-dir --user requests pytz python-dateutil
