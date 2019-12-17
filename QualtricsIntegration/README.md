@@ -3,6 +3,8 @@ The custom operators provided in this sample are designed to extract responses f
 
 Coding was done on Python 3.6.x and was tested with Data Hub version 2.7.
 
+Author: Cassio Binkowski - [github](github.com/cassioiks) - [SAP profile](https://people.sap.com/cassio.binkowski)
+
 ## Requirements
 
 Before you start using the example, please make sure that:
@@ -12,9 +14,7 @@ Before you start using the example, please make sure that:
 
 ## Content
 **1. Dockerfile 'qualtrics' ([Source code](src/qualtrics-1.0.0/content/files/vflow/dockerfiles/com/poc/qualtrics/qualtrics/Dockerfile))**
-  - Extends the SAP-delivered Dockerfile com.sap.python27
-  - imports Python libraries pyarrow and pandas
-  - Uses image tags `pyarrow` and `python27`
+
 
 **2. Custom operator 'ExportResponses' ([Source code](src/qualtrics-1.0.0/content/files/vflow/subengines/com/sap/python36/operators/com/poc/qualtrics/exportResponses/operator.json))**
   - **continuous mode**: the operator will continuously fetch responses if `recurrence` is set to anything above 0. The first run will fetch all responses until present moment, and then only the delta
@@ -34,7 +34,9 @@ Before you start using the example, please make sure that:
 
 **4. Sample graphs**
   - **Extract Responses ([Source code](src/qualtrics-1.0.0/content/files/vflow/graphs/com/poc/qualtrics/ExtractResponses/graph.json))**: extract responses in batch mode, continuously or single-run
+  ![Graph Extract Responses](./graph-extract.png)
   - **Receive Response ([Source code](src/qualtrics-1.0.0/content/files/vflow/graphs/com/poc/qualtrics/receiveResponse/graph.json))**: start an API inside Data Hub to receive responses from Qualtrics as soon as they are finished. **NB:** You need to configure an `Action` inside Qualtrics survey to send the `response ID` via POST service call.
+  ![Graph Receive Responses](./graph-receive.png)
 
 The API endpoint will be: https://`{Data Hub URL}`/app/pipeline-modeler/openapi/service/poc/qualtrics/survey
 
