@@ -1,0 +1,225 @@
+{
+    "properties": {},
+    "description": "Qualtrics Receive Response",
+    "processes": {
+        "javascriptoperator21": {
+            "component": "com.sap.system.jsmengine",
+            "metadata": {
+                "label": "Process",
+                "x": 442.99999713897705,
+                "y": 40.99999952316284,
+                "height": 80,
+                "width": 120,
+                "extensible": true,
+                "config": {
+                    "script": "$.setPortCallback(\"input\",onInput);\n\n// for simplicity, no \nvar count = 0;\nvar totalgreeted = 0;\nvar greeted = {};\n\n// subscriptions swagger-socket-request-id -> user\nvar subscriptions = {};\n\nfunction isByteArray(data) {\n    return (typeof data === 'object' && Array.isArray(data) \n        && data.length > 0 && typeof data[0] === 'number')\n}\n\nfunction sendResponse(s, m, e) {\n    if ($.output === null) {\n        // invoke the callback directly\n        $.sendResponse(s, m, e);\n    } else {\n        // let the subsequent operator decide what to do\n        if (e !== null) {\n            m.Attributes[\"message.response.error\"] = e;\n        }\n        $.output(m);\n    }\n}\n\nfunction onInput(ctx,s) {\n    var msg = {};\n\n    var inbody = s.Body;\n    var inattributes = s.Attributes;\n    \n    // convert the body into string if it is bytes\n    if (isByteArray(inbody)) {\n        inbody = String.fromCharCode.apply(null, inbody);\n    }\n\n    // prepare for a response message\n    msg.Attributes = {};\n    for (var key in inattributes) {\n        // only copy the headers that won't interfer with the recieving operators\n        if (key.indexOf(\"openapi.header\") < 0 || key === \"openapi.header.x-request-key\") {\n             msg.Attributes[key] = inattributes[key];\n        }\n    }\n    \n    // build the response\n    var reqmethod = inattributes[\"openapi.method\"];\n    var reqpath = inattributes[\"openapi.request_uri\"];\n    var opid = inattributes[\"openapi.operation_id\"];\n\n    switch (opid) {\n        case \"addSurvey\":\n            msg.Body = {\"pong\": count++};\n            sendResponse(s, msg, null);\n            break;\n        case \"getSurvey\":\n            msg.Body = {\"pong\": count++};\n            sendResponse(s, msg, null);\n            break;\n        case \"echo\":\n            msg.Body = {\"echo\": inbody};\n            sendResponse(s, msg, null);\n            break;\n        case \"getGreetSummary\":\n            msg.Body = {\"greeted\": Object.keys(greeted), \"total\": totalgreeted};\n            sendResponse(s, msg, null);\n            break;\n        case \"getGreetStatus\":\n            gname = inattributes[\"openapi.path_params.name\"];\n            gcount = greeted[gname];\n            if (gcount === undefined) {\n                gcount = 0;\n            }\n            msg.Body = {\"count\": gcount, \"name\": gname};\n            sendResponse(s, msg, null);\n            break;\n        case \"greet\":\n            gname = inattributes[\"openapi.path_params.name\"];\n            gcount = greeted[gname];\n            if (gcount === undefined) {\n                gcount = 0;\n            }\n            gcount++;\n            totalgreeted++;\n            greeted[gname] = gcount;\n            jsonbody = JSON.parse(inbody);\n            bodyname = jsonbody[\"name\"];\n            bodytext = jsonbody[\"text\"];\n            if (bodyname === undefined || bodytext === undefined) {\n                sendResponse(s, msg, Error(\"Invalid body. Missing name or text\"))\n            } else {\n                msg.Body = {\"from\": gname, \"to\": bodyname, \"text\": bodytext};\n                sendResponse(s, msg, null);\n                for (var ssrid in subscriptions) {\n                    if (bodyname === \"*\" || bodyname === subscriptions[ssrid]) {\n                        submsg = {};\n                        submsg.Attributes = {\n                            \"openapi.header.x-request-key\": ssrid\n                        };\n                        submsg.Body = msg.Body;\n                        sendResponse(s, submsg, null);\n                    }\n                }\n            }\n            break;\n        case \"upload\":\n            gname = inattributes[\"openapi.path_params.name\"];\n            filename = inattributes[\"openapi.file_params.file#name\"];\n            filecontent = inattributes[\"openapi.file_params.file\"];\n            // for now, just return the name of the file and the size of the base64 content\n            msg.Body = {\"name\": filename, \"size\": filecontent.length};\n            sendResponse(s, msg, null);\n            break;\n        case \"subscribe\":\n            gname = inattributes[\"openapi.path_params.name\"];\n            ssrid = inattributes[\"openapi.header.x-request-key\"];\n            // subscribe is enabled when a request uses swaggersocket and has this id.\n            if (ssrid !== undefined) {\n                subscriptions[ssrid] = gname;\n                msg.Attributes[\"openapi.responder.reuse\"] = true;\n            }\n            msg.Body = [];\n            sendResponse(s, msg, null);\n            break;\n        case \"unsubscribe\":\n            sid = inattributes[\"openapi.path_params.sid\"];\n            ssrid = inattributes[\"openapi.header.x-request-key\"];\n            unsubssrid = ssrid.split(\"#\")[0]+\"#\"+sid\n            delete subscriptions[unsubssrid];\n            msg.Attributes[\"openapi.responder.release\"] = unsubssrid;\n            msg.Body = {\"greeted\": Object.keys(greeted), \"total\": totalgreeted};\n            sendResponse(s, msg, null);\n            break;\n        default:\n            sendResponse(s, msg, Error(\"Unexpected operation ID \" + opid))\n            break;\n    }\n}\n"
+                }
+            }
+        },
+        "openapiservlow1": {
+            "component": "com.sap.openapi.server",
+            "metadata": {
+                "label": "OpenAPI Servlow",
+                "x": 627.9999961853027,
+                "y": 40.49999952316284,
+                "height": 80,
+                "width": 120,
+                "ui": "dynpath",
+                "config": {
+                    "basePath": "/poc/qualtrics",
+                    "swaggerSpec": "{\n  \"swagger\": \"2.0\",\n  \"info\": {\n    \"description\": \"Qualtrics sample API for receiving survey answers from actions.\",\n    \"version\": \"1.0.0\",\n    \"title\": \"Qualtrics Survey Answers\",\n    \"termsOfService\": \"http://swagger.io/terms/\",\n    \"contact\": {\n      \"email\": \"cassio.binkowski@sap.com\"\n    },\n    \"license\": {\n      \"name\": \"Apache 2.0\",\n      \"url\": \"http://www.apache.org/licenses/LICENSE-2.0.html\"\n    }\n  },\n  \"host\": \"vsystem.ingress.dh-2c678qtr.dhaas-live.shoot.live.k8s-hana.ondemand.com\",\n  \"basePath\": \"/poc/qualtrics\",\n  \"tags\": [\n    {\n      \"name\": \"survey\",\n      \"description\": \"Post survey results\",\n      \"externalDocs\": {\n        \"description\": \"Find out more\",\n        \"url\": \"http://swagger.io\"\n      }\n    }\n  ],\n  \"schemes\": [\n    \"https\"\n  ],\n  \"paths\": {\n    \"/survey\": {\n      \"post\": {\n        \"tags\": [\n          \"survey\"\n        ],\n        \"summary\": \"Add new survey result\",\n        \"description\": \"\",\n        \"operationId\": \"addSurvey\",\n        \"consumes\": [\n          \"application/json\",\n          \"application/xml\"\n        ],\n        \"produces\": [\n          \"application/xml\",\n          \"application/json\"\n        ],\n        \"parameters\": [\n          {\n            \"in\": \"body\",\n            \"name\": \"body\",\n            \"description\": \"Survey content\",\n            \"required\": true,\n            \"schema\": {\n              \"$ref\": \"#/definitions/Survey\"\n            }\n          }\n        ],\n        \"responses\": {\n          \"405\": {\n            \"description\": \"Invalid input\"\n          }\n        }\n      },\n\"get\": {\n        \"tags\": [\n          \"survey\"\n        ],\n \"produces\": [\n          \"application/json\"\n        ],\n        \"operationId\": \"getSurvey\",\n        \"responses\": {\n          \"200\": {\n            \"description\": \"Ok\"\n          }\n        }\n      }\n    }\n  },\n  \"definitions\": {\n    \"Survey\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"id\": {\n          \"type\": \"integer\",\n          \"format\": \"int64\"\n        },\n        \"petId\": {\n          \"type\": \"integer\",\n          \"format\": \"int64\"\n        },\n        \"quantity\": {\n          \"type\": \"integer\",\n          \"format\": \"int32\"\n        },\n        \"shipDate\": {\n          \"type\": \"string\",\n          \"format\": \"date-time\"\n        },\n        \"status\": {\n          \"type\": \"string\",\n          \"description\": \"Order Status\",\n          \"enum\": [\n            \"placed\",\n            \"approved\",\n            \"delivered\"\n          ]\n        },\n        \"complete\": {\n          \"type\": \"boolean\",\n          \"default\": false\n        }\n      },\n      \"xml\": {\n        \"name\": \"Order\"\n      }\n    },\n    \"ApiResponse\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"code\": {\n          \"type\": \"integer\",\n          \"format\": \"int32\"\n        },\n        \"type\": {\n          \"type\": \"string\"\n        },\n        \"message\": {\n          \"type\": \"string\"\n        }\n      }\n    }\n  },\n  \"externalDocs\": {\n    \"description\": \"Find out more about Swagger\",\n    \"url\": \"http://swagger.io\"\n  }\n}",
+                    "websocket": true,
+                    "maxConcurrency": 3
+                }
+            }
+        },
+        "wiretap1": {
+            "component": "com.sap.util.wiretap",
+            "metadata": {
+                "label": "Wiretap",
+                "x": 72.99999904632568,
+                "y": 100.49999952316284,
+                "height": 80,
+                "width": 120,
+                "ui": "dynpath",
+                "config": {
+                    "layout": "[%d] %m",
+                    "maxSize": 8192
+                }
+            }
+        },
+        "headerremover1": {
+            "component": "com.sap.util.headerRemover",
+            "metadata": {
+                "label": "Header Remover",
+                "x": 442.99999713897705,
+                "y": 160.99999952316284,
+                "height": 80,
+                "width": 120,
+                "config": {}
+            }
+        },
+        "12multiplexer1": {
+            "component": "com.sap.system.multiplexer.1-2",
+            "metadata": {
+                "label": "1:2 Multiplexer",
+                "x": 257.99999809265137,
+                "y": 100.99999952316284,
+                "height": 80,
+                "width": 120,
+                "extensible": true,
+                "config": {}
+            }
+        },
+        "wiretap2": {
+            "component": "com.sap.util.wiretap",
+            "metadata": {
+                "label": "Wiretap",
+                "x": 627.9999961853027,
+                "y": 160.49999952316284,
+                "height": 80,
+                "width": 120,
+                "ui": "dynpath",
+                "config": {}
+            }
+        },
+        "wiretap3": {
+            "component": "com.sap.util.wiretap",
+            "metadata": {
+                "label": "Wiretap",
+                "x": 981.9999952316284,
+                "y": 86.49999976158142,
+                "height": 80,
+                "width": 120,
+                "ui": "dynpath",
+                "config": {}
+            }
+        },
+        "getsingleresponse1": {
+            "component": "com.poc.qualtrics.getResponse",
+            "metadata": {
+                "label": "Get Single Response",
+                "x": 812.9999952316284,
+                "y": 86.49999976158142,
+                "height": 80,
+                "width": 120,
+                "extensible": true,
+                "config": {
+                    "apiToken": "",
+                    "dataCenter": "",
+                    "surveyID": "",
+                    "script": "import requests\nimport json\nfrom io import StringIO\nimport csv\n\ndef jsonToCsv(data):\n    output = StringIO()\n    writer = csv.DictWriter(output, data[0].keys())\n    writer.writeheader()\n    \n    for row in data:\n        writer.writerow(row)\n    \n    return output\n\napiToken = api.config.apiToken\nsurveyID = api.config.surveyID\ndataCenter = api.config.dataCenter\n\ndef on_input(sResponseID):\n    oResponseID = json.loads(sResponseID)\n    responseID = oResponseID[\"responseID\"]\n    baseUrl = \"https://{0}.qualtrics.com/API/v3/surveys/{1}/responses/{2}\".format(dataCenter, surveyID, responseID)\n    headers = {\n        \"accept\": \"application/json\",\n        \"x-api-token\": apiToken\n        }\n\n    requestUrl = baseUrl\n    downloadRequestResponse = requests.request(\"GET\", requestUrl, headers=headers)\n    print(downloadRequestResponse.text)\n    responseValues = downloadRequestResponse.json()[\"result\"][\"values\"]\n    csvValues = jsonToCsv([responseValues]).getvalue()\n\n    api.send(\"response\", csvValues)\n\napi.set_port_callback(\"responseID\", on_input)"
+                }
+            }
+        }
+    },
+    "groups": [],
+    "connections": [
+        {
+            "metadata": {
+                "points": "751.9999961853027,80.49999952316284 779.9999957084656,80.49999952316284 779.9999957084656,12.5 594.9999966621399,12.5 594.9999966621399,12 409.9999976158142,12 409.9999976158142,72 224.99999856948853,72 224.99999856948853,72.5 12,72.5 12,140.49999952316284 67.99999904632568,140.49999952316284"
+            },
+            "src": {
+                "port": "out",
+                "process": "openapiservlow1"
+            },
+            "tgt": {
+                "port": "in",
+                "process": "wiretap1"
+            }
+        },
+        {
+            "metadata": {
+                "points": "566.999997138977,80.99999952316284 594.9999966621399,80.99999952316284 594.9999966621399,80.49999952316284 622.9999961853027,80.49999952316284"
+            },
+            "src": {
+                "port": "output",
+                "process": "javascriptoperator21"
+            },
+            "tgt": {
+                "port": "ret",
+                "process": "openapiservlow1"
+            }
+        },
+        {
+            "metadata": {
+                "points": "196.99999904632568,140.49999952316284 224.99999856948853,140.49999952316284 224.99999856948853,140.99999952316284 252.99999809265137,140.99999952316284"
+            },
+            "src": {
+                "port": "out",
+                "process": "wiretap1"
+            },
+            "tgt": {
+                "port": "in1",
+                "process": "12multiplexer1"
+            }
+        },
+        {
+            "metadata": {
+                "points": "381.99999809265137,131.99999952316284 409.9999976158142,131.99999952316284 409.9999976158142,80.99999952316284 437.99999713897705,80.99999952316284"
+            },
+            "src": {
+                "port": "out1",
+                "process": "12multiplexer1"
+            },
+            "tgt": {
+                "port": "input",
+                "process": "javascriptoperator21"
+            }
+        },
+        {
+            "metadata": {
+                "points": "381.99999809265137,149.99999952316284 409.9999976158142,149.99999952316284 409.9999976158142,200.99999952316284 437.99999713897705,200.99999952316284"
+            },
+            "src": {
+                "port": "out2",
+                "process": "12multiplexer1"
+            },
+            "tgt": {
+                "port": "in",
+                "process": "headerremover1"
+            }
+        },
+        {
+            "metadata": {
+                "points": "566.999997138977,209.99999952316284 594.9999966621399,209.99999952316284 594.9999966621399,200.49999952316284 622.9999961853027,200.49999952316284"
+            },
+            "src": {
+                "port": "outbody",
+                "process": "headerremover1"
+            },
+            "tgt": {
+                "port": "in",
+                "process": "wiretap2"
+            }
+        },
+        {
+            "metadata": {
+                "points": "751.9999961853027,200.49999952316284 779.9999957084656,200.49999952316284 779.9999957084656,126.49999976158142 807.9999952316284,126.49999976158142"
+            },
+            "src": {
+                "port": "out",
+                "process": "wiretap2"
+            },
+            "tgt": {
+                "port": "responseID",
+                "process": "getsingleresponse1"
+            }
+        },
+        {
+            "metadata": {
+                "points": "936.9999952316284,126.49999976158142 976.9999952316284,126.49999976158142"
+            },
+            "src": {
+                "port": "response",
+                "process": "getsingleresponse1"
+            },
+            "tgt": {
+                "port": "in",
+                "process": "wiretap3"
+            }
+        }
+    ],
+    "inports": {},
+    "outports": {}
+}

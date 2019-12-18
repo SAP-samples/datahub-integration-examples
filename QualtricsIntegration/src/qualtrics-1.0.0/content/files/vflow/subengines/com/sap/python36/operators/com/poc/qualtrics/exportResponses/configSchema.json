@@ -1,0 +1,42 @@
+{
+    "$schema": "http://json-schema.org/draft-06/schema#",
+    "$id": "http://sap.com/vflow/com.poc.qualtrics.exportResponses.configSchema.json",
+    "type": "object",
+    "properties": {
+        "apiToken": {
+            "title": "API token",
+            "type": "string",
+            "format": "password"
+        },
+        "dataCenter": {
+            "title": "Data Center",
+            "type": "string"
+        },
+        "surveyID": {
+            "title": "Survey ID",
+            "type": "string"
+        },
+        "startDate": {
+            "title": "Start Date and Time for initial export",
+            "description": "Start Date and Time field from which to initially extract the survey responses",
+            "type": "string",
+            "format": "date-time"
+        },
+        "recurrence": {
+            "title": "Recurrence (in minutes)",
+            "description": "Recurrence to download the responses in minutes",
+            "type": "integer"
+        },
+        "codelanguage": {
+            "type": "string"
+        },
+        "script": {
+            "type": "string"
+        }
+    },
+    "required": [
+        "apiToken",
+        "dataCenter",
+        "surveyID"
+    ]
+}

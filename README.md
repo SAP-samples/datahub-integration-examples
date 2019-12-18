@@ -33,6 +33,7 @@ For details on how to configure and run the examples after the solution has been
 | [HiveOperator](/HiveOperator)                                     | Provides functionality to query a Hive Metastore server using a HiveQL string |
 | [JavaProcessExecutor](/JavaProcessExecutor)                       | Run a Java Application using a Process Executor Operator |
 | [ParquetWriterOperator](/ParquetWriterOperator)                   | This custom operator creates a file in Parquet format from an input message |
+| [Qualtrics Survey integration](/QualtricsIntegration)                   | Custom operators to extract survey responses from Qualtrics |
 
 ## Known Issues
 

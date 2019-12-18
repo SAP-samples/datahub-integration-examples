@@ -1,0 +1,9 @@
+{
+    "default": "",
+    "sles": "",
+    "python27": "",
+    "python36": "",
+    "tornado": "5.0.2",
+    "node": "10.16.0",
+    "qualtrics": ""
+}
