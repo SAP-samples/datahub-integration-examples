@@ -1,0 +1,51 @@
+{
+    "name": "VSCode",
+    "stableLink": "vsc",
+    "mounts": {
+        "vhome": true
+    },
+    "version": "1.0.0",
+    "apiVersion": "v2",
+    "type": "kubernetes",
+    "body": {
+        "kubernetes": {
+            "apiVersion": "v2",
+            "service": {
+                "metadata": {
+                    "generateName": "vsc"
+                },
+                "spec": {
+                    "ports": [
+                        {
+                            "name": "vsc",
+                            "port": 3000
+                        }
+                    ]
+                }
+            },
+            "deployment": {
+                "spec": {
+                    "template": {
+                        "spec": {
+                            "containers": [
+                                {
+                                    "name": "vsc",
+                                    "image": "sapdi/vsc-app:1.0",
+                                    "ports": [
+                                        {
+                                            "name": "vsc",
+                                            "containerPort": 3000
+                                        }
+                                    ],
+                                    "securityContext": {
+                                        "runAsNonRoot": true
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
