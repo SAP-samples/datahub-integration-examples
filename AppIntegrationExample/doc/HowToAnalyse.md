@@ -2,7 +2,7 @@
 
 ## How to import content in order to recreate the pre-built stories
 
-First of all, download the [SAP Analytics Cloud content archive](../sac) file to your computer.
+First of all, download the [SAP Analytics Cloud content archive](../src/sac) file to your computer.
 
 Open SAP Analytics Cloud and choose the Deployment window from the drop-down menu on the top-left corner. Click on Import.
 ![](images/GH_pic20.png)
