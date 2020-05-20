@@ -2,7 +2,7 @@
 
 ## How to import content in order to recreate the pre-built stories
 
-First of all, download the [SAP Analytics Cloud content archive](../src/sac) file to your computer.
+First of all, download the [SAP Analytics Cloud content archive](../sac) file to your computer.
 
 Open SAP Analytics Cloud and choose the Deployment window from the drop-down menu on the top-left corner. Click on Import.
 ![](images/GH_pic20.png)
@@ -38,6 +38,8 @@ If an object selected for import does not exist on your system, the object will 
 
 The creation of Live Data Connections to SAP HANA is described [here](https://help.sap.com/doc/00f68c2e08b941f081002fd3691d86a7/2019.16/en-US/cc03773d7f554c4ebc9e29b4c2792e26.html).
 
+[Here](https://www.sapanalytics.cloud/learning/data-connections/) you can find extensive connection guides.
+
 Once the desired Calc Views are created in SAP HANA you need to mirror them in SAP Analytics Cloud. This is done by creating a new model:
 
 ### Step 1
@@ -53,5 +55,6 @@ Once the desired Calc Views are created in SAP HANA you need to mirror them in S
 ![](images/GH_pic4.png)
 
 ### Step 4
+Choose System Type, Connection and Data Source. Finally select OK as shown below:
 
 ![](images/GH_pic5.png)
