@@ -1,17 +1,26 @@
 # VSCode Application for SAP Data Intelligence
 
-The VSCode application is a [Visual Studio Code](https://code.visualstudio.com/) extension for
-[SAP Data Intelligence (SAP DI)](https://www.sap.com/products/data-intelligence.html).
-The application allows to edit files in the user workspace of a SAP DI user, and to track artifacts
-(graphs, operators, etc.) in Git repositories.
+The VSCode "Launchpad Application" is an example application to show how a terminal interface can be added to SAP Data Intelligence.
+The application is based on the remote version of [Visual Studio Code](https://code.visualstudio.com/)
+and makes it available as an application in [SAP Data Intelligence (SAP DI)](https://www.sap.com/products/data-intelligence.html).
+The application provides the following capabilities:
+
+* Access the SAP DI user workspace using a terminal interface.
+* Provides a Git client to track files in the user workspace (e.g., graphs, operators) in a Git repository.
+* For details about the development of solutions using Git see the following guide: [Git Workflow for SAP Data Intelligence](../Readme.md)
 
 ![VSCode Application Image](../img/g-overview-2.png "VSCode Application")
 
-For details about the development of solutions using Git see the following guide:
+## Disclaimer
 
-* [Git Workflow for SAP Data Intelligence](../Readme.md)
+This application (docker image, application descriptor) is released under the
+[SAP Sample Code License Agreement](../../LICENSE) and is not part of the SAP Data Intelligence 
+shipment. Its main purpose is to simplify the tracking of development artefacts in a Git repository.
+The application should only be installed on SAP DI tenants that are used for development and/or testing.
 
-## Pre-requisites
+## Installation
+
+### Pre-requisites
 
 * The application is supported starting with:
   * **SAP Data Intelligence 3.0** (on-premise edition)
@@ -20,7 +29,7 @@ For details about the development of solutions using Git see the following guide
 * The SAP DI tenant needs to be able to access the public docker image
 [sapdi/vsc-app](https://hub.docker.com/r/sapdi/vsc-app). Otherwise, the image needs to be pushed to a private registry available to the SAP DI tenant and the solution package needs to be updated (see [Build Section](#Build) below)
 
-## Installation
+### Add Solution to Tenant
 
 1. Download the solution package [vscode-app.zip](vscode-app.zip) availabe in this project.
 2. Install the solution as a layer to your tenant as described in the official [Manage Strategies](https://help.sap.com/viewer/ca509b7635484070a655738be408da63/Cloud/en-US/8bbc552fc0604792bb114d850391d739.html) documentation. The steps at-a-glance look like this:
@@ -32,7 +41,7 @@ For details about the development of solutions using Git see the following guide
     6. Add the newly added layer `vsc-app` to the strategy and click `save`.
     7. The VSCode application will now show up in the launchpad of all users.
 
-## Build
+### Build
 
 In case the SAP DI tenant has no access to the internet the VSCode application will not work since it needs the public docker image [sapdi/vsc-app](https://hub.docker.com/r/sapdi/vsc-app). In this case, you need to push the image to a private registry that can be accessed from the SAP DI tenant first.
 
@@ -64,7 +73,7 @@ cd solution && zip -r ../vsc-app.zip manifest.json content/
 ```
 6. Install the `vsc-app.zip` solution on the SAP DI tenant as explained in the previous section.
 
-## Kubernetes Setup
+### Kubernetes Setup
 
 * Make sure your Kubernetes Load Balancer is not timing out request after a short while (e.g., 30 seconds) since this will result in a continuous "reload" message in the VSCode application due to a necessary Web Socket connection. Proper configurations to increase the timeout to reasonable values like 30 minutes are described here:
   * [GKE Backend Config](https://cloud.google.com/kubernetes-engine/docs/concepts/backendconfig)
@@ -87,3 +96,10 @@ For e.g. AWS this is the following:
 Key: kubernetes.io/role/internal-elb
 Value: 1
 ```
+
+## Legal
+
+Copyright (c) 2020 SAP SE or an SAP affiliate company. All rights reserved. 
+This project is licensed under the Apache Software License, version 2.0 except as noted otherwise in the 
+[LICENSE](https://github.com/SAP-samples/datahub-integration-examples/blob/master/LICENSE).
+
