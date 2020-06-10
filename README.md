@@ -1,12 +1,13 @@
-# SAP Data Hub Integration Examples
+# SAP Data Hub & Intelligence Integration Examples
 
 ## Description
 
-This repository contains example operators, pipelines and dockerfiles for [SAP Data Hub](https://www.sap.com/products/data-hub.html)  showing how to connect to different sources or how to perform certain tasks.
+This repository contains example operators, pipelines, dockerfiles, and best practice guides for [SAP Data Hub](https://www.sap.com/products/data-hub.html)
+and [SAP Data Intelligence](https://www.sap.com/products/data-intelligence.html). Amongst others, they show how to integrate with different systems, implement custom operators, and employ best coding practices.
 
 Before you start with the examples, please make sure that:
 
-- You are familiar with the basic concepts of SAP Data Hub Modeling such Pipelines (Graphs), Operators and Dockerfiles.  For more information, you may refer to the Modeling Guide for SAP Data Hub that is available on the SAP Help Portal (https://help.sap.com/viewer/p/SAP_DATA_HUB).
+- You are familiar with the basic concepts of SAP Data Hub/Intelligence Modeling such Pipelines (Graphs), Operators and Dockerfiles.  For more information, you may refer to the Modeling Guide for SAP Data Hub/Intelligence that is available on the SAP Help Portal (https://help.sap.com/viewer/p/SAP_DATA_HUB, https://help.sap.com/viewer/product/SAP_DATA_INTELLIGENCE/Cloud/en-US).
 - You are familiar with the basic concepts of Docker (https://docs.docker.com/get-started/) and Kubernetes (https://kubernetes.io/docs/concepts/overview/what-is-kubernetes/).
 
 ## Requirements
@@ -14,6 +15,10 @@ Before you start with the examples, please make sure that:
 In order to be able to deploy and run the examples, the following requirements need to be fulfilled:
 
 - SAP Data Hub 2.3 or later installed on a supported [platform](https://support.sap.com/content/dam/launchpad/en_us/pam/pam-essentials/SAP_Data_Hub_2_PAM.pdf) or SAP Data Hub, [trial edition 2.3](https://blogs.sap.com/2018/04/26/sap-data-hub-trial-edition/)
+
+- SAP Data Intelligence 3.0 or later (either cloud or on-premise version)
+
+Please refer to each sub-project for specific platform requirements.
 
 ## Download and Installation
 
@@ -29,6 +34,7 @@ For details on how to configure and run the examples after the solution has been
 | Name                                                              | Description                                                |
 |-------------------------------------------------------------------|------------------------------------------------------------|
 | [Application Integration Example Scenario](/AppIntegrationExample)| Exemplifies how to extract, store, transform, and analyse data from several SAP applications for 360° customer view. |
+| [Git Workflow and CI/CD Process](./GitWorkflow)                    | Shows how to develop solutions using Git and implement a CI/CD Process |
 | [HANA_exposed_via_OpenAPIServer](/HANA_exposed_via_OpenAPIServer) | Expose an SAP HANA database through an OpenAPI server operator |
 | [HiveOperator](/HiveOperator)                                     | Provides functionality to query a Hive Metastore server using a HiveQL string |
 | [JavaProcessExecutor](/JavaProcessExecutor)                       | Run a Java Application using a Process Executor Operator |
