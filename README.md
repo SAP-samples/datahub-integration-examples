@@ -1,4 +1,4 @@
-# SAP Data Hub & Intelligence Integration Examples
+# SAP Data Hub and Intelligence Integration Examples
 
 ## Description
 
@@ -51,5 +51,4 @@ If you need help or in case you found a bug please open a [Github Issue](https:/
 
 ## License
 
-Copyright (c) 2019 SAP SE or an SAP affiliate company. All rights reserved.
-This project is licensed under the SAP Sample Code License except as noted otherwise in the [LICENSE file](LICENSE).
+Copyright (c) 2019 SAP SE or an SAP affiliate company. All rights reserved. This file is licensed under the Apache Software License, version 2.0 except as noted otherwise in the [LICENSE file](LICENSE).
