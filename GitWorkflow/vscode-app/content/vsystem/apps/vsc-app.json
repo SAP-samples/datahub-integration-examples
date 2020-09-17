@@ -27,6 +27,11 @@
                 "spec": {
                     "template": {
                         "spec": {
+                            "imagePullSecrets": [
+                                {
+                                    "name": "{{ .vsystem.imagePullSecret }}"
+                                }
+                            ],
                             "containers": [
                                 {
                                     "name": "vsc",
