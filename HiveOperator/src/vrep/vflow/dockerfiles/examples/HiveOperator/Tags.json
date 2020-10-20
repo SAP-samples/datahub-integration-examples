@@ -1,5 +1,5 @@
 {
-    "pyhive": "pip2",
-    "python27": "",
+	"pyhive": "pip3",
+    "python36": "",
     "tornado": "5.0.2"
 }
