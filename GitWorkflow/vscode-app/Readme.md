@@ -13,8 +13,7 @@ The application provides the following capabilities:
 
 ## Disclaimer
 
-This application (docker image, application descriptor) is released under the
-[SAP Sample Code License Agreement](../../LICENSE) and is not part of the SAP Data Intelligence 
+This application (docker image, application descriptor) is not part of the SAP Data Intelligence 
 shipment. Its main purpose is to simplify the tracking of development artefacts in a Git repository.
 The application should only be installed on SAP DI tenants that are used for development and/or testing.
 
@@ -96,10 +95,3 @@ For e.g. AWS this is the following:
 Key: kubernetes.io/role/internal-elb
 Value: 1
 ```
-
-## Legal
-
-Copyright (c) 2020 SAP SE or an SAP affiliate company. All rights reserved. 
-This project is licensed under the Apache Software License, version 2.0 except as noted otherwise in the 
-[LICENSE](https://github.com/SAP-samples/datahub-integration-examples/blob/master/LICENSE).
-

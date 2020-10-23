@@ -48,8 +48,3 @@ For details on how to configure and run the examples after the solution has been
 ## How to get support
 
 If you need help or in case you found a bug please open a [Github Issue](https://github.com/SAP/datahub-integration-examples/issues).
-
-## License
-
-Copyright (c) 2019 SAP SE or an SAP affiliate company. All rights reserved.
-This project is licensed under the SAP Sample Code License except as noted otherwise in the [LICENSE file](LICENSE).
