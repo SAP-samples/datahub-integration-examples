@@ -1,3 +1,5 @@
+[![REUSE status](https://api.reuse.software/badge/github.com/SAP-samples/datahub-integration-examples)](https://api.reuse.software/info/github.com/SAP-samples/datahub-integration-examples)
+
 # SAP Data Hub & Intelligence Integration Examples
 
 ## Description
