@@ -44,12 +44,6 @@ To implement the Git workflow and the CI/CD process just follow the guides below
 This project is not part of the SAP Data Intelligence product. It provides best
 practices to implement a Git workflow on development environments.
 
-## Legal
-
-Copyright (c) 2020 SAP SE or an SAP affiliate company. All rights reserved. 
-This project is licensed under the Apache Software License, version 2.0 except as noted otherwise in the 
-[LICENSE](https://github.com/SAP-samples/datahub-integration-examples/blob/master/LICENSE).
-
 ## Notes
 
 Feel free to send us feedback and open bugs in case of problems. We will update
