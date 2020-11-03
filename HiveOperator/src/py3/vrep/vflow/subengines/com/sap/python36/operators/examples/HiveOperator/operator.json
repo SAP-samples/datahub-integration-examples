@@ -1,0 +1,37 @@
+{
+    "description": "hiveOperator",
+    "component": "com.sap.system.python3Operator",
+    "inports": [
+        {
+            "name": "inSql",
+            "type": "string"
+        }
+    ],
+    "outports": [
+        {
+            "name": "output",
+            "type": "string"
+        }
+    ],
+    "icon": "puzzle-piece",
+    "iconsrc": "Apache_Hive_logo.svg",
+    "config": {
+        "$type": "http://sap.com/vflow/examples.HiveOperator.configSchema.json",
+        "database": "default",
+        "delimiter": ";",
+        "hive_hostname": "fqdn.hive.com",
+        "http_mode": false,
+        "kerberos_enabled": false,
+        "kerberos_keytab_filename": "vora.keytab",
+        "kerberos_principal": "vora",
+        "kerberos_realm": "AD.HADOOP",
+        "port": 10000,
+        "script": "file://script.py",
+        "username": "hive"
+    },
+    "tags": {
+        "pyhive": "pip3",
+        "python36": "",
+        "tornado": "5.0.2"
+    }
+}

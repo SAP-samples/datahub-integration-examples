@@ -1,0 +1,64 @@
+{
+	"properties": {},
+	"description": "Hive Operation",
+	"processes": {
+		"terminal1": {
+			"component": "com.sap.util.terminal",
+			"metadata": {
+				"label": "Terminal",
+				"x": 241.99999904632568,
+				"y": 39.99999952316284,
+				"height": 80,
+				"width": 120,
+				"ui": "dynpath",
+				"subengines": [
+					"main"
+				],
+				"config": {}
+			}
+		},
+		"hiveoperator1": {
+			"component": "examples.HiveOperator",
+			"metadata": {
+				"label": "hiveOperator",
+				"x": 72.99999904632568,
+				"y": 39.99999952316284,
+				"height": 80,
+				"width": 120,
+				"extensible": true,
+				"config": {}
+			}
+		}
+	},
+	"groups": [],
+	"connections": [
+		{
+			"metadata": {
+				"points": "196.99999904632568,79.99999952316284 236.99999904632568,79.99999952316284"
+			},
+			"src": {
+				"port": "output",
+				"process": "hiveoperator1"
+			},
+			"tgt": {
+				"port": "in1",
+				"process": "terminal1"
+			}
+		},
+		{
+			"metadata": {
+				"points": "365.9999990463257,79.99999952316284 393.9999985694885,79.99999952316284 393.9999985694885,12 12,12 12,79.99999952316284 67.99999904632568,79.99999952316284"
+			},
+			"src": {
+				"port": "out1",
+				"process": "terminal1"
+			},
+			"tgt": {
+				"port": "inSql",
+				"process": "hiveoperator1"
+			}
+		}
+	],
+	"inports": {},
+	"outports": {}
+}
