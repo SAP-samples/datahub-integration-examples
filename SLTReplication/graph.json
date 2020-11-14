@@ -1,0 +1,150 @@
+{
+	"properties": {},
+	"description": "",
+	"processes": {
+		"wiretap1": {
+			"component": "com.sap.util.wiretap",
+			"metadata": {
+				"label": "Wiretap",
+				"x": 350,
+				"y": 12,
+				"height": 80,
+				"width": 120,
+				"ui": "dynpath",
+				"config": {}
+			}
+		},
+		"workflowtrigger1": {
+			"component": "com.sap.dh.trigger",
+			"metadata": {
+				"label": "Workflow Trigger",
+				"x": 12,
+				"y": 12,
+				"height": 80,
+				"width": 120,
+				"extensible": true,
+				"config": {}
+			}
+		},
+		"python3operator1": {
+			"component": "com.sap.system.python3Operator",
+			"metadata": {
+				"label": "List Tables",
+				"x": 181,
+				"y": 12,
+				"height": 80,
+				"width": 120,
+				"extensible": true,
+				"config": {
+					"graphName": "mySLTgraph",
+					"tableNames": "mara;kna1",
+					"script": "def on_input(data):\n    tables = api.config.tableNames.split(';')\n    while tables:\n         x = tables.pop()\n         msg = {}\n         msg['Attributes'] = {} \n         msg['Attributes']['openapi.header_params.X-Requested-With'] =  'Fetch'\n         msg['Body'] = '{\"src\":\"'+api.config.graphName+'\",\"name\":\"Replicate_table_'+x+'\",\"configurationSubstitutions\":{\"tableName\":\"'+x+'\"}}'\n         \n         api.send(\"output\", msg)\n    \n    \napi.set_port_callback(\"input\", on_input)\n"
+				},
+				"additionalinports": [
+					{
+						"name": "input",
+						"type": "string"
+					}
+				],
+				"additionaloutports": [
+					{
+						"name": "output",
+						"type": "message"
+					}
+				]
+			}
+		},
+		"openapiclient1": {
+			"component": "com.sap.openapi.client",
+			"metadata": {
+				"label": "Start graphs",
+				"x": 519,
+				"y": 12,
+				"height": 80,
+				"width": 120,
+				"ui": "dynpath",
+				"config": {
+					"host": "<DI_hostname>",
+					"schemes": "https",
+					"basePath": "/app/pipeline-modeler/service/v1/",
+					"pathPattern": "runtime/graphs",
+					"method": "POST",
+					"authScheme": "basic",
+					"user": "<tenant>\\<username>",
+					"password": "password",
+					"tlsSkipVerify": true,
+					"useCsrfToken": true
+				}
+			}
+		},
+		"wiretap2": {
+			"component": "com.sap.util.wiretap",
+			"metadata": {
+				"label": "Wiretap",
+				"x": 688,
+				"y": 12,
+				"height": 80,
+				"width": 120,
+				"ui": "dynpath",
+				"config": {}
+			}
+		}
+	},
+	"groups": [],
+	"connections": [
+		{
+			"metadata": {
+				"points": "136,52 176,52"
+			},
+			"src": {
+				"port": "output",
+				"process": "workflowtrigger1"
+			},
+			"tgt": {
+				"port": "input",
+				"process": "python3operator1"
+			}
+		},
+		{
+			"metadata": {
+				"points": "474,52 514,52"
+			},
+			"src": {
+				"port": "out",
+				"process": "wiretap1"
+			},
+			"tgt": {
+				"port": "in",
+				"process": "openapiclient1"
+			}
+		},
+		{
+			"metadata": {
+				"points": "305,52 345,52"
+			},
+			"src": {
+				"port": "output",
+				"process": "python3operator1"
+			},
+			"tgt": {
+				"port": "in",
+				"process": "wiretap1"
+			}
+		},
+		{
+			"metadata": {
+				"points": "643,52 683,52"
+			},
+			"src": {
+				"port": "out",
+				"process": "openapiclient1"
+			},
+			"tgt": {
+				"port": "in",
+				"process": "wiretap2"
+			}
+		}
+	],
+	"inports": {},
+	"outports": {}
+}
