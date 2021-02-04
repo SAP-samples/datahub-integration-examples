@@ -34,7 +34,7 @@ The operator runs on a custom Docker images that extends the public docker image
 
 
 ## How to run
-  - Import [solution/HiveOperator-1.0.tgz](solution/HiveOperator-1.1.0.tgz) via `SAP Data Intelligence System Manager application` -> `Files` -> `Import Solution`
+  - Import [solution/HiveOperator-1.0.tgz](solution/HiveOperator-1.1.0.tgz) via `SAP Data Intelligence System Management` -> `Files` -> `Import Solution`
   - Run the `Graph` -> `examples.HiveOperator_test`
 
 **Operator configuration parameters**
