@@ -24,7 +24,7 @@ The operator runs on a custom Docker images that extends the public docker image
   - Install Kerberos client libraries
 
 **2. Custom operator 'HiveOperator'**
-  - Derived from Pythin3Operator
+  - Derived from Python3Operator
   - Uses image tags `python36:""`, `pyhive:pip3` and `tornado:5.0.2`
   - **input port `inSql` of type string:** expects a single HiveQL-compliant string without a semicolon
   - **output port `output` of type string:** outputs the response from the Hive Metastore server, columns are delimited by a comma (default) but can be overriden using the `delimiter` configuration parameter (See description below)
