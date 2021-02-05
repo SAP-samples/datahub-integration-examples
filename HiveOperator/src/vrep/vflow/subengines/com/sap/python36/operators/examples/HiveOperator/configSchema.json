@@ -1,6 +1,6 @@
 {
     "$schema": "http://json-schema.org/draft-06/schema#",
-    "$id": "http://sap.com/vflow/HiveOperator.configSchema.json",
+    "$id": "http://sap.com/vflow/examples.HiveOperator.configSchema.json",
     "type": "object",
     "properties": {
         "codelanguage": {
@@ -55,7 +55,8 @@
                 "ui_visibility": [
                     {
                         "name": "kerberos_enabled",
-                        "value": true
+                        "value": true,
+                        "text": "kerberos_enabled=true"
                     }
                 ]
             }
@@ -66,7 +67,8 @@
                 "ui_visibility": [
                     {
                         "name": "kerberos_enabled",
-                        "value": true
+                        "value": true,
+                        "text": "kerberos_enabled=true"
                     }
                 ]
             }
@@ -77,7 +79,8 @@
                 "ui_visibility": [
                     {
                         "name": "kerberos_enabled",
-                        "value": true
+                        "value": true,
+                        "text": "kerberos_enabled=true"
                     }
                 ]
             }

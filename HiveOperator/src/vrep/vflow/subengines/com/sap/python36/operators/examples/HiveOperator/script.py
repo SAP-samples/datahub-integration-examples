@@ -13,13 +13,12 @@ kerberos_keytab = "/keytabs/" + api.config.kerberos_keytab_filename
 kerberos_principal = api.config.kerberos_principal + "@" + api.config.kerberos_realm
 http_enabled = api.config.http_mode
 
-if(kerberos_enabled): ### Copy over keytab and krb5.conf file from repository file system
-    call(["cp","/vrep/vflow/subengines/com/sap/python27/operators/examples/HiveOperator/"+api.config.kerberos_keytab_filename,"/keytabs"])
-    call(["cp","/vrep/vflow/subengines/com/sap/python27/operators/examples/HiveOperator/krb5.conf","/etc"])
-    call(["/usr/bin/kinit","-kt",kerberos_keytab, kerberos_principal]) ## Attempt to authenticate with Kerberos controller using principal id + keytab
+if(kerberos_enabled):
+    call(["cp","/vrep/vflow/subengines/com/sap/python36/operators/examples/HiveOperator/"+api.config.kerberos_keytab_filename,"/keytabs"])
+    call(["cp","/vrep/vflow/subengines/com/sap/python36/operators/examples/HiveOperator/krb5.conf","/etc"])
+    call(["/usr/bin/kinit","-kt",kerberos_keytab, kerberos_principal])
 
 def on_input(inSql):
-   
     hiveconnection(inSql)
 
 def add_http_mode_support(username=user, password=password, port=port, httpPath="/cliservice", host=hostname, transportMode="http"):
