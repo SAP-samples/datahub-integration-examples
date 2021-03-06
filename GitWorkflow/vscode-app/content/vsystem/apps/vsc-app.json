@@ -2,7 +2,8 @@
     "name": "VSCode",
     "stableLink": "vsc",
     "mounts": {
-        "vhome": true
+        "vhome": true,
+        "vrep": true
     },
     "version": "1.0.0",
     "apiVersion": "v2",
