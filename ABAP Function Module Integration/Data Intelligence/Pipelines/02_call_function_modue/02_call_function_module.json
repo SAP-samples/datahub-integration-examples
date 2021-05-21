@@ -1,0 +1,335 @@
+{
+    "properties": {},
+    "description": "demo.daniel.ExecuteFunctionModule_V5",
+    "processes": {
+        "gooperator1": {
+            "component": "com.sap.system.golangExecutor2",
+            "metadata": {
+                "label": "Go Operator",
+                "x": 584.9999980926514,
+                "y": 57,
+                "height": 80,
+                "width": 120,
+                "extensible": true,
+                "config": {
+                    "script": "package main\n\nimport (\n\t\"encoding/json\"\n)\n\ntype generalinfo struct {\n\tInactiveversion  string `json:\"INACTIVE_VERSION\"`\n\tExceptionclasses string `json:\"EXCEPTION_CLASSES\"`\n\tGlobalflag       string `json:\"GLOBAL_FLAG\"`\n\tRemotecall       string `json:\"REMOTE_CALL\"`\n\tUpdatetask       string `json:\"UPDATE_TASK\"`\n}\n\ntype properties struct {\n\tKind        string `json:\"KIND\"`\n\tTypee       string `json:\"TYPE\"`\n\tLength      int    `json:\"LENGTH\"`\n\tDecimal     int    `json:\"DECIMAL\"`\n\tDescription string `json:\"DESCRIPTION\"`\n}\n\ntype element struct {\n\tName       string     `json:\"NAME\"`\n\tProperties properties `json:\"PROPERTIES\"`\n\tValue      string     `json:\"VALUE\"`\n\tAdditional []element  `json:\"ADDITIONAL\"`\n}\n\ntype schema struct {\n\tFuncname              string      `json:\"FUNCNAME\"`\n\tGeneralinfo           generalinfo `json:\"GENERAL_INFO\"`\n\tRequiredImportParam   []string    `json:\"REQUIRED_IMPORT_PARAMETER\"`\n\tImportparameter       []element   `json:\"IMPORT_PARAMETER\"`\n\tExportparameter       []element   `json:\"EXPORT_PARAMETER\"`\n\tRequiredTablesParam   []string    `json:\"REQUIRED_TABLES_PARAMETER\"`\n\tTablesparameter       []element   `json:\"TABLES_PARAMETER\"`\n\tRequiredChangingParam []string    `json:\"REQUIRED_CHANGING_PARAMETER\"`\n\tChangingparameter     []element   `json:\"CHANGING_PARAMETER\"`\n}\n\ntype request struct {\n\tFuncname          string    `json:\"FUNCNAME\"`\n\tImportparameter   []element `json:\"IMPORT_PARAMETER\"`\n\tTablesparameter   []element `json:\"TABLES_PARAMETER\"`\n\tChangingparameter []element `json:\"CHANGING_PARAMETER\"`\n}\n\nvar Out func(interface{})\n\nfunc main() {\n\n}\n\nfunc Input1(val interface{}){\n\n    message := val.(string)\n    schema := &schema{}\n    err := json.Unmarshal([]byte(message), schema)\n    if err == nil {\n            request := buildFMRequest(schema)\n\t\t    r, _ := json.Marshal(request)\n\t\t    Out(string(r))\n\t}else{\n\t    Out(\"Error occurred\")\n\t}\n}\n\nfunc buildFMRequest(schema *schema) request {\n\n\tr := &request{}\n\tr.Funcname = schema.Funcname\n\tbuildImportParam(r, schema)\n\tbuildTablesParam(r, schema)\n\treturn *r\n}\n\nfunc buildImportParam(r *request, schema *schema) {\n\tfor _, ele := range schema.Importparameter {\n\t\tswitch ele.Name {\n\t\t    case \"HEADERDATA\":\n\t\t        e := &element{}\n\t\t\t    e.Name = ele.Name\n    \t\t    for _,add := range ele.Additional {\n    \t\t        switch add.Name{\n    \t\t            case \"BUYER_ID\":\n                \t\t\tbuyerId := &element{}\n                \t\t\tbuyerId.Name = add.Name\n                \t\t\tbuyerId.Value = \"0100000000\"\n                \t\t\te.Additional = append(e.Additional, *buyerId)\n    \t\t\t\n                \t\tcase \"BUYER_NAME\":\n                \t\t\tbuyerName := &element{}\n                \t\t\tbuyerName.Name = add.Name\n                \t\t\tbuyerName.Value = \"SAP\"\n                \t\t\te.Additional = append(e.Additional, *buyerName)\n                \t\t\t\n                \t\tcase \"CURRENCY_CODE\":\n                \t\t\tcurrCode := &element{}\n                \t\t\tcurrCode.Name = add.Name\n                \t\t\tcurrCode.Value = \"EUR\"\n                \t\t\te.Additional = append(e.Additional, *currCode)\n    \t\t        }\n    \t\t    }\n    \t\t    r.Importparameter = append(r.Importparameter, *e)\n    \t\t    \n    \t\tcase \"PERSIST_TO_DB\":\n    \t\tpersist := &element{}\n\t\t\tpersist.Name = ele.Name\n\t\t\tpersist.Value = \"\"\n\t\t\tele.Additional = append(ele.Additional, *persist)\n\t\t\t\n\t\t\tr.Importparameter = append(r.Importparameter, *persist)\n\t    }\n\t}\n}\n\nfunc buildTablesParam(r *request, schema *schema) {\n    // Add table parameter ITEMDATA to TABLES_PARAMETER\n    table := &element{}\n    table.Name = \"ITEMDATA\"\n    \n    // If users wants to add more rows to the table, here can be a loop\n    // Add one row to ITEMDATA\n    e1 := &element{}\n    e1.Name = \"ITEMDATA\"\n    \n    // Populate fields to the row\n    note := &element{}\n    note.Name = \"NOTE\"\n    note.Value = \"THIS IS A TEST SO CREATED BY DI\"\n    e1.Additional=append(e1.Additional, *note)\n    \n    grossAmount := &element{}\n    grossAmount.Name = \"GROSS_AMOUNT\"\n    grossAmount.Value = \"734.20\"\n    e1.Additional=append(e1.Additional, *grossAmount)\n    \n    netAmount := &element{}\n    netAmount.Name = \"NET_AMOUNT\"\n    netAmount.Value = \"645.20\"\n    e1.Additional=append(e1.Additional, *netAmount)\n    \n    taxAmount := &element{}\n    taxAmount.Name = \"TAX_AMOUNT\"\n    taxAmount.Value = \"112.30\"\n    e1.Additional=append(e1.Additional, *taxAmount)\n    \n    deliveryDate := &element{}\n    deliveryDate.Name = \"DELIVERY_DATE\"\n    deliveryDate.Value = \"20210320230000.0000000\"\n    e1.Additional=append(e1.Additional, *deliveryDate)\n    \n    quantity := &element{}\n    quantity.Name = \"QUANTITY\"\n    quantity.Value = \"200\"\n    e1.Additional=append(e1.Additional, *quantity)\n    \n    // Feel free to add more fields here..\n    \n    //Apend the \"row\" to \"table\"\n    table.Additional=append(table.Additional, *e1)\n    \n    //End loop\n    \n    //Apend the whole \"table\" to TABLES_PARAMETER\n    r.Tablesparameter = append(r.Tablesparameter, *table)\n    \n    returnn := &element{}\n    returnn.Name = \"RETURN\"\n    \n    r.Tablesparameter = append(r.Tablesparameter, *returnn)\n}",
+                    "codelanguage": "go"
+                },
+                "additionalinports": [
+                    {
+                        "name": "input1",
+                        "type": "any.*"
+                    }
+                ],
+                "additionaloutports": [
+                    {
+                        "name": "out",
+                        "type": "String"
+                    }
+                ]
+            }
+        },
+        "tostringconverter2": {
+            "component": "com.sap.util.toStringConverter",
+            "metadata": {
+                "label": "ToString Converter",
+                "x": 769.999997138977,
+                "y": 72,
+                "height": 50,
+                "width": 50,
+                "config": {}
+            }
+        },
+        "customabapoperator2": {
+            "component": "com.sap.abap.custom",
+            "metadata": {
+                "label": "FM Caller",
+                "x": 864.9999961853027,
+                "y": 62,
+                "height": 80,
+                "width": 120,
+                "extensible": true,
+                "config": {
+                    "connectionID": "QJ9_MIC",
+                    "operatorID": "customer.fmcaller"
+                },
+                "additionalinports": [
+                    {
+                        "name": "in",
+                        "type": "string"
+                    }
+                ],
+                "additionaloutports": [
+                    {
+                        "name": "out",
+                        "type": "string"
+                    }
+                ]
+            }
+        },
+        "writefile3": {
+            "component": "com.sap.file.write",
+            "metadata": {
+                "label": "Write File",
+                "x": 1423.999994277954,
+                "y": 57,
+                "height": 80,
+                "width": 120,
+                "config": {
+                    "connection": {
+                        "configurationType": "Connection Management",
+                        "connectionID": "DEMO_ADL"
+                    },
+                    "pathMode": "Static with placeholders",
+                    "path": "/demo/function/resultV2/<counter>_<time>.csv",
+                    "joinBatches": false
+                }
+            }
+        },
+        "tofile3": {
+            "component": "com.sap.file.toFile",
+            "metadata": {
+                "label": "To File",
+                "x": 1273.4999952316284,
+                "y": 12,
+                "height": 50,
+                "width": 50,
+                "config": {}
+            }
+        },
+        "readfile1": {
+            "component": "com.sap.file.read",
+            "metadata": {
+                "label": "Read File",
+                "x": 17,
+                "y": 57,
+                "height": 80,
+                "width": 120,
+                "config": {
+                    "mode": "Once",
+                    "connection": {
+                        "configurationType": "Connection Management",
+                        "connectionID": "DEMO_ADL"
+                    },
+                    "path": "/demo/function/metadata_BAPI_EPM_SO_CREATE.json"
+                }
+            }
+        },
+        "fromfile1": {
+            "component": "com.sap.file.fromFile",
+            "metadata": {
+                "label": "From File",
+                "x": 201.99999904632568,
+                "y": 72,
+                "height": 50,
+                "width": 50,
+                "config": {}
+            }
+        },
+        "headerremover1": {
+            "component": "com.sap.util.headerRemover",
+            "metadata": {
+                "label": "Header Remover",
+                "x": 316.99999809265137,
+                "y": 57,
+                "height": 80,
+                "width": 120,
+                "config": {}
+            }
+        },
+        "tostringconverter1": {
+            "component": "com.sap.util.toStringConverter",
+            "metadata": {
+                "label": "ToString Converter",
+                "x": 485.99999809265137,
+                "y": 72,
+                "height": 50,
+                "width": 50,
+                "config": {}
+            }
+        },
+        "12multiplexer1": {
+            "component": "com.sap.system.multiplexer.1-2",
+            "metadata": {
+                "label": "1:2 Multiplexer",
+                "x": 1028,
+                "y": 51,
+                "height": 80,
+                "width": 120,
+                "extensible": true,
+                "config": {}
+            }
+        },
+        "wiretap1": {
+            "component": "com.sap.util.wiretap",
+            "metadata": {
+                "label": "Wiretap",
+                "x": 1273,
+                "y": 129,
+                "height": 80,
+                "width": 120,
+                "ui": "dynpath",
+                "config": {}
+            }
+        },
+        "graphterminator1": {
+            "component": "com.sap.util.graphTerminator",
+            "metadata": {
+                "label": "Graph Terminator",
+                "x": 1592,
+                "y": 62,
+                "height": 80,
+                "width": 120,
+                "config": {}
+            }
+        }
+    },
+    "groups": [],
+    "connections": [
+        {
+            "metadata": {
+                "points": "1327.4999952316284,37 1390.9999947547913,37 1390.9999947547913,97 1418.999994277954,97"
+            },
+            "src": {
+                "port": "file",
+                "process": "tofile3"
+            },
+            "tgt": {
+                "port": "file",
+                "process": "writefile3"
+            }
+        },
+        {
+            "metadata": {
+                "points": "141,88 168.99999952316284,88 168.99999952316284,97 196.99999904632568,97"
+            },
+            "src": {
+                "port": "file",
+                "process": "readfile1"
+            },
+            "tgt": {
+                "port": "file",
+                "process": "fromfile1"
+            }
+        },
+        {
+            "metadata": {
+                "points": "255.99999904632568,106 283.9999985694885,106 283.9999985694885,97 311.99999809265137,97"
+            },
+            "src": {
+                "port": "message",
+                "process": "fromfile1"
+            },
+            "tgt": {
+                "port": "in",
+                "process": "headerremover1"
+            }
+        },
+        {
+            "metadata": {
+                "points": "440.99999809265137,106 480.99999809265137,106"
+            },
+            "src": {
+                "port": "outbody",
+                "process": "headerremover1"
+            },
+            "tgt": {
+                "port": "inmessage",
+                "process": "tostringconverter1"
+            }
+        },
+        {
+            "metadata": {
+                "points": "708.9999980926514,97 736.9999976158142,97 736.9999976158142,88 764.999997138977,88"
+            },
+            "src": {
+                "port": "out",
+                "process": "gooperator1"
+            },
+            "tgt": {
+                "port": "ininterface",
+                "process": "tostringconverter2"
+            }
+        },
+        {
+            "metadata": {
+                "points": "539.9999980926514,97 579.9999980926514,97"
+            },
+            "src": {
+                "port": "outstring",
+                "process": "tostringconverter1"
+            },
+            "tgt": {
+                "port": "input1",
+                "process": "gooperator1"
+            }
+        },
+        {
+            "metadata": {
+                "points": "823.999997138977,97 842,97 842,102 859.9999961853027,102"
+            },
+            "src": {
+                "port": "outstring",
+                "process": "tostringconverter2"
+            },
+            "tgt": {
+                "port": "in",
+                "process": "customabapoperator2"
+            }
+        },
+        {
+            "metadata": {
+                "points": "988.9999961853027,102 1006,102 1006,91 1023,91"
+            },
+            "src": {
+                "port": "out",
+                "process": "customabapoperator2"
+            },
+            "tgt": {
+                "port": "in1",
+                "process": "12multiplexer1"
+            }
+        },
+        {
+            "metadata": {
+                "points": "1152,82 1210.25,82 1210.25,28 1268.4999952316284,28"
+            },
+            "src": {
+                "port": "out1",
+                "process": "12multiplexer1"
+            },
+            "tgt": {
+                "port": "path",
+                "process": "tofile3"
+            }
+        },
+        {
+            "metadata": {
+                "points": "1152,100 1210,100 1210,169 1268,169"
+            },
+            "src": {
+                "port": "out2",
+                "process": "12multiplexer1"
+            },
+            "tgt": {
+                "port": "in",
+                "process": "wiretap1"
+            }
+        },
+        {
+            "metadata": {
+                "points": "1547.999994277954,88 1567.5,88 1567.5,102 1587,102"
+            },
+            "src": {
+                "port": "file",
+                "process": "writefile3"
+            },
+            "tgt": {
+                "port": "stop",
+                "process": "graphterminator1"
+            }
+        }
+    ],
+    "inports": {},
+    "outports": {}
+}
