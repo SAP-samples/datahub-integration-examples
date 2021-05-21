@@ -1,0 +1,1241 @@
+CLASS zcl_fm_interface_converter DEFINITION
+  PUBLIC
+  FINAL
+  CREATE PUBLIC .
+
+  PUBLIC SECTION.
+
+    METHODS constructor
+      IMPORTING
+        !iv_funcname TYPE rs38l-name OPTIONAL .
+    METHODS convert_to_json
+      RETURNING
+        VALUE(rv_json) TYPE string .
+    METHODS call_fm_with_json
+      IMPORTING
+        !iv_json       TYPE string
+      RETURNING
+        VALUE(rv_json) TYPE string .
+  PROTECTED SECTION.
+  PRIVATE SECTION.
+
+    TYPES:
+      BEGIN OF ts_property,
+        kind        TYPE c LENGTH 1,
+        type        TYPE string,
+        length      TYPE i,
+        decimal     TYPE i,
+        description TYPE string,
+      END OF ts_property .
+    TYPES:
+      BEGIN OF ts_element,
+        name       TYPE string,
+        properties TYPE ts_property,
+        value      TYPE string,
+        additional TYPE REF TO data,
+      END OF ts_element .
+    TYPES:
+      BEGIN OF ts_general_info,
+        inactive_version  TYPE char1,
+        exception_classes TYPE enlfdir-exten3,
+        global_flag       TYPE rs38l-global,
+        remote_call       TYPE rs38l-remote,
+        update_task       TYPE rs38l-utask,
+      END OF ts_general_info .
+    TYPES:
+      tt_element TYPE STANDARD TABLE OF ts_element WITH NON-UNIQUE KEY name .
+    TYPES:
+      BEGIN OF ts_converted_data,
+        funcname                    TYPE rs38l-name,
+        general_info                TYPE ts_general_info,
+        required_import_parameter   TYPE string_table,
+        required_tables_parameter   TYPE string_table,
+        required_changing_parameter TYPE string_table,
+        import_parameter            TYPE REF TO data,
+        export_parameter            TYPE REF TO data,
+        tables_parameter            TYPE REF TO data,
+        changing_parameter          TYPE REF TO data,
+        exception_list              TYPE REF TO data,
+      END OF ts_converted_data .
+    TYPES:
+      tt_properties TYPE STANDARD TABLE OF ts_property .
+    TYPES:
+      tt_converted_data TYPE STANDARD TABLE OF ts_converted_data WITH NON-UNIQUE KEY funcname .
+    TYPES:
+      BEGIN OF ts_error,
+        error TYPE string,
+      END OF TS_error .
+
+    DATA raw_data TYPE abap_func_parmbind_tab .
+    DATA funcname TYPE rs38l-name .
+    DATA converted_data_new TYPE ts_converted_data .
+    DATA func_call_params TYPE abap_func_parmbind_tab .
+
+    METHODS build_general_info .
+    METHODS build_exception_list .
+    METHODS build_root_parameter
+      IMPORTING
+        !iv_rootname TYPE string .
+    METHODS build_parameter_list_generic
+      IMPORTING
+        !it_func_parameter  TYPE STANDARD TABLE
+      RETURNING
+        VALUE(rt_parameter) TYPE dmc_tab_extractor_param .
+    METHODS handle
+      IMPORTING
+        !iv_para_type_meta TYPE dmc_str_param_type_meta
+        !iv_reference      TYPE REF TO dmc_tab_param_type_meta
+      RETURNING
+        VALUE(rv_element)  TYPE ts_element .
+    METHODS handle_element
+      IMPORTING
+        !iv_param_type_comp_meta TYPE dmc_str_param_type_comp_meta
+      RETURNING
+        VALUE(rv_element)        TYPE ts_element .
+    METHODS handle_table
+      IMPORTING
+        !iv_param_type_meta TYPE dmc_str_param_type_meta
+        !iv_reference       TYPE REF TO dmc_tab_param_type_meta
+      RETURNING
+        VALUE(rv_element)   TYPE ts_element .
+    METHODS handle_struct
+      IMPORTING
+        !iv_param_type_meta TYPE dmc_str_param_type_meta
+        !iv_reference       TYPE REF TO dmc_tab_param_type_meta
+      RETURNING
+        VALUE(rv_element)   TYPE ts_element .
+    METHODS parse_root_parameter
+      IMPORTING
+        !iv_rootname TYPE string .
+    METHODS parse
+      IMPORTING
+        !iv_para_type_meta TYPE dmc_str_param_type_meta
+        !iv_reference      TYPE REF TO dmc_tab_param_type_meta
+        !iv_element_ref    TYPE REF TO data
+      RETURNING
+        VALUE(rv_data)     TYPE REF TO data .
+    METHODS parse_element
+      IMPORTING
+        !iv_type        TYPE string
+        !iv_element_ref TYPE REF TO data
+      RETURNING
+        VALUE(rv_data)  TYPE REF TO data .
+    METHODS parse_struct
+      IMPORTING
+        !iv_param_type_meta TYPE dmc_str_param_type_meta
+        !iv_reference       TYPE REF TO dmc_tab_param_type_meta
+        !iv_element_ref     TYPE REF TO data
+      RETURNING
+        VALUE(rv_data)      TYPE REF TO data .
+    METHODS parse_table
+      IMPORTING
+        !iv_param_type_meta TYPE dmc_str_param_type_meta
+        !iv_reference       TYPE REF TO dmc_tab_param_type_meta
+        !iv_element_ref     TYPE REF TO data
+      RETURNING
+        VALUE(rv_data)      TYPE REF TO data .
+    METHODS parse_export_param_for_fmcall .
+    METHODS call
+      RETURNING
+        VALUE(rv_json) TYPE string .
+    METHODS build_response
+      RETURNING
+        VALUE(rv_json) TYPE string .
+    METHODS build_required_params
+      IMPORTING
+        !iv_rootname TYPE string .
+ENDCLASS.
+
+
+
+CLASS ZCL_FM_INTERFACE_CONVERTER IMPLEMENTATION.
+
+
+* <SIGNATURE>---------------------------------------------------------------------------------------+
+* | Instance Private Method ZCL_FM_INTERFACE_CONVERTER->BUILD_EXCEPTION_LIST
+* +-------------------------------------------------------------------------------------------------+
+* +--------------------------------------------------------------------------------------</SIGNATURE>
+  METHOD build_exception_list.
+
+    READ TABLE raw_data ASSIGNING FIELD-SYMBOL(<fs_exception_list>) WITH KEY name = 'EXCEPTION_LIST' .
+    IF sy-subrc = 0.
+      converted_data_new-exception_list = <fs_exception_list>-value.
+    ENDIF.
+
+  ENDMETHOD.
+
+
+* <SIGNATURE>---------------------------------------------------------------------------------------+
+* | Instance Private Method ZCL_FM_INTERFACE_CONVERTER->BUILD_GENERAL_INFO
+* +-------------------------------------------------------------------------------------------------+
+* +--------------------------------------------------------------------------------------</SIGNATURE>
+  METHOD build_general_info.
+    DATA:
+      ls_general_info   TYPE ts_general_info.
+
+
+    READ TABLE raw_data ASSIGNING FIELD-SYMBOL(<fs_funcname>) WITH KEY name = 'FUNCNAME' .
+    IF sy-subrc = 0.
+      converted_data_new-funcname = <fs_funcname>-value->*.
+    ENDIF.
+
+    READ TABLE raw_data ASSIGNING FIELD-SYMBOL(<fs_version>) WITH KEY name = 'INACTIVE_VERSION' .
+    IF sy-subrc = 0.
+      ls_general_info-inactive_version = <fs_version>-value->*.
+    ENDIF.
+
+
+    READ TABLE raw_data ASSIGNING FIELD-SYMBOL(<fs_exception>) WITH KEY name = 'EXCEPTION_CLASSES' .
+    IF sy-subrc = 0.
+      ls_general_info-exception_classes = <fs_exception>-value->*.
+    ENDIF.
+
+    READ TABLE raw_data ASSIGNING FIELD-SYMBOL(<fs_global>) WITH KEY name = 'GLOBAL_FLAG' .
+    IF sy-subrc = 0.
+      ls_general_info-global_flag = <fs_global>-value->*.
+    ENDIF.
+
+    READ TABLE raw_data ASSIGNING FIELD-SYMBOL(<fs_remote>) WITH KEY name = 'REMOTE_CALL' .
+    IF sy-subrc = 0.
+      ls_general_info-remote_call = <fs_remote>-value->*.
+    ENDIF.
+
+    READ TABLE raw_data ASSIGNING FIELD-SYMBOL(<fs_update>) WITH KEY name = 'UPDATE_TASK' .
+    IF sy-subrc = 0.
+      ls_general_info-update_task = <fs_update>-value->*.
+    ENDIF.
+
+    converted_data_new-general_info = ls_general_info.
+  ENDMETHOD.
+
+
+* <SIGNATURE>---------------------------------------------------------------------------------------+
+* | Instance Private Method ZCL_FM_INTERFACE_CONVERTER->BUILD_PARAMETER_LIST_GENERIC
+* +-------------------------------------------------------------------------------------------------+
+* | [--->] IT_FUNC_PARAMETER              TYPE        STANDARD TABLE
+* | [<-()] RT_PARAMETER                   TYPE        DMC_TAB_EXTRACTOR_PARAM
+* +--------------------------------------------------------------------------------------</SIGNATURE>
+  METHOD build_parameter_list_generic.
+
+    DATA:
+        ls_parameter TYPE dmc_str_extractor_param.
+
+    FIELD-SYMBOLS:
+      <lv_data>           TYPE any,
+      <ls_func_parameter> TYPE any.
+
+    LOOP AT it_func_parameter ASSIGNING <ls_func_parameter>.
+      ASSIGN COMPONENT 'REF_CLASS' OF STRUCTURE <ls_func_parameter> TO <lv_data>.
+      IF sy-subrc = 0.
+        IF <lv_data> = abap_true.
+          "Skip Parameters with reference types
+          CONTINUE.
+        ENDIF.
+      ENDIF.
+
+      CLEAR ls_parameter.
+      ASSIGN COMPONENT 'PARAMETER' OF STRUCTURE <ls_func_parameter> TO <lv_data>.
+      ls_parameter-name = <lv_data>.
+
+      ASSIGN COMPONENT 'DBSTRUCT' OF STRUCTURE <ls_func_parameter> TO <lv_data>. "tables parameter
+      IF sy-subrc <> 0.
+        ASSIGN COMPONENT 'DBFIELD' OF STRUCTURE <ls_func_parameter> TO <lv_data>. "other parameters
+      ENDIF.
+      IF <lv_data> IS INITIAL.
+        ASSIGN COMPONENT 'TYP' OF STRUCTURE <ls_func_parameter> TO <lv_data>. "alternative type field
+      ENDIF.
+      ls_parameter-type = <lv_data>.
+
+      IF ls_parameter-type IS INITIAL.
+        ls_parameter-type = 'ANY'.
+      ENDIF.
+
+      APPEND ls_parameter TO rt_parameter.
+    ENDLOOP.
+  ENDMETHOD.
+
+
+* <SIGNATURE>---------------------------------------------------------------------------------------+
+* | Instance Private Method ZCL_FM_INTERFACE_CONVERTER->BUILD_REQUIRED_PARAMS
+* +-------------------------------------------------------------------------------------------------+
+* | [--->] IV_ROOTNAME                    TYPE        STRING
+* +--------------------------------------------------------------------------------------</SIGNATURE>
+  METHOD build_required_params.
+    DATA:
+      lt_required_params      TYPE TABLE OF string.
+
+    FIELD-SYMBOLS:
+      <fs_required_params>      TYPE STANDARD TABLE.
+
+    READ TABLE raw_data ASSIGNING FIELD-SYMBOL(<fs_exp_para_list>) WITH KEY name = iv_rootname .
+
+* build up list of required parameters.
+    ASSIGN <fs_exp_para_list>-value->* TO <fs_required_params>.
+    LOOP AT <fs_required_params> ASSIGNING FIELD-SYMBOL(<fs_row>).
+      ASSIGN COMPONENT 'OPTIONAL' OF STRUCTURE <fs_row> TO FIELD-SYMBOL(<fs_optional>).
+      IF sy-subrc = 0 AND NOT <fs_optional> = 'X'.
+        ASSIGN COMPONENT 'PARAMETER' OF STRUCTURE <fs_row> TO FIELD-SYMBOL(<fs_name>).
+        IF sy-subrc = 0.
+          APPEND <fs_name> TO lt_required_params.
+        ENDIF.
+      ENDIF.
+    ENDLOOP.
+
+    IF lines( lt_required_params ) > 0.
+      DATA(lv_name) = 'REQUIRED_' && iv_rootname.
+      ASSIGN COMPONENT lv_name OF STRUCTURE converted_data_new TO FIELD-SYMBOL(<fs_required>).
+      IF sy-subrc = 0.
+        <fs_required> = lt_required_params.
+      ENDIF.
+    ENDIF.
+  ENDMETHOD.
+
+
+* <SIGNATURE>---------------------------------------------------------------------------------------+
+* | Instance Private Method ZCL_FM_INTERFACE_CONVERTER->BUILD_RESPONSE
+* +-------------------------------------------------------------------------------------------------+
+* | [<-()] RV_JSON                        TYPE        STRING
+* +--------------------------------------------------------------------------------------</SIGNATURE>
+  METHOD build_response.
+
+    TYPES:
+      BEGIN OF ts_response,
+        funcname           TYPE rs38l-name,
+        export_parameter   TYPE REF TO data,
+        tables_parameter   TYPE REF TO data,
+        changing_parameter TYPE REF TO data,
+*        exception_list     TYPE REF TO data,
+      END OF ts_response,
+
+      BEGIN OF ts_response_param,
+        name  TYPE abap_parmname,
+        value TYPE REF TO data,
+      END OF ts_response_param,
+      tt_response_param TYPE STANDARD TABLE OF ts_response_param WITH NON-UNIQUE KEY name.
+
+    DATA:
+      ls_response       TYPE ts_response,
+      ls_response_param TYPE ts_response_param,
+      lt_response_param TYPE tt_response_param.
+
+    FIELD-SYMBOLS:
+      <fs_pointer> TYPE tt_response_param,
+      <fs_param>   TYPE abap_func_parmbind.
+
+    ls_response-funcname = me->funcname.
+
+    CREATE DATA ls_response-export_parameter TYPE tt_response_param.
+    ASSIGN ls_response-export_parameter->* TO <fs_pointer>.
+
+    LOOP AT func_call_params ASSIGNING <fs_param> WHERE kind = 20.
+      ls_response_param-name = <fs_param>-name.
+      ls_response_param-value = <fs_param>-value.
+      APPEND ls_response_param TO <fs_pointer>.
+    ENDLOOP.
+
+    CREATE DATA ls_response-tables_parameter TYPE tt_response_param.
+    ASSIGN ls_response-tables_parameter->* TO <fs_pointer>.
+
+    LOOP AT func_call_params ASSIGNING <fs_param> WHERE kind = 30.
+      ls_response_param-name = <fs_param>-name.
+      ls_response_param-value = <fs_param>-value.
+      APPEND ls_response_param TO <fs_pointer>.
+    ENDLOOP.
+
+    CREATE DATA ls_response-changing_parameter TYPE tt_response_param.
+    ASSIGN ls_response-changing_parameter->* TO <fs_pointer>.
+
+    LOOP AT func_call_params ASSIGNING <fs_param> WHERE kind = 40.
+      ls_response_param-name = <fs_param>-name.
+      ls_response_param-value = <fs_param>-value.
+      APPEND ls_response_param TO <fs_pointer>.
+    ENDLOOP.
+
+    rv_json = /ui2/cl_json=>serialize( ls_response ).
+  ENDMETHOD.
+
+
+* <SIGNATURE>---------------------------------------------------------------------------------------+
+* | Instance Private Method ZCL_FM_INTERFACE_CONVERTER->BUILD_ROOT_PARAMETER
+* +-------------------------------------------------------------------------------------------------+
+* | [--->] IV_ROOTNAME                    TYPE        STRING
+* +--------------------------------------------------------------------------------------</SIGNATURE>
+  METHOD build_root_parameter.
+    DATA:
+      lo_resolver             TYPE REF TO if_dmc_extractor_type_resolver,
+      lref_data               TYPE REF TO dmc_tab_param_type_meta,
+      lr_parameter_info_table TYPE REF TO data.
+
+    FIELD-SYMBOLS:
+      <fs_parameter_info_table> TYPE STANDARD TABLE,
+      <fs_parameter_info>       TYPE ts_element.
+
+
+    CREATE DATA lr_parameter_info_table TYPE TABLE OF ts_element.
+    ASSIGN lr_parameter_info_table->* TO <fs_parameter_info_table>.
+
+    READ TABLE raw_data ASSIGNING FIELD-SYMBOL(<fs_exp_para_list>) WITH KEY name = iv_rootname .
+    DATA(lt_parameters) = build_parameter_list_generic( <fs_exp_para_list>-value->* ).
+
+    CREATE OBJECT lo_resolver TYPE cl_dmc_extractor_type_resolver
+      EXPORTING
+        iv_resolve_recursive = 'X'
+        it_parameter         = lt_parameters.
+    DATA(lt_para_type_meta) = lo_resolver->resolve( ).
+
+    GET REFERENCE OF lt_para_type_meta INTO lref_data.
+
+    LOOP AT lt_parameters ASSIGNING FIELD-SYMBOL(<fs_parameter>).
+      READ TABLE lt_para_type_meta ASSIGNING FIELD-SYMBOL(<fs_para_type_meta>) WITH KEY name = <fs_parameter>-name.
+      IF sy-subrc = 0.
+        APPEND INITIAL LINE TO <fs_parameter_info_table> ASSIGNING <fs_parameter_info>.
+
+        IF iv_rootname = 'TABLES_PARAMETER' AND <fs_para_type_meta>-kind = 'S'.
+* Special handling for 'like structure' under TABLE parameter -> Convert structure to table.
+          DATA: ls_property   TYPE ts_property,
+                lr_additional TYPE REF TO data.
+          FIELD-SYMBOLS:
+            <fs_additional>      TYPE STANDARD TABLE,
+            <fs_additional_item> TYPE ts_element.
+
+          <fs_parameter_info>-name = <fs_para_type_meta>-name.
+          "build property
+          ls_property-kind = 'T'.
+          ls_property-description = <fs_para_type_meta>-descr.
+          ls_property-type = 'TTYP'.
+          <fs_parameter_info>-properties = ls_property.
+
+          CREATE DATA lr_additional TYPE TABLE OF ts_element.
+          ASSIGN lr_additional->* TO <fs_additional>.
+
+          APPEND INITIAL LINE TO <fs_additional> ASSIGNING <fs_additional_item>.
+          <fs_additional_item> = handle( iv_para_type_meta = <fs_para_type_meta> iv_reference = lref_data ).
+
+          <fs_parameter_info>-additional = lr_additional.
+*Special handling end
+        ELSE.
+          <fs_parameter_info> = handle( iv_para_type_meta = <fs_para_type_meta> iv_reference = lref_data ).
+        ENDIF.
+      ENDIF.
+    ENDLOOP.
+
+    ASSIGN COMPONENT iv_rootname OF STRUCTURE converted_data_new TO FIELD-SYMBOL(<fs_parameter_item>).
+    IF sy-subrc = 0.
+      <fs_parameter_item> = lr_parameter_info_table.
+    ENDIF.
+
+  ENDMETHOD.
+
+
+* <SIGNATURE>---------------------------------------------------------------------------------------+
+* | Instance Private Method ZCL_FM_INTERFACE_CONVERTER->CALL
+* +-------------------------------------------------------------------------------------------------+
+* | [<-()] RV_JSON                        TYPE        STRING
+* +--------------------------------------------------------------------------------------</SIGNATURE>
+  METHOD call.
+    DATA:
+      lt_excepttab TYPE abap_func_excpbind_tab,
+      ls_excepttab TYPE abap_func_excpbind,
+      ls_error     TYPE ts_error.
+
+    FIELD-SYMBOLS:
+      <fs_exception_tab> TYPE ANY TABLE.
+
+*Build exception table
+    READ TABLE raw_data ASSIGNING FIELD-SYMBOL(<fs_exceptions>) WITH KEY name = 'EXCEPTION_LIST' .
+    ASSIGN <fs_exceptions>-value->* TO <fs_exception_tab>.
+
+    LOOP AT <fs_exception_tab> ASSIGNING FIELD-SYMBOL(<fs_exception>).
+      FIELD-SYMBOLS <fs_name> TYPE data.
+      ASSIGN COMPONENT 'EXCEPTION' OF STRUCTURE <fs_exception> TO <fs_name>.
+      IF sy-subrc = 0.
+        ls_excepttab-name = <fs_name>.
+        ls_excepttab-value = sy-tabix.
+        INSERT ls_excepttab INTO TABLE lt_excepttab.
+      ENDIF.
+    ENDLOOP.
+
+    TRY.
+*Call FM dynamically
+        CALL FUNCTION funcname
+          PARAMETER-TABLE
+          func_call_params
+          EXCEPTION-TABLE
+          lt_excepttab.
+
+        DATA(lv_subrc) = sy-subrc.
+        IF lv_subrc = 0.
+*Convert response into json.
+          rv_json = build_response( ).
+        ELSE.
+*Error
+          READ TABLE lt_Excepttab ASSIGNING FIELD-SYMBOL(<fs_error>) WITH KEY value = lv_subrc.
+          IF sy-subrc = 0.
+            ls_error-error = <fs_error>-name.
+          ELSE.
+            ls_error-error = 'Unknown error happens when calling function module'.
+          ENDIF.
+          rv_json = /ui2/cl_json=>serialize( ls_error ).
+        ENDIF.
+
+      CATCH cx_sy_dyn_call_error INTO DATA(lx_dyn_call).
+        ls_error-error = lx_dyn_call->if_message~get_longtext( ).
+        rv_json = /ui2/cl_json=>serialize( ls_error ).
+    ENDTRY.
+  ENDMETHOD.
+
+
+* <SIGNATURE>---------------------------------------------------------------------------------------+
+* | Instance Public Method ZCL_FM_INTERFACE_CONVERTER->CALL_FM_WITH_JSON
+* +-------------------------------------------------------------------------------------------------+
+* | [--->] IV_JSON                        TYPE        STRING
+* | [<-()] RV_JSON                        TYPE        STRING
+* +--------------------------------------------------------------------------------------</SIGNATURE>
+  METHOD call_fm_with_json.
+
+    DATA:
+      lt_excepttab       TYPE abap_func_excpbind_tab,
+      ls_excepttab       TYPE abap_func_excpbind,
+      ls_paramtab        TYPE abap_func_parmbind,
+      lv_message         TYPE string,
+
+      inactive_version   TYPE  char1,
+      global_flag        TYPE  rs38l-global,
+      remote_call        TYPE  rs38l-remote,
+      update_task        TYPE  rs38l-utask,
+      exception_classes  TYPE  enlfdir-exten3,
+      exception_list     TYPE TABLE OF  rsexc,
+      export_parameter   TYPE TABLE OF  rsexp,
+      import_parameter   TYPE TABLE OF  rsimp,
+      changing_parameter TYPE TABLE OF  rscha,
+      tables_parameter   TYPE TABLE OF  rstbl.
+
+    FIELD-SYMBOLS:
+           <fs_table> TYPE  ts_CONVERTED_DATA .
+
+* Convert json to abap deep structure
+    CLEAR converted_data_new.
+    /ui2/cl_json=>deserialize( EXPORTING json = iv_json pretty_name = /ui2/cl_json=>pretty_mode-camel_case CHANGING data = converted_data_new ).
+
+    me->funcname = converted_data_new-funcname.
+* Read FM interface into raw_data
+    " importing parameters
+    ls_paramtab-name = 'FUNCNAME'.
+    ls_paramtab-kind = abap_func_exporting.
+    GET REFERENCE OF me->funcname INTO ls_paramtab-value.
+    INSERT ls_paramtab INTO TABLE raw_data.
+    ls_paramtab-name = 'INACTIVE_VERSION'.
+    GET REFERENCE OF inactive_version INTO ls_paramtab-value.
+    INSERT ls_paramtab INTO TABLE raw_data.
+
+    " exporting parameters
+    ls_paramtab-name = 'GLOBAL_FLAG'.
+    ls_paramtab-kind = abap_func_importing.
+    GET REFERENCE OF global_flag INTO ls_paramtab-value.
+    INSERT ls_paramtab INTO TABLE raw_data.
+    ls_paramtab-name = 'REMOTE_CALL'.
+    GET REFERENCE OF remote_call INTO ls_paramtab-value.
+    INSERT ls_paramtab INTO TABLE raw_data.
+    ls_paramtab-name = 'UPDATE_TASK'.
+    GET REFERENCE OF update_task INTO ls_paramtab-value.
+    INSERT ls_paramtab INTO TABLE raw_data.
+    ls_paramtab-name = 'EXCEPTION_CLASSES'.
+    GET REFERENCE OF exception_classes INTO ls_paramtab-value.
+    INSERT ls_paramtab INTO TABLE raw_data.
+
+    " tables parameters
+    ls_paramtab-name = 'EXCEPTION_LIST'.
+    ls_paramtab-kind = abap_func_tables.
+    GET REFERENCE OF exception_list[] INTO ls_paramtab-value.
+    INSERT ls_paramtab INTO TABLE raw_data.
+    ls_paramtab-name = 'EXPORT_PARAMETER'.
+    GET REFERENCE OF export_parameter[] INTO ls_paramtab-value.
+    INSERT ls_paramtab INTO TABLE raw_data.
+    ls_paramtab-name = 'IMPORT_PARAMETER'.
+    GET REFERENCE OF import_parameter[] INTO ls_paramtab-value.
+    INSERT ls_paramtab INTO TABLE raw_data.
+    ls_paramtab-name = 'TABLES_PARAMETER'.
+    GET REFERENCE OF tables_parameter[] INTO ls_paramtab-value.
+    INSERT ls_paramtab INTO TABLE raw_data.
+    ls_paramtab-name = 'CHANGING_PARAMETER'.
+    GET REFERENCE OF changing_parameter[] INTO ls_paramtab-value.
+    INSERT ls_paramtab INTO TABLE raw_data.
+
+    " exceptions
+    ls_excepttab-name = 'ERROR_MESSAGE'.
+    ls_excepttab-value = 1.
+    INSERT ls_excepttab INTO TABLE lt_excepttab.
+    ls_excepttab-name = 'FUNCTION_NOT_FOUND'.
+    ls_excepttab-value = 2.
+    INSERT ls_excepttab INTO TABLE lt_excepttab.
+    ls_excepttab-name = 'INVALID_NAME'.
+    ls_excepttab-value = 3.
+    INSERT ls_excepttab INTO TABLE lt_excepttab.
+
+    CALL FUNCTION 'FUNCTION_IMPORT_INTERFACE'
+      PARAMETER-TABLE
+      raw_data
+      EXCEPTION-TABLE
+      lt_excepttab.
+
+    CASE sy-subrc.
+      WHEN 0. "ok
+*Build up parameters for dynamic FM call
+        parse_root_parameter( 'IMPORT_PARAMETER' ).
+        parse_root_parameter( 'TABLES_PARAMETER' ).
+        parse_root_parameter( 'CHANGING_PARAMETER' ).
+        parse_export_param_for_fmcall( ).
+        rv_json = call( ).
+
+      WHEN 1.
+        lv_message = 'Error occurred'.
+        rv_json = /ui2/cl_json=>serialize( lv_message ).
+      WHEN 2.
+        lv_message = 'Function not found'.
+        rv_json = /ui2/cl_json=>serialize( lv_message ).
+      WHEN 3.
+        lv_message = 'Invalid name'.
+        rv_json = /ui2/cl_json=>serialize( lv_message ).
+    ENDCASE.
+
+    CLEAR raw_data.
+    CLEAR converted_data_new.
+    CLEAR func_call_params.
+  ENDMETHOD.
+
+
+* <SIGNATURE>---------------------------------------------------------------------------------------+
+* | Instance Public Method ZCL_FM_INTERFACE_CONVERTER->CONSTRUCTOR
+* +-------------------------------------------------------------------------------------------------+
+* | [--->] IV_FUNCNAME                    TYPE        RS38L-NAME(optional)
+* +--------------------------------------------------------------------------------------</SIGNATURE>
+  METHOD constructor.
+
+    me->funcname = iv_funcname.
+
+  ENDMETHOD.
+
+
+* <SIGNATURE>---------------------------------------------------------------------------------------+
+* | Instance Public Method ZCL_FM_INTERFACE_CONVERTER->CONVERT_TO_JSON
+* +-------------------------------------------------------------------------------------------------+
+* | [<-()] RV_JSON                        TYPE        STRING
+* +--------------------------------------------------------------------------------------</SIGNATURE>
+  METHOD convert_to_json.
+    DATA:
+      lt_excepttab       TYPE abap_func_excpbind_tab,
+      ls_excepttab       TYPE abap_func_excpbind,
+      ls_paramtab        TYPE abap_func_parmbind,
+      ls_error           TYPE ts_error,
+
+      inactive_version   TYPE  char1,
+      global_flag        TYPE  rs38l-global,
+      remote_call        TYPE  rs38l-remote,
+      update_task        TYPE  rs38l-utask,
+      exception_classes  TYPE  enlfdir-exten3,
+      exception_list     TYPE TABLE OF  rsexc,
+      export_parameter   TYPE TABLE OF  rsexp,
+      import_parameter   TYPE TABLE OF  rsimp,
+      changing_parameter TYPE TABLE OF  rscha,
+      tables_parameter   TYPE TABLE OF  rstbl.
+
+
+    " importing parameters
+    ls_paramtab-name = 'FUNCNAME'.
+    ls_paramtab-kind = abap_func_exporting.
+    GET REFERENCE OF funcname INTO ls_paramtab-value.
+    INSERT ls_paramtab INTO TABLE raw_data.
+    ls_paramtab-name = 'INACTIVE_VERSION'.
+    GET REFERENCE OF inactive_version INTO ls_paramtab-value.
+    INSERT ls_paramtab INTO TABLE raw_data.
+
+    " exporting parameters
+    ls_paramtab-name = 'GLOBAL_FLAG'.
+    ls_paramtab-kind = abap_func_importing.
+    GET REFERENCE OF global_flag INTO ls_paramtab-value.
+    INSERT ls_paramtab INTO TABLE raw_data.
+    ls_paramtab-name = 'REMOTE_CALL'.
+    GET REFERENCE OF remote_call INTO ls_paramtab-value.
+    INSERT ls_paramtab INTO TABLE raw_data.
+    ls_paramtab-name = 'UPDATE_TASK'.
+    GET REFERENCE OF update_task INTO ls_paramtab-value.
+    INSERT ls_paramtab INTO TABLE raw_data.
+    ls_paramtab-name = 'EXCEPTION_CLASSES'.
+    GET REFERENCE OF exception_classes INTO ls_paramtab-value.
+    INSERT ls_paramtab INTO TABLE raw_data.
+
+    " tables parameters
+    ls_paramtab-name = 'EXCEPTION_LIST'.
+    ls_paramtab-kind = abap_func_tables.
+    GET REFERENCE OF exception_list[] INTO ls_paramtab-value.
+    INSERT ls_paramtab INTO TABLE raw_data.
+    ls_paramtab-name = 'EXPORT_PARAMETER'.
+    GET REFERENCE OF export_parameter[] INTO ls_paramtab-value.
+    INSERT ls_paramtab INTO TABLE raw_data.
+    ls_paramtab-name = 'IMPORT_PARAMETER'.
+    GET REFERENCE OF import_parameter[] INTO ls_paramtab-value.
+    INSERT ls_paramtab INTO TABLE raw_data.
+    ls_paramtab-name = 'TABLES_PARAMETER'.
+    GET REFERENCE OF tables_parameter[] INTO ls_paramtab-value.
+    INSERT ls_paramtab INTO TABLE raw_data.
+    ls_paramtab-name = 'CHANGING_PARAMETER'.
+    GET REFERENCE OF changing_parameter[] INTO ls_paramtab-value.
+    INSERT ls_paramtab INTO TABLE raw_data.
+
+    " exceptions
+    ls_excepttab-name = 'ERROR_MESSAGE'.
+    ls_excepttab-value = 1.
+    INSERT ls_excepttab INTO TABLE lt_excepttab.
+    ls_excepttab-name = 'FUNCTION_NOT_FOUND'.
+    ls_excepttab-value = 2.
+    INSERT ls_excepttab INTO TABLE lt_excepttab.
+    ls_excepttab-name = 'INVALID_NAME'.
+    ls_excepttab-value = 3.
+    INSERT ls_excepttab INTO TABLE lt_excepttab.
+
+
+    CALL FUNCTION 'FUNCTION_IMPORT_INTERFACE'
+      PARAMETER-TABLE
+      raw_data
+      EXCEPTION-TABLE
+      lt_excepttab.
+
+    CASE sy-subrc.
+      WHEN 0. "ok
+        build_general_info( ).
+        build_required_params( 'IMPORT_PARAMETER' ).
+        build_root_parameter( 'IMPORT_PARAMETER' ).
+
+        build_root_parameter( 'EXPORT_PARAMETER' ).
+
+        build_required_params( 'TABLES_PARAMETER' ).
+        build_root_parameter( 'TABLES_PARAMETER' ).
+
+        build_required_params( 'CHANGING_PARAMETER' ).
+        build_root_parameter( 'CHANGING_PARAMETER' ).
+        build_exception_list( ).
+
+        rv_json = /ui2/cl_json=>serialize( converted_data_new ).
+      WHEN 1.
+        ls_error-error = 'Error occurred'.
+        rv_json = /ui2/cl_json=>serialize( ls_error ).
+      WHEN 2.
+        ls_error-error = 'Function not found'.
+        rv_json = /ui2/cl_json=>serialize( ls_error ).
+      WHEN 3.
+        ls_error-error = 'Invalid name'.
+        rv_json = /ui2/cl_json=>serialize( ls_error ).
+    ENDCASE.
+
+    CLEAR raw_data.
+    CLEAR converted_data_new.
+  ENDMETHOD.
+
+
+* <SIGNATURE>---------------------------------------------------------------------------------------+
+* | Instance Private Method ZCL_FM_INTERFACE_CONVERTER->HANDLE
+* +-------------------------------------------------------------------------------------------------+
+* | [--->] IV_PARA_TYPE_META              TYPE        DMC_STR_PARAM_TYPE_META
+* | [--->] IV_REFERENCE                   TYPE REF TO DMC_TAB_PARAM_TYPE_META
+* | [<-()] RV_ELEMENT                     TYPE        TS_ELEMENT
+* +--------------------------------------------------------------------------------------</SIGNATURE>
+  METHOD handle.
+    DATA:
+      ls_property TYPE ts_property.
+
+    rv_element-name = iv_para_type_meta-name.
+
+    CASE iv_para_type_meta-kind.
+      WHEN 'E'.
+        READ TABLE iv_para_type_meta-components_orig ASSIGNING FIELD-SYMBOL(<fs_component>) INDEX 1.
+        rv_element = handle_element( <fs_component> ).
+      WHEN 'S'.
+        rv_element = handle_struct( iv_param_type_meta = iv_para_type_meta
+                                   iv_reference = iv_reference ).
+      WHEN 'T'.
+        rv_element = handle_table( iv_param_type_meta = iv_para_type_meta
+                                   iv_reference = iv_reference ).
+      WHEN OTHERS.
+        "KIND_CLASS
+        "KIND_INTF
+        "KIND_REF
+    ENDCASE.
+  ENDMETHOD.
+
+
+* <SIGNATURE>---------------------------------------------------------------------------------------+
+* | Instance Private Method ZCL_FM_INTERFACE_CONVERTER->HANDLE_ELEMENT
+* +-------------------------------------------------------------------------------------------------+
+* | [--->] IV_PARAM_TYPE_COMP_META        TYPE        DMC_STR_PARAM_TYPE_COMP_META
+* | [<-()] RV_ELEMENT                     TYPE        TS_ELEMENT
+* +--------------------------------------------------------------------------------------</SIGNATURE>
+  METHOD handle_element.
+    DATA:
+        ls_property TYPE ts_property.
+
+    rv_element-name = iv_param_type_comp_meta-name.
+    ls_property-kind = iv_param_type_comp_meta-kind.
+    ls_property-description = iv_param_type_comp_meta-descr.
+    ls_property-type = iv_param_type_comp_meta-datatype.
+    ls_property-length = iv_param_type_comp_meta-leng.
+    ls_property-decimal = iv_param_type_comp_meta-decimals.
+    rv_element-properties = ls_property.
+
+  ENDMETHOD.
+
+
+* <SIGNATURE>---------------------------------------------------------------------------------------+
+* | Instance Private Method ZCL_FM_INTERFACE_CONVERTER->HANDLE_STRUCT
+* +-------------------------------------------------------------------------------------------------+
+* | [--->] IV_PARAM_TYPE_META             TYPE        DMC_STR_PARAM_TYPE_META
+* | [--->] IV_REFERENCE                   TYPE REF TO DMC_TAB_PARAM_TYPE_META
+* | [<-()] RV_ELEMENT                     TYPE        TS_ELEMENT
+* +--------------------------------------------------------------------------------------</SIGNATURE>
+  METHOD handle_struct.
+
+    DATA:
+      ls_property             TYPE ts_property,
+      lr_parameter_info_table TYPE REF TO data.
+
+    FIELD-SYMBOLS:
+      <fs_parameter_info_table> TYPE STANDARD TABLE,
+      <fs_parameter_info>       TYPE ts_element.
+
+
+    CREATE DATA lr_parameter_info_table TYPE TABLE OF ts_element.
+    ASSIGN lr_parameter_info_table->* TO <fs_parameter_info_table>.
+
+    CASE iv_param_type_meta-kind.
+      WHEN 'S'.
+        "build name
+        rv_element-name = iv_param_type_meta-name.
+
+        "build property
+        ls_property-kind = iv_param_type_meta-kind.
+        ls_property-description = iv_param_type_meta-descr.
+        ls_property-type = iv_param_type_meta-object_type.
+        rv_element-properties = ls_property.
+
+      WHEN 'T'.
+        "build name
+        rv_element-name = 'TABL'.
+
+        "build property
+        ls_property-kind = iv_param_type_meta-ttyp_linetype_kind.
+        ls_property-description = 'TABL'.
+        ls_property-type = 'TABL'.
+        rv_element-properties = ls_property.
+
+      WHEN OTHERS.
+    ENDCASE.
+
+
+    "build value
+    LOOP AT iv_param_type_meta-components_orig ASSIGNING FIELD-SYMBOL(<fs_component>).
+      APPEND INITIAL LINE TO <fs_parameter_info_table> ASSIGNING <fs_parameter_info>.
+
+      CASE <fs_component>-kind.
+        WHEN 'E'.
+          <fs_parameter_info> = handle_element( <fs_component> ).
+        WHEN 'S'.
+          READ TABLE iv_reference->* ASSIGNING FIELD-SYMBOL(<fs_struct>) WITH KEY name = <fs_component>-name parent_id = iv_param_type_meta-id.
+          IF sy-subrc = 0.
+            <fs_parameter_info> = handle_struct( iv_param_type_meta = <fs_struct>
+                                                 iv_reference = iv_reference ).
+          ENDIF.
+        WHEN 'T'.
+          READ TABLE iv_reference->* ASSIGNING FIELD-SYMBOL(<fs_table>) WITH KEY name = <fs_component>-name parent_id = iv_param_type_meta-id.
+          IF sy-subrc = 0.
+            <fs_parameter_info> = handle_table( iv_param_type_meta = <fs_table>
+                                                iv_reference = iv_reference ).
+          ENDIF.
+        WHEN OTHERS.
+          "KIND_CLASS
+          "KIND_INTF
+          "KIND_REF
+      ENDCASE.
+    ENDLOOP.
+
+    rv_element-additional = lr_parameter_info_table.
+  ENDMETHOD.
+
+
+* <SIGNATURE>---------------------------------------------------------------------------------------+
+* | Instance Private Method ZCL_FM_INTERFACE_CONVERTER->HANDLE_TABLE
+* +-------------------------------------------------------------------------------------------------+
+* | [--->] IV_PARAM_TYPE_META             TYPE        DMC_STR_PARAM_TYPE_META
+* | [--->] IV_REFERENCE                   TYPE REF TO DMC_TAB_PARAM_TYPE_META
+* | [<-()] RV_ELEMENT                     TYPE        TS_ELEMENT
+* +--------------------------------------------------------------------------------------</SIGNATURE>
+  METHOD handle_table.
+
+    DATA:
+      ls_property             TYPE ts_property,
+      lr_parameter_info_table TYPE REF TO data.
+
+    FIELD-SYMBOLS:
+      <fs_parameter_info_table> TYPE STANDARD TABLE,
+      <fs_parameter_info>       TYPE ts_element.
+
+    "build name
+    rv_element-name = iv_param_type_meta-name.
+
+    "build property
+    ls_property-kind = iv_param_type_meta-kind.
+    ls_property-description = iv_param_type_meta-descr.
+    ls_property-type = iv_param_type_meta-object_type.
+    rv_element-properties = ls_property.
+
+    "build value (table line)
+    CREATE DATA lr_parameter_info_table TYPE TABLE OF ts_element.
+    ASSIGN lr_parameter_info_table->* TO <fs_parameter_info_table>.
+
+    APPEND INITIAL LINE TO <fs_parameter_info_table> ASSIGNING <fs_parameter_info>.
+    <fs_parameter_info> = handle_struct( iv_param_type_meta = iv_param_type_meta
+                                         iv_reference = iv_reference ).
+
+    rv_element-additional = lr_parameter_info_table.
+  ENDMETHOD.
+
+
+* <SIGNATURE>---------------------------------------------------------------------------------------+
+* | Instance Private Method ZCL_FM_INTERFACE_CONVERTER->PARSE
+* +-------------------------------------------------------------------------------------------------+
+* | [--->] IV_PARA_TYPE_META              TYPE        DMC_STR_PARAM_TYPE_META
+* | [--->] IV_REFERENCE                   TYPE REF TO DMC_TAB_PARAM_TYPE_META
+* | [--->] IV_ELEMENT_REF                 TYPE REF TO DATA
+* | [<-()] RV_DATA                        TYPE REF TO DATA
+* +--------------------------------------------------------------------------------------</SIGNATURE>
+  METHOD parse.
+
+
+    CASE iv_para_type_meta-kind.
+      WHEN 'E'.
+        DATA lv_type TYPE string.
+        lv_type = CONV #( iv_para_type_meta-typename ).
+        rv_data = parse_element( iv_type = lv_type iv_element_ref = iv_element_ref ).
+      WHEN 'S'.
+        rv_data = parse_struct( iv_param_type_meta = iv_para_type_meta
+                                iv_reference = iv_reference
+                                iv_element_ref = iv_element_ref ).
+      WHEN 'T'.
+        rv_data = parse_table( iv_param_type_meta = iv_para_type_meta
+                               iv_reference = iv_reference
+                               iv_element_ref = iv_element_ref ).
+      WHEN OTHERS.
+        "KIND_CLASS
+        "KIND_INTF
+        "KIND_REF
+    ENDCASE.
+  ENDMETHOD.
+
+
+* <SIGNATURE>---------------------------------------------------------------------------------------+
+* | Instance Private Method ZCL_FM_INTERFACE_CONVERTER->PARSE_ELEMENT
+* +-------------------------------------------------------------------------------------------------+
+* | [--->] IV_TYPE                        TYPE        STRING
+* | [--->] IV_ELEMENT_REF                 TYPE REF TO DATA
+* | [<-()] RV_DATA                        TYPE REF TO DATA
+* +--------------------------------------------------------------------------------------</SIGNATURE>
+  METHOD parse_element.
+    FIELD-SYMBOLS <fs_element> TYPE data.
+    ASSIGN iv_element_ref->* TO <fs_element>.
+
+    IF <fs_element> IS ASSIGNED.
+      FIELD-SYMBOLS <lref_value> TYPE REF TO data.
+      ASSIGN COMPONENT 'VALUE' OF STRUCTURE <fs_element> TO <lref_value>.
+
+      IF <lref_value> IS ASSIGNED.
+        FIELD-SYMBOLS <fs_value> TYPE string.
+        ASSIGN <lref_value>->* TO <fs_value>.
+
+        IF <fs_value> IS ASSIGNED.
+          CREATE DATA rv_data TYPE (iv_type).
+          FIELD-SYMBOLS <fs_data> TYPE data.
+          ASSIGN rv_data->* TO <fs_data>.
+
+          IF <fs_data> IS ASSIGNED.
+            <fs_data> = <fs_value>.
+          ENDIF.
+        ENDIF.
+      ENDIF.
+    ENDIF.
+  ENDMETHOD.
+
+
+* <SIGNATURE>---------------------------------------------------------------------------------------+
+* | Instance Private Method ZCL_FM_INTERFACE_CONVERTER->PARSE_EXPORT_PARAM_FOR_FMCALL
+* +-------------------------------------------------------------------------------------------------+
+* +--------------------------------------------------------------------------------------</SIGNATURE>
+  METHOD parse_export_param_for_fmcall.
+
+    DATA:
+      lo_resolver      TYPE REF TO if_dmc_extractor_type_resolver,
+      ls_func_parmbind TYPE abap_func_parmbind.
+
+    READ TABLE raw_data ASSIGNING FIELD-SYMBOL(<fs_exp_para_list>) WITH KEY name = 'EXPORT_PARAMETER' .
+    DATA(lt_parameters) = build_parameter_list_generic( <fs_exp_para_list>-value->* ).
+
+    CREATE OBJECT lo_resolver TYPE cl_dmc_extractor_type_resolver
+      EXPORTING
+        iv_resolve_recursive = 'X'
+        it_parameter         = lt_parameters.
+    DATA(lt_para_type_meta) = lo_resolver->resolve( ).
+
+
+    LOOP AT lt_parameters ASSIGNING FIELD-SYMBOL(<fs_parameter>).
+      READ TABLE lt_para_type_meta ASSIGNING FIELD-SYMBOL(<fs_para_type_meta>) WITH KEY name = <fs_parameter>-name.
+      IF sy-subrc = 0.
+        ls_func_parmbind-name = <fs_parameter>-name.
+        ls_func_parmbind-kind = abap_func_importing.
+        CREATE DATA ls_func_parmbind-value TYPE (<fs_para_type_meta>-typename).
+        INSERT ls_func_parmbind INTO TABLE func_call_params.
+      ENDIF.
+    ENDLOOP.
+  ENDMETHOD.
+
+
+* <SIGNATURE>---------------------------------------------------------------------------------------+
+* | Instance Private Method ZCL_FM_INTERFACE_CONVERTER->PARSE_ROOT_PARAMETER
+* +-------------------------------------------------------------------------------------------------+
+* | [--->] IV_ROOTNAME                    TYPE        STRING
+* +--------------------------------------------------------------------------------------</SIGNATURE>
+  METHOD parse_root_parameter.
+
+    DATA:
+      lo_resolver      TYPE REF TO if_dmc_extractor_type_resolver,
+      lref_data        TYPE REF TO dmc_tab_param_type_meta,
+      ls_func_parmbind TYPE abap_func_parmbind,
+      lv_kind          TYPE i.
+
+    READ TABLE raw_data ASSIGNING FIELD-SYMBOL(<fs_exp_para_list>) WITH KEY name = iv_rootname .
+    ASSIGN COMPONENT iv_rootname OF STRUCTURE converted_data_new TO FIELD-SYMBOL(<fs_root_parameter>).
+    DATA(lt_parameters) = build_parameter_list_generic( <fs_exp_para_list>-value->* ).
+
+    CASE iv_rootname.
+      WHEN 'EXPORT_PARAMETER'.
+        lv_kind = abap_func_importing.
+      WHEN 'IMPORT_PARAMETER'.
+        lv_kind = abap_func_exporting.
+      WHEN 'TABLES_PARAMETER'.
+        lv_kind = abap_func_tables.
+      WHEN 'CHANGING_PARAMETER'.
+        lv_kind = abap_func_changing.
+    ENDCASE.
+
+    CREATE OBJECT lo_resolver TYPE cl_dmc_extractor_type_resolver
+      EXPORTING
+        iv_resolve_recursive = 'X'
+        it_parameter         = lt_parameters.
+    DATA(lt_para_type_meta) = lo_resolver->resolve( ).
+
+    GET REFERENCE OF lt_para_type_meta INTO lref_data.
+
+    LOOP AT lt_parameters ASSIGNING FIELD-SYMBOL(<fs_parameter>).
+      READ TABLE lt_para_type_meta ASSIGNING FIELD-SYMBOL(<fs_para_type_meta>) WITH KEY name = <fs_parameter>-name.
+      IF sy-subrc = 0.
+        FIELD-SYMBOLS <lref_parameter_table> TYPE ANY TABLE.
+        ASSIGN <fs_root_parameter>->* TO <lref_parameter_table>.
+        IF sy-subrc = 0.
+          FIELD-SYMBOLS <lref_parameter> TYPE REF TO data.
+** Find relevent node from converted data
+          LOOP AT <lref_parameter_table> ASSIGNING <lref_parameter>.
+            FIELD-SYMBOLS <fs_element> TYPE data.
+            ASSIGN <lref_parameter>->* TO <fs_element>.
+
+            FIELD-SYMBOLS <lref_name> TYPE REF TO data.
+            ASSIGN COMPONENT 'NAME' OF STRUCTURE <fs_element> TO <lref_name>.
+
+            FIELD-SYMBOLS <fs_name> TYPE string.
+            ASSIGN <lref_name>->* TO <fs_name>.
+** node found
+            IF <fs_name> = <fs_parameter>-name.
+              ls_func_parmbind-name = <fs_parameter>-name.
+              ls_func_parmbind-kind = lv_kind.
+
+              IF iv_rootname = 'TABLES_PARAMETER' AND <fs_para_type_meta>-kind = 'S'.
+* Special handling for 'like structure' under TABLE parameter -> Convert structure to table.
+                CREATE DATA ls_func_parmbind-value TYPE TABLE OF (<fs_para_type_meta>-typename).
+                FIELD-SYMBOLS <fs_data> TYPE table.
+                ASSIGN ls_func_parmbind-value->* TO <fs_data>.
+
+                FIELD-SYMBOLS <fs_element_current> TYPE data.
+                ASSIGN <lref_parameter>->* TO <fs_element_current>.
+
+                IF <fs_element_current> IS ASSIGNED.
+                  FIELD-SYMBOLS <lref_tablelines> TYPE REF TO data.
+                  ASSIGN COMPONENT 'ADDITIONAL' OF STRUCTURE <fs_element_current> TO <lref_tablelines>.
+                ENDIF.
+
+                CHECK <lref_tablelines> IS ASSIGNED.
+
+                FIELD-SYMBOLS <fs_tablelines> TYPE ANY TABLE.
+                ASSIGN <lref_tablelines>->* TO <fs_tablelines>.
+
+                IF <fs_tablelines> IS ASSIGNED.
+                  FIELD-SYMBOLS <fs_tableline> TYPE REF TO data.
+                  LOOP AT <fs_tablelines> ASSIGNING <fs_tableline>.
+
+                    DATA lref_element TYPE REF TO data.
+                    CREATE DATA lref_element TYPE (<fs_para_type_meta>-typename).
+                    lref_element = parse_struct( iv_param_type_meta = <fs_para_type_meta>
+                                                 iv_reference = lref_data
+                                                 iv_element_ref = <fs_tableline> ).
+
+                    FIELD-SYMBOLS <fs_row> TYPE data.
+                    ASSIGN lref_element->* TO <fs_row>.
+                    APPEND <fs_row> TO <fs_data>.
+                  ENDLOOP.
+                ENDIF.
+*Special handling end
+              ELSE.
+                ls_func_parmbind-value = parse( iv_para_type_meta = <fs_para_type_meta>
+                                                iv_reference = lref_data
+                                                iv_element_ref = <lref_parameter> ).
+              ENDIF.
+              INSERT ls_func_parmbind INTO TABLE func_call_params.
+              EXIT.
+            ENDIF.
+          ENDLOOP.
+        ENDIF.
+      ENDIF.
+    ENDLOOP.
+  ENDMETHOD.
+
+
+* <SIGNATURE>---------------------------------------------------------------------------------------+
+* | Instance Private Method ZCL_FM_INTERFACE_CONVERTER->PARSE_STRUCT
+* +-------------------------------------------------------------------------------------------------+
+* | [--->] IV_PARAM_TYPE_META             TYPE        DMC_STR_PARAM_TYPE_META
+* | [--->] IV_REFERENCE                   TYPE REF TO DMC_TAB_PARAM_TYPE_META
+* | [--->] IV_ELEMENT_REF                 TYPE REF TO DATA
+* | [<-()] RV_DATA                        TYPE REF TO DATA
+* +--------------------------------------------------------------------------------------</SIGNATURE>
+  METHOD parse_struct.
+
+    CASE iv_param_type_meta-object_type.
+      WHEN 'TTYP'.
+        CREATE DATA rv_data TYPE (iv_param_type_meta-ttyp_linetype).
+      WHEN 'TABL'.
+        CREATE DATA rv_data TYPE (iv_param_type_meta-typename).
+    ENDCASE.
+
+    FIELD-SYMBOLS <fs_data> TYPE data.
+    ASSIGN rv_data->* TO <fs_data>.
+
+    FIELD-SYMBOLS <fs_element> TYPE data.
+    ASSIGN iv_element_ref->* TO <fs_element>.
+
+    IF <fs_element> IS ASSIGNED.
+      FIELD-SYMBOLS <lref_additional> TYPE REF TO data.
+      ASSIGN COMPONENT 'ADDITIONAL' OF STRUCTURE <fs_element> TO <lref_additional>.
+    ENDIF.
+
+    CHECK <lref_additional> IS ASSIGNED.
+
+    LOOP AT iv_param_type_meta-components_orig ASSIGNING FIELD-SYMBOL(<fs_component>).
+      FIELD-SYMBOLS <lref_field_table> TYPE ANY TABLE.
+      ASSIGN <lref_additional>->* TO <lref_field_table>.
+      IF sy-subrc = 0.
+        FIELD-SYMBOLS <lref_field> TYPE REF TO data.
+** Find relevent node from converted data
+        LOOP AT <lref_field_table> ASSIGNING <lref_field>.
+          FIELD-SYMBOLS <fs_field> TYPE data.
+          ASSIGN <lref_field>->* TO <fs_field>.
+
+          FIELD-SYMBOLS <lref_name> TYPE REF TO data.
+          ASSIGN COMPONENT 'NAME' OF STRUCTURE <fs_field> TO <lref_name>.
+
+          FIELD-SYMBOLS <fs_name> TYPE string.
+          ASSIGN <lref_name>->* TO <fs_name>.
+** node found
+          IF <fs_name> = <fs_component>-name.
+            ASSIGN COMPONENT <fs_name> OF STRUCTURE <fs_data> TO FIELD-SYMBOL(<fs_pointer_structfield>).
+            DATA lref_element TYPE REF TO data.
+            CASE <fs_component>-kind.
+              WHEN 'E'.
+                DATA lv_element_type TYPE string.
+                CASE iv_param_type_meta-object_type.
+                  WHEN 'TTYP'.
+                    lv_element_type = iv_param_type_meta-ttyp_linetype && '-' && <fs_component>-name.
+                  WHEN 'TABL'.
+                    lv_element_type = iv_param_type_meta-typename && '-' && <fs_component>-name.
+                ENDCASE.
+                CREATE DATA lref_element TYPE (lv_element_type).
+                lref_element = parse_element( iv_type = lv_element_type iv_element_ref = <lref_field> ).
+                <fs_pointer_structfield> = lref_element->*.
+              WHEN 'S'.
+                READ TABLE iv_reference->* ASSIGNING FIELD-SYMBOL(<fs_struct>) WITH KEY name = <fs_component>-name parent_id = iv_param_type_meta-id.
+                IF sy-subrc = 0.
+                  CREATE DATA lref_element TYPE (<fs_struct>-typename).
+                  lref_element = parse_struct( iv_param_type_meta = <fs_struct>
+                                               iv_element_ref = <lref_field>
+                                               iv_reference = iv_reference ).
+                  <fs_pointer_structfield> = lref_element->*.
+                ENDIF.
+              WHEN 'T'.
+                READ TABLE iv_reference->* ASSIGNING FIELD-SYMBOL(<fs_table>) WITH KEY name = <fs_component>-name parent_id = iv_param_type_meta-id.
+                IF sy-subrc = 0.
+                  CREATE DATA lref_element TYPE (<fs_table>-typename).
+                  lref_element = parse_table( iv_param_type_meta = <fs_table>
+                                              iv_element_ref = <lref_field>
+                                              iv_reference = iv_reference ).
+                  <fs_pointer_structfield> = lref_element->*.
+                ENDIF.
+              WHEN OTHERS.
+                "KIND_CLASS
+                "KIND_INTF
+                "KIND_REF
+            ENDCASE.
+            EXIT.
+          ENDIF.
+        ENDLOOP.
+      ENDIF.
+    ENDLOOP.
+  ENDMETHOD.
+
+
+* <SIGNATURE>---------------------------------------------------------------------------------------+
+* | Instance Private Method ZCL_FM_INTERFACE_CONVERTER->PARSE_TABLE
+* +-------------------------------------------------------------------------------------------------+
+* | [--->] IV_PARAM_TYPE_META             TYPE        DMC_STR_PARAM_TYPE_META
+* | [--->] IV_REFERENCE                   TYPE REF TO DMC_TAB_PARAM_TYPE_META
+* | [--->] IV_ELEMENT_REF                 TYPE REF TO DATA
+* | [<-()] RV_DATA                        TYPE REF TO DATA
+* +--------------------------------------------------------------------------------------</SIGNATURE>
+  METHOD parse_table.
+
+    CREATE DATA rv_data TYPE (iv_param_type_meta-typename).
+    FIELD-SYMBOLS <fs_data> TYPE table.
+    ASSIGN rv_data->* TO <fs_data>.
+
+    FIELD-SYMBOLS <fs_element> TYPE data.
+    ASSIGN iv_element_ref->* TO <fs_element>.
+
+    IF <fs_element> IS ASSIGNED.
+      FIELD-SYMBOLS <lref_tablelines> TYPE REF TO data.
+      ASSIGN COMPONENT 'ADDITIONAL' OF STRUCTURE <fs_element> TO <lref_tablelines>.
+    ENDIF.
+
+    CHECK <lref_tablelines> IS ASSIGNED.
+
+    FIELD-SYMBOLS <fs_tablelines> TYPE ANY TABLE.
+    ASSIGN <lref_tablelines>->* TO <fs_tablelines>.
+
+    IF <fs_tablelines> IS ASSIGNED.
+      FIELD-SYMBOLS <fs_tableline> TYPE REF TO data.
+      LOOP AT <fs_tablelines> ASSIGNING <fs_tableline>.
+
+        DATA lref_element TYPE REF TO data.
+        CREATE DATA lref_element TYPE (iv_param_type_meta-ttyp_linetype).
+        lref_element = parse_struct( iv_param_type_meta = iv_param_type_meta
+                                     iv_reference = iv_reference
+                                     iv_element_ref = <fs_tableline> ).
+
+        FIELD-SYMBOLS <fs_row> TYPE data.
+        ASSIGN lref_element->* TO <fs_row>.
+        APPEND <fs_row> TO <fs_data>.
+      ENDLOOP.
+    ENDIF.
+  ENDMETHOD.
+ENDCLASS.

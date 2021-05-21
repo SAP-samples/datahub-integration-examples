@@ -1,0 +1,182 @@
+{
+    "properties": {},
+    "description": "demo.daniel.ReadFuctionModule",
+    "processes": {
+        "customabapoperator1": {
+            "component": "com.sap.abap.custom",
+            "metadata": {
+                "label": "read fm schema",
+                "x": 86.99999904632568,
+                "y": 109,
+                "height": 80,
+                "width": 120,
+                "extensible": true,
+                "config": {
+                    "connectionID": "ER1_RFC_MC",
+                    "operatorID": "customer.fmschemareader"
+                },
+                "additionalinports": [
+                    {
+                        "name": "in",
+                        "type": "string"
+                    }
+                ],
+                "additionaloutports": [
+                    {
+                        "name": "out",
+                        "type": "string"
+                    }
+                ]
+            }
+        },
+        "tofile1": {
+            "component": "com.sap.file.toFile",
+            "metadata": {
+                "label": "To File",
+                "x": 493.49999713897705,
+                "y": 132,
+                "height": 50,
+                "width": 50,
+                "config": {}
+            }
+        },
+        "writefile1": {
+            "component": "com.sap.file.write",
+            "metadata": {
+                "label": "Write File",
+                "x": 648.9999961853027,
+                "y": 142.99999976158142,
+                "height": 80,
+                "width": 120,
+                "config": {
+                    "pathMode": "Static with placeholders",
+                    "connection": {
+                        "configurationType": "Connection Management",
+                        "connectionID": "DEMO_ADL"
+                    },
+                    "path": "/demo/function/metadata_BAPI_EPM_SO_CREATE.json",
+                    "mode": "Overwrite",
+                    "joinBatches": false
+                }
+            }
+        },
+        "terminal3": {
+            "component": "com.sap.util.terminal",
+            "metadata": {
+                "label": "Terminal",
+                "x": 458.99999713897705,
+                "y": 222,
+                "height": 80,
+                "width": 120,
+                "ui": "dynpath",
+                "config": {}
+            }
+        },
+        "graphterminator1": {
+            "component": "com.sap.util.graphTerminator",
+            "metadata": {
+                "label": "Graph Terminator",
+                "x": 833,
+                "y": 148,
+                "height": 80,
+                "width": 120,
+                "config": {}
+            }
+        },
+        "12multiplexer1": {
+            "component": "com.sap.system.multiplexer.1-2",
+            "metadata": {
+                "label": "1:2 Multiplexer",
+                "x": 264,
+                "y": 109,
+                "height": 80,
+                "width": 120,
+                "extensible": true,
+                "config": {}
+            }
+        }
+    },
+    "groups": [],
+    "connections": [
+        {
+            "metadata": {
+                "points": "547.499997138977,157 595.75,157 595.75,183 643.9999961853027,182.99999976158142"
+            },
+            "src": {
+                "port": "file",
+                "process": "tofile1"
+            },
+            "tgt": {
+                "port": "file",
+                "process": "writefile1"
+            }
+        },
+        {
+            "metadata": {
+                "points": "582.999997138977,262 633,262 633,333 32,333 32,149 81.99999904632568,149"
+            },
+            "src": {
+                "port": "out1",
+                "process": "terminal3"
+            },
+            "tgt": {
+                "port": "in",
+                "process": "customabapoperator1"
+            }
+        },
+        {
+            "metadata": {
+                "points": "210.99999904632568,149 259,149"
+            },
+            "src": {
+                "port": "out",
+                "process": "customabapoperator1"
+            },
+            "tgt": {
+                "port": "in1",
+                "process": "12multiplexer1"
+            }
+        },
+        {
+            "metadata": {
+                "points": "388,158 421,158 421,262 453.99999713897705,262"
+            },
+            "src": {
+                "port": "out2",
+                "process": "12multiplexer1"
+            },
+            "tgt": {
+                "port": "in1",
+                "process": "terminal3"
+            }
+        },
+        {
+            "metadata": {
+                "points": "388,140 438.25,140 438.25,166 488.49999713897705,166"
+            },
+            "src": {
+                "port": "out1",
+                "process": "12multiplexer1"
+            },
+            "tgt": {
+                "port": "in",
+                "process": "tofile1"
+            }
+        },
+        {
+            "metadata": {
+                "points": "772.9999961853027,173.99999976158142 800.5,174 800.5,188 828,188"
+            },
+            "src": {
+                "port": "file",
+                "process": "writefile1"
+            },
+            "tgt": {
+                "port": "stop",
+                "process": "graphterminator1"
+            }
+        }
+    ],
+    "inports": {},
+    "outports": {}
+}

@@ -1,0 +1,173 @@
+package main
+
+import (
+	"encoding/json"
+)
+
+type generalinfo struct {
+	Inactiveversion  string `json:"INACTIVE_VERSION"`
+	Exceptionclasses string `json:"EXCEPTION_CLASSES"`
+	Globalflag       string `json:"GLOBAL_FLAG"`
+	Remotecall       string `json:"REMOTE_CALL"`
+	Updatetask       string `json:"UPDATE_TASK"`
+}
+
+type properties struct {
+	Kind        string `json:"KIND"`
+	Typee       string `json:"TYPE"`
+	Length      int    `json:"LENGTH"`
+	Decimal     int    `json:"DECIMAL"`
+	Description string `json:"DESCRIPTION"`
+}
+
+type element struct {
+	Name       string     `json:"NAME"`
+	Properties properties `json:"PROPERTIES"`
+	Value      string     `json:"VALUE"`
+	Additional []element  `json:"ADDITIONAL"`
+}
+
+type schema struct {
+	Funcname              string      `json:"FUNCNAME"`
+	Generalinfo           generalinfo `json:"GENERAL_INFO"`
+	RequiredImportParam   []string    `json:"REQUIRED_IMPORT_PARAMETER"`
+	Importparameter       []element   `json:"IMPORT_PARAMETER"`
+	Exportparameter       []element   `json:"EXPORT_PARAMETER"`
+	RequiredTablesParam   []string    `json:"REQUIRED_TABLES_PARAMETER"`
+	Tablesparameter       []element   `json:"TABLES_PARAMETER"`
+	RequiredChangingParam []string    `json:"REQUIRED_CHANGING_PARAMETER"`
+	Changingparameter     []element   `json:"CHANGING_PARAMETER"`
+}
+
+type request struct {
+	Funcname          string    `json:"FUNCNAME"`
+	Importparameter   []element `json:"IMPORT_PARAMETER"`
+	Tablesparameter   []element `json:"TABLES_PARAMETER"`
+	Changingparameter []element `json:"CHANGING_PARAMETER"`
+}
+
+var Out func(interface{})
+
+func main() {
+
+}
+
+func Input1(val interface{}){
+
+    message := val.(string)
+    schema := &schema{}
+    err := json.Unmarshal([]byte(message), schema)
+    if err == nil {
+            request := buildFMRequest(schema)
+		    r, _ := json.Marshal(request)
+		    Out(string(r))
+	}else{
+	    Out("Error occurred")
+	}
+}
+
+func buildFMRequest(schema *schema) request {
+
+	r := &request{}
+	r.Funcname = schema.Funcname
+	buildImportParam(r, schema)
+	buildTablesParam(r, schema)
+	return *r
+}
+
+func buildImportParam(r *request, schema *schema) {
+	for _, ele := range schema.Importparameter {
+		switch ele.Name {
+		    case "HEADERDATA":
+		        e := &element{}
+			    e.Name = ele.Name
+    		    for _,add := range ele.Additional {
+    		        switch add.Name{
+    		            case "BUYER_ID":
+                			buyerId := &element{}
+                			buyerId.Name = add.Name
+                			buyerId.Value = "0100000000"
+                			e.Additional = append(e.Additional, *buyerId)
+    			
+                		case "BUYER_NAME":
+                			buyerName := &element{}
+                			buyerName.Name = add.Name
+                			buyerName.Value = "SAP"
+                			e.Additional = append(e.Additional, *buyerName)
+                			
+                		case "CURRENCY_CODE":
+                			currCode := &element{}
+                			currCode.Name = add.Name
+                			currCode.Value = "EUR"
+                			e.Additional = append(e.Additional, *currCode)
+    		        }
+    		    }
+    		    r.Importparameter = append(r.Importparameter, *e)
+    		    
+    		case "PERSIST_TO_DB":
+    		persist := &element{}
+			persist.Name = ele.Name
+			persist.Value = ""
+			ele.Additional = append(ele.Additional, *persist)
+			
+			r.Importparameter = append(r.Importparameter, *persist)
+	    }
+	}
+}
+
+func buildTablesParam(r *request, schema *schema) {
+    // Add table parameter ITEMDATA to TABLES_PARAMETER
+    table := &element{}
+    table.Name = "ITEMDATA"
+    
+    // If users wants to add more rows to the table, here can be a loop
+    // Add one row to ITEMDATA
+    e1 := &element{}
+    e1.Name = "ITEMDATA"
+    
+    // Populate fields to the row
+    note := &element{}
+    note.Name = "NOTE"
+    note.Value = "THIS IS A TEST SO CREATED BY DI"
+    e1.Additional=append(e1.Additional, *note)
+    
+    grossAmount := &element{}
+    grossAmount.Name = "GROSS_AMOUNT"
+    grossAmount.Value = "734.20"
+    e1.Additional=append(e1.Additional, *grossAmount)
+    
+    netAmount := &element{}
+    netAmount.Name = "NET_AMOUNT"
+    netAmount.Value = "645.20"
+    e1.Additional=append(e1.Additional, *netAmount)
+    
+    taxAmount := &element{}
+    taxAmount.Name = "TAX_AMOUNT"
+    taxAmount.Value = "112.30"
+    e1.Additional=append(e1.Additional, *taxAmount)
+    
+    deliveryDate := &element{}
+    deliveryDate.Name = "DELIVERY_DATE"
+    deliveryDate.Value = "20210320230000.0000000"
+    e1.Additional=append(e1.Additional, *deliveryDate)
+    
+    quantity := &element{}
+    quantity.Name = "QUANTITY"
+    quantity.Value = "200"
+    e1.Additional=append(e1.Additional, *quantity)
+    
+    // Feel free to add more fields here..
+    
+    //Apend the "row" to "table"
+    table.Additional=append(table.Additional, *e1)
+    
+    //End loop
+    
+    //Apend the whole "table" to TABLES_PARAMETER
+    r.Tablesparameter = append(r.Tablesparameter, *table)
+    
+    returnn := &element{}
+    returnn.Name = "RETURN"
+    
+    r.Tablesparameter = append(r.Tablesparameter, *returnn)
+}
