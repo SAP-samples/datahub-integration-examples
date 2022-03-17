@@ -1,0 +1,142 @@
+{
+	"properties": {},
+	"description": "[Ex] Original Graph",
+	"processes": {
+		"constantgenerator1": {
+			"component": "com.sap.util.constantGenerator",
+			"metadata": {
+				"label": "250ms Generator",
+				"x": 17,
+				"y": 12,
+				"height": 80,
+				"width": 120,
+				"extensible": true,
+				"generation": 1,
+				"config": {
+					"mode": "pulse",
+					"duration": "250ms"
+				}
+			}
+		},
+		"python3operator1": {
+			"component": "com.sap.system.python3Operator",
+			"metadata": {
+				"label": "Capture Time (10)",
+				"x": 355,
+				"y": 12,
+				"height": 80,
+				"width": 120,
+				"extensible": true,
+				"filesRequired": [
+					"script.py"
+				],
+				"generation": 1,
+				"config": {
+					"script": "from datetime import datetime\nlast = datetime.now()\nn_inputs = 0\n\ndef on_input(data):\n    global last\n    global n_inputs\n    n_inputs += 1\n    \n    if n_inputs == 10:\n        now = datetime.now()\n        diff = now - last\n        last = now\n        n_inputs = 0\n        api.send(\"out\", str(diff))\n\napi.set_port_callback(\"in\", on_input)"
+				},
+				"additionalinports": [
+					{
+						"name": "in",
+						"type": "string"
+					}
+				],
+				"additionaloutports": [
+					{
+						"name": "out",
+						"type": "string"
+					}
+				]
+			}
+		},
+		"wiretap1": {
+			"component": "com.sap.util.wiretap",
+			"metadata": {
+				"label": "Wiretap",
+				"x": 524,
+				"y": 12,
+				"height": 80,
+				"width": 120,
+				"generation": 1,
+				"ui": "dynpath",
+				"config": {}
+			}
+		},
+		"python3operator2": {
+			"component": "com.sap.system.python3Operator",
+			"metadata": {
+				"label": "1s ",
+				"x": 186,
+				"y": 12,
+				"height": 80,
+				"width": 120,
+				"extensible": true,
+				"filesRequired": [
+					"script.py"
+				],
+				"generation": 1,
+				"config": {
+					"script": "from datetime import datetime\nimport time\n\ndef on_input(data):\n    time.sleep(1)\n    api.send(\"out\", data)\n\napi.set_port_callback(\"in\", on_input)"
+				},
+				"additionalinports": [
+					{
+						"name": "in",
+						"type": "string"
+					}
+				],
+				"additionaloutports": [
+					{
+						"name": "out",
+						"type": "string"
+					}
+				]
+			}
+		}
+	},
+	"groups": [],
+	"connections": [
+		{
+			"metadata": {
+				"points": "479,52 519,52"
+			},
+			"src": {
+				"port": "out",
+				"process": "python3operator1"
+			},
+			"tgt": {
+				"port": "in",
+				"process": "wiretap1"
+			}
+		},
+		{
+			"metadata": {
+				"points": "141,52 181,52"
+			},
+			"src": {
+				"port": "out",
+				"process": "constantgenerator1"
+			},
+			"tgt": {
+				"port": "in",
+				"process": "python3operator2"
+			}
+		},
+		{
+			"metadata": {
+				"points": "310,52 350,52"
+			},
+			"src": {
+				"port": "out",
+				"process": "python3operator2"
+			},
+			"tgt": {
+				"port": "in",
+				"process": "python3operator1"
+			}
+		}
+	],
+	"inports": {},
+	"outports": {},
+	"metadata": {
+		"generation": 1
+	}
+}

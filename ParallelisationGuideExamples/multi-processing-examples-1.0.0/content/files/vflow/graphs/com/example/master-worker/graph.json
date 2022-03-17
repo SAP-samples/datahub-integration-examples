@@ -1,0 +1,142 @@
+{
+    "properties": {},
+    "description": "[Ex] Master-Worker Pattern",
+    "processes": {
+        "constantgenerator1": {
+            "component": "com.sap.util.constantGenerator",
+            "metadata": {
+                "label": "250ms Generator",
+                "x": 17,
+                "y": 12,
+                "height": 80,
+                "width": 120,
+                "extensible": true,
+                "generation": 1,
+                "config": {
+                    "mode": "pulse",
+                    "duration": "250ms"
+                }
+            }
+        },
+        "python3operator1": {
+            "component": "com.sap.system.python3Operator",
+            "metadata": {
+                "label": "Capture Time (10)",
+                "x": 355,
+                "y": 12,
+                "height": 80,
+                "width": 120,
+                "extensible": true,
+                "filesRequired": [
+                    "script.py"
+                ],
+                "generation": 1,
+                "config": {
+                    "script": "from datetime import datetime\nlast = datetime.now()\nn_inputs = 0\n\ndef on_input(data):\n    global last\n    global n_inputs\n    n_inputs += 1\n    \n    if n_inputs == 10:\n        now = datetime.now()\n        diff = now - last\n        last = now\n        n_inputs = 0\n        api.send(\"out\", str(diff))\n\napi.set_port_callback(\"in\", on_input)"
+                },
+                "additionalinports": [
+                    {
+                        "name": "in",
+                        "type": "string"
+                    }
+                ],
+                "additionaloutports": [
+                    {
+                        "name": "out",
+                        "type": "string"
+                    }
+                ]
+            }
+        },
+        "wiretap1": {
+            "component": "com.sap.util.wiretap",
+            "metadata": {
+                "label": "Wiretap",
+                "x": 524,
+                "y": 12,
+                "height": 80,
+                "width": 120,
+                "generation": 1,
+                "ui": "dynpath",
+                "config": {}
+            }
+        },
+        "python3operator2": {
+            "component": "com.sap.system.python3Operator",
+            "metadata": {
+                "label": "1s ",
+                "x": 186,
+                "y": 12,
+                "height": 80,
+                "width": 120,
+                "extensible": true,
+                "filesRequired": [
+                    "script.py"
+                ],
+                "generation": 1,
+                "config": {
+                    "script": "import multiprocessing\nfrom multiprocessing import Pool, get_context\nmultiprocessing.set_start_method('spawn')\n\nfrom operators.com.example.multi import parallel_fun\n\nq_in = multiprocessing.Queue(1)\nq_out = multiprocessing.Queue()\n\n# Spawn workers\nn_proc = 4\nproc = [multiprocessing.Process(target=parallel_fun, args=(q_in, q_out)) for _ in range(n_proc)]\nfor p in proc:\n    p.daemon = True\n    p.start()\n\n# Input callback sends data to in queue\ndef on_input(message):\n    # Just put the Message into the queue for the workers\n    q_in.put((False, message))\n    \n# Timer callback is handling the results from the out queue\nimport queue\ndef t1():\n    try:\n        out = q_out.get()\n        api.send(\"out\", out)\n    except queue.Empty:\n        pass\n    \n# \"0\" timer callback is started as quickly as possible (basically a while loop)\n# Increase time if you expect the out_queue to be empty most of the time\napi.add_timer(\"0\", t1)\n    \n# shutdown the workers\ndef shutdown_workers():\n    for _ in range(n_proc):\n        q_in.put((True, None))\n\napi.add_shutdown_handler(shutdown_workers)\n    \napi.set_port_callback(\"in\", on_input)"
+                },
+                "additionalinports": [
+                    {
+                        "name": "in",
+                        "type": "string"
+                    }
+                ],
+                "additionaloutports": [
+                    {
+                        "name": "out",
+                        "type": "string"
+                    }
+                ]
+            }
+        }
+    },
+    "groups": [],
+    "connections": [
+        {
+            "metadata": {
+                "points": "479,52 519,52"
+            },
+            "src": {
+                "port": "out",
+                "process": "python3operator1"
+            },
+            "tgt": {
+                "port": "in",
+                "process": "wiretap1"
+            }
+        },
+        {
+            "metadata": {
+                "points": "141,52 181,52"
+            },
+            "src": {
+                "port": "out",
+                "process": "constantgenerator1"
+            },
+            "tgt": {
+                "port": "in",
+                "process": "python3operator2"
+            }
+        },
+        {
+            "metadata": {
+                "points": "310,52 350,52"
+            },
+            "src": {
+                "port": "out",
+                "process": "python3operator2"
+            },
+            "tgt": {
+                "port": "in",
+                "process": "python3operator1"
+            }
+        }
+    ],
+    "inports": {},
+    "outports": {},
+    "metadata": {
+        "generation": 1
+    }
+}
