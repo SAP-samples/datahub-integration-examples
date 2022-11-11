@@ -1,0 +1,13 @@
+{
+    "description": "Get Datasource Pairs",
+    "component": "com.sap.system.python3Operator.v2",
+    "versionStatus": "active",
+    "iconsrc": "graph_datasource_pairs1.svg",
+    "config": {
+        "$type": "http://sap.com/vflow/extract.datasourcepairs.configSchema.json",
+        "errorHandling": {
+            "type": "terminate on error"
+        },
+        "script": "file://get_pairs.py"
+    }
+}

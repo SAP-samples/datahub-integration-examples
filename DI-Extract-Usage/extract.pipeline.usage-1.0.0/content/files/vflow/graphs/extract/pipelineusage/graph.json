@@ -1,0 +1,595 @@
+{
+    "properties": {},
+    "description": "Extract Pipeline Usage",
+    "processes": {
+        "getusers11": {
+            "component": "extract.users",
+            "metadata": {
+                "label": "Get Users",
+                "x": 12,
+                "y": 72,
+                "height": 80,
+                "width": 120,
+                "extensible": true,
+                "filesRequired": [
+                    "script.py"
+                ],
+                "generation": 2,
+                "config": {
+                    "connection_id": {
+                        "connectionID": "PipelineAPI"
+                    }
+                },
+                "additionaloutports": [
+                    {
+                        "name": "output",
+                        "type": "table",
+                        "vtype-ID": "extract.users"
+                    }
+                ]
+            },
+            "name": "getusers1"
+        },
+        "getruntimegraphs11": {
+            "component": "extract.runtimegraphs",
+            "metadata": {
+                "label": "Get Runtime Graphs",
+                "x": 181,
+                "y": 72,
+                "height": 80,
+                "width": 120,
+                "extensible": true,
+                "filesRequired": [
+                    "script.py"
+                ],
+                "generation": 2,
+                "config": {},
+                "additionalinports": [
+                    {
+                        "name": "input",
+                        "type": "table",
+                        "vtype-ID": "extract.users"
+                    }
+                ],
+                "additionaloutports": [
+                    {
+                        "name": "output",
+                        "type": "table",
+                        "vtype-ID": "extract.runtime_graphs"
+                    }
+                ]
+            },
+            "name": "getruntimegraphs1"
+        },
+        "getgraphdatasources11": {
+            "component": "extract.datasources",
+            "metadata": {
+                "label": "Get Graph Datasources",
+                "x": 350,
+                "y": 72,
+                "height": 80,
+                "width": 120,
+                "extensible": true,
+                "filesRequired": [
+                    "script.py"
+                ],
+                "generation": 2,
+                "config": {},
+                "additionalinports": [
+                    {
+                        "name": "input",
+                        "type": "table",
+                        "vtype-ID": "extract.runtime_graphs"
+                    }
+                ],
+                "additionaloutports": [
+                    {
+                        "name": "output1",
+                        "type": "table",
+                        "vtype-ID": "$GRAPH.graph_datasources"
+                    },
+                    {
+                        "name": "output2",
+                        "type": "table",
+                        "vtype-ID": "$GRAPH.graph_datasources"
+                    }
+                ]
+            },
+            "name": "getgraphdatasources1"
+        },
+        "getdatasourcepairs11": {
+            "component": "extract.datasourcepairs",
+            "metadata": {
+                "label": "Get Datasource Pairs",
+                "x": 534.9999990463257,
+                "y": 12,
+                "height": 80,
+                "width": 120,
+                "extensible": true,
+                "filesRequired": [
+                    "script.py"
+                ],
+                "generation": 2,
+                "config": {},
+                "additionalinports": [
+                    {
+                        "name": "input",
+                        "type": "table",
+                        "vtype-ID": "$GRAPH.graph_datasources"
+                    }
+                ],
+                "additionaloutports": [
+                    {
+                        "name": "output",
+                        "type": "table",
+                        "vtype-ID": "$GRAPH.datasource_pairs"
+                    }
+                ]
+            },
+            "name": "getdatasourcepairs1"
+        },
+        "tableproducer11": {
+            "component": "com.sap.database.table.producer.v3",
+            "metadata": {
+                "label": "Table Producer",
+                "x": 534.9999990463257,
+                "y": 132,
+                "height": 80,
+                "width": 120,
+                "extensible": false,
+                "generation": 2,
+                "config": {
+                    "service": "HANA_DB",
+                    "serviceConnection": {
+                        "configurationType": "Configuration Manager",
+                        "connectionID": "DPS"
+                    },
+                    "source": {
+                        "remoteObjectReference": {
+                            "connection": {
+                                "id": "DPS",
+                                "type": "HANA_DB"
+                            },
+                            "name": "GRAPH_DATASOURCES",
+                            "remoteObjectType": "TABLE",
+                            "qualifiedName": "/DPS_FRONTRUNNER#POC1/GRAPH_DATASOURCES",
+                            "nativeQualifiedName": "\"DPS_FRONTRUNNER#POC1\".\"GRAPH_DATASOURCES\"",
+                            "owner": "DPS_FRONTRUNNER#POC1"
+                        },
+                        "schema": {
+                            "genericType": "TABLE",
+                            "tableBasedRepresentation": {
+                                "attributes": [
+                                    {
+                                        "name": "USER",
+                                        "templateType": "string",
+                                        "datatype": "STRING",
+                                        "length": 25,
+                                        "nativeDatatype": "NVARCHAR"
+                                    },
+                                    {
+                                        "name": "TENANT",
+                                        "templateType": "string",
+                                        "datatype": "STRING",
+                                        "length": 25,
+                                        "nativeDatatype": "NVARCHAR"
+                                    },
+                                    {
+                                        "name": "SRC",
+                                        "templateType": "string",
+                                        "datatype": "STRING",
+                                        "length": 50,
+                                        "nativeDatatype": "NVARCHAR"
+                                    },
+                                    {
+                                        "name": "NAME",
+                                        "templateType": "string",
+                                        "datatype": "STRING",
+                                        "length": 25,
+                                        "nativeDatatype": "NVARCHAR"
+                                    },
+                                    {
+                                        "name": "HANDLE",
+                                        "templateType": "string",
+                                        "datatype": "STRING",
+                                        "length": 50,
+                                        "nativeDatatype": "NVARCHAR"
+                                    },
+                                    {
+                                        "name": "STATUS",
+                                        "templateType": "string",
+                                        "datatype": "STRING",
+                                        "length": 10,
+                                        "nativeDatatype": "NVARCHAR"
+                                    },
+                                    {
+                                        "name": "SUBMITTED",
+                                        "templateType": "date",
+                                        "datatype": "DATE",
+                                        "nativeDatatype": "DATE"
+                                    },
+                                    {
+                                        "name": "STOPPED",
+                                        "templateType": "date",
+                                        "datatype": "DATE",
+                                        "nativeDatatype": "DATE"
+                                    },
+                                    {
+                                        "name": "RUNTIME",
+                                        "templateType": "int32",
+                                        "datatype": "INTEGER",
+                                        "length": 4,
+                                        "nativeDatatype": "INTEGER"
+                                    },
+                                    {
+                                        "name": "DATA_SOURCE",
+                                        "templateType": "string",
+                                        "datatype": "STRING",
+                                        "length": 100,
+                                        "nativeDatatype": "NVARCHAR"
+                                    },
+                                    {
+                                        "name": "COMPONENT",
+                                        "templateType": "string",
+                                        "datatype": "STRING",
+                                        "length": 50,
+                                        "nativeDatatype": "NVARCHAR"
+                                    },
+                                    {
+                                        "name": "DIRECTION",
+                                        "templateType": "string",
+                                        "datatype": "STRING",
+                                        "length": 10,
+                                        "nativeDatatype": "NVARCHAR"
+                                    }
+                                ],
+                                "uniqueKeys": [
+                                    {
+                                        "attributeReferences": [
+                                            "HANDLE",
+                                            "COMPONENT",
+                                            "DATA_SOURCE"
+                                        ]
+                                    }
+                                ]
+                            }
+                        },
+                        "capabilityProperties": [
+                            {
+                                "name": "isProfileable",
+                                "value": "true"
+                            },
+                            {
+                                "name": "isDeltaEnabled",
+                                "value": "true"
+                            }
+                        ]
+                    },
+                    "mode": "append",
+                    "attributeMappings": [
+                        {
+                            "expression": "\"user\"",
+                            "target": "USER"
+                        },
+                        {
+                            "expression": "\"tenant\"",
+                            "target": "TENANT"
+                        },
+                        {
+                            "expression": "\"src\"",
+                            "target": "SRC"
+                        },
+                        {
+                            "expression": "\"name\"",
+                            "target": "NAME"
+                        },
+                        {
+                            "expression": "\"handle\"",
+                            "target": "HANDLE"
+                        },
+                        {
+                            "expression": "\"status\"",
+                            "target": "STATUS"
+                        },
+                        {
+                            "expression": "\"submitted\"",
+                            "target": "SUBMITTED"
+                        },
+                        {
+                            "expression": "\"stopped\"",
+                            "target": "STOPPED"
+                        },
+                        {
+                            "expression": "\"runtime\"",
+                            "target": "RUNTIME"
+                        },
+                        {
+                            "expression": "\"data_source\"",
+                            "target": "DATA_SOURCE"
+                        },
+                        {
+                            "expression": "\"component\"",
+                            "target": "COMPONENT"
+                        },
+                        {
+                            "expression": "\"direction\"",
+                            "target": "DIRECTION"
+                        }
+                    ],
+                    "upsert": true
+                },
+                "inports": [
+                    {
+                        "name": "inTable",
+                        "type": "table",
+                        "vtype-ID": "$GRAPH.graph_datasources"
+                    }
+                ]
+            },
+            "name": "tableproducer1"
+        },
+        "tableproducer21": {
+            "component": "com.sap.database.table.producer.v3",
+            "metadata": {
+                "label": "Table Producer",
+                "x": 719.9999980926514,
+                "y": 57.50000023841858,
+                "height": 80,
+                "width": 120,
+                "extensible": false,
+                "generation": 2,
+                "config": {
+                    "service": "HANA_DB",
+                    "serviceConnection": {
+                        "configurationType": "Configuration Manager",
+                        "connectionID": "DPS"
+                    },
+                    "source": {
+                        "remoteObjectReference": {
+                            "connection": {
+                                "id": "DPS",
+                                "type": "HANA_DB"
+                            },
+                            "name": "DATASOURCE_PAIRS",
+                            "remoteObjectType": "TABLE",
+                            "qualifiedName": "/DPS_FRONTRUNNER#POC1/DATASOURCE_PAIRS",
+                            "nativeQualifiedName": "\"DPS_FRONTRUNNER#POC1\".\"DATASOURCE_PAIRS\"",
+                            "owner": "DPS_FRONTRUNNER#POC1"
+                        },
+                        "schema": {
+                            "genericType": "TABLE",
+                            "tableBasedRepresentation": {
+                                "attributes": [
+                                    {
+                                        "name": "DATA_SOURCE1",
+                                        "templateType": "string",
+                                        "datatype": "STRING",
+                                        "length": 100,
+                                        "nativeDatatype": "NVARCHAR"
+                                    },
+                                    {
+                                        "name": "DATA_SOURCE2",
+                                        "templateType": "string",
+                                        "datatype": "STRING",
+                                        "length": 100,
+                                        "nativeDatatype": "NVARCHAR"
+                                    },
+                                    {
+                                        "name": "COUNT",
+                                        "templateType": "int32",
+                                        "datatype": "INTEGER",
+                                        "length": 4,
+                                        "nativeDatatype": "INTEGER"
+                                    }
+                                ]
+                            }
+                        },
+                        "capabilityProperties": [
+                            {
+                                "name": "isProfileable",
+                                "value": "true"
+                            },
+                            {
+                                "name": "isDeltaEnabled",
+                                "value": "true"
+                            }
+                        ]
+                    },
+                    "mode": "overwrite",
+                    "attributeMappings": [
+                        {
+                            "expression": "\"data_source1\"",
+                            "target": "DATA_SOURCE1"
+                        },
+                        {
+                            "expression": "\"data_source2\"",
+                            "target": "DATA_SOURCE2"
+                        },
+                        {
+                            "expression": "\"count\"",
+                            "target": "COUNT"
+                        }
+                    ]
+                },
+                "inports": [
+                    {
+                        "name": "inTable",
+                        "type": "table",
+                        "vtype-ID": "$GRAPH.datasource_pairs"
+                    }
+                ]
+            },
+            "name": "tableproducer2"
+        },
+        "python3operator1111": {
+            "component": "com.sap.system.python3Operator.v2",
+            "metadata": {
+                "label": "Python3 Operator",
+                "x": 904.999997138977,
+                "y": 72,
+                "height": 80,
+                "width": 120,
+                "extensible": true,
+                "filesRequired": [
+                    "script.py"
+                ],
+                "generation": 2,
+                "config": {
+                    "script": "input1 = False\r\ninput2 = False\r\n\r\ndef on_input1(msg_id, header, body):\r\n    global input1\r\n    input1 = True\r\n    if input1 and input2:\r\n        api.outputs.output.publish(\"stop\")\r\napi.set_port_callback(\"input1\", on_input1)\r\n\r\ndef on_input2(msg_id, header, body):\r\n    global input2\r\n    input2 = True\r\n    if input1 and input2:\r\n        api.outputs.output.publish(\"stop\")\r\n        \r\napi.set_port_callback(\"input2\", on_input2)"
+                },
+                "additionalinports": [
+                    {
+                        "name": "input1",
+                        "type": "scalar",
+                        "vtype-ID": "com.sap.core.string"
+                    },
+                    {
+                        "name": "input2",
+                        "type": "scalar",
+                        "vtype-ID": "com.sap.core.string"
+                    }
+                ],
+                "additionaloutports": [
+                    {
+                        "name": "output",
+                        "type": "scalar",
+                        "vtype-ID": "com.sap.core.string"
+                    }
+                ]
+            },
+            "name": "python3operator111"
+        },
+        "graphterminator1111": {
+            "component": "com.sap.util.graphTerminator.v2",
+            "metadata": {
+                "label": "Graph Terminator",
+                "x": 1073.999997138977,
+                "y": 72,
+                "height": 80,
+                "width": 120,
+                "generation": 2,
+                "config": {},
+                "inports": [
+                    {
+                        "name": "in",
+                        "type": "scalar",
+                        "vtype-ID": "com.sap.core.string"
+                    }
+                ]
+            },
+            "name": "graphterminator111"
+        }
+    },
+    "groups": [],
+    "connections": [
+        {
+            "metadata": {
+                "points": "136,112 176,112"
+            },
+            "src": {
+                "port": "output",
+                "process": "getusers11"
+            },
+            "tgt": {
+                "port": "input",
+                "process": "getruntimegraphs11"
+            }
+        },
+        {
+            "metadata": {
+                "points": "305,112 345,112"
+            },
+            "src": {
+                "port": "output",
+                "process": "getruntimegraphs11"
+            },
+            "tgt": {
+                "port": "input",
+                "process": "getgraphdatasources11"
+            }
+        },
+        {
+            "metadata": {
+                "points": "474,103 501.99999952316284,103 501.99999952316284,52 529.9999990463257,52"
+            },
+            "src": {
+                "port": "output1",
+                "process": "getgraphdatasources11"
+            },
+            "tgt": {
+                "port": "input",
+                "process": "getdatasourcepairs11"
+            }
+        },
+        {
+            "metadata": {
+                "points": "474,121 501.99999952316284,121 501.99999952316284,172 529.9999990463257,172"
+            },
+            "src": {
+                "port": "output2",
+                "process": "getgraphdatasources11"
+            },
+            "tgt": {
+                "port": "inTable",
+                "process": "tableproducer11"
+            }
+        },
+        {
+            "metadata": {
+                "points": "658.9999990463257,52 686.9999985694885,52 686.9999985694885,97.50000023841858 714.9999980926514,97.50000023841858"
+            },
+            "src": {
+                "port": "output",
+                "process": "getdatasourcepairs11"
+            },
+            "tgt": {
+                "port": "inTable",
+                "process": "tableproducer21"
+            }
+        },
+        {
+            "metadata": {
+                "points": "843.9999980926514,97.50000023841858 871.9999976158142,97.50000023841858 871.9999976158142,103 899.999997138977,103"
+            },
+            "src": {
+                "port": "out",
+                "process": "tableproducer21"
+            },
+            "tgt": {
+                "port": "input1",
+                "process": "python3operator1111"
+            }
+        },
+        {
+            "metadata": {
+                "points": "658.9999990463257,172 686.9999985694885,172 686.9999985694885,165.49999976158142 871.9999976158142,165.49999976158142 871.9999976158142,121 899.999997138977,121"
+            },
+            "src": {
+                "port": "out",
+                "process": "tableproducer11"
+            },
+            "tgt": {
+                "port": "input2",
+                "process": "python3operator1111"
+            }
+        },
+        {
+            "metadata": {
+                "points": "1028.999997138977,112 1068.999997138977,112"
+            },
+            "src": {
+                "port": "output",
+                "process": "python3operator1111"
+            },
+            "tgt": {
+                "port": "in",
+                "process": "graphterminator1111"
+            }
+        }
+    ],
+    "inports": {},
+    "outports": {},
+    "metadata": {
+        "generation": 2
+    }
+}

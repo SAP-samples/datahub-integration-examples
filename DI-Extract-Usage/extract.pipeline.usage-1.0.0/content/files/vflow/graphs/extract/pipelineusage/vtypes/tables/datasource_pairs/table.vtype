@@ -1,0 +1,28 @@
+{
+	"name": "datasource_pairs",
+	"description": "datasource_pairs",
+	"vflow.type": "table",
+	"keys": [],
+	"rows": {
+		"components": [
+			{
+				"data_source1": {
+					"vflow.type": "scalar",
+					"vtype-ID": "$GRAPH.str_100"
+				}
+			},
+			{
+				"data_source2": {
+					"vflow.type": "scalar",
+					"vtype-ID": "$GRAPH.str_100"
+				}
+			},
+			{
+				"count": {
+					"vflow.type": "scalar",
+					"vtype-ID": "com.sap.core.int64"
+				}
+			}
+		]
+	}
+}

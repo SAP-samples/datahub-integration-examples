@@ -1,0 +1,13 @@
+{
+    "description": "Get Users",
+    "component": "com.sap.system.python3Operator.v2",
+    "versionStatus": "active",
+    "iconsrc": "users.svg",
+    "config": {
+        "$type": "http://sap.com/vflow/extract.users.configSchema.json",
+        "errorHandling": {
+            "type": "terminate on error"
+        },
+        "script": "file://get_users.py"
+    }
+}

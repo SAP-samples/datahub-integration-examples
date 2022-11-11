@@ -1,0 +1,82 @@
+{
+	"name": "graph_datasources",
+	"description": "graph_datasources",
+	"vflow.type": "table",
+	"keys": [],
+	"rows": {
+		"components": [
+			{
+				"user": {
+					"vflow.type": "scalar",
+					"vtype-ID": "$GRAPH.str_25"
+				}
+			},
+			{
+				"tenant": {
+					"vflow.type": "scalar",
+					"vtype-ID": "$GRAPH.str_25"
+				}
+			},
+			{
+				"src": {
+					"vflow.type": "scalar",
+					"vtype-ID": "$GRAPH.str_50"
+				}
+			},
+			{
+				"name": {
+					"vflow.type": "scalar",
+					"vtype-ID": "$GRAPH.str_25"
+				}
+			},
+			{
+				"handle": {
+					"vflow.type": "scalar",
+					"vtype-ID": "$GRAPH.str_50"
+				}
+			},
+			{
+				"status": {
+					"vflow.type": "scalar",
+					"vtype-ID": "$GRAPH.str_10"
+				}
+			},
+			{
+				"submitted": {
+					"vflow.type": "scalar",
+					"vtype-ID": "com.sap.core.timestamp"
+				}
+			},
+			{
+				"stopped": {
+					"vflow.type": "scalar",
+					"vtype-ID": "com.sap.core.timestamp"
+				}
+			},
+			{
+				"runtime": {
+					"vflow.type": "scalar",
+					"vtype-ID": "com.sap.core.int64"
+				}
+			},
+			{
+				"data_source": {
+					"vflow.type": "scalar",
+					"vtype-ID": "$GRAPH.str_100"
+				}
+			},
+			{
+				"component": {
+					"vflow.type": "scalar",
+					"vtype-ID": "$GRAPH.str_50"
+				}
+			},
+			{
+				"direction": {
+					"vflow.type": "scalar",
+					"vtype-ID": "$GRAPH.str_10"
+				}
+			}
+		]
+	}
+}

@@ -1,0 +1,1 @@
+{"name":"extract.users","description":"extract.users","vflow.type":"table","keys":[],"rows":{"components":[{"tenant":{"vflow.type":"scalar","vtype-ID":"com.sap.core.string"}},{"username":{"vflow.type":"scalar","vtype-ID":"com.sap.core.string"}}]}}
