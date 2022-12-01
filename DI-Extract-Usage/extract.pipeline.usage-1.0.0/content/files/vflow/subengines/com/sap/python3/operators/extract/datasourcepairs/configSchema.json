@@ -1,0 +1,18 @@
+{
+    "$schema": "http://json-schema.org/draft-06/schema#",
+    "$id": "http://sap.com/vflow/extract.datasourcepairs.configSchema.json",
+    "type": "object",
+    "properties": {
+        "codelanguage": {
+            "type": "string"
+        },
+        "errorHandling": {
+            "title": "Error Handling",
+            "$ref": "http://sap.com/vflow/com.sap.error.scriptOperator.schema.json"
+        },
+        "script": {
+            "type": "string"
+        }
+    },
+    "required": []
+}

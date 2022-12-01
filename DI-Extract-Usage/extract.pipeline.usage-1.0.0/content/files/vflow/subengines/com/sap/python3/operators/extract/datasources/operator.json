@@ -1,0 +1,13 @@
+{
+    "description": "Get Graph Datasources",
+    "component": "com.sap.system.python3Operator.v2",
+    "versionStatus": "active",
+    "iconsrc": "pipeline_api_graph_datasources.svg",
+    "config": {
+        "$type": "http://sap.com/vflow/extract.datasources.configSchema.json",
+        "errorHandling": {
+            "type": "terminate on error"
+        },
+        "script": "file://get_datasources.py"
+    }
+}
