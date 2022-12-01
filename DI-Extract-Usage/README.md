@@ -1,5 +1,5 @@
 # Extract DI Pipeline Usage
-This is the source code for the blog post: [Analyzing SAP Data Intelligence Pipeline Usage: From REST API to SAC](url)
+This is the source code for the blog post: [Analyzing SAP Data Intelligence Pipeline Usage: From REST API to SAC](https://blogs.sap.com/2022/12/01/analyzing-sap-data-intelligence-pipeline-usage-from-rest-api-to-sac/)
 ![b1-3](https://user-images.githubusercontent.com/109061211/201470709-b608038c-c9e7-49dd-8ddf-61d5417bf8a4.png)
 
 ## Contents
