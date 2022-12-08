@@ -24,15 +24,20 @@ def get_datasource_pairs(df):
         name='direction_data_source')
     path_list = pairs_df['direction_data_source'].to_list()
 
-    for i in range(len(path_list)):
-        pairs.append(findsubsets(path_list[i], 2))
+    for path in path_list:
+        pairs.append(findsubsets(path, 2))
+
     pairs = flatten(pairs)
 
-    pairs_df = pd.DataFrame(pairs)
-    pairs_df.columns = ['data_source1', 'data_source2']
-    pairs_df = pairs_df.groupby(['data_source1', 'data_source2']).size().reset_index(name='count')
+    if pairs:
+        pairs_df = pd.DataFrame(pairs)
+        pairs_df.columns = ['data_source1', 'data_source2']
+        pairs_df = pairs_df.groupby(['data_source1', 'data_source2']).size().reset_index(name='count')
+    else:
+        pairs_df = pd.DataFrame({'data_source1':'no pairs', 'data_source2':'no pairs', 'count':0}, index=[0])
 
     return pairs_df
+
 
 
 #
