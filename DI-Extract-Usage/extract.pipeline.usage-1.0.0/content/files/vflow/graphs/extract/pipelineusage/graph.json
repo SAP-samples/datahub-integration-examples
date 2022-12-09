@@ -97,37 +97,6 @@
             },
             "name": "getgraphdatasources1"
         },
-        "getdatasourcepairs11": {
-            "component": "extract.datasourcepairs",
-            "metadata": {
-                "label": "Get Datasource Pairs",
-                "x": 534.9999990463257,
-                "y": 12,
-                "height": 80,
-                "width": 120,
-                "extensible": true,
-                "filesRequired": [
-                    "script.py"
-                ],
-                "generation": 2,
-                "config": {},
-                "additionalinports": [
-                    {
-                        "name": "input",
-                        "type": "table",
-                        "vtype-ID": "$GRAPH.graph_datasources"
-                    }
-                ],
-                "additionaloutports": [
-                    {
-                        "name": "output",
-                        "type": "table",
-                        "vtype-ID": "$GRAPH.datasource_pairs"
-                    }
-                ]
-            },
-            "name": "getdatasourcepairs1"
-        },
         "tableproducer11": {
             "component": "com.sap.database.table.producer.v3",
             "metadata": {
@@ -478,6 +447,36 @@
                 ]
             },
             "name": "graphterminator111"
+        },
+        "getdatasourcepairs3": {
+            "component": "extract.datasourcepairs",
+            "metadata": {
+                "label": "Get Datasource Pairs",
+                "x": 534.9999990463257,
+                "y": 12,
+                "height": 80,
+                "width": 120,
+                "extensible": true,
+                "filesRequired": [
+                    "script.py"
+                ],
+                "generation": 2,
+                "config": {},
+                "additionalinports": [
+                    {
+                        "name": "input",
+                        "type": "table",
+                        "vtype-ID": "$GRAPH.graph_datasources"
+                    }
+                ],
+                "additionaloutports": [
+                    {
+                        "name": "output",
+                        "type": "table",
+                        "vtype-ID": "$GRAPH.datasource_pairs"
+                    }
+                ]
+            }
         }
     },
     "groups": [],
@@ -510,19 +509,6 @@
         },
         {
             "metadata": {
-                "points": "474,103 501.99999952316284,103 501.99999952316284,52 529.9999990463257,52"
-            },
-            "src": {
-                "port": "output1",
-                "process": "getgraphdatasources11"
-            },
-            "tgt": {
-                "port": "input",
-                "process": "getdatasourcepairs11"
-            }
-        },
-        {
-            "metadata": {
                 "points": "474,121 501.99999952316284,121 501.99999952316284,172 529.9999990463257,172"
             },
             "src": {
@@ -532,19 +518,6 @@
             "tgt": {
                 "port": "inTable",
                 "process": "tableproducer11"
-            }
-        },
-        {
-            "metadata": {
-                "points": "658.9999990463257,52 686.9999985694885,52 686.9999985694885,97.50000023841858 714.9999980926514,97.50000023841858"
-            },
-            "src": {
-                "port": "output",
-                "process": "getdatasourcepairs11"
-            },
-            "tgt": {
-                "port": "inTable",
-                "process": "tableproducer21"
             }
         },
         {
@@ -584,6 +557,32 @@
             "tgt": {
                 "port": "in",
                 "process": "graphterminator1111"
+            }
+        },
+        {
+            "metadata": {
+                "points": "474,103 501.99999952316284,103 501.99999952316284,52 529.9999990463257,52"
+            },
+            "src": {
+                "port": "output1",
+                "process": "getgraphdatasources11"
+            },
+            "tgt": {
+                "port": "input",
+                "process": "getdatasourcepairs3"
+            }
+        },
+        {
+            "metadata": {
+                "points": "658.9999990463257,52 686.9999985694885,52 686.9999985694885,97.50000023841858 714.9999980926514,97.50000023841858"
+            },
+            "src": {
+                "port": "output",
+                "process": "getdatasourcepairs3"
+            },
+            "tgt": {
+                "port": "inTable",
+                "process": "tableproducer21"
             }
         }
     ],
