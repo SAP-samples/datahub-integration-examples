@@ -1,0 +1,15 @@
+{
+    "description": "Extract Pipelines",
+    "component": "com.sap.system.python3Operator.v2",
+    "versionStatus": "active",
+    "icon": "puzzle-piece",
+    "config": {
+        "$type": "http://sap.com/vflow/extract.pipelines.configSchema.json",
+        "errorHandling": {
+            "type": "terminate on error"
+        },
+        "script": "file://extract_pipelines.py",
+        "stopped_after": null,
+        "stopped_before": null
+    }
+}

@@ -1,0 +1,140 @@
+{
+    "description": "Extract Pipelines",
+    "processes": {
+        "graphterminator11": {
+            "component": "com.sap.util.graphTerminator.v2",
+            "metadata": {
+                "label": "Graph Terminator",
+                "x": 550.9999980926514,
+                "y": 12,
+                "height": 80,
+                "width": 120,
+                "allowedStarPort": true,
+                "generation": 2,
+                "config": {}
+            },
+            "name": "graphterminator1"
+        },
+        "binaryfileproducer11": {
+            "component": "com.sap.file.write.v2",
+            "metadata": {
+                "label": "Binary File Producer",
+                "x": 365.9999990463257,
+                "y": 12,
+                "height": 80,
+                "width": 120,
+                "generation": 2,
+                "config": {
+                    "connection": {
+                        "configurationType": "Connection Management",
+                        "connectionID": "S3_Catalog"
+                    },
+                    "mode": "Create only"
+                }
+            },
+            "name": "binaryfileproducer1"
+        },
+        "tabletobinary11": {
+            "component": "com.sap.table.encode",
+            "metadata": {
+                "label": "Table to Binary",
+                "x": 181,
+                "y": 12,
+                "height": 80,
+                "width": 120,
+                "extensible": false,
+                "generation": 2,
+                "ui": "dynpath",
+                "config": {
+                    "outputFormat": "JSONLINES"
+                },
+                "inports": [
+                    {
+                        "name": "table",
+                        "type": "table",
+                        "vtype-ID": "extract.pipelines"
+                    }
+                ]
+            },
+            "name": "tabletobinary1"
+        },
+        "extractpipelines1": {
+            "component": "extract.pipelines",
+            "metadata": {
+                "label": "Extract Pipelines",
+                "x": 12,
+                "y": 12,
+                "height": 80,
+                "width": 120,
+                "extensible": true,
+                "filesRequired": [
+                    "script.py"
+                ],
+                "generation": 2,
+                "config": {
+                    "connection_id": {
+                        "connectionID": "PipelineAPI"
+                    },
+                    "stopped_after": 0,
+                    "stopped_before": 9999999999,
+                    "status": "completed"
+                },
+                "additionaloutports": [
+                    {
+                        "name": "output",
+                        "type": "table",
+                        "vtype-ID": "extract.pipelines"
+                    }
+                ]
+            }
+        }
+    },
+    "groups": [],
+    "connections": [
+        {
+            "metadata": {
+                "points": "305,43 332.99999952316284,43 332.99999952316284,52 360.9999990463257,52"
+            },
+            "src": {
+                "port": "binary",
+                "process": "tabletobinary11"
+            },
+            "tgt": {
+                "port": "file",
+                "process": "binaryfileproducer11"
+            }
+        },
+        {
+            "metadata": {
+                "points": "489.9999990463257,43 517.9999985694885,43 517.9999985694885,52 545.9999980926514,52"
+            },
+            "src": {
+                "port": "file",
+                "process": "binaryfileproducer11"
+            },
+            "tgt": {
+                "port": "in",
+                "process": "graphterminator11"
+            }
+        },
+        {
+            "metadata": {
+                "points": "136,52 176,52"
+            },
+            "src": {
+                "port": "output",
+                "process": "extractpipelines1"
+            },
+            "tgt": {
+                "port": "table",
+                "process": "tabletobinary11"
+            }
+        }
+    ],
+    "inports": {},
+    "outports": {},
+    "properties": {},
+    "metadata": {
+        "generation": 2
+    }
+}
