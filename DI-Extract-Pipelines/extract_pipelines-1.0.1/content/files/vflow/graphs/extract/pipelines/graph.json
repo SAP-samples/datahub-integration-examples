@@ -1,0 +1,103 @@
+{
+    "properties": {},
+    "description": "Extract Pipelines",
+    "processes": {
+        "graphterminator11": {
+            "component": "com.sap.util.graphTerminator.v2",
+            "metadata": {
+                "label": "Graph Terminator",
+                "x": 365.9999990463257,
+                "y": 12,
+                "height": 80,
+                "width": 120,
+                "allowedStarPort": true,
+                "generation": 2,
+                "config": {}
+            },
+            "name": "graphterminator1"
+        },
+        "binaryfileproducer11": {
+            "component": "com.sap.file.write.v2",
+            "metadata": {
+                "label": "Binary File Producer",
+                "x": 181,
+                "y": 12,
+                "height": 80,
+                "width": 120,
+                "generation": 2,
+                "config": {
+                    "connection": {
+                        "configurationType": "Connection Management",
+                        "connectionID": "S3_Catalog"
+                    },
+                    "mode": "Append"
+                }
+            },
+            "name": "binaryfileproducer1"
+        },
+        "extractpipelines1": {
+            "component": "extract.pipelines",
+            "metadata": {
+                "label": "Extract Pipelines",
+                "x": 12,
+                "y": 12,
+                "height": 80,
+                "width": 120,
+                "extensible": true,
+                "filesRequired": [
+                    "script.py"
+                ],
+                "generation": 2,
+                "config": {
+                    "stopped_before": 9999999999,
+                    "status": "completed",
+                    "stopped_after": 0,
+                    "connection_id": {
+                        "connectionID": "PipelineAPI"
+                    }
+                },
+                "additionaloutports": [
+                    {
+                        "name": "output",
+                        "type": "scalar",
+                        "vtype-ID": "com.sap.core.binary"
+                    }
+                ]
+            }
+        }
+    },
+    "groups": [],
+    "connections": [
+        {
+            "metadata": {
+                "points": "305,43 332.99999952316284,43 332.99999952316284,52 360.9999990463257,52"
+            },
+            "src": {
+                "port": "file",
+                "process": "binaryfileproducer11"
+            },
+            "tgt": {
+                "port": "in",
+                "process": "graphterminator11"
+            }
+        },
+        {
+            "metadata": {
+                "points": "136,52 176,52"
+            },
+            "src": {
+                "port": "output",
+                "process": "extractpipelines1"
+            },
+            "tgt": {
+                "port": "file",
+                "process": "binaryfileproducer11"
+            }
+        }
+    ],
+    "inports": {},
+    "outports": {},
+    "metadata": {
+        "generation": 2
+    }
+}
