@@ -1,3 +1,8 @@
+# DEPRECATED: Do not use this method for SAP Data Intelligence Git integration!
+# INSTEAD: Use the SAP Data Intelligence [Git Terminal](https://help.sap.com/docs/SAP_DATA_INTELLIGENCE/1c1341f6911f4da5a35b191b40b426c8/5d7d9e25afb642ed9f4b21f0c62f9871.html?locale=en-US&version=Cloud).
+
+----
+
 # Git Integration and CI/CD Process with SAP Data Intelligence
 
 In this project we describe a process to develop [SAP Data Intelligence (SAP DI)](https://www.sap.com/products/data-intelligence.html) solutions using Git and to build, test, and deploy them
