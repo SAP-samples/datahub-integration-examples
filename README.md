@@ -42,6 +42,7 @@ For details on how to configure and run the examples after the solution has been
 | [JavaProcessExecutor](/JavaProcessExecutor)                       | Run a Java Application using a Process Executor Operator |
 | [ParquetWriterOperator](/ParquetWriterOperator)                   | This custom operator creates a file in Parquet format from an input message |
 | [Qualtrics Survey integration](/QualtricsIntegration)                   | Custom operators to extract survey responses from Qualtrics |
+| [Parallelisation Method Examples](/ParallelisationGuideExamples)                   | Example Graphs showing different possible parallelisation methods in SAP Data Intelligence |
 
 ## Known Issues
 
