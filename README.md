@@ -1,6 +1,6 @@
 [![REUSE status](https://api.reuse.software/badge/github.com/SAP-samples/datahub-integration-examples)](https://api.reuse.software/info/github.com/SAP-samples/datahub-integration-examples)
 
-# SAP Data Hub & Intelligence Integration Examples
+# SAP Data Hub and Intelligence Integration Examples
 
 ## Description
 
@@ -50,3 +50,7 @@ For details on how to configure and run the examples after the solution has been
 ## How to get support
 
 If you need help or in case you found a bug please open a [Github Issue](https://github.com/SAP/datahub-integration-examples/issues).
+
+## License
+
+Copyright (c) 2020 SAP SE or an SAP affiliate company. All rights reserved. This project is licensed under the Apache Software License, version 2.0 except as noted otherwise in the [LICENSE](LICENSES/Apache-2.0.txt) file.
